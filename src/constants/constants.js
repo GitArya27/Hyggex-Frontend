@@ -7,10 +7,10 @@ export const Navlinks = [
         id: 'about',
         title: 'About',
     },
-    {
-        id: 'features',
-        title: 'Features',
-    },
+    // {
+    //     id: 'features',
+    //     title: 'Features',
+    // },
     {
         id: 'price',
         title: 'Price & Pricing',

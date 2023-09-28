@@ -10,7 +10,7 @@ const Navbar = () => {
   return (
     <>
       <nav className='w-full flex justify-between  pt-[1.17rem]'>
-        <img src={Logo} alt="Hyggex" className="ml-[5em]  ]" />
+        <img src={Logo} alt="Hyggex" className=" w-[191px] h-[39px] md:ml-[4.33rem]  ]" />
 
 
         <ul className='list-none w-full sm:flex hidden  gap-[1.6rem] justify-end text-[0.75rem]  items-center cursor-pointer flex-1'>
