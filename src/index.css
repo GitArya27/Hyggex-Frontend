@@ -16,4 +16,47 @@
     
     
  }
+ /* Default font size */
+html {
+  font-size: 16px; /* This is typically the default browser font size */
+}
+@media only screen and (min-width: 300px) {
+  html {
+    font-size: 11px;
+  }
+}
+@media only screen and (min-width: 400px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  html {
+    font-size: 22px;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  html {
+    font-size: 24px;
+  }
+}
+
 

@@ -16,17 +16,18 @@ const Hero = () => {
   return (
     <>
       {/* Hero section */}
-      <section className="pt-[2.25rem] pl-[6.8625em] flex">
+      <section className="pt-[1.5rem] xs:pl-[1.4em] md:pl-[4.575rem] flex flex-1 flex-col md:flex-row">
         {/* Hero-Heading-section */}
         <div>
-          <div className=" relative mt-[4.75em] text-zinc-800 text-[2.125rem] font-medium">
+          <div className=" relative mt-[4.75em] text-zinc-800 text-[1.6rem] ">
             <h1>
               Transform your{" "}
-              <span className="text-[#FF6E41] text-[2.125rem] font-medium">
+              <span className="text-[#FF6E41] text-[1.6rem] ">
                 weakness
                 <span>
                   <svg
-                    className="-top-12 absolute right-[4em]"
+                  
+                    className="xs:w-[10em]  absolute xs:-top-12 md:-top-6 absolute  xs:right-[1.4em]  md:right-[-1.4em]"
                     width="105"
                     height="77"
                     viewBox="0 0 105 77"
@@ -41,13 +42,13 @@ const Hero = () => {
                 </span>
               </span>
             </h1>
-            <h1 className="text-zinc-800 text-7xl font-medium flex">
+            <h1 className="text-zinc-800 text-[3rem] font-medium flex">
               {" "}
               Into{" "}
               <span className=" ml-[0.3em]">
                 {words.map((word, index) => {
                   let styles =
-                    "text-blue-950 text-7xl font-bold absolute  w-full transition-all duration-1000";
+                    "text-blue-950 text-[3rem] font-bold absolute  w-full transition-all duration-1000";
 
                   if (index === currentWordIndex) {
                     styles += " translate-y-0 opacity-100";
@@ -69,35 +70,46 @@ const Hero = () => {
               </span>
             </h1>
           </div>
-          <div className="w-[581px] h-[96px] pt-[15.9px] text-justify">
-            <p className="">
+          <div className=" w-[24.20rem]  h-[4rem] pt-[0.67rem] text-justify">
+            <p className="xs:text-[0.8rem] md:text-[0.66rem]">
               Don't leave your academic growth to chance! Hyggex's
               psychoeducational tests identify your strengths and areas for
               improvement. Get customized tools and mentorship to level up.
               No more guesswork!
             </p>
+
+
           </div>
-          <div className="flex">
-          <button className="group flex items-center relative w-[219px] h-14 bg-gradient-to-r from-blue-950 to-blue-600 rounded-[33px] text-white hover:bg-gradient-to-r hover:from-blue-850 hover:to-blue-550 transition-all duration-300">
-    <span className="ml-9">Take a Test</span>
-    <span className="absolute right-1 flex items-center justify-center p-2 w-11 h-11 bg-stone-50 rounded-full transition-transform duration-300 group-hover:translate-x-[-10px]">
-        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" className="transition-transform duration-300 transform group-hover:scale-110">
-            <path d="M14.4299 6.61523L20.4999 12.6852L14.4299 18.7552" stroke="#06286E" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M3.5 12.6855H20.33" stroke="#06286E" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-    </span>
-</button>
+          <div className="flex ">
+            <button className="group xs:mt-[3em] md:mt-[1.625rem] flex items-center relative xs:w-[44%] w-[60%] h-[2.33em] bg-gradient-to-r from-blue-950 to-blue-600 rounded-[33px] text-white hover:bg-gradient-to-r hover:from-blue-850 hover:to-blue-550 transition-all duration-300">
+              <span className="ml-[1.45em] text-[0.75rem]">Take a Test</span>
+              <span className="absolute right-1 flex items-center justify-center  w-[1.83rem] h-[1.83rem] bg-stone-50 rounded-full transition-transform duration-300 group-hover:translate-x-[-10px]">
+                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" className="transition-transform duration-300 transform group-hover:scale-110">
+                  <path d="M14.4299 6.61523L20.4999 12.6852L14.4299 18.7552" stroke="#06286E" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M3.5 12.6855H20.33" stroke="#06286E" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+            </button>
 
 
-            <div className="origin-top-left rotate-[-5.03deg] font-LaBelleAurore text-center text-blue-950 text-[28px]  leading-[30.44px] tracking-wide">
+            <div className="pl-[5em] xs:mt-[2.5em] md:mt-[1em] origin-top-left rotate-[-5.03deg] font-LaBelleAurore text-center text-blue-950 xs:text-[0.9rem] md:text-[0.8rem]   ">
               Take test to know yourself
               <br />
               better
             </div>
           </div>
         </div>
+        <div className="absolute xs:top-[26em] sm:top-[25em] xs:pl-[45%] sm:pl-[10.8em]">
+          <svg  className="xs:w-[10.3rem]" height="80" viewBox="0 0 243 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.5 20.1855C100.667 42.3522 284 73.3855 216 20.1855" stroke="black" />
+            <path d="M0.5 20.1855C100.667 42.3522 284 73.3855 216 20.1855" stroke="black" />
+            <path d="M13.3516 33.7446C10.724 30.9535 4.71487 24.5703 1.69887 21.3666C-1.31712 18.1629 11.868 15.1293 19.5 16.185" stroke="black" />
+          </svg>
+
+        </div>
+
         <div>
-          <img src={HeroImg} alt="hero-img" />
+          <img src={HeroImg} alt="hero-img" className="h-[90%] w-[100%]" />
         </div>
       </section>
     </>
