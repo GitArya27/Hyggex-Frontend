@@ -16,7 +16,7 @@ const Hero = () => {
   return (
     <>
       {/* Hero section */}
-      <section className="pt-[0.8rem] xs:pl-[1.4em] md:pl-[4.575rem] flex flex-1 flex-col ss:flex-row">
+      <section className="z-0 pt-[0.8rem] xs:pl-[3.4em] md:pl-[6.575rem] flex flex-1 flex-col ss:flex-row">
         {/* Hero-Heading-section */}
         <div >
           <div className=" relative mt-[5.95rem] text-zinc-800 text-[1.6rem]  ">
