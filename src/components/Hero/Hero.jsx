@@ -16,18 +16,17 @@ const Hero = () => {
   return (
     <>
       {/* Hero section */}
-      <section className="z-0 pt-[0.8rem] xs:pl-[3.4em] md:pl-[6.575rem] flex flex-1 flex-col ss:flex-row">
+      <div className="  pt-[0.8rem] xs:pl-[1.4em] md:ml-[4.72rem] jsutify-center align-center flex flex-1 flex-col ss:flex-row">
         {/* Hero-Heading-section */}
-        <div >
-          <div className=" relative mt-[5.95rem] text-zinc-800 text-[1.6rem]  ">
+        <div className="w-full ">
+          <div className="w-full  mt-[5.95rem] text-zinc-800 text-[1.6rem]   ">
             <h1>
               Transform your{" "}
               <span className="text-[#FF6E41] text-[1.6rem] ">
                 weakness
                 <span>
                   <svg
-                  
-                    className="xs:w-[10%]  absolute xs:-top-12 ss:-top-8 md:-top-6 absolute xs:left-[60%]  ss:left-[74%] md:right-[2.4rem]"
+                    className="xs:w-[10%]  absolute top-[8rem] md:left-[21rem] left-[18.5rem]"
                     width="105"
                     height="77"
                     viewBox="0 0 105 77"
@@ -77,41 +76,77 @@ const Hero = () => {
               improvement. Get customized tools and mentorship to level up.
               No more guesswork!
             </p>
-
-
           </div>
           <div className="flex ">
-          <button className="group xs:mt-[3em] md:mt-[1.625rem] flex items-center relative w-[9.125rem] h-[2.33em] bg-gradient-to-r from-blue-950 to-blue-600 rounded-[33px] text-white hover:from-blue-800 hover:to-blue-500 z-10">
-    <span className="ml-[1.45em] text-[0.75rem] z-0">Take a Test</span>
-    <span className="absolute right-1 flex items-center justify-center w-[1.83rem] h-[1.83rem] bg-stone-50 rounded-full transition-transform duration-300 group-hover:right-3 z-0">
-        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg" className="transition-transform duration-300 transform group-hover:scale-110 z-0">
-            <path d="M14.4299 6.61523L20.4999 12.6852L14.4299 18.7552" stroke="#06286E" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M3.5 12.6855H20.33" stroke="#06286E" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-    </span>
-</button>
+            <button className="group xs:mt-[5rem] ss:mt-[3rem] flex items-center relative w-[9.125rem] h-[2.33em] bg-gradient-to-r from-blue-950 to-blue-600 rounded-[33px] text-white hover:from-blue-800 hover:to-blue-500 z-10">
+              <span className="ml-[1.45em] text-[0.75rem] z-0">
+                Take a Test
+              </span>
+              <span className="absolute right-1 flex items-center justify-center w-[1.83rem] h-[1.83rem] bg-stone-50 rounded-full transition-transform duration-300 group-hover:right-3 z-0">
+                <svg
+                  width="24"
+                  height="25"
+                  viewBox="0 0 24 25"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="transition-transform duration-300 transform group-hover:scale-110 z-0"
+                >
+                  <path
+                    d="M14.4299 6.61523L20.4999 12.6852L14.4299 18.7552"
+                    stroke="#06286E"
+                    strokeWidth="1.5"
+                    strokeMiterlimit="10"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M3.5 12.6855H20.33"
+                    stroke="#06286E"
+                    strokeWidth="1.5"
+                    strokeMiterlimit="10"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+            </button>
 
-
-            <div className="ss:ml-[12.125em] sm:ml-[8.125em] md:ml-[7.5em] xs:ml-[11.5em] xs:w-[50vw] ss:w-[28vw] sm:w-[40vw] md:w-[26vw] absolute  md:mt-[0.3em] xs:mt-[2em] origin-top-left rotate-[-5.03deg] font-LaBelleAurore text-center  text-[#06286E]  xs:text-[1rem] sm:text-[1.21rem]  w-[23vw] ">
+            <div
+              className="ml-[10.9rem] mt-[1.3rem] absolute origin-top-left rotate-[-5.03deg] font-LaBelleAurore text-center text-[#06286E] 
+                 
+                text-[1.27rem]"
+            >
               Take test to know yourself
-              <br/>
+              <br />
               better
             </div>
-          </div>
-        </div>
-        <div className="absolute xs:top-[24em] md:top-[23em] sm:top-[25em]  xs:pl-[10em] ss:pl-[9.3em]">
-          <svg  className="sm:w-[10.3rem] xs:w-[10.3rem]" height="80" viewBox="0 0 243 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0.5 20.1855C100.667 42.3522 284 73.3855 216 20.1855" stroke="black" />
-            <path d="M0.5 20.1855C100.667 42.3522 284 73.3855 216 20.1855" stroke="black" />
-            <path d="M13.3516 33.7446C10.724 30.9535 4.71487 24.5703 1.69887 21.3666C-1.31712 18.1629 11.868 15.1293 19.5 16.185" stroke="black" />
-          </svg>
 
-        </div>
-       {/* hero-img */}
-        <div >
+            <div className="absolute mt-[3rem] ml-[9.4rem]">
+              <svg
+                className="sm:w-[10.3rem] xs:w-[10.3rem]"
+                height="80"
+                viewBox="0 0 243 80"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0.5 20.1855C100.667 42.3522 284 73.3855 216 20.1855"
+                  stroke="black"
+                />
+                <path
+                  d="M13.3516 33.7446C10.724 30.9535 4.71487 24.5703 1.69887 21.3666C-1.31712 18.1629 11.868 15.1293 19.5 16.185"
+                  stroke="black"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>{" "}
+        {/* hero-img */}
+        <div className=" w-full translate-x-[-4em]	">
           <img src={HeroImg} alt="hero-img" className="w-[100%]" />
         </div>
-      </section>
+      </div>
+
     </>
   );
 };
