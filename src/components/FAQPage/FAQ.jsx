@@ -11,7 +11,6 @@ function FAQ ({faq, index, toggleFAQ}) {
 				{faq.question}
 			</div>
 			<div className="faq-answer p-1">
-				<div className="p-2 rounded-3x1 text-[0.72rem] text-[#06286E]">{faq.answer}</div>
 			<div className="p-2 rounded-3x1 text-[0.72rem] text-[#06286E]">{faq.question1}</div>
 				<div className="p-2 rounded-3x1 text-[0.72rem] text-[#696671]">{faq.answer}</div>
 			</div>
