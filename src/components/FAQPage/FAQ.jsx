@@ -7,7 +7,7 @@ function FAQ ({faq, index, toggleFAQ}) {
 			key={index}
 			onClick={() => toggleFAQ(index)}
 		>
-			<div className="faq-question p-2 rounded-2xl bg-blue-500 text-white">
+			<div className="faq-question p-2 rounded-2xl text-[0.72rem] bg-blue-500 text-white">
 				{faq.question}
 			</div>
 			<div className="faq-answer p-1">
