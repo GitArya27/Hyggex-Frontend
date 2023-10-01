@@ -5,15 +5,24 @@ import Footer from "./components/Footer/Footer";
 import WhyHyggex from "./components/WhyHyggex/WhyHyggex";
 import Assessment from "./components/Psy-ED Assessments/Assesment";
 import OurServices from "./components/OurServices/OurServices";
+import ReadArticleSummaryCard from "./components/ReadArticleSummaryCard/ReadArticleSummaryCard";
+import ContactUs from "./components/ReachUs/ReachUs";
+import FAQPage from "./components/FAQPage/FAQPage";
+
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+
 
 function App() {
     return (
         <div>
            <Navbar/>
            <Hero/>
+           <ReadArticleSummaryCard />
            <WhyHyggex/>
            <OurServices/>
            <Assessment/>
+           <ContactUs />
+           <FAQPage />
            <Footer/>
                   
         </div>
