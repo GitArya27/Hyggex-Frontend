@@ -18,7 +18,7 @@ const Footer = () => {
               />
             </div>
             {/* footer-list */}
-            <div className="ss:flex-row xs:flex-col xs:mt-[1.5rem] md:mt-[6.318rem] flex">
+            <div className="ss:flex-col sm:flex-row xs:flex-col xs:mt-[1.5rem] md:mt-[6.318rem] flex">
               <div className="flex">
                 <div className="xs:ml-[4rem] md:ml-[6.5rem]">
                   <h2 className="text-[0.818rem] font-medium text-[#FFFFFF]">
