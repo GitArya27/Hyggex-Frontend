@@ -11,13 +11,18 @@ function FAQPage() {
             open: true
         },
         {
-            question: 'How many patients can you accomodate for Home Service?',
-            answer: 'You. The Viewer.',
+            question: ' What is HyggeX, and how does it work?',
+            answer: 'HyggeX is an adaptive learning platform that offers personalized educational content and tools. It assesses your strengths and weaknesses through psychoeducational tests and tailors your learning journey accordingly.',
             open: false
         },
         {
-            question: 'Do you have doctors who can do house calls?',
-            answer: 'This many.',
+            question: 'How does HyggeX adapt to my learning needs?',
+            answer: 'HyggeX uses advanced algorithms to analyze your psychoeducational test results and learning preferences. It then suggests content and learning strategies tailored to your unique needs.',
+            open: false
+        },
+        {
+            question: 'Is there a free trial available?',
+            answer: 'Yes, HyggeX offers a free basic plan so you can experience the platform before deciding to subscribe to a premium plan.',
             open: false
         }
     ]);

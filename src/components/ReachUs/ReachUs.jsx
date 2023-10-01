@@ -18,15 +18,15 @@ export const ContactUs = () => {
 
   return (
     <div className="p-10">
-            <div className="Rectangle10943 h-[710px] bg-indigo-100 rounded-3xl relative flex p-10" >
-                <div className="Group47901 w-2/5 p-3 rounded-3xl relative">
-                    <div className="ContactUs text-black text-3xl font-medium font-['Inter'] mt-auto relative">Contact Us</div>
+            <div className="h-[710px] bg-indigo-100 rounded-3xl flex p-10" >
+                <div className="w-2/5 p-3 rounded-3xl relative">
+                    <div className="text-black text-3xl font-medium font-['Inter'] mt-auto relative">Contact Us</div>
                     <div className="p-3"></div>
-                    <div className="WeReHereToHelpReachOutAndLetUsKnowHowWeCanAssistYou w-96 text-neutral-700 text-1xl font-normal font-['Inter'] mt-auto relative">We're Here to Help! Reach out and let us know how we can assist you</div>
+                    <div className="w-[100%] text-neutral-700 text-1xl font-normal font-['Inter'] mt-auto relative">We're Here to Help! Reach out and let us know how we can assist you</div>
                     <img src={ContactUsImg} className="l-[400px] h-[400px]" alt="hero-img" />
 
                 </div>
-                <div className="Group47901 w-3/5 rounded-3xl relative bg-white justify-center items-center">
+                <div className="Group47901 w-3/5 rounded-3xl bg-white justify-center items-center">
                     <div className="m-auto h-[100%]">
                         <form ref={form} onSubmit={sendEmail}>
                             <div className="form-group p-5 justify-center items-center">
