@@ -12,8 +12,8 @@ function App() {
            <Navbar/>
            <Hero/>
            <WhyHyggex/>
-           <Assessment/>
            <OurServices/>
+           <Assessment/>
            <Footer/>
                   
         </div>

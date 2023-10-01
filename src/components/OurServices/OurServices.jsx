@@ -2,8 +2,8 @@ import React from "react";
 
 const OurServices = () => {
     return (
-        <div className="OurService relative">
-            <div className="textdata p-">
+        <div className=" ">
+            <div className="textdata ">
                 <div className="text-center mt-[4.36rem]">
                     <h2 className="text-zinc-800 text-[2.18rem] font-medium ">
                         Our Serices
@@ -13,9 +13,9 @@ const OurServices = () => {
                     </div>
                 </div>
             </div>
-            <div class="container">
-                <div class="row p-2">
-                    <div class="col-sm">
+            <div className=" justify-center items-center my-5 flex">
+                <div className="flex gap-4 ">
+                    <div className="col-sm">
                         <div className="Rectangle1349 w-[278px] h-[320px] bg-orange-100 rounded-3xl mx-auto p-2 relative">
                             <div class="Arrow float-right">
                                 <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -42,7 +42,7 @@ const OurServices = () => {
 
                         </div>
                     </div>
-                    <div class="col-sm">
+                    <div class="col-sm flex">
                         <div className="Rectangle1347 w-[278px] h-[320px] bg-amber-100 rounded-3xl mx-auto p-2" >
                             <div class="Arrow float-right">
                                 <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
