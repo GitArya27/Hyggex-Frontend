@@ -6,6 +6,7 @@ function FAQPage() {
     const [faqs, setfaqs] = useState([
         {
             question: 'How to book a HomeService Apartment? When is the earliest schedule?',
+            question1: 'Can we directly call the branch nearest to our house to schedule for a home service appointment?',
             answer: 'Yes. On our websit, click on Find Our Lab and click on chosen branch view their contact information and location.',
             open: true
         },
