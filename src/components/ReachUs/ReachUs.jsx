@@ -45,8 +45,8 @@ export const ContactUs = () => {
                                 <div className="mb-4">
                                     <textarea className="form-control bg-blue-250" id="message" name="message" placeholder="Message" required />
                                 </div>
-                                <div className="button p-2 justify-center items-center"><button className="btn btn-danger bg-blue-500" type="submit" value="Send">
-                                <input type="submit" value="Send" />
+                                <div className="button flex justify-center items-center"><button className="btn btn-danger bg-blue-500 w-[22.90rem] h-[2.54rem] mb-[6rem]" type="submit" value="Send">
+                                <input type="submit" value="Submit" />
                                 </button></div>
                             </div>
                         </form>

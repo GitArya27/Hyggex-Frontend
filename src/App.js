@@ -1,4 +1,6 @@
 import React from "react";
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
 import Footer from "./components/Footer/Footer";
@@ -8,8 +10,6 @@ import OurServices from "./components/OurServices/OurServices";
 import ReadArticleSummaryCard from "./components/ReadArticleSummaryCard/ReadArticleSummaryCard";
 import ContactUs from "./components/ReachUs/ReachUs";
 import FAQPage from "./components/FAQPage/FAQPage";
-
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 
 function App() {
@@ -24,7 +24,6 @@ function App() {
            <ContactUs />
            <FAQPage />
            <Footer/>
-                  
         </div>
     );
 }
