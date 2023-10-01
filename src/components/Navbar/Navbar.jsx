@@ -14,7 +14,7 @@ const Navbar = () => {
         <ul className='list-none w-full sm:flex hidden gap-[1.6rem] justify-end text-[0.75rem] items-center cursor-pointer flex-1'>
           {Navlinks.map((nav, index) => (
             index === Navlinks.length - 1 ?
-              <button key={nav.id} className='btn w-[128px] h-[48px] rounded-full bg-primary text-white hover:bg-[#0070D7] mr-[4.33rem]'>
+              <button key={nav.id} className='btn w-[128px] h-[48px] rounded-full bg-[#06286E] text-white hover:bg-[#0070D7] mr-[4.33rem]'>
                 {nav.title}
               </button> :
               <li key={nav.id}
