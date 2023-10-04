@@ -6,11 +6,11 @@ const WhyHyggex = () => {
     <>
       <section className="why-hyggex">
         <div className="text-center mt-[4.36rem]">
-          <h2 className="text-zinc-800 text-[2.18rem] font-medium ">
+          <h2 className="text-zinc-800 text-[1.81rem] font-medium ">
             Why Choose{" "}
             <span className="text-blue-950  font-bold ">HyggeX </span>?
           </h2>
-          <div className="text-right w-[88%] pt-[1.45rem] text-blue-950 text-[1.45rem] font-LaBelleAurore leading-[1.58rem]">
+          <div className="text-right w-[88%] pt-[1.45rem] text-blue-950 text-[1.27rem] font-LaBelleAurore leading-[1.58rem]">
             Our strength lies in our bespoke offerings
           </div>
         </div>
@@ -32,11 +32,12 @@ const WhyHyggex = () => {
                         : "w-[28rem] h-[7.36rem]"
                     }  my-[1.36rem]`}
                   >
-                    <p className="text-[1.1rem] text-[#696671]">{item.text}</p>
-                  </div>
-                  <button className="w-[7.5rem] h-[2.45rem] bg-[#164EC0] hover:bg-[#0070D7] rounded-[33px] border-4 border-[#164EC0] border-opacity-25 justify-center items-center gap-2.5 inline-flex text-white text-[0.81rem] font-normal">
+                    <p className="text-[0.72rem] text-[#696671]">{item.text}</p>
+                     <button className="my-4 w-[7.5rem] h-[2.45rem] bg-[#164EC0] hover:bg-[#0070D7] rounded-[33px] border-4 border-[#164EC0] border-opacity-25 justify-center items-center gap-2.5 inline-flex text-white text-[0.81rem] font-normal">
                     Learn More
                   </button>
+                  </div>
+                 
                 </div>
               )}
               <img
@@ -54,13 +55,14 @@ const WhyHyggex = () => {
                 <div className=" ">
                   <h2 className="text-[1.81rem] font-medium ">{item.title}</h2>
                   <div className="w-[28rem] h-[8.9rem] my-[1.36rem]">
-                    <p className="text-[1.09rem] text-[#696671] text-left">
+                    <p className="text-[0.72rem] text-[#696671] text-left">
                       {item.text}
                     </p>
-                  </div>
-                  <button className="w-[7.5rem] h-[2.45rem] bg-[#164EC0] hover:bg-[#0070D7] rounded-[33px] border-4 border-[#164EC0] border-opacity-25 justify-center items-center gap-2.5 inline-flex text-white text-[0.81rem] font-normal">
+                    <button className="w-[7.5rem] my-4 h-[2.45rem] bg-[#164EC0] hover:bg-[#0070D7] rounded-[33px] border-4 border-[#164EC0] border-opacity-25 justify-center items-center gap-2.5 inline-flex text-white text-[0.81rem] font-normal">
                     Learn More
                   </button>
+                  </div>
+                  
                 </div>
               )}
             </div>

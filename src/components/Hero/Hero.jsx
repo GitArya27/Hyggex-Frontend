@@ -16,9 +16,9 @@ const Hero = () => {
   return (
     <>
       {/* Hero section */}
-      <div className=" pt-[0.8rem]  jsutify-center align-center flex flex-1 flex-col ss:flex-row">
+      <div className=" pt-[0.8rem] xs:pl-[1.4em] md:ml-[3.72rem] jsutify-center align-center flex flex-1 flex-col ss:flex-row">
         {/* Hero-Heading-section */}
-        <div className="w-full xs:pl-[1.4em] md:ml-[3.72rem] ">
+        <div className="w-full ">
           <div className="w-full  mt-[5.95rem] text-zinc-800 text-[1.6rem]   ">
             <h1>
               Transform your{" "}
