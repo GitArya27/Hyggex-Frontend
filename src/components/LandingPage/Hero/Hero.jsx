@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { HeroImg } from "../../constants/url";
+import { HeroImg } from "../../../constants/url";
+import HeroImage from "./HeroImage";
 
-const words = ["Hyggex", "Strength", "Hyggex", "Strength"];
+const words = ["Learn", "Grow", "Thrive"];
 
 const Hero = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
@@ -15,18 +16,19 @@ const Hero = () => {
 
   return (
     <>
+    <section className="bg-[#F9F9F9] pt-10">
       {/* Hero section */}
-      <div className=" pt-[0.8rem] xs:pl-[1.4em] md:ml-[3.72rem] jsutify-center align-center flex flex-1 flex-col ss:flex-row">
+      <div className=" pt-[0.8rem] xs:pl-[1.4em] md:ml-[3.72rem] jsutify-center align-center flex flex-1 xs:flex-col sm:flex-row">
         {/* Hero-Heading-section */}
         <div className="w-full ">
           <div className="w-full  mt-[5.95rem] text-zinc-800 text-[1.6rem]   ">
-            <h1>
+            {/* <h1>
               Transform your{" "}
               <span className="text-[#FF6E41] text-[1.6rem] ">
                 weakness
                 <span>
                   <svg
-                    className="xs:w-[10%]  absolute top-[8rem] md:left-[21rem] left-[18.5rem]"
+                    className="xs:w-[10%]  absolute ss:top-[8rem] xs:top-[6rem] md:left-[21rem] left-[18.5rem]"
                     width="105"
                     height="77"
                     viewBox="0 0 105 77"
@@ -40,14 +42,13 @@ const Hero = () => {
                   </svg>
                 </span>
               </span>
-            </h1>
-            <h1 className="text-zinc-800 text-[3rem] font-medium flex">
-              {" "}
-              Into{" "}
-              <span className=" ml-[0.3em]">
+            </h1> */}
+            <div className="text-primary text-[2.27rem]  font-medium flex">
+                       
+            <span className="">
                 {words.map((word, index) => {
                   let styles =
-                    "text-blue-950 text-[3rem] font-bold absolute  transition-all duration-800";
+                    "text-primary text-[3rem] text-[2.72rem] font-bold absolute  transition-all duration-800";
 
                   if (index === currentWordIndex) {
                     styles += " translate-y-0 opacity-100";
@@ -67,22 +68,21 @@ const Hero = () => {
                   );
                 })}
               </span>
-            </h1>
+          
+              <span className={`mt-3 mr-2 ml-[9.6rem] text-[#FF6E41] text-[2rem] `}>With</span>
+              {" "}
+              <span className=" mt-2 font-bold">Hyggex</span>   
+            </div>
+            
           </div>
           <div className=" w-[24.20rem]  h-[4rem] pt-[0.67rem] text-justify">
-            <p className="xs:text-[0.8rem] md:text-[0.66rem]">
-              Don't leave your academic growth to chance! Hyggex's
-              psychoeducational tests identify your strengths and areas for
-              improvement. Get customized tools and mentorship to level up.
-              No more guesswork!
-            </p>
+            <p className=" text-[0.81rem]">
+            In just 10 minutes, unlock 'astoundingly precise' insights into your study habits and future success with our Adaptive Learning Assessment.            </p>
           </div>
-          <div className="flex ">
-            <button className="group xs:mt-[5rem] ss:mt-[3rem] flex items-center relative w-[9.125rem] h-[2.33em] bg-gradient-to-r from-blue-950 to-blue-600 rounded-[33px] text-white hover:from-blue-800 hover:to-blue-500 z-10">
-              <span className="ml-[1.45em] text-[0.75rem] z-0">
-                Take a Test
-              </span>
-              <span className="absolute right-1 flex items-center justify-center w-[1.83rem] h-[1.83rem] bg-stone-50 rounded-full transition-transform duration-300 group-hover:right-3 z-0">
+          <div className="flex  ">
+            <button className=" border-4 border-blue-200 border-opacity-70 text-[0.81rem] justify-center align-center  group xs:mt-[5rem] ss:mt-[3rem] flex items-center relative w-[11.9rem] h-[2.63rem] bg-blue-800 rounded-[33px] text-white hover:bg-blue-600">
+              Start Your Assessment
+              {/* <span className="absolute right-1 flex items-center justify-center w-[1.83rem] h-[1.83rem] bg-stone-50 rounded-full transition-transform duration-300 group-hover:right-3 z-0">
                 <svg
                   width="24"
                   height="25"
@@ -108,20 +108,20 @@ const Hero = () => {
                     strokeLinejoin="round"
                   />
                 </svg>
-              </span>
+              </span> */}
             </button>
-
+          
             <div
-              className="ml-[10.9rem] mt-[1.3rem] absolute origin-top-left rotate-[-5.03deg] font-LaBelleAurore text-center text-[#06286E] 
+              className="ss:ml-[15.9rem] xs:ml-[13.5rem] xs:mt-[2.3rem]  ss:mt-[0.8rem] absolute origin-top-left rotate-[-5.03deg] font-LaBelleAurore text-center text-[#06286E] 
                  
-                text-[1.27rem]"
+                text-[1.52rem]"
             >
-              Take test to know yourself
+              Step into the Future of 
               <br />
-              better
+              Learning.
             </div>
 
-            <div className="absolute mt-[3rem] ml-[9.4rem]">
+            <div className="absolute ss:mt-[3.2rem] xsm:mt-[4.2rem]  xs:mt-[3.8rem] ss:ml-[12.2rem] xs:ml-[12.2rem]">
               <svg
                 className="sm:w-[10.3rem] xs:w-[10.3rem]"
                 height="80"
@@ -142,11 +142,9 @@ const Hero = () => {
           </div>
         </div>{" "}
         {/* hero-img */}
-        <div className=" w-full translate-x-[-4em]	">
-          <img src={HeroImg} alt="hero-img" className="w-[100%]" />
-        </div>
+       <HeroImage/>
       </div>
-
+      </section>
     </>
   );
 };

@@ -2,6 +2,7 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+
 html{
   scroll-behavior: smooth;
 }
@@ -66,3 +67,14 @@ html {
 }
 
 
+input:focus::placeholder,
+textarea:focus::placeholder {
+  color: #164EC0;
+}
+
+/* Custom CSS for border color on focus */
+input:focus,
+textarea:focus {
+  border-color: #164EC0;
+  outline-color: #164EC0;
+}

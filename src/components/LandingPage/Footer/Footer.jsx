@@ -1,10 +1,10 @@
 import React from "react";
-import { footerImg } from "../../constants/url";
+import { footerImg } from "../../../constants/url";
 
 const Footer = () => {
   return (
     // Footer
-    <section id="footer mt-5">
+    <section id="footer">
       <footer className=" relative bg-[#28262C] ">
 
         {/* Footer-logo */}

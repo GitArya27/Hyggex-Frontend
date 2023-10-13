@@ -83,15 +83,15 @@ function Card({ data }) {
     <div className="flex justify-center items-center  mt-8 space-x-4">
   <button
     onClick={handlePrev}
-    className="w-4 h-4 bg-[#083899] rounded-full active:bg-white"
+    className="w-4 h-4 active:bg-[#083899] rounded-full bg-white"
   ></button>
   <button
     onClick={handleMiddle}
-    className="w-4 h-4 bg-[#083899] rounded-full active:bg-white"
+    className="w-4 h-4 active:bg-[#083899] rounded-full bg-white"
   ></button>
   <button
     onClick={handleNext}
-    className="w-4 h-4 bg-[#083899] rounded-full active:bg-white"
+    className="w-4 h-4 active:bg-[#083899] rounded-full bg-white"
   ></button>
 </div>
 

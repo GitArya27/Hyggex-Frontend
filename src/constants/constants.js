@@ -1,3 +1,4 @@
+//navdata
 export const Navlinks = [
   {
     id: "home",
@@ -7,10 +8,10 @@ export const Navlinks = [
     id: "about",
     title: "About",
   },
-  // {
-  //     id: 'features',
-  //     title: 'Features',
-  // },
+  {
+      id: 'resources',
+      title: 'Resources',
+  },
   {
     id: "price",
     title: "Price & Pricing",
@@ -28,6 +29,7 @@ export const Navlinks = [
     title: "Login",
   },
 ];
+
 
 //Why Choose Hyggex
 
@@ -57,6 +59,8 @@ export const whyHyggex = [
     position: "left",
   },
 ];
+
+//crousel card data
 
 export const carouselCard = [{
     id:"1",
@@ -89,4 +93,80 @@ export const carouselCard = [{
   imageUrl:"https://res.cloudinary.com/do4vytmxm/image/upload/v1696142360/AI_multitasking_nr786q.svg"
 },
 
+]
+
+
+//students struggle data
+
+export const struggleData = [
+  {
+    id: '1',
+    title:'73%',
+    desc:"of students feel overwhelmed by standard curriculums that don't cater to their unique learning patterns.",
+    source:"EdTech Review 2022",
+    imageUrl:"https://res.cloudinary.com/do4vytmxm/image/upload/v1697104415/div.MuiBox-root_zkjt1a.svg"
+  },
+  {
+    id: '2',
+    title:'2.5 Million',
+    desc:"students globally express the need for more personalized and adaptive learning experiences.",
+    source:"Global Education Report 2022",
+    imageUrl:"https://res.cloudinary.com/do4vytmxm/image/upload/v1697104415/div.MuiBox-root_1_bfmvcp.svg"
+  },
+  {
+    id: '3',
+    title:'₹3,000',
+    desc:"average additional expenditure by parents seeking external personalized guidance for their child's education.",
+    source:"Indian Educational Census 2022",
+    imageUrl:"https://res.cloudinary.com/do4vytmxm/image/upload/v1697104417/div.MuiBox-root_2_ilwdfj.svg"
+  }
+]
+
+//Why choose Hyggex
+export const whyChooseHyggeX =[
+  {
+    id: 'adaptmate',
+    imageUrl:'https://res.cloudinary.com/do4vytmxm/image/upload/v1696419454/12_1_ipcoco.png'
+  },
+  {
+    id: 'lifementor',
+    imageUrl:'https://res.cloudinary.com/do4vytmxm/image/upload/v1696419453/13_1_neybzs.png'
+  },
+  {
+    id: 'tasktick',
+    imageUrl:'https://res.cloudinary.com/do4vytmxm/image/upload/v1696419454/9_1_cxvhdh.png'
+  }
+]
+
+export const SolutionData= [
+  {
+    id: '1',
+    imageUrl:'https://res.cloudinary.com/do4vytmxm/image/upload/v1697128204/Frame_1171275284_vdy9pd.svg',
+    title:'Adaptive Learning Assessments',
+    desc:'Discover more about your individual learning style, strengths, and areas that you can improve upon.'
+  },
+  {
+    id: '2',
+    imageUrl:'https://res.cloudinary.com/do4vytmxm/image/upload/v1697128204/Frame_1171275283_fnw01l.svg',
+    title:'Customized Study Plans',
+    desc:'Get customized plans that cater to your academic and emotional requirements, ensuring effective learning.'
+  },
+  {
+    id: '3',
+    imageUrl:'https://res.cloudinary.com/do4vytmxm/image/upload/v1697128204/Frame_1171275281_wjc7of.svg',
+    title:'Guidance from Experienced Mentors',
+    desc:'Our experienced experts are available to provide immediate guidance and emotional assistance.'
+  },
+  {
+    id: '4',
+    imageUrl:'https://res.cloudinary.com/do4vytmxm/image/upload/v1697128204/Frame_1171275285_mihta3.svg',
+    title:'Tracking Progress Continuously',
+    desc:'Keep track of your growth progress with our easy-to-use dashboards and comprehensive reports.'
+  },
+  {
+    id: '5',
+    imageUrl:'https://res.cloudinary.com/do4vytmxm/image/upload/v1697128204/Frame_1171275282_czn3kf.svg',
+    title:'Certified Growth Journeys',
+    desc:'After achieving certain milestones, you can obtain certificates that recognize your overall academic and personal growth.'
+  }
 ]
