@@ -3,26 +3,32 @@ export const Navlinks = [
   {
     id: "home",
     title: "Home",
+    link:''
   },
   {
     id: "about",
     title: "About",
+    link:''
   },
   {
       id: 'resources',
       title: 'Resources',
+      link:''
   },
   {
     id: "price",
     title: "Price & Pricing",
+    link:''
   },
   {
     id: "blog",
     title: "Blog",
+    link:'https://blog.hyggexworld.com'
   },
   {
     id: "contact",
     title: "Contact",
+    link:''
   },
   {
     id: "login",
@@ -170,3 +176,37 @@ export const SolutionData= [
     desc:'After achieving certain milestones, you can obtain certificates that recognize your overall academic and personal growth.'
   }
 ]
+
+export const MeetHyggexData = [
+  {
+    avatar: 'https://res.cloudinary.com/do4vytmxm/image/upload/v1697276725/sameer_aazmat.jpg',
+    name: 'Sameer Ahmed',
+    position: 'CEO & Founder',
+    about: "An MSc & MBA holder, combines his extensive expertise in mental health and entrepreneurial spirit to spearhead Hyggex. A seasoned speaker, author, and mentor, he's passionately dedicated to revolutionizing learning by integrating emotional and academic support, drawing from his rich background in neuroscience, psychology, and business management.",
+  },
+  {
+    avatar: 'https://res.cloudinary.com/do4vytmxm/image/upload/v1697277532/sultana_mpxdoo.jpg',
+    name: 'Sultana Rahman',
+    position: 'CWO',
+    about: "Sultana, Chief Wellness Officer at Hyggex, has over 20 years of experience in counseling psychology across various sectors. She is the founder of Freeple and a passionate advocate for mental health. To date, she has facilitated over 100 workshops, combining her expertise with heartfelt wellness advocacy.",
+  },
+  {
+    avatar: 'https://res.cloudinary.com/do4vytmxm/image/upload/v1697276725/akshya-set_objxne.jpg',
+    name: 'Akshay Seth',
+    position: 'Director of Community Outreach',
+    about: 'Captain Akshay Seth,brings a wealth of experience from his military and legal background. A law graduate from Dr. RMLNLU and commissioned Army Officer, his leadership extends beyond service, into his passion for gaming, anime, and arts, ensuring vibrant, engaged, and inclusive community interactions.'
+  },
+  {
+    avatar: 'https://res.cloudinary.com/do4vytmxm/image/upload/v1697276725/akshya-set_objxne.jpg',
+    name: 'Akshay Seth',
+    position: 'Director of Community Outreach',
+    about: 'Captain Akshay Seth,brings a wealth of experience from his military and legal background. A law graduate from Dr. RMLNLU and commissioned Army Officer, his leadership extends beyond service, into his passion for gaming, anime, and arts, ensuring vibrant, engaged, and inclusive community interactions.'
+  },
+  {
+    avatar: 'https://res.cloudinary.com/do4vytmxm/image/upload/v1697276725/rana_ylwa8y.jpg',
+    name: 'Rana Singh',
+    position: 'CTO',
+    about: 'Meet Rana Singh, our prodigious CTO at Hyggex, only 23 and already a seasoned developer with 20+ professional projects under his belt. A Maths Olympiad topper and science exhibition winner, Rana blends youthful energy with tech expertise, propelling innovative solutions.'
+  },
+  
+];

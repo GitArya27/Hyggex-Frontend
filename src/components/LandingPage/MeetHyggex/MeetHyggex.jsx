@@ -1,21 +1,7 @@
 import React from 'react';
 import Carousel from './Cards';
+import { MeetHyggexData } from '../../../constants/constants';
 
-const data = [
-  {
-    avatar: 'https://via.placeholder.com/150',
-    name: 'John Doe',
-    position: 'Developer',
-    about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. aliquam diam sagittis sagittis ullamcorper. Lorem ipsum dolor sit amet, consectetur adipiscing elit. aliquam Lorem ipsum dolor sit amet, consectetur adipiscing elit. aliquam diam sagittis sagittis ullamcorper. Lorem ipsum dolor sit amet, consectetur adipiscing elit. aliquam.'
-  },
-  {
-    avatar: 'https://via.placeholder.com/150',
-    name: 'Jane Doe',
-    position: 'Designer',
-    about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. aliquam diam sagittis sagittis ullamcorper. Lorem ipsum dolor sit amet, consectetur adipiscing elit. aliquam Lorem ipsum dolor sit amet, consectetur adipiscing elit. aliquam diam sagittis sagittis ullamcorper. Lorem ipsum dolor sit amet, consectetur adipiscing elit. aliquam.'
-  },
-  // Add more items as needed
-];
 
 const MeetHyggex = () => {
   return (<>
@@ -32,7 +18,7 @@ const MeetHyggex = () => {
           </div>
     <div className="py-6 flex items-center justify-center  ">
          
-      <Carousel data={data} />
+      <Carousel data={MeetHyggexData} />
     </div>
     </div>
     </>

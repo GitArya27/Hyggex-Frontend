@@ -21,7 +21,7 @@ const Navbar = () => {
                 className={`ml-2 hover:text-primary justify-self-start ${activeLink === nav.id ? 'font-[600] text-primary' : 'font-[400] text-[#3A3740]'}`}
                 onClick={() => setActiveLink(nav.id)}
               >
-                {nav.title}
+               <a href={nav.link}>{nav.title}</a> 
               </li>
           ))}
         </ul>
