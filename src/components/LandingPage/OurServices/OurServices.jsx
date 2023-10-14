@@ -13,8 +13,9 @@ const OurServices = () => {
                     </div>
                 </div>
             </div>
-            <div className=" justify-center items-center my-5 flex">
-                <div className="flex gap-4 ">
+            <div className="flex justify-center items-center">
+            <div className="p-[10px] pr-[2rem] flex overflow-x-auto">
+                <div className="p-[10px] flex gap-4">
                     <div className="col-sm">
                         <div className="Rectangle1349 w-[278px] h-[320px] bg-orange-100 rounded-3xl mx-auto p-2 relative">
                             <div class="Arrow float-right">
@@ -112,6 +113,7 @@ const OurServices = () => {
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     );
