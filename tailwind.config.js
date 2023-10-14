@@ -14,10 +14,11 @@ module.exports = {
     },
     screens: {
       xs: "300px",
-      ss: "600px",
+      xsm:"440px",
+      ss: "768px",
       sm: "920px",
       md: "1060px",
-      lg: "1200px",
+      lg: "1250px",
       xl: "1700px",
     },},
     

@@ -1,7 +1,9 @@
 export const  Logo = "https://res.cloudinary.com/do4vytmxm/image/upload/v1695803892/images/Logo_ev7w4u.png";
-export const HeroImg="https://res.cloudinary.com/do4vytmxm/image/upload/v1695882108/images/Hero-img1_thoqzj.png"
+export const HeroImg="https://res.cloudinary.com/do4vytmxm/image/upload/v1696948881/Group_48032_1_fd2xdk.png"
 export const footerImg = "https://res.cloudinary.com/do4vytmxm/image/upload/v1695975824/Copy_of_HyggeX_3_2_pduhry.png"
-export const menuImg="https://res.cloudinary.com/do4vytmxm/image/upload/v1696076836/menu_qc9bcs.svg" 
-export const closeImg = "https://res.cloudinary.com/do4vytmxm/image/upload/v1696076827/close_vksjn4.svg"
+export const menuImg="https://res.cloudinary.com/do4vytmxm/image/upload/v1696534721/Frame_j3gmfb.svg" 
+export const closeImg = "https://res.cloudinary.com/do4vytmxm/image/upload/v1696534721/Frame_1_x7lprw.svg"
 export const ReadArticleSummaryImg = "https://res.cloudinary.com/do4vytmxm/image/upload/v1696159400/Frame_1171275098_vq3cay.svg"
-export const ContactUsImg = "https://res.cloudinary.com/do4vytmxm/image/upload/v1696159208/Customer_survey_form_orxaky.svg"
+export const ContactUsImg = "https://res.cloudinary.com/do4vytmxm/image/upload/v1697149634/image_20_ufn6zn.png"
+export const WhyHyggexImg = "https://res.cloudinary.com/do4vytmxm/image/upload/v1697111578/image_14_ku8uow.png"
+export  const HowItWorksImg = "https://res.cloudinary.com/do4vytmxm/image/upload/v1697124875/Frame_1171275274_ak68it.png"
