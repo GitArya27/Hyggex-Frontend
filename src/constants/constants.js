@@ -70,34 +70,34 @@ export const whyHyggex = [
 
 export const carouselCard = [{
     id:"1",
-    title: "Academic & Career Orientation",
-    listText:["40 Questions ", "60 Minutes ", "299" ],
+    title: "Reading Assessment",
+    listText:["30 Questions ", "10 Minutes ", "Free" ],
     imageUrl:"https://res.cloudinary.com/do4vytmxm/image/upload/v1696142360/Career_boost_wrlmf9.svg"
 },
 {
   id:"2",
-  title: "Cognitive & Learning Abilities",
-  listText:["40 Questions ", "60 Minutes ", "299" ],
+  title: "Learning Style Assessments",
+  listText:["30 Questions ", "10 Minutes ", "Free" ],
   imageUrl:"https://res.cloudinary.com/do4vytmxm/image/upload/v1696142360/Online_science_learning_ljsvoj.svg"
 },
 {
   id:"3",
-  title: "Emotional & Psychological Well-being ",
-  listText:["40 Questions ", "60 Minutes ", "299" ],
+  title: "Attention and Executive Functioning Assessments ",
+  listText:["30 Questions ", "10 Minutes ", "Free" ],
   imageUrl:"https://res.cloudinary.com/do4vytmxm/image/upload/v1696142360/Multitasking_young_woman_meditating_cfidfz.svg"
 },
-{
-  id:"4",
-  title: "Personal & Interpersonal Skills",
-  listText:["40 Questions ", "60 Minutes ", "299" ],
-  imageUrl:"https://res.cloudinary.com/do4vytmxm/image/upload/v1696142360/Girl_studying_u156vu.svg"
-},
-{
-  id:"5",
-  title: "Personal & Interpersonal Skills",
-  listText:["40 Questions ", "60 Minutes ", "299" ],
-  imageUrl:"https://res.cloudinary.com/do4vytmxm/image/upload/v1696142360/AI_multitasking_nr786q.svg"
-},
+// {
+//   id:"4",
+//   title: "Personal & Interpersonal Skills",
+//   listText:["40 Questions ", "60 Minutes ", "299" ],
+//   imageUrl:"https://res.cloudinary.com/do4vytmxm/image/upload/v1696142360/Girl_studying_u156vu.svg"
+// },
+// {
+//   id:"5",
+//   title: "Personal & Interpersonal Skills",
+//   listText:["40 Questions ", "60 Minutes ", "299" ],
+//   imageUrl:"https://res.cloudinary.com/do4vytmxm/image/upload/v1696142360/AI_multitasking_nr786q.svg"
+// },
 
 ]
 

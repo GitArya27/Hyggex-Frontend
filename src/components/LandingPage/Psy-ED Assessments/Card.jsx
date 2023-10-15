@@ -50,7 +50,7 @@ function Card({ data }) {
                     return (
                       <li key={index} className="flex items-center font-bold relative ss:gap-2 xs:gap-4">
                         <Svg />
-                        <span className="text-[#696671] font-normal ">
+                        {/* <span className="text-[#696671] font-normal ">
                           Rs {" " }
                           <span className=" inline-block relative z-10">
                             999
@@ -58,7 +58,7 @@ function Card({ data }) {
                               <StrikeThrough />
                             </span>
                           </span>
-                        </span>
+                        </span> */}
                         {list}
                       </li>
                     );
