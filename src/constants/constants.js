@@ -187,14 +187,14 @@ export const MeetHyggexData = [
   {
     avatar: 'https://res.cloudinary.com/do4vytmxm/image/upload/v1697277532/sultana_mpxdoo.jpg',
     name: 'Sultana Rahman',
-    position: 'CWO',
-    about: "Sultana, Chief Wellness Officer at Hyggex, has over 20 years of experience in counseling psychology across various sectors. She is the founder of Freeple and a passionate advocate for mental health. To date, she has facilitated over 100 workshops, combining her expertise with heartfelt wellness advocacy.",
+    position: 'Chief Wellness Officer',
+    about: "Sultana has over 20 years of experience in counseling psychology across various sectors. She is the founder of Freeple and a passionate advocate for mental health. To date, she has facilitated over 100 workshops, combining her expertise with heartfelt wellness advocacy.",
   },
   
   {
     avatar: 'https://res.cloudinary.com/do4vytmxm/image/upload/v1697276725/akshya-set_objxne.jpg',
     name: 'Akshay Seth',
-    position: 'Director of Community Outreach',
+    position: 'Director of Community Outreach & Engagement',
     about: 'Captain Akshay Seth,brings a wealth of experience from his military and legal background. A law graduate from Dr. RMLNLU and commissioned Army Officer, his leadership extends beyond service, into his passion for gaming, anime, and arts, ensuring vibrant, engaged, and inclusive community interactions.'
   },
   {
