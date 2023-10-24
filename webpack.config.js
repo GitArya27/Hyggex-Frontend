@@ -7,7 +7,13 @@ module.exports = {
         path: path.join(__dirname, '/dist'),
         filename: 'bundle.js',
         publicPath: '/'
-
+    },
+    devServer: {
+        compress: true,
+        historyApiFallback: true,
+        static: {  // Instead of contentBase, now it's named `static`
+            directory: path.join(__dirname, 'dist')
+        }
     },
     plugins: [
         new HTMLWebpackPlugin({
@@ -26,7 +32,7 @@ module.exports = {
                     }
                 }
             },
-            {   // CSS handling
+            {
                 test: /\.css$/,
                 use: [
                     'style-loader',

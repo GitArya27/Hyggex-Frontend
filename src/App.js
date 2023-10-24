@@ -1,36 +1,16 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Layout from "../src/layout/Layout";
+import Login from "../src/components/auth/Login";
+import Home from "../src/components/LandingPage/Home";
 
-import Navbar from "./components/LandingPage/Navbar/Navbar";
-import Hero from "./components/LandingPage/Hero/Hero";
-import Footer from "./components/LandingPage/Footer/Footer";
-import Assessment from "./components/LandingPage/Psy-ED Assessments/Assesment";
-import OurServices from "./components/LandingPage/OurServices/OurServices";
-import ReadArticleSummaryCard from "./components/LandingPage/ReadArticleSummaryCard/ReadArticleSummaryCard";
-import ContactUs from "./components/LandingPage/ReachUs/ReachUs";
-import FAQPage from "./components/LandingPage/FAQPage/FAQPage";
-import Struggle from "./components/LandingPage/studentStruggle/Struggle";
-import Product from "./components/LandingPage/Product/Product";
-import HowItWorks from "./components/LandingPage/HowItWorks/HowItWorks";
-import Solution from "./components/LandingPage/Solution/Solution";
-import MeetHyggex from "./components/LandingPage/MeetHyggex/MeetHyggex";
-
-
-function App() {
+export default function App() {
     return (
-        <div>
-           <Navbar/>
-           <Hero/>
-           <Struggle/>
-           <Product/>
-           <Assessment/>
-           <HowItWorks/>
-           <Solution/>
-           <MeetHyggex/>
-           <ContactUs />
-           <FAQPage />
-           <Footer/>
-        </div>
+        <Routes>
+            <Route path="/" element={<Layout/>}>
+                <Route index element={<Home/>} />
+            </Route>
+            <Route path="/login" element={<Login/>} />
+        </Routes>
     );
 }
-
-export default App;
