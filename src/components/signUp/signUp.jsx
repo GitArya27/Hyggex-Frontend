@@ -1,17 +1,14 @@
 import './sign.css'
 
 import React, {useEffect, useState} from 'react'
+import { logo1, slide1, slide2, slide3 } from '../../constants/url'
 
 import { Link } from 'react-router-dom'
-import { Logo } from '../../constants/url'
 
 const SignUp = () => {
-    const login1 = "https://res.cloudinary.com/dbnxbly1r/image/upload/v1698181188/login_1_mjpshn.svg";
-    const login2 = "https://res.cloudinary.com/dbnxbly1r/image/upload/v1698181349/login_2_zmmwrs.svg";
-    const login3 = "https://res.cloudinary.com/dbnxbly1r/image/upload/v1698181445/login_3_y0ib97.svg";
-    const logo = "https://res.cloudinary.com/dbnxbly1r/image/upload/v1698181752/Component_9_dqkwgp.png";
 
-  const images = [`${login1}`, `${login2}`, `${login3}`];
+
+  const images = [`${slide1}`, `${slide2}`, `${slide3}`];
 
   const imageText = [
     "Our flagship adaptive learning system that resonates with each student's unique learning pattern.",
@@ -35,10 +32,10 @@ const SignUp = () => {
     return (
         <div className='flex flex-col justify-center sm:flex-row' id='container'>
             <div className="bg-[#DFEAFF] sm:w-1/2 bg-cover bg-center relative" id='card1'>
-                <img src={logo} alt="logo" className="ml-8 mb-6 w-32 py-8" id='logo' />
-                <div id='inner-card'>
+                <img src={logo1} alt="logo" className="ml-8 mb-6 w-32 py-8" id='logo' />
+                  <div id='inner-card'>
 
-            <img src={images[activeIndex]} alt="carousel" className="max-w-xs w-full mx-auto" id='carousel' />
+                  <img src={images[activeIndex]} alt="carousel" className="max-w-xs w-full mx-auto" id='carousel' />
 
                   <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex space-x-2 mt-2">
 
@@ -54,8 +51,8 @@ const SignUp = () => {
                     <div className="text-center text-gray-700 mt-2">
                       <p id='imagetxt' className="text-xs px-8 leading-6">{imageText[activeTextIndex]}</p>
                     </div>
-                </div>
-            </div>
+                  </div>
+              </div>
 
             <div className="sm:w-1/2 py-8 px-10 m-auto flex flex-col" id='card2'>
                 <div id='first-div' className="my-5 text-center">
