@@ -12,8 +12,8 @@ const SignUp = () => {
 
   const imageText = [
     "Our flagship adaptive learning system that resonates with each student's unique learning pattern.",
-    'Text for image 2',
-    'Text for image 3',
+    "Tailored guidiance to help navigate academic intricacies and diverse challenges.",
+    "we ground every Hyggex offering in rigorous scientific research, ensuring it's effectiveness and trustworthiness. Although we cater primarily to Indian's diverse audience, our vision has a global reach",
   ];
 
   const [activeIndex, setActiveIndex] = useState(0);
@@ -23,56 +23,54 @@ const SignUp = () => {
     const interval = setInterval(() => {
       setActiveIndex((prevIndex) => (prevIndex + 1) % images.length);
       setActiveTextIndex((prevTextIndex) => (prevTextIndex + 1) % imageText.length);
-    }, 3000); // changes every 3 seconds
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
 
 
     return (
-        <div className='flex flex-col justify-center sm:flex-row' id='container'>
-            <div className="bg-[#DFEAFF] sm:w-1/2 bg-cover bg-center relative" id='card1'>
-                <img src={logo1} alt="logo" className="ml-8 mb-6 w-32 py-8" id='logo' />
-                  <div id='inner-card'>
+      <div className='flex flex-col justify-center sm:flex-row' id='container'>
+        <div className="bg-[#DFEAFF] sm:w-1/2 bg-cover bg-center relative pb-8" id='card1'>
+          <img src={logo1} alt="logo" className="ml-8 mb-6 w-32 py-8" id='logo' />
+          <div id='inner-card'>
 
-                  <img src={images[activeIndex]} alt="carousel" className="max-w-xs w-full mx-auto" id='carousel' />
+            <img src={images[activeIndex]} alt="carousel" className="w-60 h-60 mx-auto" id='slider' />
 
-                  <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex space-x-2 mt-2">
+            <div className="absolute bottom-40 left-1/2 transform -translate-x-1/2 flex space-x-2 mt-2">
+              {images.map((_, index) => (
+                <button
+                  key={index}
+                  className={`w-8 h-1 bg-gray-300' ${activeIndex === index ? 'bg-blue-500' : ''}`}
+                  onClick={() => setActiveIndex(index)}
+                ></button>
 
-                    {images.map((_, index) => (
-                      <button
-                        key={index}
-                        className={`w-8 h-1 bg-white-300 ${activeIndex === index ? 'bg-blue-500' : ''}`}
-                        onClick={() => setActiveIndex(index)}
-                      ></button>
+              ))}
+            </div>
+            <div className="text-center text-gray-700 mt-2">
+              <p id='imagetxt' className="text-xs px-8 leading-5">{imageText[activeTextIndex]}</p>
+            </div>
+          </div>
+        </div>
 
-                    ))}
-                  </div>
-                    <div className="text-center text-gray-700 mt-2">
-                      <p id='imagetxt' className="text-xs px-8 leading-6">{imageText[activeTextIndex]}</p>
-                    </div>
-                  </div>
-              </div>
+        <div className="sm:w-1/2 py-8 px-10 m-auto flex flex-col" id='card2'>
+          <div id='first-div' className="my-5 text-center">
+            <h1 id="h1" className="text-blue-600 font-medium pb-5">Sign Up</h1>
+            <p id="p1" className="text-gray-600 text-xs">Enter profile details</p>
+          </div>
 
-            <div className="sm:w-1/2 py-8 px-10 m-auto flex flex-col" id='card2'>
-                <div id='first-div' className="my-5 text-center">
-                    <h1 id="h1" className="text-blue-600 font-medium pb-5">Sign Up</h1>
-                    <p id="p1" className="text-gray-600 text-xs">Enter profile details</p>
-                </div>
+          <div className="flex flex-row justify-center mt-4 md:mt-6 text-gray-600" id='second-div'>
+            <span className='text-xs mx-4 text-blue-600 font-medium'>Enter Number</span>
+            <span className='text-xs mx-4'>Enter basic details</span>
+          </div>
 
-            <div className="flex flex-row justify-center mt-4 md:mt-6 text-gray-600" id='second-div'>
-                <span className='text-xs mx-4 text-blue-600 font-medium'>Enter Number</span>
-                <span className='text-xs mx-4'>Enter basic details</span>
-                </div>
+          <p className="mt-4 md:mt-6 text-gray-600 text-xs text-center" id='profile-details'>We will need your profile details to give you a better experience</p>
+          <form action="" id='form' className="text-xs text-gray-600 max-w-screen-sm px-20 py-5">
+            <label htmlFor="name" className="text-xs text-gray-600">Name <small>*</small></label>
+            <input type="text" name="name" placeholder="Sam Christy" className="w-full py-2 px-3 border rounded-md mb-6 text-xs" />
 
-                <p className="mt-4 md:mt-6 text-gray-600 text-xs text-center" id='profile-details'>We will need your profile details to give you a better experience</p>
-
-                <form action="" id='form' className="text-xs text-gray-600 max-w-screen-sm px-20 py-5">
-                    <label htmlFor="name" className="text-xs text-gray-600">Name <small>*</small></label>
-                    <input type="text" name="name" placeholder="Sam Christy" className="w-full py-2 px-3 border rounded-md mb-6 text-xs" />
-
-                    <label htmlFor="email" className="text-xs text-gray-600">Email<small>*</small></label>
-                    <input type="email" name="email" placeholder="samchristy98879@gmail.com" className="w-full py-2 px-3 border rounded-md mb-6 text-xs" />
+            <label htmlFor="email" className="text-xs text-gray-600">Email<small>*</small></label>
+            <input type="email" name="email" placeholder="samchristy98879@gmail.com" className="w-full py-2 px-3 border rounded-md mb-6 text-xs" />
 
             <div id="select-container" className="flex items-center justify-between">
               <div>
@@ -91,19 +89,19 @@ const SignUp = () => {
                   <option value="afghanistan">Afghanistan</option>
                 </select>
               </div>
-          </div>
-          <button type="submit" id="submit"  className="my-12 flex justify-center text-xs m-auto md:mt-12 mb-6 bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-600">
-            Continue
-          </button>
-
+            </div>
+            <button type="submit" id="submit"  className="my-12 flex justify-center text-xs m-auto md:mt-12 mb-6 bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-600">
+              Continue
+            </button>
 
           </form>
+
           <span id="link-span" className="text-gray-600 text-center mx-auto text-xs">
             Already have an account? <Link id="link-to-register" to="/login" className="text-center mx-auto text-xs text-blue-500 hover:underline">Login</Link>
           </span><br />
-            </div>
-
         </div>
+
+      </div>
     )
 }
 
