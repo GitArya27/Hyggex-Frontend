@@ -35,7 +35,7 @@ const SignIn = () => {
 
             <img src={images[activeIndex]} alt="carousel" className="w-60 h-60 mx-auto" id='slider' />
 
-            <div className="absolute bottom-10 sm:bottom-40 left-1/2 transform -translate-x-1/2 flex space-x-2 mt-2">
+            <div className="absolute bottom-10 sm:bottom-10 left-1/2 transform -translate-x-1/2 flex space-x-2 mt-2">
               {images.map((_, index) => (
                 <button
                   key={index}
@@ -58,31 +58,30 @@ const SignIn = () => {
             </div>
 
             <div className="flex flex-row justify-center mt-4 md:mt-6 text-gray-600" id='second-div'>
-                <span className='text-xs mx-4 text-blue-600 font-medium'>Enter Number</span>
-                <span className='text-xs mx-4'>Enter basic details</span>
+                <span className='text-xs mr-8 text-blue-600 font-medium'>Enter Number</span>
+                <span className='text-xs ml-8'>Verify</span>
             </div>
-            <p className="mt-4 md:mt-6 text-gray-600 text-xs text-center" id='profile-details'>Enter your mobile number to continue your journey</p>
+            <p className="mt-10 md:mt-6 text-gray-600 text-xs text-center" id='profile-details'>Enter your mobile number to continue your journey</p>
 
             <form action="" id='form' className="text-xs text-gray-600 max-w-screen-sm px-20 py-5">
-                <label htmlFor="mobile number" className="text-xs text-gray-600">Mobile Number</label>
+                <label htmlFor="mobile number" className="text-xs text-blue-600 font-semibold">Mobile Number</label>
                 <div id="select-container" className="flex items-center justify-between">
-                    <select name="location" id="select1" className="w-full py-2 px-3 border rounded-md mb-6 text-xs">
-                        <option value=""></option>
-                        <option value="yes">Yes</option>
-                        <option value="CTA">CTA</option>
-                        <option value="CLAT">CLAT</option>
+                    <select name="location" id="select1" className="w-1/2 py-2 px-3 border mb-6 mt-2 text-xs">
+                        <option value="+91">+91</option>
+                        <option value="+234">+234</option>
+                        <option value="+144">+144</option>
                     </select>
-                    <input type="tel" name="mobile number" placeholder="Enter your mobile number" className="w-full py-2 px-3 border rounded-md mb-6 text-xs" />
+                    <input type="tel" name="mobile number" placeholder="Enter your mobile number" className="mt-2 w-full py-2 px-3 border mb-6 text-xs" />
                 </div>
 
-                <button type="submit" id="submit"  className="my-12 flex justify-center text-xs m-auto md:mt-12 mb-6 bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-600">
+                <button type="submit" id="submit"  className="my-5 flex justify-center text-xs m-auto md:mt-5 mb-6 bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-600">
                     Continue
                 </button>
 
             </form>
 
             <span id="link-span" className="text-gray-600 text-center mx-auto text-xs">
-                Already have an account? <Link id="link-to-register" to="/login" className="text-center no-underline mx-auto text-xs text-blue-500">Sign Up</Link>
+                Already have an account? <Link id="link-to-register" to="/signUp" className="text-center no-underline mx-auto text-xs text-blue-500">Sign Up</Link>
             </span><br />
         </div>
 

@@ -97,7 +97,7 @@ const SignUp = () => {
               </div>
               <div>
                 <label htmlFor="grade" className="text-xs text-gray-600">Grade<small>*</small></label>
-                <select name="grade" id="select2" className="w-full py-2 px-3 text-xs border mx-3 rounded-md">
+                <select name="grade" id="select2" className="w-30 py-2 px-3 text-xs border mx-3 rounded-md">
                   <option value=""></option>
                   <option value="Grade1">Grade1</option>
                   <option value="Grade2">Grade2</option>
@@ -112,7 +112,7 @@ const SignUp = () => {
           </form>
 
           <span id="link-span" className="text-gray-600 text-center mx-auto text-xs">
-            Already have an account? <Link id="link-to-register" to="/login" className="text-center no-underline mx-auto text-xs text-blue-500">Login</Link>
+            Already have an account? <Link id="link-to-register" to="/signIn" className="text-center no-underline mx-auto text-xs text-blue-500">Login</Link>
           </span><br />
         </div>
 
