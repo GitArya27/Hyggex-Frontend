@@ -69,7 +69,8 @@ const SignIn = () => {
                     <select name="location" id="select1" className="w-1/2 py-2 px-3 border mb-6 mt-2 text-xs">
                         <option value="+91">+91</option>
                         <option value="+234">+234</option>
-                        <option value="+144">+144</option>
+                            <option value="+144">+144</option>
+                            <option value="+1">+1</option>
                     </select>
                     <input type="tel" name="mobile number" placeholder="Enter your mobile number" className="mt-2 w-full py-2 px-3 border mb-6 text-xs" />
                 </div>
