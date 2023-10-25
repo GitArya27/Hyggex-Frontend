@@ -1,4 +1,4 @@
-import './sign.css'
+//import './sign.css'
 
 import React, {useEffect, useState} from 'react'
 import { logo1, slide1, slide2, slide3 } from '../../constants/url'
