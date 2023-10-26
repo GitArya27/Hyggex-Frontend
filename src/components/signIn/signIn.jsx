@@ -6,16 +6,22 @@ import { Link } from 'react-router-dom'
 const SignIn = () => {
 
 
-  const images = [`${slide1}`, `${slide2}`, `${slide3}`];
+    const images = [`${slide1}`, `${slide2}`, `${slide3}`];
 
-  const imageText = [
-    "Our flagship adaptive learning system that resonates with each student's unique learning pattern.",
-    "Tailored guidiance to help navigate academic intricacies and diverse challenges.",
-    "we ground every Hyggex offering in rigorous scientific research, ensuring it's effectiveness and trustworthiness. Although we cater primarily to Indian's diverse audience, our vision has a global reach",
-  ];
+    const imageText = [
+        "Our flagship adaptive learning system that resonates with each student's unique learning pattern.",
+        "Tailored guidiance to help navigate academic intricacies and diverse challenges.",
+        "we ground every Hyggex offering in rigorous scientific research, ensuring it's effectiveness and trustworthiness. Although we cater primarily to Indian's diverse audience, our vision has a global reach",
+    ];
 
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [activeTextIndex, setActiveTextIndex] = useState(0);
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [activeTextIndex, setActiveTextIndex] = useState(0);
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleAccordion = () => {
+        setIsOpen(!isOpen);
+    };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -84,7 +90,24 @@ const SignIn = () => {
             <span id="link-span" className="text-gray-600 text-center mx-auto text-xs">
                 Already have an account? <Link id="link-to-register" to="/signUp" className="text-center no-underline mx-auto text-xs text-blue-500">Sign Up</Link>
             </span><br />
+            <div className="cursor-pointer flex items-center justify-between" onClick={toggleAccordion}>
+  {isOpen ? (
+    <button className="text-gray-600 text-lg bg-slate-500" >up</button> // Upward arrow when open
+  ) : (
+    <button className="text-gray-600 text-lg bg-slate-500" >down</button> // Downward arrow when closed
+  )}
+
+</div>
+{isOpen && (
+  <div className="mt-2 border">
+    {/* Content to display when the accordion is open */}
+        <p className="text-gray-700">Accordion Content</p>
+        <p className="text-gray-700">Accordion Content</p>
+  </div>
+)}
+
         </div>
+
 
       </div>
     )
