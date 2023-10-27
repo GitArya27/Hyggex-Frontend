@@ -8,11 +8,12 @@ const SignIn = () => {
 
     const images = [`${slide1}`, `${slide2}`, `${slide3}`];
 
-    const imageText = [
+    imageText = [
         "Our flagship adaptive learning system that resonates with each student's unique learning pattern.",
         "Tailored guidiance to help navigate academic intricacies and diverse challenges.",
         "we ground every Hyggex offering in rigorous scientific research, ensuring it's effectiveness and trustworthiness. Although we cater primarily to Indian's diverse audience, our vision has a global reach",
-    ];
+  ];
+
 
     const [activeIndex, setActiveIndex] = useState(0);
     const [activeTextIndex, setActiveTextIndex] = useState(0)

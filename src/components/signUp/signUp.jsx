@@ -1,9 +1,13 @@
 //import './sign.css'
 
+import 'react-phone-input-2/lib/style.css'
+
 import React, {useEffect, useState} from 'react'
 import { logo1, slide1, slide2, slide3 } from '../../constants/url'
 
 import { Link } from 'react-router-dom'
+import PhoneInput from 'react-phone-input-2'
+import imageText from '../signIn/signIn'
 
 const SignUp = () => {
 
@@ -18,6 +22,9 @@ const SignUp = () => {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeTextIndex, setActiveTextIndex] = useState(0);
+
+  const [name, setName] = useState("");
+  const [phonenumber, setPhoneNumber] = useState("");
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -56,18 +63,64 @@ const SignUp = () => {
 
         <div className="sm:w-1/2 py-8 px-10 m-auto flex flex-col" id='card2'>
           <div id='first-div' className="my-5 text-center">
-            <h1 id="h1" className="text-blue-600 font-medium pb-5">Sign Up</h1>
-            <p id="p1" className="text-gray-600 text-xs">Enter profile details</p>
+            <h1 id="h1" className="text-blue-600 font-bold pb-5">Sign Up</h1>
+            <p id="p1" className="text-gray-600 text-base">Enter profile details</p>
           </div>
 
-          <div className="flex flex-row justify-center mt-4 md:mt-6 text-gray-600" id='second-div'>
-            <span className='text-xs mx-4 text-blue-600 font-medium'>Enter Number</span>
-            <span className='text-xs mx-4'>Enter basic details</span>
+          <div className="flex flex-row justify-evenly mt-4 md:mt-6 text-gray-600" id='second-div'>
+            <span className='text-base mx-4 text-blue-600 font-medium'>Enter Number</span>
+            <span className='text-base mx-4'>Enter basic details</span>
           </div>
 
           {/*<p className="mt-4 md:mt-6 text-gray-600 text-xs text-center" id='profile-details'>We will need your profile details to give you a better experience</p>*/}
-          <form action="" id='form' className="text-xs text-gray-600 max-w-screen-sm px-20 py-5">
-            <label htmlFor="email" className="text-xs text-gray-600">Email Address <small>*</small></label>
+          <form action="" id='form' className="text-base text-gray-600 max-w-screen-sm px-10 py-5">
+            <label htmlFor="name" className="text-babase font-semibold text-blue-600 leading-7">Name</label>
+            <input type="text" name="name" placeholder="Enter your name" className="w-full py-2 px-3 border rounded-md mb-4 text-base h-10 md:h-8 xs:h-12" />
+
+            <label htmlFor="mobile number" className="text-base font-semibold text-blue-600 leading-7">Mobile Number</label>
+            <div className="w-full md:mb-8 mb-12 h-12">
+              <PhoneInput
+                /*className="rounded-md text-base w-full h-12 md:h-12"*/
+                inputProps={{
+                  'required': true,
+                  name:'phonenumber'
+                }}
+                placeholder='Enter your mobile number'
+                enableSearch
+                inputStyle={{paddingTop:"1rem",paddingBottom:"1rem",width:"100%",height:"46px"}}
+                country={'in'}
+                value={phonenumber}
+                onChange={setPhoneNumber}
+                /*inputExtraProps={{
+                  className: 'w-full py-20 px-3 border rounded-md text-xs flex items-center'
+                }}*/
+            />
+            </div>
+
+            <span id="link-span" className="text-gray-600 text-center mx-auto text-babase">
+              By Signing Up, you agree to
+              <a href="#" className="text-center no-underline mx-auto text-base text-blue-500"> terms of use</a> and
+              <a href="#" id="lin-to-privacy"
+                className="text-center no-underline mx-auto text-base text-blue-600"> privacy statements.
+              </a>
+            </span>
+
+            <button type="submit" id="submit"  className="my-8 flex justify-center text-base m-auto md:mt-8 mb-6 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
+              Continue
+            </button>
+
+          </form>
+
+          <span id="link-span" className="text-gray-600 text-center mx-auto text-base">
+            Already have an account? <Link id="link-to-register" to="/signIn" className="text-center no-underline mx-auto text-base text-blue-600 font-medium">Login</Link>
+          </span><br />
+        </div>
+
+      </div>
+    )
+}
+/*<div>
+    <label htmlFor="email" className="text-xs text-gray-600">Email Address <small>*</small></label>
             <input type="email" name="email" placeholder="Samchristy98879@gmail.com" className="w-full py-2 px-3 border rounded-md mb-6 text-xs" />
 
             <label htmlFor="shool" className="text-xs text-gray-600">Are you in school? <small>*</small></label>
@@ -84,40 +137,6 @@ const SignUp = () => {
               <option value="CTA">CTA</option>
               <option value="CLAT">CLAT</option>
             </select>
-
-            <div id="select-container" className="flex items-center justify-between">
-              <div>
-                <label htmlFor="location" className="text-xs text-gray-600">Location<small className="text-red-500">*</small></label>
-                <select name="location" id="select1" className="w-full py-2 px-3 border rounded-md">
-                  <option value=""></option>
-                  <option value="Chennai">Chennai</option>
-                  <option value="Mubi">Mubi</option>
-                  <option value="Delhi">Delhi</option>
-                </select>
-              </div>
-              <div>
-                <label htmlFor="grade" className="text-xs text-gray-600">Grade<small>*</small></label>
-                <select name="grade" id="select2" className="w-30 py-2 px-3 text-xs border mx-3 rounded-md">
-                  <option value=""></option>
-                  <option value="Grade1">Grade1</option>
-                  <option value="Grade2">Grade2</option>
-                  <option value="Grade3">Grade3</option>
-                </select>
-              </div>
-            </div>
-            <button type="submit" id="submit"  className="my-12 flex justify-center text-xs m-auto md:mt-12 mb-6 bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-600">
-              Continue
-            </button>
-
-          </form>
-
-          <span id="link-span" className="text-gray-600 text-center mx-auto text-xs">
-            Already have an account? <Link id="link-to-register" to="/signIn" className="text-center no-underline mx-auto text-xs text-blue-500">Login</Link>
-          </span><br />
-        </div>
-
-      </div>
-    )
-}
-
+</div>*/
 export default SignUp
+
