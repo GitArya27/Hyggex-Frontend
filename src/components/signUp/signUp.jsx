@@ -89,8 +89,11 @@ const SignUp = () => {
                 <span className='text-xs mx-4 text-blue-600 font-medium'>Enter Number</span>
                 <span className='text-xs mx-4'>Verify</span>
               </div>
-              <h2 className="text-gray-600 text-center">Enter OPT sent to</h2>
-              <p className="text-xs font-semibold text-blue-600 leading-7 text-center">{phonenumber}</p>
+              <div className='my-8'>
+                <h2 className="text-gray-600 text-center">Enter OPT sent to</h2>
+                <p className="text-xs font-semibold text-blue-600 leading-7 text-center">{phonenumber}</p>
+              </div>
+
               <h3 className="text-gray-600 flex">Enter OTP</h3>
               <OTPInput
                 value={OTP}
