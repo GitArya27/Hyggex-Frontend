@@ -3,6 +3,7 @@ import TestHeader from "../../../Assets/TestHeader.png";
 import theory from "../../../Assets/theory.png";
 import exercise from "../../../Assets/exercise.png";
 import 'font-awesome/css/font-awesome.min.css';
+import './TestPage.css'; 
 
 
 function TestPage() {
