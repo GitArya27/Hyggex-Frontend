@@ -1,6 +1,9 @@
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+
 import React, {useEffect, useState} from 'react'
 import { logo1, slide1, slide2, slide3 } from '../../constants/url'
 
+import { Carousel } from 'react-responsive-carousel';
 import { Link } from 'react-router-dom'
 
 const SignIn = () => {
@@ -90,6 +93,43 @@ const SignIn = () => {
 
         </div>
 
+
+        {/*<div>
+    <label htmlFor="email" className="text-xs text-gray-600">Email Address <small>*</small></label>
+            <input type="email" name="email" placeholder="Samchristy98879@gmail.com" className="w-full py-2 px-3 border rounded-md mb-6 text-xs" />
+
+            <label htmlFor="shool" className="text-xs text-gray-600">Are you in school? <small>*</small></label>
+            <select name="location" id="select1" className="w-full py-2 px-3 border rounded-md mb-6 text-xs">
+              <option value=""></option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+
+            <label htmlFor="exam" className="text-xs text-gray-600">Are you preparing for competitive exams? <small>*</small></label>
+            <select name="location" id="select1" className="w-full py-2 px-3 border rounded-md mb-6 text-xs">
+              <option value=""></option>
+              <option value="yes">Yes</option>
+              <option value="CTA">CTA</option>
+              <option value="CLAT">CLAT</option>
+            </select>
+        </div>*/}
+
+        <div>
+          <Carousel>
+                <div>
+                    <img src={slide1} />
+                    <p className="legend">Legend 1</p>
+                </div>
+                <div>
+                    <img src={slide2} />
+                    <p className="legend">Legend 2</p>
+                </div>
+                <div>
+                    <img src={slide3} />
+                    <p className="legend">Legend 3</p>
+                </div>
+            </Carousel>
+        </div>
 
       </div>
     )

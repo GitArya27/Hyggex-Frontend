@@ -15,3 +15,4 @@ export const logo1 = "https://res.cloudinary.com/dbnxbly1r/image/upload/v1698181
 
 export const circle = "https://res.cloudinary.com/dbnxbly1r/image/upload/v1698453653/hyggex/Ellipse_309_mi5dmy.png";
 export const circle1 = "https://res.cloudinary.com/dbnxbly1r/image/upload/v1698453776/hyggex/Ellipse_308_bdqm4m.png";
+export const circle2 = "https://res.cloudinary.com/dbnxbly1r/image/upload/v1698467648/hyggex/Group_48075_fixvfn.png"
