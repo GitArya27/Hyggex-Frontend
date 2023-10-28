@@ -7,6 +7,7 @@ import React, {useEffect, useState} from 'react'
 import { circle, circle1, circle2, logo1, slide1, slide2, slide3 } from '../../constants/url'
 
 import { Link } from 'react-router-dom'
+import OtpInput from './otpinput';
 import PhoneInput from 'react-phone-input-2'
 import imageText from '../signIn/signIn'
 
@@ -23,13 +24,14 @@ const SignUp = () => {
   const [activeTextIndex, setActiveTextIndex] = useState(0);
 
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [phonenumber, setPhoneNumber] = useState("");
   const [OTP, setOTP] = useState("");
   const [showOTPForm, setShowOTPForm] = useState(false);
+  const [showDetailForm, setShowDetailForm] = useState(false);
 
   const handleSubmit =(e)=>{
     e.preventDefault();
-
 
     if (name !="" && phonenumber !="") {
       setShowOTPForm(true);
@@ -38,12 +40,7 @@ const SignUp = () => {
     }
   }
 
-  const handleOTP = () => {
-    if (OTP === '5555') {
-      alert("success, you can register");
-      window.location.href = "#";
-    }
-  }
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -82,52 +79,85 @@ const SignUp = () => {
         </div>
 
         <div className="sm:w-1/2 sm:order-2 order-1 py-8 px-10 m-auto flex flex-col" id='card2'>
+          {/*====================OTP form===============*/}
           {showOTPForm ? (
+            <OtpInput setShowDetailForm={setShowDetailForm}/>
+
+
+            //===============profile details===============
+          ) : showDetailForm ? (
             <div>
+
               <div id='first-div' className="my-5 text-center">
                 <h1 id="h1" className="text-blue-600 font-bold pb-5">Sign Up</h1>
+                <p id="p1" className="text-gray-600 text-xs">Enter profile details</p>
               </div>
 
               <div className='flex flex-row justify-center'>
-                <img src={circle2} alt="dotted circle" className='w-6 h-6' />
+                <img src={circle1} alt="dotted circle" className='w-6 h-6' />
                 <span className='text-blue-600'>--------------------------</span>
-                <img className='w-6 h-6' src={ circle} alt="circle" />
+                <img className='w-6 h-6' src={circle} alt="circle" />
               </div>
 
-              <div className="flex flex-row justify-evenly mb-10 mt-2 md:mt-2 text-gray-600" id='second-div'>
+              <div className="flex flex-row justify-evenly mt-2 md:mt-2 text-gray-600" id='second-div'>
                 <span className='text-xs mx-4 text-blue-600 font-medium'>Enter Number</span>
-                <span className='text-xs mx-4'>Verify</span>
-              </div>
-              <div className='my-6'>
-                <h2 className="text-gray-600 text-xs text-center">Enter OPT sent to</h2>
-                <p className="text-xs text-blue-600 leading-7 text-center">{phonenumber}</p>
+                <span className='text-xs mx-4'>Enter basic details</span>
               </div>
 
-              <h3 className="text-gray-600 text-xs ml-28 md:ml-32 mb-0">Enter OTP</h3>
-              <OTPInput
-                value={OTP}
-                onChange={setOTP}
-                OTPLength={4}
-                otpType="number"
-                disabled={false}
-                inputStyles={{border:"1px solid #696671", borderRadius:"8px", width:"40px", height:"40px", marginTop:"-0.5rem"}}
-                secure
-                className="flex justify-center p-4"
-              />
-              <ResendOTP maxTime={20} style={{color:"#164EC0",textAlign:"center", margin:"0rem 9rem",fontSize:"0.7rem"}}
-                onResendClick={() => console.log("Resend clicked")}
-              />
-              <button onClick={handleOTP} className="w-24 my-8 flex justify-center text-xs m-auto md:mt-8 mb-6 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
-                Login
-              </button>
-              <div className='my-8'>
-                <span id="link-span" className="text-gray-600 flex items-center justify-center text-center mx-auto text-xs">
-                  Already have an account?  <Link id="link-to-register" to="/signIn" className="text-center no-underline text-xs text-blue-600 font-medium">  Login</Link>
+              <form onSubmit={handleSubmit} action="" id='form' className="text-xs text-gray-600 max-w-screen-sm px-10 py-5">
+                <label htmlFor="name" className="text-xs text-gray-600 leading-7">Name <small className='text-red-500'>*</small></label>
+                <input
+                  type="text"
+                  name="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Enter your name"
+                  className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12"
+                 />
+
+                <label htmlFor="email" className="text-xs text-gray-600 leading-7">Email Address<small className='text-red-500'>*</small></label>
+                <input
+                  type="email"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Samchristy98879@gmail.com"
+                  className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12"
+                />
+
+                <label htmlFor="shool" className="text-xs text-gray-600">Are you in school? <small className='text-red-500'>*</small></label>
+                <select name="location" id="select1" className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
+                  <option value=""></option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+
+                <label htmlFor="exam" className="text-xs text-gray-600">Are you preparing for competitive exams? <small className='text-red-500'>*</small></label>
+                <select name="location" id="select1" className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
+                  <option value=""></option>
+                  <option value="yes">Yes</option>
+                  <option value="CTA">CTA</option>
+                  <option value="CLAT">CLAT</option>
+                </select>
+
+
+
+                <button type="submit" id="submit" className="my-8 flex justify-center text-xs m-auto md:mt-8 mb-6 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
+                  Continue
+                </button>
+
+              </form>
+
+              <span id="link-span" className="text-gray-600 flex items-center justify-center text-center mx-auto text-xs">
+                Already have an account?  <Link id="link-to-register" to="/signIn" className="text-center no-underline text-xs text-blue-600 font-medium">  Login</Link>
               </span><br />
-              </div>
+
             </div>
 
-          ) : (
+          ):(
+
+
+              //basic details form
             <div>
               <div id='first-div' className="my-5 text-center">
                 <h1 id="h1" className="text-blue-600 font-bold pb-5">Sign Up</h1>
@@ -137,7 +167,7 @@ const SignUp = () => {
               <div className='flex flex-row justify-center'>
                 <img src={circle1} alt="dotted circle" className='w-6 h-6' />
                 <span className='text-blue-600'>--------------------------</span>
-                <img className='w-6 h-6' src={ circle} alt="circle" />
+                <img className='w-6 h-6' src={circle} alt="circle" />
               </div>
 
               <div className="flex flex-row justify-evenly mt-2 md:mt-2 text-gray-600" id='second-div'>
@@ -158,27 +188,27 @@ const SignUp = () => {
                   type="text"
                   name="name"
                   value={name}
-                  onChange={(e)=>setName(e.target.value)}
+                  onChange={(e) => setName(e.target.value)}
                   placeholder="Enter your name"
                   className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12"
                 />
 
-                  <label htmlFor="mobile number" className="text-xs font-semibold text-blue-600 leading-7">Mobile Number</label>
-                  <div className="w-full md:mb-8 mb-12 h-12">
-                    <PhoneInput
-                      inputProps={{
-                        'required': true,
-                        name: 'phonenumber'
-                      }}
-                      placeholder='Enter your mobile number'
-                      enableSearch
-                      required={true}
-                      inputStyle={{ paddingTop: "1rem", paddingBottom: "1rem", width: "100%", height: "46px" }}
-                      country={'in'}
-                      value={phonenumber}
-                      onChange={setPhoneNumber}
-                    />
-                  </div>
+                <label htmlFor="mobile number" className="text-xs font-semibold text-blue-600 leading-7">Mobile Number</label>
+                <div className="w-full md:mb-8 mb-12 h-12">
+                  <PhoneInput
+                    inputProps={{
+                      'required': true,
+                      name: 'phonenumber'
+                    }}
+                    placeholder='Enter your mobile number'
+                    enableSearch
+                    required={true}
+                    inputStyle={{ paddingTop: "1rem", paddingBottom: "1rem", width: "100%", height: "46px" }}
+                    country={'in'}
+                    value={phonenumber}
+                    onChange={setPhoneNumber}
+                  />
+                </div>
 
                 <span id="link-span" className="text-gray-600 text-center mx-auto text-xs">
                   By Signing Up, you agree to
@@ -188,7 +218,7 @@ const SignUp = () => {
                   </a>
                 </span>
 
-                <button type="submit" id="submit"  className="my-8 flex justify-center text-xs m-auto md:mt-8 mb-6 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
+                <button type="submit" id="submit" className="my-8 flex justify-center text-xs m-auto md:mt-8 mb-6 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
                   Continue
                 </button>
 
@@ -199,7 +229,6 @@ const SignUp = () => {
               </span><br />
 
             </div>
-
 
           )}
 
