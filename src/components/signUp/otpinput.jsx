@@ -59,5 +59,4 @@ const OtpInput = ({setShowDetailForm}) => {
             </div>
     )
 }
-
 export default OtpInput
