@@ -29,11 +29,17 @@ const SignUp = () => {
 
   const handleSubmit =(e)=>{
     e.preventDefault();
-    setShowOTPForm(true);
+
+
+    if (name !="" && phonenumber !="") {
+      setShowOTPForm(true);
+    } else {
+      alert(`Fill in your details.`)
+    }
   }
 
   const handleOTP = () => {
-    if (OTP == '1234') {
+    if (OTP === '5555') {
       alert("success, you can register");
       window.location.href = "#";
     }
@@ -52,7 +58,7 @@ const SignUp = () => {
 
     return (
       <div className='flex flex-col justify-center sm:flex-row' id='container'>
-        <div className="bg-[#DFEAFF] sm:w-1/2 bg-cover bg-center relative pb-10" id='card1'>
+        <div className="bg-[#DFEAFF] sm:w-1/2 bg-cover bg-center relative pb-10 sm:order-1 order-2" id='card1'>
           <img src={logo1} alt="logo" className="ml-8 mb-6 w-32 py-8" id='logo' />
           <div id='inner-card' className=''>
 
@@ -75,7 +81,7 @@ const SignUp = () => {
           </div>
         </div>
 
-        <div className="sm:w-1/2 py-8 px-10 m-auto flex flex-col" id='card2'>
+        <div className="sm:w-1/2 sm:order-2 order-1 py-8 px-10 m-auto flex flex-col" id='card2'>
           {showOTPForm ? (
             <div>
               <div id='first-div' className="my-5 text-center">
@@ -92,24 +98,23 @@ const SignUp = () => {
                 <span className='text-xs mx-4 text-blue-600 font-medium'>Enter Number</span>
                 <span className='text-xs mx-4'>Verify</span>
               </div>
-              <div className='my-8'>
-                <h2 className="text-gray-600 text-center">Enter OPT sent to</h2>
-                <p className="text-xs font-semibold text-blue-600 leading-7 text-center">{phonenumber}</p>
+              <div className='my-6'>
+                <h2 className="text-gray-600 text-xs text-center">Enter OPT sent to</h2>
+                <p className="text-xs text-blue-600 leading-7 text-center">{phonenumber}</p>
               </div>
 
-              <h3 className="text-gray-600 flex">Enter OTP</h3>
+              <h3 className="text-gray-600 text-xs ml-28 md:ml-32 mb-0">Enter OTP</h3>
               <OTPInput
                 value={OTP}
                 onChange={setOTP}
-                autoFocus
                 OTPLength={4}
                 otpType="number"
                 disabled={false}
-                inputStyles={{border:"1px solid #164EC0", borderRadius:"5px"}}
+                inputStyles={{border:"1px solid #696671", borderRadius:"8px", width:"40px", height:"40px", marginTop:"-0.5rem"}}
                 secure
                 className="flex justify-center p-4"
               />
-              <ResendOTP maxTime={20} style={{color:"blue"}}
+              <ResendOTP maxTime={20} style={{color:"#164EC0",textAlign:"center", margin:"0rem 9rem",fontSize:"0.7rem"}}
                 onResendClick={() => console.log("Resend clicked")}
               />
               <button onClick={handleOTP} className="w-24 my-8 flex justify-center text-xs m-auto md:mt-8 mb-6 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
@@ -152,8 +157,7 @@ const SignUp = () => {
                 <input
                   type="text"
                   name="name"
-                    value={name}
-                    required
+                  value={name}
                   onChange={(e)=>setName(e.target.value)}
                   placeholder="Enter your name"
                   className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12"
