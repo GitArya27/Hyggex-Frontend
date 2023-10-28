@@ -33,7 +33,10 @@ const SignUp = () => {
   }
 
   const handleOTP = () => {
-
+    if (OTP == '1234') {
+      alert("success, you can register");
+      window.location.href = "#";
+    }
   }
 
   useEffect(() => {
