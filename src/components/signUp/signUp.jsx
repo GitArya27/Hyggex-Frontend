@@ -3,7 +3,7 @@
 import 'react-phone-input-2/lib/style.css'
 
 import React, {useEffect, useState} from 'react'
-import { logo1, slide1, slide2, slide3 } from '../../constants/url'
+import { circle, circle1, logo1, slide1, slide2, slide3 } from '../../constants/url'
 
 import { Link } from 'react-router-dom'
 import PhoneInput from 'react-phone-input-2'
@@ -25,6 +25,10 @@ const SignUp = () => {
 
   const [name, setName] = useState("");
   const [phonenumber, setPhoneNumber] = useState("");
+
+  const handleSubmit =(e)=>{
+    e.preventDefault()
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -64,23 +68,40 @@ const SignUp = () => {
         <div className="sm:w-1/2 py-8 px-10 m-auto flex flex-col" id='card2'>
           <div id='first-div' className="my-5 text-center">
             <h1 id="h1" className="text-blue-600 font-bold pb-5">Sign Up</h1>
-            <p id="p1" className="text-gray-600 text-base">Enter profile details</p>
+            <p id="p1" className="text-gray-600 text-xs">Let's get started</p>
           </div>
 
-          <div className="flex flex-row justify-evenly mt-4 md:mt-6 text-gray-600" id='second-div'>
-            <span className='text-base mx-4 text-blue-600 font-medium'>Enter Number</span>
-            <span className='text-base mx-4'>Enter basic details</span>
+          <div className='flex flex-row justify-center'>
+            <img src={circle1} alt="dotted circle" className='w-6 h-6' />
+             <span className='text-blue-600'>--------------------------</span>
+            <img className='w-6 h-6' src={ circle} alt="circle" />
           </div>
 
-          {/*<p className="mt-4 md:mt-6 text-gray-600 text-xs text-center" id='profile-details'>We will need your profile details to give you a better experience</p>*/}
-          <form action="" id='form' className="text-base text-gray-600 max-w-screen-sm px-10 py-5">
-            <label htmlFor="name" className="text-babase font-semibold text-blue-600 leading-7">Name</label>
-            <input type="text" name="name" placeholder="Enter your name" className="w-full py-2 px-3 border rounded-md mb-4 text-base h-10 md:h-8 xs:h-12" />
+          <div className="flex flex-row justify-evenly mt-2 md:mt-2 text-gray-600" id='second-div'>
+            <span className='text-xs mx-4 text-blue-600 font-medium'>Enter Number</span>
+            <span className='text-xs mx-4'>Enter basic details</span>
+          </div>
 
-            <label htmlFor="mobile number" className="text-base font-semibold text-blue-600 leading-7">Mobile Number</label>
+          <p
+            className="my-8 md:my-8 text-gray-600 text-xs text-center"
+            id='profile-details'
+          >
+            Enter your name and mobile number to continue your journey
+          </p>
+          <form onSubmit={handleSubmit} action="" id='form' className="text-xs text-gray-600 max-w-screen-sm px-10 py-5">
+            <label htmlFor="name" className="text-xs font-semibold text-blue-600 leading-7">Name</label>
+            <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={(e)=>setName(e.target.value)}
+              placeholder="Enter your name"
+              className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12"
+            />
+
+            <label htmlFor="mobile number" className="text-xs font-semibold text-blue-600 leading-7">Mobile Number</label>
             <div className="w-full md:mb-8 mb-12 h-12">
               <PhoneInput
-                /*className="rounded-md text-base w-full h-12 md:h-12"*/
                 inputProps={{
                   'required': true,
                   name:'phonenumber'
@@ -91,28 +112,25 @@ const SignUp = () => {
                 country={'in'}
                 value={phonenumber}
                 onChange={setPhoneNumber}
-                /*inputExtraProps={{
-                  className: 'w-full py-20 px-3 border rounded-md text-xs flex items-center'
-                }}*/
             />
             </div>
 
-            <span id="link-span" className="text-gray-600 text-center mx-auto text-babase">
+            <span id="link-span" className="text-gray-600 text-center mx-auto text-xs">
               By Signing Up, you agree to
-              <a href="#" className="text-center no-underline mx-auto text-base text-blue-500"> terms of use</a> and
+              <a href="#" className="text-center no-underline mx-auto text-xs text-blue-500"> terms of use</a> and
               <a href="#" id="lin-to-privacy"
-                className="text-center no-underline mx-auto text-base text-blue-600"> privacy statements.
+                className="text-center no-underline mx-auto text-xs text-blue-600"> privacy statements.
               </a>
             </span>
 
-            <button type="submit" id="submit"  className="my-8 flex justify-center text-base m-auto md:mt-8 mb-6 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
+            <button type="submit" id="submit"  className="my-8 flex justify-center text-xs m-auto md:mt-8 mb-6 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
               Continue
             </button>
 
           </form>
 
-          <span id="link-span" className="text-gray-600 text-center mx-auto text-base">
-            Already have an account? <Link id="link-to-register" to="/signIn" className="text-center no-underline mx-auto text-base text-blue-600 font-medium">Login</Link>
+          <span id="link-span" className="text-gray-600 text-center mx-auto text-xs">
+            Already have an account? <Link id="link-to-register" to="/signIn" className="text-center no-underline mx-auto text-xs text-blue-600 font-medium">Login</Link>
           </span><br />
         </div>
 

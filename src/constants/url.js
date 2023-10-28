@@ -12,3 +12,6 @@ export const slide1 = "https://res.cloudinary.com/dbnxbly1r/image/upload/v169818
 export const slide2 = "https://res.cloudinary.com/dbnxbly1r/image/upload/v1698181349/login_2_zmmwrs.svg";
 export const slide3 = "https://res.cloudinary.com/dbnxbly1r/image/upload/v1698181445/login_3_y0ib97.svg";
 export const logo1 = "https://res.cloudinary.com/dbnxbly1r/image/upload/v1698181752/Component_9_dqkwgp.png";
+
+export const circle = "https://res.cloudinary.com/dbnxbly1r/image/upload/v1698453653/hyggex/Ellipse_309_mi5dmy.png";
+export const circle1 = "https://res.cloudinary.com/dbnxbly1r/image/upload/v1698453776/hyggex/Ellipse_308_bdqm4m.png";
