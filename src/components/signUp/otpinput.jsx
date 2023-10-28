@@ -1,4 +1,3 @@
-import OTPInput, { ResendOTP } from "otp-input-react";
 import React,{useState} from 'react'
 import { circle, circle2 } from "../../constants/url";
 
@@ -18,7 +17,7 @@ const OtpInput = ({setShowDetailForm}) => {
   }
 
     return (
-        <div>{/*===============OTP===============*/}
+        <div className='m-auto'>{/*===============OTP===============*/}
               <div id='first-div' className="my-5 text-center">
                 <h1 id="h1" className="text-blue-600 font-bold pb-5">Sign Up</h1>
               </div>
@@ -34,29 +33,26 @@ const OtpInput = ({setShowDetailForm}) => {
                 <span className='text-xs mx-4'>Verify</span>
               </div>
               <div className='my-6'>
-                <h2 className="text-gray-600 text-xs text-center">Enter OPT sent to</h2>
-                <p className="text-xs text-blue-600 leading-7 text-center">{phonenumber}</p>
+                <h2 className="text-gray-500 text-xs text-center">Enter OPT sent to</h2>
+                <p className="text-xs text-blue-600 leading-7 text-center">+91  9876543299</p>
               </div>
 
-              <h3 className="text-gray-600 text-xs ml-28 md:ml-32 mb-0">Enter OTP</h3>
-              <OTPInput
-                value={OTP}
-                onChange={setOTP}
-                OTPLength={4}
-                otpType="number"
-                disabled={false}
-                inputStyles={{ border: "1px solid #696671", borderRadius: "8px", width: "40px", height: "40px", marginTop: "-0.5rem" }}
-                secure
-                className="flex justify-center p-4"
-              />
-              <ResendOTP maxTime={20} style={{ color: "#164EC0", textAlign: "center", margin: "0rem 9rem", fontSize: "0.7rem" }}
-                onResendClick={() => console.log("Resend clicked")}
-              />
-              <button onClick={handleOTP} className="w-24 my-8 flex justify-center text-xs m-auto md:mt-8 mb-6 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
+              <h3 className="text-gray-500 text-xs ml-4 md:ml-4 mb-0">Enter OTP</h3>
+              <div className="flex flex-row justify-center items-center">
+                <input type="tel" name="otp" value={OTP} onChange={(e)=>setOTP(e.target.value)} className="mx-3 w-10 h-10 text-center p-2 border border-gray-300 rounded-md"/>
+                <input type="tel" name="otp" value={OTP} onChange={(e)=>setOTP(e.target.value)} className="mx-3 w-10 h-10 text-center p-2 border border-gray-300 rounded-md"/>
+                <input type="tel" name="otp" value={OTP} onChange={(e)=>setOTP(e.target.value)} className="mx-3 w-10 h-10 text-center p-2 border border-gray-300 rounded-md"/>
+                <input type="tel" name="otp" value={OTP} onChange={(e)=>setOTP(e.target.value)} className="mx-3 w-10 h-10 text-center p-2 border border-gray-300 rounded-md"/>
+              </div>
+              <p className='text-gray-500 float-right pr-4 text-xs leading-7 pb-8'>Resend OTP in: <span className="text-xs text-blue-600 leading-7">20 seconds</span></p>
+
+              <div className='flex justify-center items-center my-16 mx-auto'>
+                <button onClick={handleOTP} className="w-24 text-center text-xs bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
                 Login
               </button>
-              <div className='my-8'>
-                <span id="link-span" className="text-gray-600 flex items-center justify-center text-center mx-auto text-xs">
+              </div>
+              <div className='my-4'>
+                <span id="link-span" className="text-gray-500 flex items-center justify-center text-center mx-auto text-xs">
                   Already have an account?  <Link id="link-to-register" to="/signIn" className="text-center no-underline text-xs text-blue-600 font-medium">  Login</Link>
                 </span><br />
               </div>

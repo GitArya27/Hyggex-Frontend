@@ -99,101 +99,101 @@ const SignUp = () => {
         </div>
 
         <div className="sm:w-1/2 sm:order-2 order-1 py-8 px-10 m-auto flex flex-col" id='card2'>
-          {/*====================OTP form===============*/}
-          {showOTPForm ? (
-            <OtpInput setShowDetailForm={setShowDetailForm}/>
+          {/*====================profile details===============*/}
+        {showDetailForm ? (
 
+          <div>
 
-            //===============profile details===============
-          ) : showDetailForm ? (
-            <div>
-
-              <div id='first-div' className="my-5 text-center">
-                <h1 id="h1" className="text-blue-600 font-bold pb-5">Sign Up</h1>
-                <p id="p1" className="text-gray-600 text-xs">Enter profile details</p>
-              </div>
-
-              <div className='flex flex-row justify-center'>
-                <img src={circle1} alt="dotted circle" className='w-6 h-6' />
-                <span className='text-blue-600'>--------------------------</span>
-                <img className='w-6 h-6' src={circle} alt="circle" />
-              </div>
-
-              <div className="flex flex-row justify-evenly mt-2 md:mt-2 text-gray-600" id='second-div'>
-                <span className='text-xs mx-4 text-blue-600 font-medium'>Enter Number</span>
-                <span className='text-xs mx-4'>Enter basic details</span>
-              </div>
-
-              <form onSubmit={handleSubmit} action="" id='form' className="text-xs text-gray-600 max-w-screen-sm px-10 py-5">
-                <label htmlFor="name" className="text-xs text-gray-600 leading-7">Name <small className='text-red-500'>*</small></label>
-                <input
-                  type="text"
-                  name="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Enter your name"
-                  className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12"
-                 />
-
-                <label htmlFor="email" className="text-xs text-gray-600 leading-7">Email Address<small className='text-red-500'>*</small></label>
-                <input
-                  type="email"
-                  name="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Samchristy98879@gmail.com"
-                  className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12"
-                />
-
-                <label htmlFor="shool" className="text-xs text-gray-600">Are you in school? <small className='text-red-500'>*</small></label>
-                <select name="location" id="select1" className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
-                  <option value=""></option>
-                  <option value="yes">Yes</option>
-                  <option value="no">No</option>
-                </select>
-
-                <label htmlFor="exam" className="text-xs text-gray-600">Are you preparing for competitive exams? <small className='text-red-500'>*</small></label>
-                <select name="location" id="select1" className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
-                  <option value=""></option>
-                  <option value="yes">Yes</option>
-                  <option value="CTA">CTA</option>
-                  <option value="CLAT">CLAT</option>
-                </select>
-
-                <div className='w-full flex flex-row justify-between items-center'>
-                  <div>
-                    <label htmlFor="shool" className="text-xs text-gray-600">Location <small className='text-red-500'>*</small></label>
-                    <select name="location" id="select1" className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
-                      <option value=""></option>
-                      <option value="Chennai">Chennai</option>
-                      <option value="Mumbai">Mumbai</option>
-                      <option value="Delhi">Delhai</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label htmlFor="exam" className="text-xs text-gray-600">Grade <small className='text-red-500'>*</small></label>
-                    <select name="location" id="select1" className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
-                      <option value=""></option>
-                      <option value="Grade1">Grade1</option>
-                      <option value="Grade2">Grade2</option>
-                      <option value="Grade3">Grade3</option>
-                    </select>
-                  </div>
-                </div>
-
-                <button type="submit" id="submit" className="my-8 flex justify-center text-xs m-auto md:mt-8 mb-6 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
-                  Continue
-                </button>
-
-              </form>
-
-              <span id="link-span" className="text-gray-600 flex items-center justify-center text-center mx-auto text-xs">
-                Already have an account?  <Link id="link-to-register" to="/signIn" className="text-center no-underline text-xs text-blue-600 font-medium">  Login</Link>
-              </span><br />
-
+            <div id='first-div' className="my-5 text-center">
+              <h1 id="h1" className="text-blue-600 font-bold pb-5">Sign Up</h1>
+              <p id="p1" className="text-gray-600 text-xs">Enter profile details</p>
             </div>
 
+            <div className='flex flex-row justify-center'>
+              <img src={circle1} alt="dotted circle" className='w-6 h-6' />
+              <span className='text-blue-600'>--------------------------</span>
+              <img className='w-6 h-6' src={circle} alt="circle" />
+            </div>
+
+            <div className="flex flex-row justify-evenly mt-2 md:mt-2 text-gray-600" id='second-div'>
+              <span className='text-xs mx-4 text-blue-600 font-medium'>Enter Number</span>
+              <span className='text-xs mx-4'>Enter basic details</span>
+            </div>
+
+            <form onSubmit={handleSubmit} action="" id='form' className="text-xs text-gray-600 max-w-screen-sm px-10 py-5">
+              <label htmlFor="name" className="text-xs text-gray-600 leading-7">Name <small className='text-red-500'>*</small></label>
+              <input
+                type="text"
+                name="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Enter your name"
+                className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12"
+              />
+
+              <label htmlFor="email" className="text-xs text-gray-600 leading-7">Email Address<small className='text-red-500'>*</small></label>
+              <input
+                type="email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Samchristy98879@gmail.com"
+                className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12"
+              />
+
+              <label htmlFor="shool" className="text-xs text-gray-600">Are you in school? <small className='text-red-500'>*</small></label>
+              <select name="location" id="select1" className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
+                <option value=""></option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+
+              <label htmlFor="exam" className="text-xs text-gray-600">Are you preparing for competitive exams? <small className='text-red-500'>*</small></label>
+              <select name="location" id="select1" className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
+                <option value=""></option>
+                <option value="yes">Yes</option>
+                <option value="CTA">CTA</option>
+                <option value="CLAT">CLAT</option>
+              </select>
+
+              <div className='w-full flex flex-row justify-between items-center'>
+                <div>
+                  <label htmlFor="shool" className="text-xs text-gray-600">Location <small className='text-red-500'>*</small></label>
+                  <select name="location" id="select1" className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
+                    <option value=""></option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Delhi">Delhai</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label htmlFor="exam" className="text-xs text-gray-600">Grade <small className='text-red-500'>*</small></label>
+                  <select name="location" id="select1" className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
+                    <option value=""></option>
+                    <option value="Grade1">Grade1</option>
+                    <option value="Grade2">Grade2</option>
+                    <option value="Grade3">Grade3</option>
+                  </select>
+                </div>
+              </div>
+
+              <button type="submit" id="submit" className="my-8 flex justify-center text-xs m-auto md:mt-8 mb-6 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
+                Continue
+              </button>
+
+            </form>
+
+            <span id="link-span" className="text-gray-600 flex items-center justify-center text-center mx-auto text-xs">
+              Already have an account?  <Link id="link-to-register" to="/signIn" className="text-center no-underline text-xs text-blue-600 font-medium">  Login</Link>
+            </span><br />
+
+          </div>
+
+
+          //===============OTP form===============
+        ) : showOTPForm ? (
+            <OtpInput setShowDetailForm={setShowDetailForm} />
           ):(
 
 
