@@ -114,22 +114,7 @@ const SignIn = () => {
             </select>
         </div>*/}
 
-        <div>
-          <Carousel>
-                <div>
-                    <img src={slide1} />
-                    <p className="legend">Legend 1</p>
-                </div>
-                <div>
-                    <img src={slide2} />
-                    <p className="legend">Legend 2</p>
-                </div>
-                <div>
-                    <img src={slide3} />
-                    <p className="legend">Legend 3</p>
-                </div>
-            </Carousel>
-        </div>
+
 
       </div>
     )

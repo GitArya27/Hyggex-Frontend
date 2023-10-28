@@ -1,7 +1,8 @@
 //import './sign.css'
 
 import 'react-phone-input-2/lib/style.css'
-
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 import OTPInput, { ResendOTP } from "otp-input-react";
 import React, {useEffect, useState} from 'react'
 import { circle, circle1, circle2, logo1, slide1, slide2, slide3 } from '../../constants/url'
@@ -53,29 +54,48 @@ const SignUp = () => {
 
 
 
-    return (
-      <div className='flex flex-col justify-center sm:flex-row' id='container'>
+
+
+  return (
+
+      <div className='flex flex-col justify-center sm:flex-row sm:justify-between' id='container'>
         <div className="bg-[#DFEAFF] sm:w-1/2 bg-cover bg-center relative pb-10 sm:order-1 order-2" id='card1'>
           <img src={logo1} alt="logo" className="ml-8 mb-6 w-32 py-8" id='logo' />
-          <div id='inner-card' className=''>
-
-            <img src={images[activeIndex]} alt="carousel" className="w-60 h-60 mx-auto" id='slider' />
-
-            <div className="absolute bottom-10 sm:bottom-40 left-1/2 transform -translate-x-1/2 flex space-x-2 mt-2">
-              {images.map((_, index) => (
-                <button
-                  key={index}
-                  className={`w-6 h-1 ${activeIndex === index ? 'bg-blue-500' : 'bg-white'}`}
-                  onClick={() => setActiveIndex(index)}
-                ></button>
-
-              ))}
-
-            </div>
-            <div className="text-center text-gray-700 mt-2 mb-10">
-              <p id='imagetxt' className="text-xs px-8 leading-5">{imageText[activeTextIndex]}</p>
-            </div>
+          <div className='mx-10'>
+            <Carousel
+              autoPlay
+              infiniteLoop={true}
+              dynamicHeight={false}
+              showThumbs={false}
+              showArrows={false}
+              showStatus={false}
+              interval={4000}
+              axis='horizontal'
+            >
+              <div>
+                <img src={slide1} className='w-60 h-60' />
+                <p className='text-xs mb-10'>
+                  Our flagship adaptive learning system that resonates with each student's
+                  unique learning pattern.
+                </p>
+              </div>
+              <div>
+                <img src={slide2} className='w-60 h-60' />
+                <p className="text-xs mb-10">
+                  Tailored guidiance to help navigate academic intricacies and diverse challenges.
+                </p>
+              </div>
+              <div>
+                <img src={slide3} className='w-60 h-60' />
+                <p className="text-xs mb-10">
+                  we ground every Hyggex offering in rigorous scientific research, ensuring it's
+                  effectiveness and trustworthiness. Although we cater primarily to Indian's diverse
+                  audience, our vision has a global reach
+                </p>
+              </div>
+            </Carousel>
           </div>
+
         </div>
 
         <div className="sm:w-1/2 sm:order-2 order-1 py-8 px-10 m-auto flex flex-col" id='card2'>
@@ -140,7 +160,27 @@ const SignUp = () => {
                   <option value="CLAT">CLAT</option>
                 </select>
 
+                <div className='w-full flex flex-row justify-between items-center'>
+                  <div>
+                    <label htmlFor="shool" className="text-xs text-gray-600">Location <small className='text-red-500'>*</small></label>
+                    <select name="location" id="select1" className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
+                      <option value=""></option>
+                      <option value="Chennai">Chennai</option>
+                      <option value="Mumbai">Mumbai</option>
+                      <option value="Delhi">Delhai</option>
+                    </select>
+                  </div>
 
+                  <div>
+                    <label htmlFor="exam" className="text-xs text-gray-600">Grade <small className='text-red-500'>*</small></label>
+                    <select name="location" id="select1" className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
+                      <option value=""></option>
+                      <option value="Grade1">Grade1</option>
+                      <option value="Grade2">Grade2</option>
+                      <option value="Grade3">Grade3</option>
+                    </select>
+                  </div>
+                </div>
 
                 <button type="submit" id="submit" className="my-8 flex justify-center text-xs m-auto md:mt-8 mb-6 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
                   Continue
