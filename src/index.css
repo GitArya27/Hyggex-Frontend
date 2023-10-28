@@ -1,18 +1,16 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-
-html{
+html {
   scroll-behavior: smooth;
 }
 
-body{   margin: 0;
-    font-family: 'Inter', sans-serif;
-    
-    
- }
- /* Default font size */
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+}
+/* Default font size */
 html {
   font-size: 16px; /* This is typically the default browser font size */
 }
@@ -66,15 +64,245 @@ html {
   }
 }
 
-
 input:focus::placeholder,
 textarea:focus::placeholder {
-  color: #164EC0;
+  color: #164ec0;
 }
 
 /* Custom CSS for border color on focus */
 input:focus,
 textarea:focus {
-  border-color: #164EC0;
-  outline-color: #164EC0;
+  border-color: #164ec0;
+  outline-color: #164ec0;
 }
+
+
+/* TestPage.css */
+.heading {
+  background: #06286e;
+  color: white;
+  padding: 90px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  text-align: center;
+  width: 100%;
+}
+
+.h1{
+  font-size: 30px;
+  font-weight: 800;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .heading {
+    padding: 90px 20px 20px 20px;
+  }
+}
+
+/* Box 1 styling */
+.box1 {
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  border-bottom: 140px solid rgb(124, 200, 187);
+  width: 270px;
+  height: 220px;
+  flex-shrink: 0;
+  position: absolute;
+  top: 54%;
+  left: 240px;
+  transform: translate(0, -50%);
+  color: white;
+  padding: 20px;
+  z-index: 1;
+}
+
+.question{
+  font-size: 20px;
+  font-weight: 600;
+}
+
+img {
+  position: relative;
+  bottom: 15px;
+  left: 80px;
+}
+
+.one p {
+  font-size: 16px;
+  color: #576071;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20.07px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+  white-space: inherit;
+}
+
+h6 {
+  margin: 0;
+  white-space: nowrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #576071;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+/* Box 2 styling */
+.box2 {
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  border-bottom: 140px solid #f3d75c;
+  width: 270px;
+  height: 220px;
+  flex-shrink: 0;
+  position: absolute;
+  top: 54%;
+  left: 540px;
+  transform: translate(0, -50%);
+  color: white;
+  padding: 20px;
+  z-index: 1;
+}
+
+/* Box 3 styling */
+.box3 {
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  border-bottom: 140px solid #d09eb7;
+  width: 270px;
+  height: 220px;
+  flex-shrink: 0;
+  position: absolute;
+  top: 54%;
+  left: 840px;
+  transform: translate(0, -50%);
+  color: white;
+  padding: 20px;
+  z-index: 1;
+}
+/* Slider code */
+.line {
+  width: 1340px;
+  height: 30px;
+  flex-shrink: 0;
+  background: #f1f1f1;
+  margin-top: 190px;
+}
+
+.slider-container {
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.slider {
+  width: 100%;
+}
+
+#slider-value {
+  font-size: 24px;
+}
+
+/* Reader  */
+
+.Read {
+  padding: 50px 10px 10px 50px;
+}
+
+.question {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  margin:  0px auto;
+}
+
+
+/* Custom CSS for radio buttons with labels below */
+
+.radio-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.radio-btn input[type="radio"] {
+  width: 24px;
+  height: 24px;
+  margin: 40px;
+}
+
+/* Center the labels under the radio buttons */
+.radio-btn label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  right: 30px;
+}
+
+/* Next button */
+
+/* Add this to your TestPage.css */
+.next-button {
+  background: #06286e;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+.next-button:hover {
+  background: #164ec0; /* Change the background color on hover */
+}
+
+
+.next-btn{
+  width: fit-content;
+  height: 15vh;
+  margin-top: 20px;
+}
+
+.next {
+  display: inline-flex;
+  height: 54px;
+  padding: 18px 32px;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  border-radius: 33px;
+  border: 5px solid rgba(22, 78, 192, 0.25);
+  background: linear-gradient(93deg, #06286e -34.91%, #164ec0 135.05%);
+  position: absolute;
+  top: 2250px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+}
+
+
+.next i {
+  font-size: 16px;
+}
+
+.next:hover {
+  transform: translate(-50%, -50%) scale(1.02);
+  font-size: 20px;
+}
+
+/* Footer styling */
+
