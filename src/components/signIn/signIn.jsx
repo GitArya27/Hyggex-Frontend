@@ -1,21 +1,24 @@
 //import './sign.css'
+
 import 'react-phone-input-2/lib/style.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from 'react-responsive-carousel';
+
 import React, {useEffect, useState} from 'react'
 import { circle, circle1, circle2, logo1, slide1, slide2, slide3 } from '../../constants/url'
-import SignUp from '../signUp/signUp';
+
+import { Carousel } from 'react-responsive-carousel';
 import { Link } from 'react-router-dom'
 import PhoneInput from 'react-phone-input-2'
-
 
 const SignIn = () => {
 
   const [phonenumber, setPhoneNumber] = useState("");
   const [OTP, setOTP] = useState("");
   const [OTPForm, setOTPForm] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeTextIndex, setActiveTextIndex] = useState(0);
 
-  const handleOTP =(e)=>{
+  const handleOTP =(e)=>{//render otp form
     e.preventDefault();
 
     if (OTP !="") {
@@ -26,7 +29,7 @@ const SignIn = () => {
     }
   }
 
-
+  //render login page
   const Login = () => {
     if (phonenumber !="") {
       setOTPForm(true)
@@ -35,48 +38,49 @@ const SignIn = () => {
     }
   }
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prevIndex) => (prevIndex + 1) % images.length);
+      setActiveTextIndex((prevTextIndex) => (prevTextIndex + 1) % imageText.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const images = [`${slide1}`, `${slide2}`, `${slide3}`];
+  const imageText = [
+    "Our flagship adaptive learning system that resonates with each student's unique learning pattern.",
+    "Tailored guidiance to help navigate academic intricacies and diverse challenges.",
+    "we ground every Hyggex offering in rigorous scientific research, ensuring it's effectiveness and trustworthiness. Although we cater primarily to Indian's diverse audience, our vision has a global reach",
+  ];
 
   return (
 
       <div className='flex flex-col justify-center sm:flex-row sm:justify-between' id='container'>
         <div className="bg-[#DFEAFF] sm:w-1/2 bg-cover bg-center relative pb-10 sm:order-1 order-2" id='card1'>
-          <img src={logo1} alt="logo" className="ml-8 mb-6 w-32 py-8" id='logo' />
-          <div className='mx-10'>
-            <Carousel
-              autoPlay
-              infiniteLoop={true}
-              dynamicHeight={false}
-              showThumbs={false}
-              showArrows={false}
-              showStatus={false}
-              interval={4000}
-              axis='horizontal'
-            >
-              <div>
-                <img src={slide1} className='w-60 h-60' />
-                <p className='text-xs mb-10'>
-                  Our flagship adaptive learning system that resonates with each student's
-                  unique learning pattern.
-                </p>
-              </div>
-              <div>
-                <img src={slide2} className='w-60 h-60' />
-                <p className="text-xs mb-10">
-                  Tailored guidiance to help navigate academic intricacies and diverse challenges.
-                </p>
-              </div>
-              <div>
-                <img src={slide3} className='w-60 h-60' />
-                <p className="text-xs mb-10">
-                  we ground every Hyggex offering in rigorous scientific research, ensuring it's
-                  effectiveness and trustworthiness. Although we cater primarily to Indian's diverse
-                  audience, our vision has a global reach
-                </p>
-              </div>
-            </Carousel>
+        <img src={logo1} alt="logo" className="ml-8 mb-6 w-32 py-8" id='logo' />
+
+        <div id='inner-card' className=''>
+
+          <img src={images[activeIndex]} alt="carousel" className="w-60 h-60 mx-auto" id='slider' />
+
+            <div className="absolute bottom-10 sm:bottom-10 left-1/2 transform -translate-x-1/2 flex space-x-2 mt-2">
+              {images.map((_, index) => (
+                <button
+                  key={index}
+                  className={`w-6 h-1 ${activeIndex === index ? 'bg-blue-500' : 'bg-white'}`}
+                  onClick={() => setActiveIndex(index)}
+                ></button>
+
+              ))}
+
+            </div>
+            <div className="text-center text-gray-700 mt- mb-10">
+              <p id='imagetxt' className="text-xs px-8 leading-5">{imageText[activeTextIndex]}</p>
+            </div>
           </div>
 
-        </div>
+          </div>
 
         <div className="sm:w-1/2 sm:order-2 order-1 py-8 px-10 m-auto flex flex-col" id='card2'>
           {/*====================profile details===============*/}
