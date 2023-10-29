@@ -58,11 +58,11 @@ const SignIn = () => {
 
       <div className='flex flex-col justify-center sm:flex-row sm:justify-between' id='container'>
         <div className="bg-[#DFEAFF] sm:w-1/2 bg-cover bg-center relative pb-10 sm:order-1 order-2" id='card1'>
-        <img src={logo1} alt="logo" className="ml-8 mb-6 w-32 py-8" id='logo' />
+          <img src={logo1} alt="logo" className="ml-8 mb-6 w-32 py-8" id='logo' />
 
-        <div id='inner-card' className=''>
+          <div id='inner-card' className=''>
 
-          <img src={images[activeIndex]} alt="carousel" className="w-60 h-60 mx-auto" id='slider' />
+            <img src={images[activeIndex]} alt="carousel" className="w-60 h-60 mx-auto" id='slider' />
 
             <div className="absolute bottom-10 sm:bottom-10 left-1/2 transform -translate-x-1/2 flex space-x-2 mt-2">
               {images.map((_, index) => (
@@ -80,7 +80,7 @@ const SignIn = () => {
             </div>
           </div>
 
-          </div>
+        </div>
 
         <div className="sm:w-1/2 sm:order-2 order-1 py-8 px-10 m-auto flex flex-col" id='card2'>
           {/*====================profile details===============*/}
