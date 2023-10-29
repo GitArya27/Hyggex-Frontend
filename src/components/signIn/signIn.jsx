@@ -1,123 +1,187 @@
+//import './sign.css'
+import 'react-phone-input-2/lib/style.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-
-import React, {useEffect, useState} from 'react'
-import { logo1, slide1, slide2, slide3 } from '../../constants/url'
-
 import { Carousel } from 'react-responsive-carousel';
+import React, {useEffect, useState} from 'react'
+import { circle, circle1, circle2, logo1, slide1, slide2, slide3 } from '../../constants/url'
+import SignUp from '../signUp/signUp';
 import { Link } from 'react-router-dom'
+import PhoneInput from 'react-phone-input-2'
+
 
 const SignIn = () => {
 
+  const [phonenumber, setPhoneNumber] = useState("");
+  const [OTP, setOTP] = useState("");
+  const [OTPForm, setOTPForm] = useState(false);
 
-    const images = [`${slide1}`, `${slide2}`, `${slide3}`];
+  const handleOTP =(e)=>{
+    e.preventDefault();
 
-    imageText = [
-        "Our flagship adaptive learning system that resonates with each student's unique learning pattern.",
-        "Tailored guidiance to help navigate academic intricacies and diverse challenges.",
-        "we ground every Hyggex offering in rigorous scientific research, ensuring it's effectiveness and trustworthiness. Although we cater primarily to Indian's diverse audience, our vision has a global reach",
-  ];
-
-
-    const [activeIndex, setActiveIndex] = useState(0);
-    const [activeTextIndex, setActiveTextIndex] = useState(0)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prevIndex) => (prevIndex + 1) % images.length);
-      setActiveTextIndex((prevTextIndex) => (prevTextIndex + 1) % imageText.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
+    if (OTP !="") {
+      alert(`You have successfully loggedin`);
+      window.location.href = "/";
+    } else {
+      alert(`Enter the OTP.`)
+    }
+  }
 
 
-    return (
-      <div className='flex flex-col justify-center sm:flex-row' id='container'>
-        <div className="bg-[#DFEAFF] sm:w-1/2 bg-cover bg-center relative pb-10" id='card1'>
+  const Login = () => {
+    if (phonenumber !="") {
+      setOTPForm(true)
+    } else {
+      alert('fill in your mobile number')
+    }
+  }
+
+
+  return (
+
+      <div className='flex flex-col justify-center sm:flex-row sm:justify-between' id='container'>
+        <div className="bg-[#DFEAFF] sm:w-1/2 bg-cover bg-center relative pb-10 sm:order-1 order-2" id='card1'>
           <img src={logo1} alt="logo" className="ml-8 mb-6 w-32 py-8" id='logo' />
-          <div id='inner-card' className=''>
-
-            <img src={images[activeIndex]} alt="carousel" className="w-60 h-60 mx-auto" id='slider' />
-
-            <div className="absolute bottom-10 sm:bottom-10 left-1/2 transform -translate-x-1/2 flex space-x-2 mt-2">
-              {images.map((_, index) => (
-                <button
-                  key={index}
-                  className={`w-6 h-1 ${activeIndex === index ? 'bg-blue-500' : 'bg-white'}`}
-                  onClick={() => setActiveIndex(index)}
-                ></button>
-
-              ))}
-
-            </div>
-            <div className="text-center text-gray-700 mt-2 mb-10">
-              <p id='imagetxt' className="text-xs px-8 leading-5">{imageText[activeTextIndex]}</p>
-            </div>
+          <div className='mx-10'>
+            <Carousel
+              autoPlay
+              infiniteLoop={true}
+              dynamicHeight={false}
+              showThumbs={false}
+              showArrows={false}
+              showStatus={false}
+              interval={4000}
+              axis='horizontal'
+            >
+              <div>
+                <img src={slide1} className='w-60 h-60' />
+                <p className='text-xs mb-10'>
+                  Our flagship adaptive learning system that resonates with each student's
+                  unique learning pattern.
+                </p>
+              </div>
+              <div>
+                <img src={slide2} className='w-60 h-60' />
+                <p className="text-xs mb-10">
+                  Tailored guidiance to help navigate academic intricacies and diverse challenges.
+                </p>
+              </div>
+              <div>
+                <img src={slide3} className='w-60 h-60' />
+                <p className="text-xs mb-10">
+                  we ground every Hyggex offering in rigorous scientific research, ensuring it's
+                  effectiveness and trustworthiness. Although we cater primarily to Indian's diverse
+                  audience, our vision has a global reach
+                </p>
+              </div>
+            </Carousel>
           </div>
-        </div>
-
-        <div className="sm:w-1/2 py-8 px-10 m-auto flex flex-col" id='card2'>
-            <div id='first-div' className="my-5 text-center">
-                <h1 id="h1" className="text-blue-600 font-medium pb-5">Login</h1>
-            </div>
-
-            <div className="flex flex-row justify-center mt-4 md:mt-6 text-gray-600" id='second-div'>
-                <span className='text-xs mr-8 text-blue-600 font-medium'>Enter Number</span>
-                <span className='text-xs ml-8'>Verify</span>
-            </div>
-            <p className="mt-10 md:mt-6 text-gray-600 text-xs text-center" id='profile-details'>Enter your mobile number to continue your journey</p>
-
-            <form action="" id='form' className="text-xs text-gray-600 max-w-screen-sm px-20 py-5">
-                <label htmlFor="mobile number" className="text-xs text-blue-600 font-semibold">Mobile Number</label>
-                <div id="select-container" className="flex items-center justify-between">
-                    <select name="location" id="select1" className="w-1/2 py-2 px-3 border mb-6 mt-2 text-xs">
-                        <option value="+91">+91</option>
-                        <option value="+234">+234</option>
-                            <option value="+144">+144</option>
-                            <option value="+1">+1</option>
-                    </select>
-                    <input type="tel" name="mobile number" placeholder="Enter your mobile number" className="mt-2 w-full py-2 px-3 border mb-6 text-xs" />
-                </div>
-
-                <button type="submit" id="submit"  className="my-5 flex justify-center text-xs m-auto md:mt-5 mb-6 bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-600">
-                    Continue
-                </button>
-
-            </form>
-
-            <span id="link-span" className="text-gray-600 text-center mx-auto text-xs">
-                Already have an account? <Link id="link-to-register" to="/signUp" className="text-center no-underline mx-auto text-xs text-blue-500">Sign Up</Link>
-            </span><br />
-
-
 
         </div>
 
-
-        {/*<div>
-    <label htmlFor="email" className="text-xs text-gray-600">Email Address <small>*</small></label>
-            <input type="email" name="email" placeholder="Samchristy98879@gmail.com" className="w-full py-2 px-3 border rounded-md mb-6 text-xs" />
-
-            <label htmlFor="shool" className="text-xs text-gray-600">Are you in school? <small>*</small></label>
-            <select name="location" id="select1" className="w-full py-2 px-3 border rounded-md mb-6 text-xs">
-              <option value=""></option>
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
-            </select>
-
-            <label htmlFor="exam" className="text-xs text-gray-600">Are you preparing for competitive exams? <small>*</small></label>
-            <select name="location" id="select1" className="w-full py-2 px-3 border rounded-md mb-6 text-xs">
-              <option value=""></option>
-              <option value="yes">Yes</option>
-              <option value="CTA">CTA</option>
-              <option value="CLAT">CLAT</option>
-            </select>
-        </div>*/}
+        <div className="sm:w-1/2 sm:order-2 order-1 py-8 px-10 m-auto flex flex-col" id='card2'>
+          {/*====================profile details===============*/}
+        {OTPForm ? (
 
 
+           <div className='m-auto'>{/*===============OTP===============*/}
+              <div id='first-div' className="my-5 text-center">
+                <h1 id="h1" className="text-blue-600 font-bold pb-5">LogIn</h1>
+              </div>
+
+              <div className='flex flex-row justify-center'>
+                <img src={circle2} alt="dotted circle" className='w-6 h-6' />
+                <span className='text-blue-600'>--------------------------</span>
+                <img className='w-6 h-6' src={circle} alt="circle" />
+              </div>
+
+              <div className="flex flex-row justify-evenly mb-10 mt-2 md:mt-2 text-gray-600" id='second-div'>
+                <span className='text-xs mx-4 text-blue-600 font-medium'>Enter Number</span>
+                <span className='text-xs mx-4'>Verify</span>
+              </div>
+              <div className='my-6'>
+                <h2 className="text-gray-500 text-xs text-center">Enter OPT sent to</h2>
+                <p className="text-xs text-blue-600 leading-7 text-center">+91  9876543299</p>
+              </div>
+
+              <h3 className="text-gray-500 text-xs ml-4 md:ml-4 mb-0">Enter OTP</h3>
+              <div className="flex flex-row justify-center items-center">
+                <input type="tel" name="otp" value={OTP} onChange={(e)=>setOTP(e.target.value)} className="mx-3 w-10 h-10 text-center p-2 border border-gray-300 rounded-md"/>
+                <input type="tel" name="otp" value={OTP} onChange={(e)=>setOTP(e.target.value)} className="mx-3 w-10 h-10 text-center p-2 border border-gray-300 rounded-md"/>
+                <input type="tel" name="otp" value={OTP} onChange={(e)=>setOTP(e.target.value)} className="mx-3 w-10 h-10 text-center p-2 border border-gray-300 rounded-md"/>
+                <input type="tel" name="otp" value={OTP} onChange={(e)=>setOTP(e.target.value)} className="mx-3 w-10 h-10 text-center p-2 border border-gray-300 rounded-md"/>
+              </div>
+              <p className='text-gray-500 float-right pr-4 text-xs leading-7 pb-8'>Resend OTP in: <span className="text-xs text-blue-600 leading-7">20 seconds</span></p>
+
+              <div className='flex justify-center items-center my-16 mx-auto'>
+                <button onClick={handleOTP} className="w-24 text-center text-xs bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
+                Login
+              </button>
+              </div>
+              <div className='my-4'>
+                <span id="link-span" className="text-gray-500 flex items-center justify-center text-center mx-auto text-xs">
+                  Already have an account?  <Link id="link-to-register" to="/SignUp" className="text-center no-underline text-xs text-blue-600 font-medium"> Sign Up</Link>
+                </span><br />
+              </div>
+            </div>
+
+            ) : (
+            //====================Login form=======================
+            <div id='login'>
+              <div id='first-div' className="my-5 text-center">
+                <h1 id="h1" className="text-blue-600 font-bold pb-5">Login</h1>
+              </div>
+
+              <div className='flex flex-row justify-center'>
+                <img src={circle1} alt="dotted circle" className='w-6 h-6' />
+                <span className='text-blue-600'>--------------------------</span>
+                <img className='w-6 h-6' src={circle} alt="circle" />
+              </div>
+
+              <div className="flex flex-row justify-evenly mt-2 md:mt-2 text-gray-600" id='second-div'>
+                <span className='text-xs mx-4 text-blue-600 font-medium'>Enter Number</span>
+                <span className='text-xs mx-4'>Verify</span>
+              </div>
+              <p
+                className="my-8 md:my-8 text-gray-600 text-xs text-center"
+                id='profile-details'
+              >
+                Enter your name and mobile number to continue your journey
+              </p>
+
+              <form onSubmit={ Login } action="" className="text-xs text-gray-600 max-w-screen-sm px-10 py-5">
+                  <label htmlFor="mobile number" className="text-xs font-semibold text-blue-600 leading-7">Mobile Number</label>
+                  <div className="w-full md:mb-8 mb-12 h-12">
+                  <PhoneInput
+                  inputProps={{
+                    'required': true,
+                    name: 'phonenumber'
+                  }}
+                  placeholder='Enter your mobile number'
+                  enableSearch
+                  required={true}
+                  inputStyle={{ paddingTop: "1rem", paddingBottom: "1rem", width: "100%", height: "46px" }}
+                  country={'in'}
+                  value={phonenumber}
+                  onChange={setPhoneNumber}
+                />
+              </div>
+
+              <button type="submit" id="submit" onClick={Login} className="my-8 flex justify-center text-xs m-auto md:mt-8 mb-6 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
+                Continue
+              </button>
+              <span id="link-span" className="text-gray-600 flex items-center justify-center text-center mx-auto text-xs">
+                  Already have an account?  <Link id="link-to-register" to="/SignUp" className="text-center no-underline text-xs text-blue-600 font-medium">Sign Up</Link>
+              </span><br />
+              </form>
+            </div>
+
+          )}
+
+        </div>
 
       </div>
     )
 }
 
 export default SignIn
+

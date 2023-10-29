@@ -1,9 +1,8 @@
 //import './sign.css'
-
+import SignIn from '../signIn/signIn';
 import 'react-phone-input-2/lib/style.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-import OTPInput, { ResendOTP } from "otp-input-react";
 import React, {useEffect, useState} from 'react'
 import { circle, circle1, circle2, logo1, slide1, slide2, slide3 } from '../../constants/url'
 
@@ -40,20 +39,6 @@ const SignUp = () => {
       alert(`Fill in your details.`)
     }
   }
-
-
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prevIndex) => (prevIndex + 1) % images.length);
-      setActiveTextIndex((prevTextIndex) => (prevTextIndex + 1) % imageText.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-
-
 
 
   return (
@@ -181,21 +166,20 @@ const SignUp = () => {
               <button type="submit" id="submit" className="my-8 flex justify-center text-xs m-auto md:mt-8 mb-6 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
                 Continue
               </button>
-
-            </form>
-
-            <span id="link-span" className="text-gray-600 flex items-center justify-center text-center mx-auto text-xs">
-              Already have an account?  <Link id="link-to-register" to="/signIn" className="text-center no-underline text-xs text-blue-600 font-medium">  Login</Link>
+              <span id="link-span" className="text-gray-600 flex items-center justify-center text-center mx-auto text-xs">
+              Already have an account?  <Link id="link-to-register" to="/SignIn" className="text-center no-underline text-xs text-blue-600 font-medium">  Login</Link>
             </span><br />
+            </form>
 
           </div>
 
 
-          //===============OTP form===============
-        ) : showOTPForm ? (
+            //===============OTP form===============
+          ) : showOTPForm ? (
             <OtpInput setShowDetailForm={setShowDetailForm} />
-          ):(
 
+
+          ):  (
 
               //basic details form
             <div>
@@ -265,10 +249,11 @@ const SignUp = () => {
               </form>
 
               <span id="link-span" className="text-gray-600 flex items-center justify-center text-center mx-auto text-xs">
-                Already have an account?  <Link id="link-to-register" to="/signIn" className="text-center no-underline text-xs text-blue-600 font-medium">  Login</Link>
+                Already have an account?  <Link id="link-to-register" to="/SignIn" className="text-center no-underline text-xs text-blue-600 font-medium">  Login</Link>
               </span><br />
 
             </div>
+
 
           )}
 

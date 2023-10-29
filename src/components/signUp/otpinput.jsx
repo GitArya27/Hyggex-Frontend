@@ -2,8 +2,9 @@ import React,{useState} from 'react'
 import { circle, circle2 } from "../../constants/url";
 
 import { Link } from "react-router-dom";
+import SignIn from '../signIn/signIn';
 
-const OtpInput = ({setShowDetailForm}) => {
+const OtpInput = ({setShowDetailForm, SignIn}) => {
   const [phonenumber, setPhoneNumber] = useState("");
   const [OTP, setOTP] = useState("");
 
@@ -53,7 +54,7 @@ const OtpInput = ({setShowDetailForm}) => {
               </div>
               <div className='my-4'>
                 <span id="link-span" className="text-gray-500 flex items-center justify-center text-center mx-auto text-xs">
-                  Already have an account?  <Link id="link-to-register" to="/signIn" className="text-center no-underline text-xs text-blue-600 font-medium">  Login</Link>
+                  Already have an account?  <Link id="link-to-register" to="/SignIn" className="text-center no-underline text-xs text-blue-600 font-medium">  Login</Link>
                 </span><br />
               </div>
             </div>
