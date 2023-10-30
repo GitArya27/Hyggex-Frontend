@@ -11,7 +11,7 @@ module.exports = {
     devServer: {
         compress: true,
         historyApiFallback: true,
-        static: {
+        static: {  // Instead of contentBase, now it's named `static`
             directory: path.join(__dirname, 'dist')
         }
     },
@@ -49,19 +49,7 @@ module.exports = {
                         },
                     }
                 ]
-            },
-            {
-                test: /\.(png|jpe?g|gif)$/,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: '[name].[ext]',
-                            outputPath: 'images/',
-                        },
-                    },
-                ],
-            },
+            }
         ]
     },
     resolve: {
