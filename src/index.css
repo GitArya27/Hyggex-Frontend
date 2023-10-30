@@ -1,18 +1,16 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-
-html{
+html {
   scroll-behavior: smooth;
 }
 
-body{   margin: 0;
-    font-family: 'Inter', sans-serif;
-    
-    
- }
- /* Default font size */
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+}
+/* Default font size */
 html {
   font-size: 16px; /* This is typically the default browser font size */
 }
@@ -66,15 +64,15 @@ html {
   }
 }
 
-
 input:focus::placeholder,
 textarea:focus::placeholder {
-  color: #164EC0;
+  color: #164ec0;
 }
 
 /* Custom CSS for border color on focus */
 input:focus,
 textarea:focus {
-  border-color: #164EC0;
-  outline-color: #164EC0;
+  border-color: #164ec0;
+  outline-color: #164ec0;
 }
+
