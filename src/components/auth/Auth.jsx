@@ -98,6 +98,7 @@ function Auth() {
 
   };
 
+
   const register = async () => {
     try {
       const response = await axios.post("https://hyggexbackend-d2b0.onrender.com/api/v1/auth/register", {

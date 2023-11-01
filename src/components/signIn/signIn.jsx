@@ -26,27 +26,6 @@ const SignIn = () => {
   const recaptchaVerifierRef = useRef(null);
 
 
-  /*const handleOTP =(e)=>{//render otp form
-    e.preventDefault();
-
-    if (OTP !="") {
-      alert(`You have successfully loggedin`);
-      window.location.href = "/";
-    } else {
-      alert(`Enter the OTP.`)
-    }
-  }*/
-
-
-  //render login page
-  const Login = () => {
-    if (phonenumber !="") {
-      setOTPForm(true)
-    } else {
-      alert('fill in your mobile number')
-    }
-  }
-
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -62,6 +41,8 @@ const SignIn = () => {
       },
       firebaseAuth
     );
+
+
 
     recaptchaVerifierRef.current = recaptchaVerifierInstance;
 
