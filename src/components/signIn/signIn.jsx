@@ -3,12 +3,18 @@
 import 'react-phone-input-2/lib/style.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { circle, circle1, circle2, logo1, slide1, slide2, slide3 } from '../../constants/url'
 
 import { Carousel } from 'react-responsive-carousel';
 import { Link } from 'react-router-dom'
 import PhoneInput from 'react-phone-input-2'
+import { auth as firebaseAuth } from "../auth/firebaseconfig";
+
+//import { auth as firebaseAuth } from "../auth/firebaseconfig";
+
+
 
 const SignIn = () => {
 
@@ -17,8 +23,10 @@ const SignIn = () => {
   const [OTPForm, setOTPForm] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeTextIndex, setActiveTextIndex] = useState(0);
+  const recaptchaVerifierRef = useRef(null);
 
-  const handleOTP =(e)=>{//render otp form
+
+  /*const handleOTP =(e)=>{//render otp form
     e.preventDefault();
 
     if (OTP !="") {
@@ -27,7 +35,8 @@ const SignIn = () => {
     } else {
       alert(`Enter the OTP.`)
     }
-  }
+  }*/
+
 
   //render login page
   const Login = () => {
@@ -44,8 +53,67 @@ const SignIn = () => {
       setActiveTextIndex((prevTextIndex) => (prevTextIndex + 1) % imageText.length);
     }, 3000);
 
-    return () => clearInterval(interval);
+    clearInterval(interval);
+
+    const recaptchaVerifierInstance = new RecaptchaVerifier(
+      "recaptcha-container",
+      {
+        size: "invisible"
+      },
+      firebaseAuth
+    );
+
+    recaptchaVerifierRef.current = recaptchaVerifierInstance;
+
+    return () => {
+      if(recaptchaVerifierRef.current) {
+        recaptchaVerifierRef.current.clear(); // Cleanup on component unmount
+      }
+    };
+
   }, []);
+
+
+  const sendOtp = () => {
+    signInWithPhoneNumber(
+      firebaseAuth,
+      phonenumber,
+      recaptchaVerifierRef.current
+    ) // <-- use firebaseAuth here
+      .then((confirmationResult) => {
+        window.confirmationResult = confirmationResult;
+        alert(`otp sent`)
+        setOTPForm(true);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.error("Backend responded with:", error.response.data);
+      } else {
+          console.error("Error sending OTP:", error);
+          alert('Enter your phone number');
+    } });
+  };
+
+
+
+  const verifyOtp = () => {
+    const confirmationResult = window.confirmationResult;
+    confirmationResult
+      .confirm(OTP)
+      .then((result) => {
+        const user = result.user;
+        user.getIdToken().then((idToken) => {
+          authenticateWithBackend(idToken, user.phonenumber);
+        });
+      })
+      . catch( (error) =>{
+        if (error.response) {
+            console.error("Backend responded with:", error.response.data);
+        } else {
+            console.error("Error during authentication:", error);
+        }
+    })
+  };
 
   const images = [`${slide1}`, `${slide2}`, `${slide3}`];
   const imageText = [
@@ -117,7 +185,7 @@ const SignIn = () => {
               <p className='text-gray-500 float-right pr-4 text-xs leading-7 pb-8'>Resend OTP in: <span className="text-xs text-blue-600 leading-7">20 seconds</span></p>
 
               <div className='flex justify-center items-center my-16 mx-auto'>
-                <button onClick={handleOTP} className="w-24 text-center text-xs bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
+                <button onClick={verifyOtp} className="w-24 text-center text-xs bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
                 Login
               </button>
               </div>
@@ -152,7 +220,7 @@ const SignIn = () => {
                 Enter your name and mobile number to continue your journey
               </p>
 
-              <form onSubmit={ Login } action="" className="text-xs text-gray-600 max-w-screen-sm px-10 py-5">
+              <form className="text-xs text-gray-600 max-w-screen-sm px-10 py-5">
                   <label htmlFor="mobile number" className="text-xs font-semibold text-blue-600 leading-7">Mobile Number</label>
                   <div className="w-full md:mb-8 mb-12 h-12">
                   <PhoneInput
@@ -170,9 +238,10 @@ const SignIn = () => {
                 />
               </div>
 
-              <button type="submit" id="submit" onClick={Login} className="my-8 flex justify-center text-xs m-auto md:mt-8 mb-6 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
+              <button type="submit" id="submit" onClick={sendOtp} className="my-8 flex justify-center text-xs m-auto md:mt-8 mb-6 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
                 Continue
-              </button>
+                </button>
+                <div id='recaptcha-container'></div>
               <span id="link-span" className="text-gray-600 flex items-center justify-center text-center mx-auto text-xs">
                   Already have an account?  <Link id="link-to-register" to="/SignUp" className="text-center no-underline text-xs text-blue-600 font-medium">Sign Up</Link>
               </span><br />

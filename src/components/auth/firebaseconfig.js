@@ -1,5 +1,5 @@
-import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDUOQ6HRQzq8zLuWkDiac_XnYW_AEv7WoQ",
@@ -11,5 +11,6 @@ const firebaseConfig = {
 };
 const apps = initializeApp(firebaseConfig);
 const auth = getAuth(apps);
+auth.settings.appVerificationDisabledForTesting = true;
 
 export { auth };

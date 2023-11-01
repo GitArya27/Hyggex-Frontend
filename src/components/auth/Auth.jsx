@@ -1,8 +1,8 @@
-import React from "react";
-import { useState, useEffect, useRef } from "react";
-import axios from "axios";
-
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import { useEffect, useRef, useState } from "react";
+
+import React from "react";
+import axios from "axios";
 import { auth as firebaseAuth } from "./firebaseconfig"; // This is your custom firebase auth instance
 
 function Auth() {
@@ -24,7 +24,7 @@ function Auth() {
         size: "invisible"
       }
     );
-    
+
     recaptchaVerifierRef.current = recaptchaVerifierInstance;
 
     return () => {
@@ -32,7 +32,8 @@ function Auth() {
         recaptchaVerifierRef.current.clear(); // Cleanup on component unmount
       }
     };
-}, []);
+  }, []);
+
   const sendOtp = () => {
     signInWithPhoneNumber(
       firebaseAuth,
@@ -47,8 +48,8 @@ function Auth() {
         if (error.response) {
           console.error("Backend responded with:", error.response.data);
       } else {
-          console.error("Error sendin OTP:", error);
-      }      });
+          console.error("Error sending OTP:", error);
+    } });
   };
 
   const verifyOtp = () => {
@@ -72,7 +73,8 @@ function Auth() {
     const authenticateWithBackend = async (idToken, phoneNumber) => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/auth/authenticate",
+        //"http://localhost:3001/auth/authenticate",
+        "https://hyggexbackend-d2b0.onrender.com/api/v1/auth/authenticate",
         {
           idToken,
           phoneNumber,
@@ -93,17 +95,19 @@ function Auth() {
           console.error("Error during authentication:", error);
       }
   }
-  
+
   };
 
   const register = async () => {
     try {
-      const response = await axios.post("http://localhost:3001/auth/register", {
-        uid,  // <-- Send the UID here
+      const response = await axios.post("https://hyggexbackend-d2b0.onrender.com/api/v1/auth/register", {
+        uid,  // <-- Send the UID here http://localhost:3001/auth/register
         name,
         email,
         phoneNumber,
         location,
+        schoolStudent,
+
       });
       if (response.data.success) {
         alert("Registered Successfully!");

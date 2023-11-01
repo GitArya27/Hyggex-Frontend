@@ -1,11 +1,11 @@
 //import './sign.css'
-
+import { RecaptchaVerifier,signInWithPhoneNumber } from 'firebase/auth';
 import 'react-phone-input-2/lib/style.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-
-import React, {useEffect, useState} from 'react'
+import axios from 'axios';
+import React, {useEffect,useRef, useState} from 'react'
 import { circle, circle1, circle2, logo1, slide1, slide2, slide3 } from '../../constants/url'
-
+import { auth as firebaseAuth} from '../auth/firebaseconfig';
 import { Carousel } from 'react-responsive-carousel';
 import { Link } from 'react-router-dom'
 import OtpInput from './otpinput';
@@ -49,6 +49,32 @@ const SignUp = () =>{
     "Tailored guidiance to help navigate academic intricacies and diverse challenges.",
     "we ground every Hyggex offering in rigorous scientific research, ensuring it's effectiveness and trustworthiness. Although we cater primarily to Indian's diverse audience, our vision has a global reach",
   ];
+
+
+  //===============registration=============
+  const register = async () => {
+    try {
+      const response = await axios.post("https://hyggexbackend-d2b0.onrender.com/api/v1/auth/register", {
+        uid,  // <-- Send the UID here http://localhost:3001/auth/register
+        name,
+        email,
+        phoneNumber,
+        location,
+        schoolStudent,
+
+      });
+      if (response.data.success) {
+        alert("Registered Successfully!");
+      }
+    } catch (error) {
+      if (error.response) {
+          console.error("Backend responded with:", error.response.data);
+      } else {
+          console.error("Error during authentication:", error);
+      }
+    }
+
+  };
 
 
   return (
@@ -101,7 +127,7 @@ const SignUp = () =>{
               <span className='text-xs mx-4'>Enter basic details</span>
             </div>
 
-            <form onSubmit={handleSubmit} action="" id='form' className="text-xs text-gray-600 max-w-screen-sm px-10 py-5">
+            <form onSubmit={register} action="" id='form' className="text-xs text-gray-600 max-w-screen-sm px-10 py-5">
               <label htmlFor="name" className="text-xs text-gray-600 leading-7">Name <small className='text-red-500'>*</small></label>
               <input
                 type="text"
@@ -159,7 +185,7 @@ const SignUp = () =>{
                 </div>
               </div>
 
-              <button type="submit" id="submit" className="my-8 flex justify-center text-xs m-auto md:mt-8 mb-6 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
+              <button type="submit" id="submit" onClick="" className="my-8 flex justify-center text-xs m-auto md:mt-8 mb-6 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
                 Continue
               </button>
               <span id="link-span" className="text-gray-600 flex items-center justify-center text-center mx-auto text-xs">
