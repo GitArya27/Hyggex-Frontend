@@ -16,3 +16,7 @@ export const logo1 = "https://res.cloudinary.com/dbnxbly1r/image/upload/v1698181
 export const circle = "https://res.cloudinary.com/dbnxbly1r/image/upload/v1698453653/hyggex/Ellipse_309_mi5dmy.png";
 export const circle1 = "https://res.cloudinary.com/dbnxbly1r/image/upload/v1698453776/hyggex/Ellipse_308_bdqm4m.png";
 export const circle2 = "https://res.cloudinary.com/dbnxbly1r/image/upload/v1698467648/hyggex/Group_48075_fixvfn.png"
+
+export const checklist = "https://res.cloudinary.com/do4vytmxm/image/upload/v1698743033/checklist_6354361_1_qmatt8.png"
+export const idea = "https://res.cloudinary.com/do4vytmxm/image/upload/v1698743032/idea_8958989_1_ib5p34.png"
+export const book = "https://res.cloudinary.com/do4vytmxm/image/upload/v1698743032/book_8132252_1_pzdi2q.png"

@@ -7,9 +7,13 @@ const firebaseConfig = {
   projectId: "hyggex-f50b8",
   storageBucket: "hyggex-f50b8.appspot.com",
   messagingSenderId: "142951014931",
-  appId: "1:142951014931:web:d0aef43ae86edf5fa515e6"
+  appId: "1:142951014931:web:d0aef43ae86edf5fa515e6",
+  appVerificationDisabledForTesting : true
 };
 const apps = initializeApp(firebaseConfig);
 const auth = getAuth(apps);
 
 export { auth };
+
+
+
