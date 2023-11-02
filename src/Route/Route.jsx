@@ -10,6 +10,7 @@ import Auth2 from "../components/auth/AuthLeft";
 import AuthLeft from "../components/auth/AuthLeft";
 import SignUpForm from "../components/auth/SignUpForm";
 import SignInForm from "../components/auth/SignInForm";
+import TestPage from "../components/LandingPage/TestPage/TestPage";
 // import TestPage from "../components/LandingPage/TestPage/TestPage";
 
 export const router =createBrowserRouter(
