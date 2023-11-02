@@ -1,13 +1,8 @@
-//import './sign.css'
-
-import 'react-phone-input-2/lib/style.css'
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 import React, {useEffect, useRef, useState} from 'react'
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { circle, circle1, circle2, logo1, slide1, slide2, slide3 } from '../../constants/url'
 
-import { Carousel } from 'react-responsive-carousel';
 import { Link } from 'react-router-dom'
 import PhoneInput from 'react-phone-input-2'
 import { auth as firebaseAuth } from "../auth/firebaseconfig";
@@ -55,23 +50,26 @@ const SignIn = () => {
 
     clearInterval(interval);
 
+   
+  }, []);
+  useEffect(() => {
     const recaptchaVerifierInstance = new RecaptchaVerifier(
+      firebaseAuth,
       "recaptcha-container",
       {
         size: "invisible"
-      },
-      firebaseAuth
+      }
     );
 
     recaptchaVerifierRef.current = recaptchaVerifierInstance;
 
     return () => {
-      if(recaptchaVerifierRef.current) {
+      if (recaptchaVerifierRef.current) {
         recaptchaVerifierRef.current.clear(); // Cleanup on component unmount
       }
     };
-
   }, []);
+
 
 
   const sendOtp = () => {

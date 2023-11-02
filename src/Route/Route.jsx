@@ -5,6 +5,11 @@ import Login from "../components/auth/Login";
 import React from "react";
 import SignIn from "../components/signIn/signIn";
 import SignUp from "../components/signUp/signUp";
+import Auth from "../components/auth/Auth";
+import Auth2 from "../components/auth/AuthLeft";
+import AuthLeft from "../components/auth/AuthLeft";
+import SignUpForm from "../components/auth/SignUpForm";
+import SignInForm from "../components/auth/SignInForm";
 // import TestPage from "../components/LandingPage/TestPage/TestPage";
 
 export const router =createBrowserRouter(
@@ -24,15 +29,15 @@ export const router =createBrowserRouter(
     },
     {
         path:'/login',
-        element: <Login/>
+        element: <SignIn/>
     },
     {
         path:'/signUp',
-        element: <SignUp/>
+        element: <SignUpForm/>
     },
     {
         path:'/signIn',
-        element: <SignIn/>
+        element: <SignInForm/>
     }
 
 
