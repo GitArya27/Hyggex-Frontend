@@ -1,6 +1,6 @@
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { useEffect, useMemo, useRef, useState } from "react";
-import React from "react"; 
+import React from "react";
 import axios from "axios";
 import { auth as firebaseAuth } from "./firebaseconfig"; // This is your custom firebase auth instance
 
@@ -71,7 +71,7 @@ function Auth() {
     })
   };
   const contextValue = useMemo(() => ({ sendOtp }), [sendOtp]);
- 
+
     const authenticateWithBackend = async (idToken, phoneNumber) => {
     try {
       const response = await axios.post(
@@ -110,7 +110,7 @@ function Auth() {
         phoneNumber,
         location,
         schoolStudent,
-        
+
 
       });
       if (response.data.success) {
@@ -131,10 +131,10 @@ function Auth() {
     <div>
       {status === "initial" && (
         <>
-        
+
           <input
             type="text"
-            placeholder="Phone Number"
+            placeholder="Phone Numbe"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
           />
@@ -177,7 +177,7 @@ function Auth() {
           <button onClick={register}>Register</button>
         </>
       )}
-  
+
     </div>
 
   );
