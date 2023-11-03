@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+/*import React, { useState } from 'react';
 import { circle, circle2 } from "../../constants/url";
 import { Link } from "react-router-dom";
 
@@ -42,9 +42,9 @@ const OtpInput = ({ setShowDetailForm }) => {
     }
   }
 
-  */}
+  */
 
-  return (
+  /*return (
     <div className='m-auto'>
       <div id='first-div' className="my-5 text-center">
         <h1 id="h1" className="text-blue-600 font-bold pb-5">Sign Up</h1>
@@ -69,14 +69,14 @@ const OtpInput = ({ setShowDetailForm }) => {
       <h3 className="text-gray-500 text-xs ml-4 md:ml-4 mb-0">Enter OTP</h3>
       <div className="flex flex-row justify-center items-center">
         {OTP.map((value, index) => (
-          <input 
+          <input
             key={index}
-            type="tel" 
+            type="tel"
             name={`otp-${index}`}
             maxLength="1"
             value={value}
             onChange={(e) => handleOTPChange(index, e.target.value)}
-            className="mx-3 w-10 h-10 text-center p-2 border border-gray-300 rounded-md" 
+            className="mx-3 w-10 h-10 text-center p-2 border border-gray-300 rounded-md"
           />
         ))}
       </div>
@@ -98,4 +98,4 @@ const OtpInput = ({ setShowDetailForm }) => {
   )
 }
 
-export default OtpInput;
+export default OtpInput;*/

@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import {  logo1, slide1, slide2, slide3 } from '../../constants/url'
+import { logo1, slide1, slide2, slide3 } from '../../constants/url'
 
 const AuthLeft = () => {
-    const [activeIndex, setActiveIndex] = useState(0);
-    const [activeTextIndex, setActiveTextIndex] = useState(0);
-  
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeTextIndex, setActiveTextIndex] = useState(0);
+
     useEffect(() => {
-        const interval = setInterval(() => {
-          setActiveIndex((prevIndex) => (prevIndex + 1) % images.length);
-          setActiveTextIndex((prevTextIndex) => (prevTextIndex + 1) % imageText.length);
-        }, 3000);
-    
-        return () => clearInterval(interval);
-      }, []);
-    
+      const interval = setInterval(() => {
+        setActiveIndex((prevIndex) => (prevIndex + 1) % images.length);
+        setActiveTextIndex((prevTextIndex) => (prevTextIndex + 1) % imageText.length);
+      }, 3000);
+
+      return () => clearInterval(interval);
+    }, []);
 
     const images = [`${slide1}`, `${slide2}`, `${slide3}`];
     const imageText = [
@@ -21,7 +20,7 @@ const AuthLeft = () => {
       "Tailored guidiance to help navigate academic intricacies and diverse challenges.",
       "we ground every Hyggex offering in rigorous scientific research, ensuring it's effectiveness and trustworthiness. Although we cater primarily to Indian's diverse audience, our vision has a global reach",
     ];
-     
+
   return (
     <div className='w-full flex flex-col justify-center ' id='container'>
     <div className=" min-h-[100vh] bg-[#DFEAFF]   relative pb-10  " id='card1'>
@@ -48,7 +47,7 @@ const AuthLeft = () => {
       </div>
 
     </div>
-    
+
 </div>
   )
 }

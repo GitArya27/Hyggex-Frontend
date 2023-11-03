@@ -1,16 +1,19 @@
 //import './sign.css'
-import { RecaptchaVerifier,signInWithPhoneNumber } from 'firebase/auth';
+
 import 'react-phone-input-2/lib/style.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import axios from 'axios';
-import React, {useEffect,useRef, useState} from 'react'
+
+import React, {useEffect, useRef, useState} from 'react'
+import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
 import { circle, circle1, circle2, logo1, slide1, slide2, slide3 } from '../../constants/url'
-import { auth as firebaseAuth} from '../auth/firebaseconfig';
+
 import { Carousel } from 'react-responsive-carousel';
 import { Link } from 'react-router-dom'
 import OtpInput from './otpinput';
 import PhoneInput from 'react-phone-input-2'
 import SignIn from '../signIn/signIn';
+import axios from 'axios';
+import { auth as firebaseAuth } from '../auth/firebaseconfig';
 import imageText from '../signIn/signIn'
 
 const SignUp = () =>{
@@ -124,7 +127,7 @@ const SignUp = () =>{
 
             <div className="flex flex-row justify-evenly mt-2 md:mt-2 text-gray-600" id='second-div'>
               <span className='text-xs mx-4 text-blue-600 font-medium'>Enter Number</span>
-              <span className='text-xs mx-4'>Enter basic details</span>
+              <span className='text-xs mx-4'>Basic details</span>
             </div>
 
             <form onSubmit={register} action="" id='form' className="text-xs text-gray-600 max-w-screen-sm px-10 py-5">
