@@ -14,12 +14,21 @@ function Auth() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [location, setLocation] = useState("");
+  const [grade, setGrade] = useState([]);
+  const [selectedGrade, setSelectedGrade] = useState();
   const [status, setStatus] = useState("initial"); // initial, otpSent, newUser
   const recaptchaVerifierRef = useRef(null);
   const [uid, setUid] = useState(null);
 
 
   useEffect(() => {
+
+    /*fetch('https://hyggexbackend-d2b0.onrender.com/api/v1/user/getGrade')
+      .then((response) => response.json())
+      .then((data) => setGrade(data))
+      .catch((error) => console.error('Error fetching grades:', error));*/
+
+
     const recaptchaVerifierInstance = new RecaptchaVerifier(
       firebaseAuth,
       "recaptcha-container",
@@ -35,6 +44,7 @@ function Auth() {
         recaptchaVerifierRef.current.clear(); // Cleanup on component unmount
       }
     };
+
   }, []);
 
   const sendOtp = () => {
@@ -94,6 +104,7 @@ function Auth() {
         } else if (response.data.status === "newUser") {
           setStatus("newUser");
           setUid(response.data.uid);  // <-- Store the UID here
+          alert('You have not registered.')
         }
       }
     } catch (error) {
@@ -116,8 +127,6 @@ function Auth() {
         phoneNumber,
         location,
         grade,
-
-
       });
       if (response.data.success) {
         alert("Registered Successfully!");
@@ -138,15 +147,8 @@ function Auth() {
     <div className="pb-[40px]">
       {status === "initial" && (
         <>
-          <div>
-            {/*<input
-              type="text"
-              placeholder="Phone Numbe"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-            />
-            <button onClick={sendOtp}>Continue</button>
-            <div id="recaptcha-container"></div>*/}
+          <div className="flex flex-col">
+            {/*===========Enter phone number form==============*/}
             <div id='first-div' className="my-5 text-center">
                 <h1 id="h1" className="text-blue-600 font-bold pb-5">Login</h1>
             </div>
@@ -158,14 +160,14 @@ function Auth() {
               </div>
 
               <div className="flex flex-row justify-evenly mt-2 md:mt-2 text-gray-600" id='second-div'>
-                <span className='text-xs mx-4 text-blue-600 font-medium'>Enter Number</span>
-                <span className='text-xs mx-4'>Verify</span>
+                <span className='text-xs mr-[8rem] text-blue-600 font-medium'>Enter Number</span>
+                <span className='text-xs ml-6'>Verify</span>
               </div>
               <p
                 className="my-8 md:my-8 text-gray-600 text-xs text-center"
                 id='profile-details'
               >
-                Enter your name and mobile number to continue your journey
+                Enter your mobile number to continue your journey
               </p>
             <div className="">
               <label htmlFor="mobile number" className="text-xs font-semibold text-blue-600 leading-7">Mobile Number</label>
@@ -181,11 +183,11 @@ function Auth() {
                   inputStyle={{ paddingTop: "1rem", paddingBottom: "1rem", width: "100%", height: "46px" }}
                   country={'in'}
                   value={phoneNumber}
-                  onChange={(phoneNumber)=>setPhoneNumber("+" + phoneNumber)}
+                  onChange={(phoneNumber)=>setPhoneNumber("+"+ phoneNumber)}
                 />
               </div>
               <button onClick={sendOtp}
-                className="my-8 flex justify-center text-xs m-auto md:mt-8 mb-6 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
+                className="mt-4 flex justify-center text-xs m-auto md:mt-4 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
                   Continue
               </button>
 
@@ -195,15 +197,9 @@ function Auth() {
           </div>
         </>
 
-      )}
+      )}{/*==============OTP form==============*/}
       {status === "otpSent" && (
         <>
-          {/*<input
-            type="text"
-            placeholder="Enter OTP"
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-          />*/}
 
           <div id='first-div' className="my-5 text-center">
                 <h1 id="h1" className="text-blue-600 font-bold pb-5">LogIn</h1>
@@ -239,7 +235,7 @@ function Auth() {
           >Verify OTP</button>
         </>
       )}
-      {status === "newUser" && (
+      {status === "newUser" && (/*==============registration form=============*/
         <>
           <div>
             <div id='first-div' className="my-5 text-center">
@@ -280,14 +276,18 @@ function Auth() {
               />
 
               <label htmlFor="shool" className="text-xs text-gray-600">Are you in school? <small className='text-red-500'>*</small></label>
-              <select name="location" id="select1" className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
+              <select name="school" id="select1" className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
                 <option value=""></option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
               </select>
 
               <label htmlFor="exam" className="text-xs text-gray-600">Are you preparing for competitive exams? <small className='text-red-500'>*</small></label>
-              <select name="location" id="select1" className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
+              <select
+                name="location"
+                value={exams}
+                id="select1"
+                className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
                 <option value=""></option>
                 <option value="yes">Yes</option>
                 <option value="CTA">CTA</option>
@@ -296,8 +296,13 @@ function Auth() {
 
               <div className='w-full flex flex-row justify-between items-center'>
                 <div>
-                  <label htmlFor="shool" className="text-xs text-gray-600">Location <small className='text-red-500'>*</small></label>
-                  <select name="location" id="select1" className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
+                  <label htmlFor="location" className="text-xs text-gray-600">Location <small className='text-red-500'>*</small></label>
+                  <select
+                    name="location"
+                    value={location}
+                    onChange={(e)=>setLocation(e.target.value)}
+                    id="select1"
+                    className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
                     <option value=""></option>
                     <option value="Chennai">Chennai</option>
                     <option value="Mumbai">Mumbai</option>
@@ -307,11 +312,16 @@ function Auth() {
 
                 <div>
                   <label htmlFor="exam" className="text-xs text-gray-600">Grade <small className='text-red-500'>*</small></label>
-                  <select name="location" id="select1" className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
+                  <select
+                    name="grade"
+                    id="select1"
+                    value={grade}
+                    onChange={(e)=>setGrade(e.target.value)}
+                    className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
                     <option value=""></option>
-                    <option value="Grade1">Grade1</option>
-                    <option value="Grade2">Grade2</option>
-                    <option value="Grade3">Grade3</option>
+                    <option value="class1">class1</option>
+                    <option value="class2">class2</option>
+                    <option value="NO">NO</option>
                   </select>
                 </div>
               </div>
@@ -319,30 +329,7 @@ function Auth() {
               <button id="submit" onClick={register} className="my-8 flex justify-center text-xs m-auto md:mt-8 mb-6 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
                 Continue
               </button>
-              <span id="link-span" className="text-gray-600 flex items-center justify-center text-center mx-auto text-xs">
-              Already have an account?  <Link id="link-to-register" to="/SignIn" className="text-center no-underline text-xs text-blue-600 font-medium">  Login</Link>
-            </span><br />
             </div>
-          {/*<input
-            type="text"
-            placeholder="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-
-          <input
-            type="text"
-            placeholder="Location"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-          />
-          <button onClick={register}>Register</button>*/}
         </>
       )}
 
