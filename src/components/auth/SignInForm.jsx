@@ -13,7 +13,7 @@ const SignInForm = () => {
         <div className='bg-[#DFEAFF] w-[100%] sm:w-[50%] border-2 border-green-500 pb-[1rem] flex'>
           <AuthLeft />
         </div>
-        <div className='pt-[2rem] px-20 w-[100%] sm:w-[50%] border-2 border-green-500'>
+        <div className='pt-[2rem] px-10 w-[100%] sm:w-[50%] border-2 border-green-500'>
           <div>
             <Auth />
             <span id="link-span" className="text-gray-600 flex items-center justify-center text-center mx-auto text-xs">

@@ -154,10 +154,10 @@ function Auth() {
 
   return (
 
-    <div className="pb-[20px] border-2 border-red-500 flex flex-col justify-center">
+    <div className="pb-[20px] border-2 border-red-500 flex min-h-[80vh] flex-col justify-center items-center">
       {status === "initial" && (
         <>
-          <div className="flex flex-col w-[100%]">
+          <div className="w-[100%] items-center">
             {/*===========Enter phone number form==============*/}
             <div id='first-div' className="my-5 text-center">
                 <h1 id="h1" className="text-blue-600 font-bold pb-5">Login</h1>
@@ -170,7 +170,7 @@ function Auth() {
               </div>
 
               <div className="flex flex-row justify-evenly mt-2 md:mt-2 text-gray-600" id='second-div'>
-                <span className='text-xs mr-[8rem] text-blue-600 font-medium'>Enter Number</span>
+                <span className='text-xs mr-[4rem] text-blue-600 font-medium'>Enter Number</span>
                 <span className='text-xs ml-6'>Verify</span>
               </div>
               <p
@@ -179,9 +179,9 @@ function Auth() {
               >
                 Enter your mobile number to continue your journey
               </p>
-            <div className="">
+            <div className="md:px-12 w-[100%] px-24">
               <label htmlFor="mobile number" className="text-xs font-semibold text-blue-600 leading-7">Mobile Number</label>
-              <div className="w-full md:mb-8 mb-12 h-12">
+              <div className="md:mb-8 mb-12 h-12">
                 <PhoneInput
                   inputProps={{
                     'required': true,

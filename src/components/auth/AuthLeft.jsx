@@ -23,7 +23,7 @@ const AuthLeft = () => {
 
   return (
     <div className='flex flex-col justify-center ' id='container'>
-    <div className=" min-h-[100vh] bg-[#DFEAFF] border-2 border-red-500 w-full md:w-full relative pb-10  " id='card1'>
+    <div className=" min-h-[80vh] bg-[#DFEAFF] border-2 border-red-500 w-full md:w-full relative pb-10  " id='card1'>
       <img src={logo1} alt="logo" className="ml-8 mb-6 w-32 py-8" id='logo' />
 
       <div id='inner-card ' className=' '>
