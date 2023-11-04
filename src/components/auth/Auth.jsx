@@ -10,11 +10,12 @@ import { auth as firebaseAuth } from "./firebaseconfig"; // This is your custom 
 
 function Auth() {
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [code, setCode] = useState("");
+  const [code, setCode] = useState(["","","","","",""]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [location, setLocation] = useState("");
   const [grade, setGrade] = useState([]);
+  const [exam, setExam] = useState("");
   const [selectedGrade, setSelectedGrade] = useState();
   const [status, setStatus] = useState("initial"); // initial, otpSent, newUser
   const recaptchaVerifierRef = useRef(null);
@@ -23,10 +24,10 @@ function Auth() {
 
   useEffect(() => {
 
-    /*fetch('https://hyggexbackend-d2b0.onrender.com/api/v1/user/getGrade')
+    fetch('https://hyggexbackend-d2b0.onrender.com/api/v1/user/getGrade')
       .then((response) => response.json())
       .then((data) => setGrade(data))
-      .catch((error) => console.error('Error fetching grades:', error));*/
+      .catch((error) => console.error('Error fetching grades:', error));
 
 
     const recaptchaVerifierInstance = new RecaptchaVerifier(
@@ -104,7 +105,7 @@ function Auth() {
         } else if (response.data.status === "newUser") {
           setStatus("newUser");
           setUid(response.data.uid);  // <-- Store the UID here
-          alert('You have not registered.')
+          alert('You cannot Sign in, Sign up first.')
         }
       }
     } catch (error) {
@@ -126,28 +127,37 @@ function Auth() {
         email,
         phoneNumber,
         location,
-        grade,
+        selectedGrade,
       });
       if (response.data.success) {
         alert("Registered Successfully!");
-        window.location.href="/SignForm"
+        window.location.href="/SignIn"
       }
     } catch (error) {
       if (error.response) {
-          console.error("Backend responded with:", error.response.data);
+        console.error("Backend responded with:", error.response.data);
+        alert('registration failed')
       } else {
-          console.error("Error during authentication:", error);
+        console.error("Error during authentication:", error);
+        alert('error during authentication')
       }
     }
 
   };
 
+  //=============function to dynamically input the OTP codes to each box==================
+  /*const codeChange = (index, value) => {
+    const updateCode = [...code];
+    updateCode[index - 1] = value;
+    setCode(updateCode);
+  }*/
+
   return (
 
-    <div className="pb-[40px]">
+    <div className="pb-[20px] border-2 border-red-500 flex flex-col justify-center">
       {status === "initial" && (
         <>
-          <div className="flex flex-col">
+          <div className="flex flex-col w-[100%]">
             {/*===========Enter phone number form==============*/}
             <div id='first-div' className="my-5 text-center">
                 <h1 id="h1" className="text-blue-600 font-bold pb-5">Login</h1>
@@ -193,7 +203,7 @@ function Auth() {
 
               <div id="recaptcha-container"></div>
 
-            </div>
+                </div>
           </div>
         </>
 
@@ -202,23 +212,23 @@ function Auth() {
         <>
 
           <div id='first-div' className="my-5 text-center">
-                <h1 id="h1" className="text-blue-600 font-bold pb-5">LogIn</h1>
-              </div>
+            <h1 id="h1" className="text-blue-600 font-bold pb-5">LogIn</h1>
+          </div>
 
-              <div className='flex flex-row justify-center'>
-                <img src={circle2} alt="dotted circle" className='w-6 h-6' />
-                <span className='text-blue-600'>--------------------------</span>
-                <img className='w-6 h-6' src={circle} alt="circle" />
-              </div>
+          <div className='flex flex-row justify-center'>
+            <img src={circle2} alt="dotted circle" className='w-6 h-6' />
+            <span className='text-blue-600'>--------------------------</span>
+            <img className='w-6 h-6' src={circle} alt="circle" />
+          </div>
 
-              <div className="flex flex-row justify-evenly mb-10 mt-2 md:mt-2 text-gray-600" id='second-div'>
-                <span className='text-xs mx-4 text-blue-600 font-medium'>Enter Number</span>
-                <span className='text-xs mx-4'>Verify</span>
-              </div>
-              <div className='my-6'>
-                <h2 className="text-gray-500 text-xs text-center">Enter the OPT sent to</h2>
+          <div className="flex flex-row justify-evenly mb-10 mt-2 md:mt-2 text-gray-600" id='second-div'>
+            <span className='text-xs mx-4 text-blue-600 font-medium'>Enter Number</span>
+            <span className='text-xs mx-4'>Verify</span>
+          </div>
+          <div className='my-6'>
+            <h2 className="text-gray-500 text-xs text-center">Enter the OPT sent to</h2>
             <p className="text-xs text-blue-600 leading-7 text-center">{phoneNumber}</p>
-              </div>
+          </div>
 
           <h3 className="text-gray-500 text-xs ml-4 md:ml-4 mb-0">Enter OTP</h3>
           <input
@@ -285,7 +295,8 @@ function Auth() {
               <label htmlFor="exam" className="text-xs text-gray-600">Are you preparing for competitive exams? <small className='text-red-500'>*</small></label>
               <select
                 name="location"
-                value={exams}
+                value={exam}
+                onChange={(e)=>setExam(e.target.value)}
                 id="select1"
                 className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
                 <option value=""></option>
@@ -315,13 +326,18 @@ function Auth() {
                   <select
                     name="grade"
                     id="select1"
-                    value={grade}
-                    onChange={(e)=>setGrade(e.target.value)}
+                    value={selectedGrade}
+                    onChange={(e)=>setSelectedGrade(e.target.value)}
                     className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
                     <option value=""></option>
-                    <option value="class1">class1</option>
+                  {/*<option value="clase1">clase1</option>
                     <option value="class2">class2</option>
-                    <option value="NO">NO</option>
+                    <option value="No">No</option>*/}
+                    {grade.map((grades) => (
+                      <option key={grades.id} value={grades.id}>
+                        {grades.name}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>

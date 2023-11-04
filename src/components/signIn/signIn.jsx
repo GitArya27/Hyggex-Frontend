@@ -1,4 +1,3 @@
-
 import React, {useEffect, useRef, useState} from 'react'
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { circle, circle1, circle2, logo1, slide1, slide2, slide3 } from '../../constants/url'
@@ -29,7 +28,7 @@ const SignIn = () => {
 
     clearInterval(interval);
 
-   
+
   }, []);
   useEffect(() => {
     const recaptchaVerifierInstance = new RecaptchaVerifier(
@@ -122,7 +121,7 @@ const SignIn = () => {
               ))}
 
             </div>
-            <div className="text-center text-gray-700 mt- mb-10">
+            <div className="text-center text-gray-700 mb-10">
               <p id='imagetxt' className="text-xs px-8 leading-5">{imageText[activeTextIndex]}</p>
             </div>
           </div>
@@ -200,30 +199,30 @@ const SignIn = () => {
               </p>
 
               <form className="text-xs text-gray-600 max-w-screen-sm px-10 py-5">
-                  <label htmlFor="mobile number" className="text-xs font-semibold text-blue-600 leading-7">Mobile Number</label>
-                  <div className="w-full md:mb-8 mb-12 h-12">
+                <label htmlFor="mobile number" className="text-xs font-semibold text-blue-600 leading-7">Mobile Number</label>
+                <div className="w-full md:mb-8 mb-12 h-12">
                   <PhoneInput
-                  inputProps={{
-                    'required': true,
-                    name: 'phonenumber'
-                  }}
-                  placeholder='Enter your mobile number'
-                  enableSearch
-                  required={true}
-                  inputStyle={{ paddingTop: "1rem", paddingBottom: "1rem", width: "100%", height: "46px" }}
-                  country={'in'}
-                  value={phonenumber}
-                  onChange={setPhoneNumber}
-                />
-              </div>
+                    inputProps={{
+                      'required': true,
+                      name: 'phonenumber'
+                    }}
+                    placeholder='Enter your mobile number'
+                    enableSearch
+                    required={true}
+                    inputStyle={{ paddingTop: "1rem", paddingBottom: "1rem", width: "100%", height: "46px" }}
+                    country={'in'}
+                    value={phonenumber}
+                    onChange={setPhoneNumber}
+                  />
+                </div>
 
-              <button type="submit" id="submit" onClick={sendOtp} className="my-8 flex justify-center text-xs m-auto md:mt-8 mb-6 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
-                Continue
+                <button type="submit" id="submit" onClick={sendOtp} className="my-8 flex justify-center text-xs m-auto md:mt-8 mb-6 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
+                  Continue
                 </button>
                 <div id='recaptcha-container'></div>
-              <span id="link-span" className="text-gray-600 flex items-center justify-center text-center mx-auto text-xs">
+                <span id="link-span" className="text-gray-600 flex items-center justify-center text-center mx-auto text-xs">
                   Already have an account?  <Link id="link-to-register" to="/SignUp" className="text-center no-underline text-xs text-blue-600 font-medium">Sign Up</Link>
-              </span><br />
+                </span><br />
               </form>
             </div>
 

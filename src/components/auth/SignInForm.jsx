@@ -9,11 +9,11 @@ import React from 'react'
 const SignInForm = () => {
   return (
     <>
-      <div className='flex xs:flex-col-reverse sm:flex-row  min-h-[100vh]  '>
-        <div className='md:w-1/2 bg-[#dfeaff] pb-[1rem]'>
-          <AuthLeft/>
+      <div className='flex flex-col sm:flex-row  min-h-[100vh]  '>
+        <div className='bg-[#DFEAFF] w-[100%] sm:w-[50%] border-2 border-green-500 pb-[1rem] flex'>
+          <AuthLeft />
         </div>
-        <div className='ml-20 mt-[4rem]  '>
+        <div className='pt-[2rem] px-20 w-[100%] sm:w-[50%] border-2 border-green-500'>
           <div>
             <Auth />
             <span id="link-span" className="text-gray-600 flex items-center justify-center text-center mx-auto text-xs">
