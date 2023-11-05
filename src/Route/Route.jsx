@@ -7,11 +7,19 @@ import Home from "../components/LandingPage/Home";
 import Layout from "../layout/Layout";
 import Login from "../components/auth/Login";
 import React from "react";
-import SignIn from "../components/signIn/signIn";
 import SignInForm from "../components/auth/SignInForm";
-import SignUp from "../components/signUp/signUp";
 import SignUpForm from "../components/auth/SignUpForm";
 import TestPage from "../components/LandingPage/TestPage/TestPage";
+
+//import SignUp from "../components/signUp/signUp";
+
+
+
+//import SignIn from "../components/signIn/signIn";
+
+
+
+
 
 // import TestPage from "../components/LandingPage/TestPage/TestPage";
 
@@ -32,14 +40,14 @@ export const router =createBrowserRouter(
     },
     {
         path:'/login',
-        element: <SignIn/>
+        element: <SignInForm/>
     },
     {
-        path:'/signUp',
+        path:'/signUpForm',
         element: <SignUpForm/>
     },
     {
-        path:'/signIn',
+        path:'/signInForm',
         element: <SignInForm/>
     }
 

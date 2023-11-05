@@ -11,17 +11,16 @@ const SignUpForm = () => {
 
   return (
     <>
-      <div className=' min-h-[100vh] flex xs:flex-col-reverse sm:flex-row'>
-        <div className='md:w-1/2 bg-[#dfeaff] pb-[1rem]'>
+      <div className=' min-h-[100vh] flex sm:flex-row'>
+        <div className='bg-[#DFEAFF] w-[100%] sm:w-[50%] pb-12 pt-4 ms:pt-0 flex order-2 sm:order-1'>
           <AuthLeft/>
         </div>
-        <div className='ml-20 mt-[4rem]   '>
-
+        <div className='pt-8 pb-2 sm:pt-12 px-10 w-[100%] sm:w-[50%] order-1 sm:order-2'>
           <div>
             <Auth/>
           </div>
           <span id="link-span" className="text-gray-600 flex items-center justify-center text-center mx-auto text-xs">
-                Don't have an account?   <Link id="link-to-register" to="/signIn" className="text-center no-underline text-xs text-blue-600 font-medium">  Login</Link>
+                Don't have an account?   <Link id="link-to-register" to="/signInForm" className="text-center no-underline text-xs text-blue-600 font-medium">  Login</Link>
                </span>
         </div><br /><br />
       </div>

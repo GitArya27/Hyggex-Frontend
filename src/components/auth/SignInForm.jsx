@@ -9,15 +9,15 @@ import React from 'react'
 const SignInForm = () => {
   return (
     <>
-      <div className='flex flex-col sm:flex-row  min-h-[100vh]  '>
-        <div className='bg-[#DFEAFF] w-[100%] sm:w-[50%] border-2 border-green-500 pb-[1rem] flex'>
+      <div className='flex flex-col sm:flex-row  min-h-[100vh]'>
+        <div className='bg-[#DFEAFF] w-[100%] sm:w-[50%] pb-12 pt-4 ms:pt-0 flex order-2 sm:order-1'>
           <AuthLeft />
         </div>
-        <div className='pt-[2rem] px-10 w-[100%] sm:w-[50%] border-2 border-green-500'>
+        <div className='pt-8 pb-2 sm:pt-12 px-10 w-[100%] sm:w-[50%] order-1 sm:order-2'>
           <div>
             <Auth />
             <span id="link-span" className="text-gray-600 flex items-center justify-center text-center mx-auto text-xs">
-                Don't have an account?   <Link id="link-to-register" to="/signUp" className="text-center no-underline text-xs text-blue-600 font-medium">  Sign Up</Link>
+                Don't have an account?   <Link id="link-to-register" to="/signUpForm" className="text-center no-underline text-xs text-blue-600 font-medium">  Sign Up</Link>
                </span><br /><br />
           </div>
 

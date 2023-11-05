@@ -1,6 +1,6 @@
 //import './sign.css'
 
-import 'react-phone-input-2/lib/style.css'
+/*import 'react-phone-input-2/lib/style.css'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 import React, {useEffect, useRef, useState} from 'react'
@@ -16,7 +16,7 @@ import axios from 'axios';
 import { auth as firebaseAuth } from '../auth/firebaseconfig';
 import imageText from '../signIn/signIn'
 
-const SignUp = () =>{
+const SignUpTest = () =>{
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -109,8 +109,8 @@ const SignUp = () =>{
         </div>
 
         <div className="sm:w-1/2 sm:order-2 order-1 py-8 px-10 m-auto flex flex-col" id='card2'>
-          {/*====================profile details===============*/}
-          {showDetailForm ? (
+          {/*====================profile details===============*/
+          {/*{showDetailForm ? (
 
           <div>
 
@@ -288,5 +288,5 @@ const SignUp = () =>{
     )
 }
 
-export default SignUp
+export default SignUpTest*/}
 

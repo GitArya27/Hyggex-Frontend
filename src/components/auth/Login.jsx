@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+/*import React, { useState, useEffect } from 'react';
 import { HeroImg, Logo, menuImg } from '../../constants/url';
 
 function Login() {
@@ -7,7 +7,7 @@ function Login() {
     `${Logo}`,
     `${HeroImg}`,
     `${menuImg}`,
-    
+
   ];
 
   useEffect(() => {
@@ -39,9 +39,9 @@ function Login() {
           <div className="flex items-center">
             <select className="border p-2 mr-2">
               <option>+1</option>
-              <option>+91</option>
+              <option>+91</option>*/
               {/* Add other country codes here */}
-            </select>
+            /*</select>
             <input
               type="text"
               placeholder="Enter your number"
@@ -55,4 +55,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Login;*/

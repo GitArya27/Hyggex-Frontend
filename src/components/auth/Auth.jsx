@@ -10,7 +10,7 @@ import { auth as firebaseAuth } from "./firebaseconfig"; // This is your custom 
 
 function Auth() {
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [code, setCode] = useState(["","","","","",""]);
+  const [code, setCode] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [location, setLocation] = useState("");
@@ -154,7 +154,7 @@ function Auth() {
 
   return (
 
-    <div className="pb-[20px] border-2 border-red-500 flex min-h-[80vh] flex-col justify-center items-center">
+    <div className="pb-[20px] flex flex-col justify-center items-center">
       {status === "initial" && (
         <>
           <div className="w-[100%] items-center">
@@ -174,14 +174,14 @@ function Auth() {
                 <span className='text-xs ml-6'>Verify</span>
               </div>
               <p
-                className="my-8 md:my-8 text-gray-600 text-xs text-center"
+                className="my-8 sm:my-8 text-gray-600 text-xs text-center"
                 id='profile-details'
               >
                 Enter your mobile number to continue your journey
               </p>
-            <div className="md:px-12 w-[100%] px-24">
+            <div className="sm:w-[100%] px-12">
               <label htmlFor="mobile number" className="text-xs font-semibold text-blue-600 leading-7">Mobile Number</label>
-              <div className="md:mb-8 mb-12 h-12">
+              <div className="sm:mb-8 mb-12 h-12">
                 <PhoneInput
                   inputProps={{
                     'required': true,
@@ -190,10 +190,10 @@ function Auth() {
                   placeholder='Enter your mobile number'
                   enableSearch
                   required={true}
-                  inputStyle={{ paddingTop: "1rem", paddingBottom: "1rem", width: "100%", height: "46px" }}
+                  inputStyle={{ paddingTop: "0.5rem", borderRadius:"10px",border:"1px solid grey", paddingBottom: "0.5rem", width: "100%", height: "42px" }}
                   country={'in'}
                   value={phoneNumber}
-                  onChange={(phoneNumber)=>setPhoneNumber("+"+ phoneNumber)}
+                  onChange={(phoneNumber)=>setPhoneNumber("+" + phoneNumber)}
                 />
               </div>
               <button onClick={sendOtp}
@@ -230,14 +230,14 @@ function Auth() {
             <p className="text-xs text-blue-600 leading-7 text-center">{phoneNumber}</p>
           </div>
 
-          <h3 className="text-gray-500 text-xs ml-4 md:ml-4 mb-0">Enter OTP</h3>
+          <h3 className="text-gray-500 text-xs ml-4 md:ml-4 mb-0 text-start">Enter OTP</h3>
           <input
             type="text"
             name="code"
             value={code}
             onChange={(e) => setCode(e.target.value)}
             placeholder="Enter your OTP"
-            className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12"
+            className="w-[80%] mx-auto py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12"
           />
 
           <button onClick={verifyOtp}

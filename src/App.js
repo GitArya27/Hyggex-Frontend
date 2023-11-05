@@ -5,7 +5,9 @@ import Layout from "../src/layout/Layout";
 import Login from "../src/components/auth/Login";
 import React from "react";
 import SignIn from "./components/signIn/signIn";
+import SignInForm from "./components/auth/SignInForm";
 import SignUp from "../src/components/signUp/signUp";
+import SignUpForm from "./components/auth/SignUpForm";
 
 export default function App() {
     return (
@@ -14,9 +16,9 @@ export default function App() {
                 <Route index element={<Home/>} />
 
             </Route>
-            <Route path="/login" element={<Login />} />
-            <Route path="/signUp" element={<SignUp />} />
-            <Route path="/signIn" element={<SignIn/>} />
+            {/*<Route path="/login" element={<Login />} />
+            <Route path="/signUpForm" element={<SignUpForm />} />
+            <Route path="/signInForm" element={<SignInForm/>} />*/}
         </Routes>
     );
 }
