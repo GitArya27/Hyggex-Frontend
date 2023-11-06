@@ -23,10 +23,11 @@ const AuthLeft = () => {
 
   return (
     <div className='flex flex-col justify-center ' id='container'>
-    <div className=" min-h-[80] bg-[#DFEAFF] w-[100vw] sm:w-full relative mb-12 mt-4 sm:mt-0" id='card1'>
       <img src={logo1} alt="logo" className="ml-8 mb-6 w-32 pt-4 pb-8" id='logo' />
 
-      <div id='inner-card ' className=''>
+    <div className=" min-h-[80] bg-[#DFEAFF] w-[100vw] sm:w-full relative mb-12 mt-4 sm:mt-0" id='card1'>
+
+      <div id='inner-card ' className='h-40'>
 
         <img src={images[activeIndex]} alt="carousel" className="w-40 h-40 mx-auto" id='slider' />
 
