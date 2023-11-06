@@ -258,7 +258,7 @@ function Auth() {
               placeholder="Enter your OTP"
               className="w-[80%] mx-auto py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12"
             />
-            <p className='float-right'>
+            <p className='float-right text-xs'>
               <span className='text-blue-600 px-8' onClick={resendOtpHandler}>resend OTP</span>
               <span className='text-blue-600'>{startCountDown}</span>
             </p>
