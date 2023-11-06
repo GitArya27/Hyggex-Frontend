@@ -21,10 +21,19 @@ function Auth() {
   const [selectedGrade, setSelectedGrade] = useState();
   const [status, setStatus] = useState("initial"); // initial, otpSent, newUser
   const recaptchaVerifierRef = useRef(null);
+  const [countDown, setCountDown] = useState(20);
+  const [resendOtp, setResendOtp] = useState(false);
   const [uid, setUid] = useState(null);
 
 
   useEffect(() => {
+    let timer;
+
+    if (resendOtp && countDown > 0) {
+      timer = setTimeout(() => {
+        setCountDown(countDown - 1)
+      }, 1000);
+    }
 
     fetch('https://hyggexbackend-d2b0.onrender.com/api/v1/user/getGrade')
       .then((response) => response.json())
@@ -46,10 +55,24 @@ function Auth() {
       if (recaptchaVerifierRef.current) {
         recaptchaVerifierRef.current.clear(); // Cleanup on component unmount
       }
+      clearTimeout(timer);
     };
 
-  }, []);
+  }, [resendOtp, countDown]);
 
+
+  //resent otp function
+  const startCountDown = () => {
+    setResendOtp(true);
+    setCountDown(20);
+  }
+
+  const resendOtpHandler = () => {
+    setResendOtp();
+    setCountDown();
+  }
+
+  //send OTP function
   const sendOtp = () => {
     signInWithPhoneNumber(
       firebaseAuth,
@@ -147,13 +170,6 @@ function Auth() {
 
   };
 
-  //=============function to dynamically input the OTP codes to each box==================
-  /*const codeChange = (index, value) => {
-    const updateCode = [...code];
-    updateCode[index - 1] = value;
-    setCode(updateCode);
-  }*/
-
   return (
 
     <div className="pb-[20px] flex flex-col justify-center items-center">
@@ -242,6 +258,10 @@ function Auth() {
               placeholder="Enter your OTP"
               className="w-[80%] mx-auto py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12"
             />
+            <p className='float-right'>
+              <span className='text-blue-600 px-8' onClick={resendOtpHandler}>resend OTP</span>
+              <span className='text-blue-600'>{startCountDown}</span>
+            </p>
           </div>
 
           <button onClick={verifyOtp}

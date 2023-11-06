@@ -5,9 +5,9 @@ import Layout from "../src/layout/Layout";
 import Login from "../src/components/auth/Login";
 import React from "react";
 import SignIn from "./components/signIn/signIn";
-import SignInForm from "./components/auth/SignInForm";
+import SignInForm from "./components/auth/SignIn";
 import SignUp from "../src/components/signUp/signUp";
-import SignUpForm from "./components/auth/SignUpForm";
+import SignUpForm from "./components/auth/SignUp";
 
 export default function App() {
     return (
