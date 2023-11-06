@@ -1,3 +1,5 @@
+import 'react-phone-input-2/lib/style.css'
+
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { circle, circle1, circle2 } from "../../constants/url";
 import { useEffect, useMemo, useRef, useState } from "react";

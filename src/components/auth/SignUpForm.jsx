@@ -11,7 +11,7 @@ const SignUpForm = () => {
 
   return (
     <>
-      <div className=' min-h-[100vh] flex sm:flex-row'>
+      <div className='flex flex-col sm:flex-row  min-h-[100vh]'>
         <div className='bg-[#DFEAFF] w-[100%] sm:w-[50%] pb-12 pt-4 ms:pt-0 flex order-2 sm:order-1'>
           <AuthLeft/>
         </div>
