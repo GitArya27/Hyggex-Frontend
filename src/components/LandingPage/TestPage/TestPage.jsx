@@ -146,7 +146,7 @@ function Question({ number, text,  handleAnswerSelect, answer }) {
           onChange={() => handleAnswerSelect(number, "Sometimes")}
           className="sometimes-input"
         />
-        <label htmlFor={`Sometimes${number}`}>Sometimes</label>
+        <label className="sometimes" htmlFor={`Sometimes${number}`}>Sometimes</label>
 
         <input
           type="radio"
@@ -157,7 +157,7 @@ function Question({ number, text,  handleAnswerSelect, answer }) {
           onChange={() => handleAnswerSelect(number, "Often")}
           className="often-input"
         />
-        <label htmlFor={`Often${number}`}>Often</label>
+        <label className="often" htmlFor={`Often${number}`}>Often</label>
 
         <input
           type="radio"

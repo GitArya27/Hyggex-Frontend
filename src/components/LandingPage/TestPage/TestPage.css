@@ -176,10 +176,18 @@ input[type="radio"]:checked:before {
 
 .radio-btn label {
   position: relative;
-  right: 30px;
+  top: 40px;
+  right: 70px;
   transition: color 0.3s;
   color: #696671;
 }
+
+.sometimes{
+  position: relative !important;
+  top: 40px !important;
+  right: 55px !important;
+}
+
 
 .never-input,
 .rarely-input {
@@ -200,6 +208,8 @@ input[type="radio"]:checked:before {
   outline: none;
   box-shadow: 0 0 0 2px #a6c1f9;
   transition: box-shadow 0.3s;
+  position: relative;
+  left: 40px;
 }
 
 .often-input,
@@ -247,7 +257,7 @@ input[type="radio"]:checked:before {
   border: 5px solid #add8e6;
   background: linear-gradient(93deg, #06286e -34.91%, #164ec0 135.05%);
   position: absolute;
-  top: 1320px;
+  top: 1340px;
   left: 670px;
   transform: translate(-50%, -50%);
   z-index: 1;
@@ -319,7 +329,7 @@ h6 {
   .question {
     font-size: 8.8px;
     font-weight: 800;
-    line-height: 2.5; 
+    line-height: 7; 
   }
 
   .radio-btn {
@@ -335,18 +345,38 @@ h6 {
 
   .radio-btn label {
     position: relative;
-    right: 0px;
+    right: 35px;
+    top: 30px;
     font-size: 10px;
   }
 
-  .next-btn {
-    height: 1vh;
-    margin-top: 0px;
+  .sometimes{
+    position: relative !important;
+    top: 30px !important;
+    right: 28px !important;
+  }
+
+  .often{
+    position: relative !important;
+    top: 30px !important;
+    right: 27px !important;
+  }
+
+  .sometimes-input {
+    -webkit-appearance: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    outline: none;
+    box-shadow: 0 0 0 2px #a6c1f9;
+    transition: box-shadow 0.3s;
+    position: relative;
+    left: 17px;
   }
 
   .next {
     padding: 15px 30px;
-    top: 1370px;
+    top: 1580px;
     left: 220px;
   }
 
