@@ -20,7 +20,7 @@ const SignUpForm = () => {
             <Auth/>
           </div>
           <span id="link-span" className="text-gray-600 flex items-center justify-center text-center mx-auto text-xs">
-                Don't have an account?   <Link id="link-to-register" to="/signInForm" className="text-center no-underline text-xs text-blue-600 font-medium">  Login</Link>
+                Already have an account?   <Link id="link-to-register" to="/signInForm" className="text-center no-underline text-xs text-blue-600 font-medium">  Login</Link>
                </span>
         </div><br /><br />
       </div>

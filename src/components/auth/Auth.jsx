@@ -181,7 +181,7 @@ function Auth() {
               >
                 Enter your mobile number to continue your journey
               </p>
-            <div className="sm:w-[100%] px-12">
+            <div className="sm:w-[95%] w-[80%] sm:px-12 px-6 mx-auto">
               <label htmlFor="mobile number" className="text-xs font-semibold text-blue-600 leading-7">Mobile Number</label>
               <div className="sm:mb-8 mb-12 h-12">
                 <PhoneInput
@@ -232,15 +232,17 @@ function Auth() {
             <p className="text-xs text-blue-600 leading-7 text-center">{phoneNumber}</p>
           </div>
 
-          <h3 className="text-gray-500 text-xs ml-4 md:ml-4 mb-0 text-start">Enter OTP</h3>
-          <input
-            type="text"
-            name="code"
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-            placeholder="Enter your OTP"
-            className="w-[80%] mx-auto py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12"
-          />
+          <div className='flex flex-col text-start'>
+            <h3 className="text-gray-500 text-xs ml-4 mb-0 text-start">Enter OTP</h3>
+            <input
+              type="text"
+              name="code"
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+              placeholder="Enter your OTP"
+              className="w-[80%] mx-auto py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12"
+            />
+          </div>
 
           <button onClick={verifyOtp}
             className="my-8 flex justify-center text-xs m-auto md:mt-8 mb-6 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600"
