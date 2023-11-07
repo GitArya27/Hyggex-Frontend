@@ -4,6 +4,7 @@ import { circle, circle1, circle2, logo1, slide1, slide2, slide3 } from '../../c
 import Auth from './Auth'
 import AuthLeft from './AuthLeft'
 import { Link } from 'react-router-dom'
+import Test from './test'
 
 const SignUpForm = () => {
 

@@ -7,6 +7,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import {Link} from 'react-router-dom'
 import PhoneInput from 'react-phone-input-2'
 import React from "react";
+import Testfile from './testfile';
 import axios from "axios";
 import { auth as firebaseAuth } from "./firebaseconfig"; // This is your custom firebase auth instance
 
@@ -228,7 +229,7 @@ function Auth() {
       )}{/*==============OTP form==============*/}
       {status === "otpSent" && (
         <>
-
+          <Testfile/>
           <div id='first-div' className="my-5 text-center">
             <h1 id="h1" className="text-blue-600 font-bold pb-5">LogIn</h1>
           </div>
@@ -259,8 +260,8 @@ function Auth() {
               className="w-[80%] mx-auto py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12"
             />
             <p className='float-right text-xs'>
-              <span className='text-blue-600 px-8' onClick={resendOtpHandler}>resend OTP</span>
-              <span className='text-blue-600'>{startCountDown}</span>
+              <span className='text-gray-600 px-8' onClick={resendOtpHandler}>resend OTP in: </span>
+              <span className='text-blue-600'>{startCountDown} 20 seconds</span>
             </p>
           </div>
 
