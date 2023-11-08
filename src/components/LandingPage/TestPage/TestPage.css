@@ -95,10 +95,11 @@ h6 {
   margin-top: 220px;
 }
 .slider-container {
-  width: 100%; 
+  width: 90%;
   margin: 10px auto;
   text-align: center;
   padding-top: 10px;
+  position: relative;
 }
 
 .slider {
@@ -109,14 +110,14 @@ h6 {
   font-size: 16px;
   position: absolute;
   text-align: center;
-  top: 80%;
+  top: -20px; 
   left: 50%;
   transform: translateX(-50%);
   width: auto;
 }
 
 
-/* Reader  */
+/* Reader styling */
 
 .Read {
   padding: 30px 10px 10px 50px;
@@ -126,8 +127,6 @@ h6 {
   align-items: center;
   justify-content: center;
 }
-
-
 
 .question {
   display: flex;
@@ -243,7 +242,7 @@ input[type="radio"]:checked:before {
 
 .next {
   display: flex;
-  height: 10vh;
+  height: 7vh;
   padding: 15px 20px;
   justify-content: center;
   align-items: center;
@@ -326,14 +325,12 @@ input[type="radio"]:checked:before {
   }
 
   #slider-value {
-    font-size: 16px;
-    position: absolute;
-    text-align: center;
-    top: 48%;
+    font-size: 14px; 
+    top: 5%;
   }
 
   .question {
-    font-size: 7.5px; 
+    font-size: 7.5px !important; 
     max-width: 90%;
     margin: auto 20px;
     line-height: 6;
@@ -388,7 +385,6 @@ input[type="radio"]:checked:before {
     font-size: 40px;
     font-weight: 800;
   }
-
 
   .head p {
     font-size: 25px;
