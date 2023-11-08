@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import PhoneInput from 'react-phone-input-2'
 import React from 'react'
 
-const SignInForm = () => {
+const SignIn = () => {
   return (
     <>
       <div className='flex flex-col sm:flex-row  min-h-[100vh]'>
@@ -27,4 +27,4 @@ const SignInForm = () => {
   )
 }
 
-export default SignInForm;
+export default SignIn;

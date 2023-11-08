@@ -6,7 +6,7 @@ import AuthLeft from './AuthLeft'
 import { Link } from 'react-router-dom'
 import Test from './test'
 
-const SignUpForm = () => {
+const SignUp = () => {
 
 
 
@@ -29,4 +29,4 @@ const SignUpForm = () => {
   )
 }
 
-export default SignUpForm
+export default SignUp

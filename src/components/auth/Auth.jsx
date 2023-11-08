@@ -18,6 +18,7 @@ function Auth() {
   const [email, setEmail] = useState("");
   const [location, setLocation] = useState("");
   const [grade, setGrade] = useState([]);
+  const [schoolStudent, setSchoolStudent] = useState();
   const [exam, setExam] = useState("");
   const [selectedGrade, setSelectedGrade] = useState();
   const [status, setStatus] = useState("initial"); // initial, otpSent, newUser
@@ -27,18 +28,33 @@ function Auth() {
   const [uid, setUid] = useState(null);
 
 
-  useEffect(() => {
-    let timer;
+  /*let timer;
+  const resendOtpHandler = () => {
+    setResendOtp(false);
+    setCountDown(20);
+    //sendOtp();
+  }*/
 
-    if (resendOtp && countDown > 0) {
-      timer = setTimeout(() => {
-        setCountDown(countDown - 1)
-      }, 1000);
-    }
+
+  useEffect(() => {
+
+    /*const countdownFunction = () => {
+      if (resendOtp && countDown > 0) {
+        timer = setTimeout(() => {
+          setCountDown(countDown - 1);
+        }, 1000);
+      }
+    };
+
+    countdownFunction();
+    const interval = setInterval(countdownFunction, 1000);*/
 
     fetch('https://hyggexbackend-d2b0.onrender.com/api/v1/user/getGrade')
       .then((response) => response.json())
-      .then((data) => setGrade(data))
+      .then((data) => {
+        console.log(data, 'grades fetched');
+        setGrade(data);
+      })
       .catch((error) => console.error('Error fetching grades:', error));
 
 
@@ -56,22 +72,12 @@ function Auth() {
       if (recaptchaVerifierRef.current) {
         recaptchaVerifierRef.current.clear(); // Cleanup on component unmount
       }
-      clearTimeout(timer);
+
     };
 
-  }, [resendOtp, countDown]);
+  }, []);
 
 
-  //resent otp function
-  const startCountDown = () => {
-    setResendOtp(true);
-    setCountDown(20);
-  }
-
-  const resendOtpHandler = () => {
-    setResendOtp();
-    setCountDown();
-  }
 
   //send OTP function
   const sendOtp = () => {
@@ -82,6 +88,7 @@ function Auth() {
     ) // <-- use firebaseAuth here
       .then((confirmationResult) => {
         window.confirmationResult = confirmationResult;
+        alert("otp has been sent")
         setStatus("otpSent");
       })
       .catch((error) => {
@@ -90,6 +97,7 @@ function Auth() {
           console.error("Backend responded with:", error.response.data);
       } else {
           console.error("Error sending OTP:", error);
+          alert("otp not send")
     } });
   };
 
@@ -154,6 +162,7 @@ function Auth() {
         phoneNumber,
         location,
         selectedGrade,
+        schoolStudent
       });
       if (response.data.success) {
         alert("Registered Successfully!");
@@ -229,7 +238,7 @@ function Auth() {
       )}{/*==============OTP form==============*/}
       {status === "otpSent" && (
         <>
-          <Testfile/>
+
           <div id='first-div' className="my-5 text-center">
             <h1 id="h1" className="text-blue-600 font-bold pb-5">LogIn</h1>
           </div>
@@ -240,7 +249,7 @@ function Auth() {
             <img className='w-6 h-6' src={circle} alt="circle" />
           </div>
 
-          <div className="flex flex-row justify-evenly mb-10 mt-2 md:mt-2 text-gray-600" id='second-div'>
+          <div className="flex flex-row justify-evenly mb-4 mt-2 md:mt-2 text-gray-600" id='second-div'>
             <span className='text-xs mx-4 text-blue-600 font-medium'>Enter Number</span>
             <span className='text-xs mx-4'>Verify</span>
           </div>
@@ -249,7 +258,7 @@ function Auth() {
             <p className="text-xs text-blue-600 leading-7 text-center">{phoneNumber}</p>
           </div>
 
-          <div className='flex flex-col text-start'>
+          <div className='flex flex-col text-start border-2 border-green-500 w-[]'>
             <h3 className="text-gray-500 text-xs ml-4 mb-0 text-start">Enter OTP</h3>
             <input
               type="text"
@@ -257,12 +266,13 @@ function Auth() {
               value={code}
               onChange={(e) => setCode(e.target.value)}
               placeholder="Enter your OTP"
-              className="w-[80%] mx-auto py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12"
+              className="w-[100%] py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12"
             />
             <p className='float-right text-xs'>
-              <span className='text-gray-600 px-8' onClick={resendOtpHandler}>resend OTP in: </span>
-              <span className='text-blue-600'>{startCountDown} 20 seconds</span>
+              <span className='text-gray-600 pr-2'>resend OTP in: </span>
+              <span className='text-blue-600'> seconds</span>
             </p>
+
           </div>
 
           <button onClick={verifyOtp}
@@ -300,6 +310,16 @@ function Auth() {
                 className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12"
               />
 
+              <label htmlFor="phoneNumber" className="text-xs text-gray-600 leading-7">Phone Number <small className='text-red-500'>*</small></label>
+              <input
+                type="text"
+                name="phoneNumber"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                placeholder="Enter your mobile number"
+                className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12"
+              />
+
               <label htmlFor="email" className="text-xs text-gray-600 leading-7">Email Address<small className='text-red-500'>*</small></label>
               <input
                 type="email"
@@ -310,11 +330,23 @@ function Auth() {
                 className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12"
               />
 
-              <label htmlFor="shool" className="text-xs text-gray-600">Are you in school? <small className='text-red-500'>*</small></label>
+              <label htmlFor="school" className="text-xs text-gray-600">Are you in school? <small className='text-red-500'>*</small></label>
               <select name="school" id="select1" className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
                 <option value=""></option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+
+              <label htmlFor="schoolStudent" className="text-xs text-gray-600">School Student <small className='text-red-500'>*</small></label>
+              <select
+                name="schoolStudent"
+                id="student"
+                value={schoolStudent}
+                onChange={(e)=>setSchoolStudent(e.target.value)}
+                className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
+                <option value=""></option>
+                <option value="true">true</option>
+                <option value="false">false</option>
               </select>
 
               <label htmlFor="exam" className="text-xs text-gray-600">Are you preparing for competitive exams? <small className='text-red-500'>*</small></label>
@@ -353,14 +385,12 @@ function Auth() {
                     id="select1"
                     value={selectedGrade}
                     onChange={(e)=>setSelectedGrade(e.target.value)}
-                    className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
-                    <option value=""></option>
-                  {/*<option value="clase1">clase1</option>
-                    <option value="class2">class2</option>
-                    <option value="No">No</option>*/}
-                    {grade.map((grades) => (
-                      <option key={grades.id} value={grades.id}>
-                        {grades.name}
+                    className="w-full py-2 text-black px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12"
+                  >
+                    <option key="" value=""></option>
+                      {grade.map((grades) => (
+                      <option key={grades._id} value={grades._id}>
+                        {grades.grade}
                       </option>
                     ))}
                   </select>

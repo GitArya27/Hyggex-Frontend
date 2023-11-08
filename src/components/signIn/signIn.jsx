@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react'
+/*import React, {useEffect, useRef, useState} from 'react'
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { circle, circle1, circle2, logo1, slide1, slide2, slide3 } from '../../constants/url'
 
@@ -129,11 +129,11 @@ const SignIn = () => {
         </div>
 
         <div className="sm:w-1/2 sm:order-2 order-1 py-8 px-10 m-auto flex flex-col" id='card2'>
-          {/*====================profile details===============*/}
+          {/*====================profile details===============*
         {OTPForm ? (
 
 
-           <div className='m-auto'>{/*===============OTP===============*/}
+           <div className='m-auto'>{/*===============OTP===============*
               <div id='first-div' className="my-5 text-center">
                 <h1 id="h1" className="text-blue-600 font-bold pb-5">LogIn</h1>
               </div>
@@ -234,5 +234,5 @@ const SignIn = () => {
     )
 }
 
-export default SignIn
+export default SignIn*/
 
