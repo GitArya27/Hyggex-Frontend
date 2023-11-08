@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import 'font-awesome/css/font-awesome.min.css';
-import './TestPage.css'; 
+import "font-awesome/css/font-awesome.min.css";
+import "./TestPage.css";
 import { checklist } from "../../../constants/url";
 import { idea } from "../../../constants/url";
 import { book } from "../../../constants/url";
@@ -27,10 +27,10 @@ function TestPage() {
 
   const initialQuestions = [
     "How often do you struggle to understand what you're reading during your study sessions?",
-    "How often do you have to re-read sentences or paragraphs to understand them?",
-    "How often do you find it difficult to summarize what you've read?",
-    "How often do you struggle to identify the main points in a passage or chapter?",
-    "How often do you find it hard to make predictions or inferences based on what you're reading?",
+    "How often do you struggle to understand what you're reading during your study sessions?",
+    "How often do you struggle to understand what you're reading during your study sessions?",
+    "How often do you struggle to understand what you're reading during your study sessions?",
+    "How often do you struggle to understand what you're reading during your study sessions?",
   ];
 
   const questionsPerPage = 5;
@@ -43,29 +43,39 @@ function TestPage() {
 
   return (
     <div>
-      <div className="head">
+   <div className="head">
         <h1 className="h1">Free Reading Assessment</h1>
         <p>HyggeX Assessment Explorer &reg;</p>
       </div>
+
       <div className="box1">
         <img src={checklist} alt="" />
         <div className="one">
           <h6>Complete the Assessment</h6>
-          <p>Engage sincerely and respond accurately to unveil your reading profile.</p>
+          <p>
+            Engage sincerely and respond accurately to unveil your reading
+            profile.
+          </p>
         </div>
       </div>
       <div className="box2">
         <img src={idea} alt="" />
         <div className="one">
           <h6>View Detailed Insights</h6>
-          <p>Explore the impact of comprehension, speed, retention, anxiety, focus, and fatigue on your reading.</p>
+          <p>
+            Explore the impact of comprehension, speed, retention, anxiety,
+            focus, and fatigue on your reading.
+          </p>
         </div>
       </div>
       <div className="box3">
         <img src={book} alt="" />
         <div className="one">
           <h6>Unlock Your Reading Potential</h6>
-          <p>Advance into the proficient reader you aim to be with your optional Premium Suite.</p>
+          <p>
+            Advance into the proficient reader you aim to be with your optional
+            Premium Suite.
+          </p>
         </div>
       </div>
       <div className="line">
@@ -98,17 +108,19 @@ function TestPage() {
       </div>
       <div className="button-container">
         {selectedQuestion <= 60 && (
-          <button className="next" onClick={() => setCurrentPage(currentPage + 1)}>
-          Next <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+          <button
+            className="next"
+            onClick={() => setCurrentPage(currentPage + 1)}
+          >
+            Next <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
           </button>
         )}
       </div>
     </div>
   );
-  
 }
 
-function Question({ number, text,  handleAnswerSelect, answer }) {
+function Question({ number, text, handleAnswerSelect, answer }) {
   return (
     <div>
       <h5 className="question">
@@ -146,7 +158,9 @@ function Question({ number, text,  handleAnswerSelect, answer }) {
           onChange={() => handleAnswerSelect(number, "Sometimes")}
           className="sometimes-input"
         />
-        <label className="sometimes" htmlFor={`Sometimes${number}`}>Sometimes</label>
+        <label className="sometimes" htmlFor={`Sometimes${number}`}>
+          Sometimes
+        </label>
 
         <input
           type="radio"
@@ -157,7 +171,9 @@ function Question({ number, text,  handleAnswerSelect, answer }) {
           onChange={() => handleAnswerSelect(number, "Often")}
           className="often-input"
         />
-        <label className="often" htmlFor={`Often${number}`}>Often</label>
+        <label className="often" htmlFor={`Often${number}`}>
+          Often
+        </label>
 
         <input
           type="radio"
