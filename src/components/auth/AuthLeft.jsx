@@ -22,16 +22,16 @@ const AuthLeft = () => {
     ];
 
   return (
-    <div className='flex flex-col justify-center ' id='container'>
+    <div className='flex flex-col justify-center bg-[#DFEAFF]' id='container'>
       <img src={logo1} alt="logo" className="ml-8 mb-6 w-32 pt-4 pb-8" id='logo' />
 
-    <div className=" min-h-[80] bg-[#DFEAFF] w-[100vw] sm:w-full relative mb-12 mt-4 sm:mt-0" id='card1'>
+      <div className=" min-h-[80] bg-[#DFEAFF] w-[100vw] sm:w-full relative mb-12 mt-4 sm:mt-0" id='card1'>
 
-      <div id='inner-card ' className='h-40'>
+        <div id='inner-card ' className='h-40'>
 
-        <img src={images[activeIndex]} alt="carousel" className="w-40 h-40 mx-auto" id='slider' />
+          <img src={images[activeIndex]} alt="carousel" className="w-40 h-40 mx-auto" id='slider' />
 
-        <div className="absolute sm:mb-16 left-[40%] flex space-x-2 mt-20">
+          <div className="absolute sm:mb-16 left-[40%] flex space-x-2 mt-20">
           {images.map((_, index) => (
             <button
               key={index}

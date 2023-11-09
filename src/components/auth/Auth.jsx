@@ -252,8 +252,8 @@ function Auth() {
           </div>
 
           <div className="flex flex-row justify-evenly mb-4 mt-2 md:mt-2 text-gray-600" id='second-div'>
-            <span className='text-xs mx-4 text-blue-600 font-medium'>Enter Number</span>
-            <span className='text-xs mx-4'>Verify</span>
+            <span className='text-xs mr-16 text-blue-600 font-medium'>Enter Number</span>
+            <span className='text-xs ml-16'>Verify</span>
           </div>
           <div className='my-6'>
             <h2 className="text-gray-500 text-xs text-center">Enter the OPT sent to</h2>
@@ -261,22 +261,22 @@ function Auth() {
           </div>
 
           <div className='flex flex-col text-start w-[]'>
-            <h3 className="text-gray-500 text-xs ml-4 mb-0 text-start">Enter OTP</h3>
+            <h3 className="text-gray-500 text-[1rem] mb-0 text-left">Enter OTP</h3>
             <input
               type="text"
               name="code"
               value={code}
               onChange={(e) => setCode(e.target.value)}
               placeholder="Enter your OTP"
-              className="py-2 px-3 border rounded-md w-[300px] mb-4 text-xs h-10 md:h-8 xs:h-12"
+              className="px-3 py-3 border rounded-md w-[270px] sm:w-[300px] mb-2 text-[1rem] h-10 ms:h-8"
             />
-            <p className='float-right text-xs'>
-              <span className='text-gray-600 pr-2'>
+            <p className='text-right text-[1rem]'>
+              <span className='text-gray-600 pr-2 text-right'>
                 {minutes < 10 ? `0${minutes}` : minutes}:
                 {seconds < 10 ? `0${seconds}` : seconds}
               </span>
               <button
-                className='text-blue-600'
+                className='text-blue-600 text-right'
                 disabled={seconds > 0 || minutes > 0} style={{color: seconds > 0 || minutes > 0 ? "#dfe3e8":"#ff5630"}}
 
               > resend OTP</button>
