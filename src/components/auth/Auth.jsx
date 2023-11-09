@@ -26,6 +26,8 @@ function Auth() {
   const [countDown, setCountDown] = useState(20);
   const [resendOtp, setResendOtp] = useState(false);
   const [uid, setUid] = useState(null);
+  const [minutes, setMinutes] = useState(1);
+  const [seconds, setSeconds] = useState(5);
 
 
   /*let timer;
@@ -35,8 +37,8 @@ function Auth() {
     //sendOtp();
   }*/
 
-
   useEffect(() => {
+
 
     /*const countdownFunction = () => {
       if (resendOtp && countDown > 0) {
@@ -69,10 +71,10 @@ function Auth() {
     recaptchaVerifierRef.current = recaptchaVerifierInstance;
 
     return () => {
+
       if (recaptchaVerifierRef.current) {
         recaptchaVerifierRef.current.clear(); // Cleanup on component unmount
       }
-
     };
 
   }, []);
@@ -258,7 +260,7 @@ function Auth() {
             <p className="text-xs text-blue-600 leading-7 text-center">{phoneNumber}</p>
           </div>
 
-          <div className='flex flex-col text-start border-2 border-green-500 w-[]'>
+          <div className='flex flex-col text-start w-[]'>
             <h3 className="text-gray-500 text-xs ml-4 mb-0 text-start">Enter OTP</h3>
             <input
               type="text"
@@ -266,11 +268,18 @@ function Auth() {
               value={code}
               onChange={(e) => setCode(e.target.value)}
               placeholder="Enter your OTP"
-              className="w-[100%] py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12"
+              className="py-2 px-3 border rounded-md w-[300px] mb-4 text-xs h-10 md:h-8 xs:h-12"
             />
             <p className='float-right text-xs'>
-              <span className='text-gray-600 pr-2'>resend OTP in: </span>
-              <span className='text-blue-600'> seconds</span>
+              <span className='text-gray-600 pr-2'>
+                {minutes < 10 ? `0${minutes}` : minutes}:
+                {seconds < 10 ? `0${seconds}` : seconds}
+              </span>
+              <button
+                className='text-blue-600'
+                disabled={seconds > 0 || minutes > 0} style={{color: seconds > 0 || minutes > 0 ? "#dfe3e8":"#ff5630"}}
+
+              > resend OTP</button>
             </p>
 
           </div>
