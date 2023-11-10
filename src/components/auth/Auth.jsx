@@ -1,6 +1,8 @@
 import 'react-phone-input-2/lib/style.css'
+import 'react-toastify/dist/ReactToastify.css';
 
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import { ToastContainer, toast } from 'react-toastify';
 import { circle, circle1, circle2 } from "../../constants/url";
 import { useEffect, useMemo, useRef, useState } from "react";
 
@@ -26,35 +28,15 @@ function Auth() {
   const [countDown, setCountDown] = useState(20);
   const [resendOtp, setResendOtp] = useState(false);
   const [uid, setUid] = useState(null);
-  const [minutes, setMinutes] = useState(1);
-  const [seconds, setSeconds] = useState(5);
 
-
-  /*let timer;
-  const resendOtpHandler = () => {
-    setResendOtp(false);
-    setCountDown(20);
-    //sendOtp();
-  }*/
 
   useEffect(() => {
-
-
-    /*const countdownFunction = () => {
-      if (resendOtp && countDown > 0) {
-        timer = setTimeout(() => {
-          setCountDown(countDown - 1);
-        }, 1000);
-      }
-    };
-
-    countdownFunction();
-    const interval = setInterval(countdownFunction, 1000);*/
 
     fetch('https://hyggexbackend-d2b0.onrender.com/api/v1/user/getGrade')
       .then((response) => response.json())
       .then((data) => {
         console.log(data, 'grades fetched');
+        //setNotification({message: `Error : ${error.response.data.message}`, type:'error'})
         setGrade(data);
       })
       .catch((error) => console.error('Error fetching grades:', error));
@@ -90,16 +72,19 @@ function Auth() {
     ) // <-- use firebaseAuth here
       .then((confirmationResult) => {
         window.confirmationResult = confirmationResult;
-        alert("otp has been sent")
+        //alert("otp has been sent")
+        toast.success('OTP has been sent');
         setStatus("otpSent");
       })
       .catch((error) => {
         console.log(error);
         if (error.response) {
           console.error("Backend responded with:", error.response.data);
+          toast.error('Error: ' + error.response.data.message);
       } else {
           console.error("Error sending OTP:", error);
-          alert("otp not send")
+          //alert("otp not send")
+          toast.error('Error sending OTP, check and try again');
     } });
   };
 
@@ -115,12 +100,36 @@ function Auth() {
       })
       . catch( (error) =>{
         if (error.response) {
-            console.error("Backend responded with:", error.response.data);
+          console.error("Backend responded with:", error.response.data);
+          toast.error('Error: ' + error.response.data.message);
         } else {
-            console.error("Error during authentication:", error);
+          console.error("Error during authentication:", error);
+          toast.error('You must fill in the correct OTP');
         }
     })
   };
+
+
+  //function to resend OTP
+  const handleResendOTP = () => {
+    setCode("")
+    setResendOtp(true);
+    sendOtp();
+
+    let countdown = 20;
+    const countdownInterval = setInterval(() => {
+      countdown -= 1;
+      setCountDown(countdown);
+
+      if (countdown === 0) {
+        clearInterval(countdownInterval);
+        setResendOtp(false);
+        sendOtp();
+      }
+
+    }, 1000)
+  };
+
 
   const contextValue = useMemo(() => ({ sendOtp }), [sendOtp]);
 
@@ -137,19 +146,21 @@ function Auth() {
       if (response.data.success) {
         if (response.data.status === "loggedIn") {
           alert("Logged In Successfully!");
+          toast.success('successfully logged in');
           window.location.href = "/";
         } else if (response.data.status === "newUser") {
           setStatus("newUser");
           setUid(response.data.uid);  // <-- Store the UID here
-          alert('You cannot Sign in, Sign up first.')
+          //alert('You cannot Sign in, Sign up first.')
+          toast.error('You cannot login, sign Up first')
         }
       }
     } catch (error) {
       if (error.response) {
-          console.error("Backend responded with:", error.response.data);
+        console.error("Backend responded with:", error.response.data);
       } else {
-          console.error("Error during authentication:", error);
-      }
+      console.error("Error during authentication:", error);
+    }
   }
 
   };
@@ -167,16 +178,19 @@ function Auth() {
         schoolStudent
       });
       if (response.data.success) {
-        alert("Registered Successfully!");
+        //alert("Registered Successfully!");
+        toast.success("Registered Successfully!")
         window.location.href="/SignIn"
       }
     } catch (error) {
       if (error.response) {
         console.error("Backend responded with:", error.response.data);
-        alert('registration failed')
+        //alert('registration failed')
+        toast.error(`registration failed`)
       } else {
         console.error("Error during authentication:", error);
         alert('error during authentication')
+        toast.error('error during authentication')
       }
     }
 
@@ -187,6 +201,7 @@ function Auth() {
     <div className="pb-[20px] flex flex-col justify-center items-center">
       {status === "initial" && (
         <>
+
           <div className="w-[100%] items-center">
             {/*===========Enter phone number form==============*/}
             <div id='first-div' className="my-5 text-center">
@@ -261,26 +276,24 @@ function Auth() {
           </div>
 
           <div className='flex flex-col text-start w-[]'>
-            <h3 className="text-gray-500 text-[1rem] mb-0 text-left">Enter OTP</h3>
+            <h3 className="text-gray-500 text-[0.8rem] mb-0 text-left">Enter OTP</h3>
             <input
               type="text"
               name="code"
               value={code}
               onChange={(e) => setCode(e.target.value)}
               placeholder="Enter your OTP"
-              className="px-3 py-3 border rounded-md w-[270px] sm:w-[300px] mb-2 text-[1rem] h-10 ms:h-8"
+              className="px-3 py-3 border rounded-md w-[270px] sm:w-[300px] mb-2 text-[0.8rem] h-10 ms:h-8"
             />
-            <p className='text-right text-[1rem]'>
-              <span className='text-gray-600 pr-2 text-right'>
-                {minutes < 10 ? `0${minutes}` : minutes}:
-                {seconds < 10 ? `0${seconds}` : seconds}
-              </span>
+            <div className='flex justify-end items-end'>
+              <span className='text-[0.8rem] text-gray-500'>Resend OTP in: </span>
               <button
-                className='text-blue-600 text-right'
-                disabled={seconds > 0 || minutes > 0} style={{color: seconds > 0 || minutes > 0 ? "#dfe3e8":"#ff5630"}}
-
-              > resend OTP</button>
-            </p>
+                onClick={handleResendOTP}
+                className={`text-blue-600 text-[0.8rem] text-right ${resendOtp ? 'pointer-events-none' : ''}`}
+              >
+                {countDown} Seconds
+              </button>
+            </div>
 
           </div>
 
@@ -412,7 +425,7 @@ function Auth() {
             </div>
         </>
       )}
-
+      <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
     </div>
 
   );
