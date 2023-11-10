@@ -29,18 +29,16 @@ function Auth() {
   const [resendOtp, setResendOtp] = useState(false);
   const [uid, setUid] = useState(null);
 
-
+  //const isMounted = useRef(true);
   useEffect(() => {
 
     fetch('https://hyggexbackend-d2b0.onrender.com/api/v1/user/getGrade')
       .then((response) => response.json())
       .then((data) => {
         console.log(data, 'grades fetched');
-        //setNotification({message: `Error : ${error.response.data.message}`, type:'error'})
         setGrade(data);
       })
       .catch((error) => console.error('Error fetching grades:', error));
-
 
     const recaptchaVerifierInstance = new RecaptchaVerifier(
       firebaseAuth,
@@ -52,18 +50,21 @@ function Auth() {
 
     recaptchaVerifierRef.current = recaptchaVerifierInstance;
 
+
+
     return () => {
 
       if (recaptchaVerifierRef.current) {
         recaptchaVerifierRef.current.clear(); // Cleanup on component unmount
       }
-    };
+    }
 
   }, []);
 
 
 
   //send OTP function
+
   const sendOtp = () => {
     signInWithPhoneNumber(
       firebaseAuth,
@@ -100,19 +101,18 @@ function Auth() {
       })
       . catch( (error) =>{
         if (error.response) {
+          console.log(error, 'error');
           console.error("Backend responded with:", error.response.data);
           toast.error('Error: ' + error.response.data.message);
         } else {
-          console.error("Error during authentication:", error);
+          //console.error("Error during authentication:", error);
           toast.error('You must fill in the correct OTP');
         }
     })
   };
 
-
-  //function to resend OTP
   const handleResendOTP = () => {
-    setCode("")
+    setCode(code)
     setResendOtp(true);
     sendOtp();
 
@@ -122,9 +122,11 @@ function Auth() {
       setCountDown(countdown);
 
       if (countdown === 0) {
+        console.log('before',countdown);
         clearInterval(countdownInterval);
+        console.log('after',countdown);
         setResendOtp(false);
-        sendOtp();
+        //sendOtp();
       }
 
     }, 1000)
@@ -145,7 +147,7 @@ function Auth() {
       );
       if (response.data.success) {
         if (response.data.status === "loggedIn") {
-          alert("Logged In Successfully!");
+          //alert("Logged In Successfully!");
           toast.success('successfully logged in');
           window.location.href = "/";
         } else if (response.data.status === "newUser") {
@@ -248,7 +250,7 @@ function Auth() {
 
               <div id="recaptcha-container"></div>
 
-                </div>
+              </div>
           </div>
         </>
 
