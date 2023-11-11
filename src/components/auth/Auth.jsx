@@ -25,13 +25,17 @@ function Auth() {
   const [selectedGrade, setSelectedGrade] = useState();
   const [status, setStatus] = useState("initial"); // initial, otpSent, newUser
   const recaptchaVerifierRef = useRef(null);
-  const [countDown, setCountDown] = useState(20);
+  const [countDown, setCountDown] = useState(40);
   const [resendOtp, setResendOtp] = useState(false);
   const [uid, setUid] = useState(null);
+  const [course, setCourse] = useState([]);
+  const [prepCourse, setPrepCourse] = useState();
+  const [shouldRenderRecaptcha, setShouldRenderRecaptcha] = useState(true);
 
-  //const isMounted = useRef(true);
+
+
   useEffect(() => {
-
+    //fetching grades
     fetch('https://hyggexbackend-d2b0.onrender.com/api/v1/user/getGrade')
       .then((response) => response.json())
       .then((data) => {
@@ -40,17 +44,32 @@ function Auth() {
       })
       .catch((error) => console.error('Error fetching grades:', error));
 
-    const recaptchaVerifierInstance = new RecaptchaVerifier(
-      firebaseAuth,
-      "recaptcha-container",
-      {
-        size: "invisible"
-      }
-    );
+    //fetching courses
+    fetch('https://hyggexbackend-d2b0.onrender.com/api/v1/user/getCourse')
+      .then((response) =>response.json())
+      .then((data) => {
+        console.log(data, 'available courses');
+        setCourse(data)
+      })
+      .catch((err) => console.log(err, 'courses not found'));
 
-    recaptchaVerifierRef.current = recaptchaVerifierInstance;
+    if (shouldRenderRecaptcha) {
+    const recaptchaContainer = document.getElementById('recaptcha-container');
 
+    if (recaptchaContainer) {
+      const recaptchaVerifierInstance = new RecaptchaVerifier(
+        firebaseAuth,
+        recaptchaContainer,
+        {
+          size: "invisible"
+        }
+      );
 
+      recaptchaVerifierRef.current = recaptchaVerifierInstance;
+    } else {
+      console.error("Recaptcha container not found");
+    }
+  }
 
     return () => {
 
@@ -59,12 +78,10 @@ function Auth() {
       }
     }
 
-  }, []);
-
+  }, [shouldRenderRecaptcha]);
 
 
   //send OTP function
-
   const sendOtp = () => {
     signInWithPhoneNumber(
       firebaseAuth,
@@ -98,6 +115,7 @@ function Auth() {
         user.getIdToken().then((idToken) => {
           authenticateWithBackend(idToken, user.phoneNumber);
         });
+        console.log(code, 'code');
       })
       . catch( (error) =>{
         if (error.response) {
@@ -112,11 +130,11 @@ function Auth() {
   };
 
   const handleResendOTP = () => {
-    setCode(code)
+    setCode("")
     setResendOtp(true);
     sendOtp();
 
-    let countdown = 20;
+    let countdown = 40;
     const countdownInterval = setInterval(() => {
       countdown -= 1;
       setCountDown(countdown);
@@ -129,7 +147,8 @@ function Auth() {
         //sendOtp();
       }
 
-    }, 1000)
+    }, 2000)
+
   };
 
 
@@ -177,6 +196,7 @@ function Auth() {
         phoneNumber,
         location,
         selectedGrade,
+        prepCourse,
         schoolStudent
       });
       if (response.data.success) {
@@ -296,7 +316,7 @@ function Auth() {
                 {countDown} Seconds
               </button>
             </div>
-
+            <div id="recaptcha-container"></div>
           </div>
 
           <button onClick={verifyOtp}
@@ -373,17 +393,20 @@ function Auth() {
                 <option value="false">false</option>
               </select>
 
-              <label htmlFor="exam" className="text-xs text-gray-600">Are you preparing for competitive exams? <small className='text-red-500'>*</small></label>
+              <label htmlFor="PrepCourse" className="text-xs text-gray-600">Are you preparing for competitive exams? <small className='text-red-500'>*</small></label>
               <select
-                name="location"
-                value={exam}
-                onChange={(e)=>setExam(e.target.value)}
-                id="select1"
-                className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
-                <option value=""></option>
-                <option value="yes">Yes</option>
-                <option value="CTA">CTA</option>
-                <option value="CLAT">CLAT</option>
+                name="prepCourse"
+                id="select"
+                value={prepCourse}
+                onChange={(e)=>setPrepCourse(e.target.value)}
+                className="w-full py-2 text-black px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12"
+                >
+                <option key="" value=""></option>
+                  {course.map((courses) => (
+                  <option key={courses._id} value={courses._id}>
+                    {courses.name}
+                  </option>
+                ))}
               </select>
 
               <div className='w-full flex flex-row justify-between items-center'>
@@ -403,7 +426,7 @@ function Auth() {
                 </div>
 
                 <div>
-                  <label htmlFor="exam" className="text-xs text-gray-600">Grade <small className='text-red-500'>*</small></label>
+                  <label htmlFor="grade" className="text-xs text-gray-600">Grade <small className='text-red-500'>*</small></label>
                   <select
                     name="grade"
                     id="select1"
