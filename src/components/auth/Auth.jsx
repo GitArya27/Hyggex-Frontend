@@ -25,16 +25,28 @@ function Auth() {
   const [selectedGrade, setSelectedGrade] = useState();
   const [status, setStatus] = useState("initial"); // initial, otpSent, newUser
   const recaptchaVerifierRef = useRef(null);
-  const [countDown, setCountDown] = useState(40);
+  //const [countDown, setCountDown] = useState(40);
   const [resendOtp, setResendOtp] = useState(false);
   const [uid, setUid] = useState(null);
   const [course, setCourse] = useState([]);
   const [prepCourse, setPrepCourse] = useState();
-  const [shouldRenderRecaptcha, setShouldRenderRecaptcha] = useState(true);
+  const [otp, setOtp] = useState('');
+  const [isOtpExpired, setIsOtpExpired] = useState(false);
+  const [countdown, setCountdown] = useState(50);
 
 
 
   useEffect(() => {
+
+    const countdownInterval = setInterval(() => {
+      if (countdown > 0) {
+        setCountdown((prevCountdown) => prevCountdown - 1);
+      } else {
+        setIsOtpExpired(true);
+        clearInterval(countdownInterval);
+      }
+    }, 1000);
+
     //fetching grades
     fetch('https://hyggexbackend-d2b0.onrender.com/api/v1/user/getGrade')
       .then((response) => response.json())
@@ -53,7 +65,7 @@ function Auth() {
       })
       .catch((err) => console.log(err, 'courses not found'));
 
-    if (shouldRenderRecaptcha) {
+
     const recaptchaContainer = document.getElementById('recaptcha-container');
 
     if (recaptchaContainer) {
@@ -61,24 +73,20 @@ function Auth() {
         firebaseAuth,
         recaptchaContainer,
         {
-          size: "invisible"
+            size: "invisible"
         }
       );
 
       recaptchaVerifierRef.current = recaptchaVerifierInstance;
+
     } else {
       console.error("Recaptcha container not found");
     }
-  }
 
-    return () => {
+    return () => clearInterval(countdownInterval);
 
-      if (recaptchaVerifierRef.current) {
-        recaptchaVerifierRef.current.clear(); // Cleanup on component unmount
-      }
-    }
+  }, [countdown]);
 
-  }, [shouldRenderRecaptcha]);
 
 
   //send OTP function
@@ -103,7 +111,10 @@ function Auth() {
           console.error("Error sending OTP:", error);
           //alert("otp not send")
           toast.error('Error sending OTP, check and try again');
-    } });
+        }
+      });
+    setCountdown(50);
+    setIsOtpExpired(false);
   };
 
   const verifyOtp = () => {
@@ -130,26 +141,21 @@ function Auth() {
   };
 
   const handleResendOTP = () => {
-    setCode("")
-    setResendOtp(true);
-    sendOtp();
+  setCode(""); // Clear the code when resending OTP
+  setResendOtp(true);
+  sendOtp();
 
-    let countdown = 40;
-    const countdownInterval = setInterval(() => {
-      countdown -= 1;
-      setCountDown(countdown);
+  let countdown = 49; // Start countdown from 49
+  const countdownInterval = setInterval(() => {
+    countdown -= 1;
+    setCountdown(countdown);
 
-      if (countdown === 0) {
-        console.log('before',countdown);
-        clearInterval(countdownInterval);
-        console.log('after',countdown);
-        setResendOtp(false);
-        //sendOtp();
-      }
-
-    }, 2000)
-
-  };
+    if (countdown === 0) {
+      clearInterval(countdownInterval);
+      setResendOtp(false);
+    }
+  }, 2000); // Adjust interval duration if needed
+};
 
 
   const contextValue = useMemo(() => ({ sendOtp }), [sendOtp]);
@@ -267,9 +273,16 @@ function Auth() {
                 className="mt-4 flex justify-center text-xs m-auto md:mt-4 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
                   Continue
               </button>
+                  {isOtpExpired && (
+        <div>
+          <p>OTP has expired. Resend OTP?</p>
+          <button onClick={handleResendOTP}>Resend OTP</button>
+        </div>
+      )}
 
+      {!isOtpExpired && <p>Time remaining: {countdown} seconds</p>}
               <div id="recaptcha-container"></div>
-
+                  <input type="text" />
               </div>
           </div>
         </>
@@ -313,10 +326,10 @@ function Auth() {
                 onClick={handleResendOTP}
                 className={`text-blue-600 text-[0.8rem] text-right ${resendOtp ? 'pointer-events-none' : ''}`}
               >
-                {countDown} Seconds
+                {countdown} Seconds
               </button>
             </div>
-            <div id="recaptcha-container"></div>
+
           </div>
 
           <button onClick={verifyOtp}
