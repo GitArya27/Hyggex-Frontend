@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import 'font-awesome/css/font-awesome.min.css';
-import './TestPage.css'; 
+import "font-awesome/css/font-awesome.min.css";
+import "./TestPage.css";
 import { checklist } from "../../../constants/url";
 import { idea } from "../../../constants/url";
 import { book } from "../../../constants/url";
 
-
 function TestPage() {
   const [sliderValue, setSliderValue] = useState(0);
   const [selectedQuestion, setSelectedQuestion] = useState(1);
-  const [answers, setAnswers] = useState(new Array(5).fill(null))
+  const [answers, setAnswers] = useState(new Array(60).fill(null));
+  const [currentPage, setCurrentPage] = useState(1);
 
   const handleSliderChange = (event) => {
     setSliderValue(event.target.value);
@@ -23,44 +23,59 @@ function TestPage() {
     const updatedAnswers = [...answers];
     updatedAnswers[questionNumber - 1] = answer;
     setAnswers(updatedAnswers);
-      if (questionNumber < questions.length) {
-        setSelectedQuestion(questionNumber + 1);
-      }
-    };
+  };
 
-  const questions = [
+  const initialQuestions = [
     "How often do you struggle to understand what you're reading during your study sessions?",
-    "How often do you have to re-read sentences or paragraphs to understand them?",
-    "How often do you find it difficult to summarize what you've read?",
-    "How often do you struggle to identify the main points in a passage or chapter?",
-    "How often do you find it hard to make predictions or inferences based on what you're reading?",
+    "How often do you struggle to understand what you're reading during your study sessions?",
+    "How often do you struggle to understand what you're reading during your study sessions?",
+    "How often do you struggle to understand what you're reading during your study sessions?",
+    "How often do you struggle to understand what you're reading during your study sessions?",
   ];
+
+  const questionsPerPage = 5;
+  const firstQuestion = (currentPage - 1) * questionsPerPage;
+
+  const questions = initialQuestions.map((question, index) => ({
+    text: question,
+    number: firstQuestion + index + 1,
+  }));
 
   return (
     <div>
-      <div className="head">
+   <div className="head">
         <h1 className="h1">Free Reading Assessment</h1>
         <p>HyggeX Assessment Explorer &reg;</p>
       </div>
+
       <div className="box1">
         <img src={checklist} alt="" />
         <div className="one">
           <h6>Complete the Assessment</h6>
-          <p>Engage sincerely and respond accurately to unveil your reading profile.</p>
+          <p>
+            Engage sincerely and respond accurately to unveil your reading
+            profile.
+          </p>
         </div>
       </div>
       <div className="box2">
         <img src={idea} alt="" />
         <div className="one">
           <h6>View Detailed Insights</h6>
-          <p>Explore the impact of comprehension, speed, retention, anxiety, focus, and fatigue on your reading.</p>
+          <p>
+            Explore the impact of comprehension, speed, retention, anxiety,
+            focus, and fatigue on your reading.
+          </p>
         </div>
       </div>
       <div className="box3">
         <img src={book} alt="" />
         <div className="one">
           <h6>Unlock Your Reading Potential</h6>
-          <p>Advance into the proficient reader you aim to be with your optional Premium Suite.</p>
+          <p>
+            Advance into the proficient reader you aim to be with your optional
+            Premium Suite.
+          </p>
         </div>
       </div>
       <div className="line">
@@ -73,47 +88,53 @@ function TestPage() {
             className="slider"
             onChange={handleSliderChange}
           />
+          <div id="slider-value">{sliderValue}%</div>
         </div>
-        <div id="slider-value">{sliderValue}%</div>
       </div>
       <div>
         <h6 className="Read">Reading Comprehension</h6>
-        <hr></hr>
-        {questions.map((question, index) => (
+        <hr />
+        {questions.map((question) => (
           <Question
-            key={index}
-            number={index + 1}
-            text={question}
-            selected={index + 1 === selectedQuestion}
+            key={question.number}
+            number={question.number}
+            text={question.text}
+            selected={question.number === selectedQuestion}
             handleQuestionChange={handleQuestionChange}
             handleAnswerSelect={handleAnswerSelect}
-            answer={answers[index]}
+            answer={answers[question.number - 1]}
           />
         ))}
       </div>
-      <div className="next-btn">
-        <button className="next" onClick={() => handleQuestionChange(selectedQuestion + 1)}>
-          Next <i className="fas fa-arrow-right"></i>
-        </button>
+      <div className="button-container">
+        {selectedQuestion <= 60 && (
+          <button
+            className="next"
+            onClick={() => setCurrentPage(currentPage + 1)}
+          >
+            Next <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+          </button>
+        )}
       </div>
     </div>
   );
 }
 
-function Question({ number, text, selected, handleQuestionChange, handleAnswerSelect, answer }) {
+function Question({ number, text, handleAnswerSelect, answer }) {
   return (
-    <div className={` ${!selected ? 'blur' : ''}`}>
+    <div>
       <h5 className="question">
         {number}. {text}
       </h5>
       <div className="radio-btn">
-      <input
+        <input
           type="radio"
           id={`Never${number}`}
           name={`choose${number}`}
           value="Never"
           checked={answer === "Never"}
           onChange={() => handleAnswerSelect(number, "Never")}
+          className="never-input"
         />
         <label htmlFor={`Never${number}`}>Never</label>
 
@@ -124,6 +145,7 @@ function Question({ number, text, selected, handleQuestionChange, handleAnswerSe
           value="Rarely"
           checked={answer === "Rarely"}
           onChange={() => handleAnswerSelect(number, "Rarely")}
+          className="rarely-input"
         />
         <label htmlFor={`Rarely${number}`}>Rarely</label>
 
@@ -134,8 +156,12 @@ function Question({ number, text, selected, handleQuestionChange, handleAnswerSe
           value="Sometimes"
           checked={answer === "Sometimes"}
           onChange={() => handleAnswerSelect(number, "Sometimes")}
+          className="sometimes-input"
         />
-        <label htmlFor={`Sometimes${number}`}>Sometimes</label>
+        <label className="sometimes" htmlFor={`Sometimes${number}`}>
+          Sometimes
+        </label>
+
         <input
           type="radio"
           id={`Often${number}`}
@@ -143,8 +169,11 @@ function Question({ number, text, selected, handleQuestionChange, handleAnswerSe
           value="Often"
           checked={answer === "Often"}
           onChange={() => handleAnswerSelect(number, "Often")}
+          className="often-input"
         />
-        <label htmlFor={`Often${number}`}>Often</label>
+        <label className="often" htmlFor={`Often${number}`}>
+          Often
+        </label>
 
         <input
           type="radio"
@@ -153,9 +182,9 @@ function Question({ number, text, selected, handleQuestionChange, handleAnswerSe
           value="Always"
           checked={answer === "Always"}
           onChange={() => handleAnswerSelect(number, "Always")}
+          className="always-input"
         />
         <label htmlFor={`Always${number}`}>Always</label>
-
       </div>
     </div>
   );
