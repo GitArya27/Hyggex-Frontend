@@ -5,7 +5,6 @@ import { data } from 'autoprefixer';
 
 const Product = () => {
     const[active, setActive] = useState(0);
-    console.log(active);
   return (
     <section className='mt-4 bg-[#F9F9F9]' id='section'>
       <div className=' flex  md:flex-row xs:flex-col xs:ml-6 md:pl-0'>

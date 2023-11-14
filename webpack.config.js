@@ -9,6 +9,13 @@ module.exports = {
         publicPath: '/'
     },
     devServer: {
+         client:{
+            overlay: {
+                errors: true,
+                warnings: false,
+                runtimeErrors: false,
+              },
+         },
         compress: true,
         historyApiFallback: true,
         static: {  // Instead of contentBase, now it's named `static`
