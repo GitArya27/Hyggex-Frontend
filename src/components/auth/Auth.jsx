@@ -46,21 +46,22 @@ function Auth() {
   }, [seconds]);
 
 
-useEffect(()=>{
-  if (status === "initial") {
-    setupRecaptcha();
-  }
+  useEffect(()=>{
+    if (status === "initial") {
+     setupRecaptcha();
+    }
 
   }, [status]);
-const setupRecaptcha = ()=>{
-  const recaptchaContainer = document.getElementById('recaptcha-container');
+
+  const setupRecaptcha = ()=>{
+    const recaptchaContainer = document.getElementById('recaptcha-container');
 
     if (recaptchaContainer) {
       const recaptchaVerifierInstance = new RecaptchaVerifier(
         firebaseAuth,
         recaptchaContainer,
         {
-            size: "invisible",
+          size: "invisible",
 
         }
       );
@@ -71,7 +72,7 @@ const setupRecaptcha = ()=>{
       console.error("Recaptcha container not found");
     }
 
-}
+  }
 
   useEffect(() => {
     fetch('https://hyggexbackend-d2b0.onrender.com/api/v1/user/getGrade')
@@ -97,11 +98,11 @@ const setupRecaptcha = ()=>{
 
   //send OTP function
   const sendOtp = () => {
-  signInWithPhoneNumber(
-    firebaseAuth,
-    phoneNumber,
-    recaptchaVerifierRef.current
-  )
+    signInWithPhoneNumber(
+      firebaseAuth,
+      phoneNumber,
+      recaptchaVerifierRef.current
+    )
     .then((confirmationResult) => {
       window.confirmationResult = confirmationResult;
       toast.success('OTP has been sent');
@@ -117,7 +118,7 @@ const setupRecaptcha = ()=>{
         toast.error('Error sending OTP, check and try again');
       }
     });
-};
+  };
 
   const verifyOtp = () => {
     const confirmationResult = window.confirmationResult;
