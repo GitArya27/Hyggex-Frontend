@@ -279,17 +279,16 @@ function Auth() {
               className="px-3 py-3 border rounded-md w-[270px] sm:w-[300px] mb-2 text-[0.8rem] h-10 ms:h-8"
             />
             <div id="recaptcha-container"></div>
-            <div className='flex justify-end items-end'>
-              <div className="countdown-text flex justify-end text-[0.7rem]">
-                {seconds<1?'':  <p className='mr-2 text-gray-500 text-end text-[0.7rem]'>Resend OTP in:
+            <div className='flex justify-end items-right text-right float-right'>
+              <div className="countdown-text flex justify-right  text-gray-500 float-right text-[0.7rem]">
+                {seconds<1?'Resend OTP in:  ':  <p className='ml-8 text-gray-500 text-right text-[0.7rem]'>Resend OTP in:
                       <span className='text-blue-600 font'>{` ${seconds} seconds `}</span>
                   </p>}
-
 
                 <button
                   className='text-[0.8rem]'
                   disabled={seconds > 0 }
-                  style={{color: seconds > 0? "#fff" : "#4c51bf","fontWeight":"400"}}
+                  style={{color: seconds > 0? "#fff" : "#4c51bf"}}
                   onClick={sendOtp}
                 >
                   45  seconds
