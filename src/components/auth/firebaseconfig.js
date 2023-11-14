@@ -8,10 +8,13 @@ const firebaseConfig = {
   storageBucket: "hyggex-f50b8.appspot.com",
   messagingSenderId: "142951014931",
   appId: "1:142951014931:web:d0aef43ae86edf5fa515e6",
-  appVerificationDisabledForTesting : true
 };
 const apps = initializeApp(firebaseConfig);
 const auth = getAuth(apps);
+
+// Set appVerificationDisabledForTesting only if needed for testing
+// auth.settings.appVerificationDisabledForTesting = true;
+
 
 export { auth };
 
