@@ -15,37 +15,46 @@ import { auth as firebaseAuth } from "./firebaseconfig"; // This is your custom 
 
 function Auth() {
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [code, setCode] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [location, setLocation] = useState("");
   const [grade, setGrade] = useState([]);
   const [schoolStudent, setSchoolStudent] = useState();
-  const [exam, setExam] = useState("");
   const [selectedGrade, setSelectedGrade] = useState();
   const [status, setStatus] = useState("initial"); // initial, otpSent, newUser
   const recaptchaVerifierRef = useRef(null);
-  //const [countDown, setCountDown] = useState(40);
   const [resendOtp, setResendOtp] = useState(false);
   const [uid, setUid] = useState(null);
   const [course, setCourse] = useState([]);
   const [prepCourse, setPrepCourse] = useState();
   const [otp, setOtp] = useState('');
-  const [isOtpExpired, setIsOtpExpired] = useState(false);
-  const [countdown, setCountdown] = useState(50);
+  //const [isOtpExpired, setIsOtpExpired] = useState(false);
+  //const [countdown, setCountdown] = useState(50);
+  const [minutes, setMinutes] = useState(1);
+  const [seconds, setSeconds] = useState(30);
 
 
 
   useEffect(() => {
 
-    const countdownInterval = setInterval(() => {
-      if (countdown > 0) {
-        setCountdown((prevCountdown) => prevCountdown - 1);
-      } else {
-        setIsOtpExpired(true);
-        clearInterval(countdownInterval);
+    const interval = setInterval(() => {
+
+      if (seconds > 0) {
+        setSeconds(seconds - 1);
       }
-    }, 1000);
+
+      if (seconds === 0) {
+
+        if (minutes === 0) {
+          clearInterval(interval);
+
+        } else {
+          setSeconds(59);
+          setMinutes(minutes - 1);
+        }
+      };
+    }, 1000)
+
 
     //fetching grades
     fetch('https://hyggexbackend-d2b0.onrender.com/api/v1/user/getGrade')
@@ -83,9 +92,9 @@ function Auth() {
       console.error("Recaptcha container not found");
     }
 
-    return () => clearInterval(countdownInterval);
+    return () => clearInterval(interval);
 
-  }, [countdown]);
+  }, [seconds]);
 
 
 
@@ -113,20 +122,18 @@ function Auth() {
           toast.error('Error sending OTP, check and try again');
         }
       });
-    setCountdown(50);
-    setIsOtpExpired(false);
   };
 
   const verifyOtp = () => {
     const confirmationResult = window.confirmationResult;
     confirmationResult
-      .confirm(code)
+      .confirm(otp)
       .then((result) => {
         const user = result.user;
         user.getIdToken().then((idToken) => {
           authenticateWithBackend(idToken, user.phoneNumber);
         });
-        console.log(code, 'code');
+        console.log(otp, 'otp');
       })
       . catch( (error) =>{
         if (error.response) {
@@ -140,22 +147,27 @@ function Auth() {
     })
   };
 
-  const handleResendOTP = () => {
-  setCode(""); // Clear the code when resending OTP
-  setResendOtp(true);
-  sendOtp();
+  const ResendOtp = () => {
+    setMinutes(1);
+    setSeconds(30);
+    sendOtp();
+  }
+  /*const handleResendOTP = () => {
+    setOtp(""); // Clear the code when resending OTP
+    setResendOtp(true);
+    sendOtp();
 
-  let countdown = 49; // Start countdown from 49
-  const countdownInterval = setInterval(() => {
-    countdown -= 1;
-    setCountdown(countdown);
+    let countdown = 49; // Start countdown from 49
+    const countdownInterval = setInterval(() => {
+      countdown -= 1;
+      setCountdown(countdown);
 
-    if (countdown === 0) {
-      clearInterval(countdownInterval);
-      setResendOtp(false);
-    }
-  }, 2000); // Adjust interval duration if needed
-};
+      if (countdown === 0) {
+        clearInterval(countdownInterval);
+        setResendOtp(false);
+      }
+    }, 2000); // Adjust interval duration if needed
+  };*/
 
 
   const contextValue = useMemo(() => ({ sendOtp }), [sendOtp]);
@@ -273,16 +285,16 @@ function Auth() {
                 className="mt-4 flex justify-center text-xs m-auto md:mt-4 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
                   Continue
               </button>
-                  {isOtpExpired && (
-        <div>
-          <p>OTP has expired. Resend OTP?</p>
-          <button onClick={handleResendOTP}>Resend OTP</button>
-        </div>
-      )}
+                  {/*isOtpExpired && (
+                      <div>
+                        <p>OTP has expired. Resend OTP?</p>
+                        <button onClick={handleResendOTP}>Resend OTP</button>
+                      </div>
+                    )*/}
 
-      {!isOtpExpired && <p>Time remaining: {countdown} seconds</p>}
-              <div id="recaptcha-container"></div>
-                  <input type="text" />
+                    {/*!isOtpExpired && <p>Time remaining: {countdown} seconds</p>*/}
+                  <div id="recaptcha-container"></div>
+                   <input type="text" />
               </div>
           </div>
         </>
@@ -314,20 +326,38 @@ function Auth() {
             <h3 className="text-gray-500 text-[0.8rem] mb-0 text-left">Enter OTP</h3>
             <input
               type="text"
-              name="code"
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
+              name="otp"
+              value={otp}
+              onChange={(e) => setOtp(e.target.value)}
               placeholder="Enter your OTP"
               className="px-3 py-3 border rounded-md w-[270px] sm:w-[300px] mb-2 text-[0.8rem] h-10 ms:h-8"
             />
+            <div id="recaptcha-container"></div>
             <div className='flex justify-end items-end'>
-              <span className='text-[0.8rem] text-gray-500'>Resend OTP in: </span>
+              {/*<span className='text-[0.8rem] text-gray-500'>Resend OTP in: </span>
               <button
-                onClick={handleResendOTP}
+                onClick=""
                 className={`text-blue-600 text-[0.8rem] text-right ${resendOtp ? 'pointer-events-none' : ''}`}
               >
                 {countdown} Seconds
-              </button>
+              </button>*/}
+              <div className="countdown-text">
+                {seconds > 0 || minutes > 0 ? (
+                  <p>Resend OTP in: {minutes < 10 ? `0${minutes}` : minutes}:
+                    {seconds < 10 ? `0${seconds}` : seconds}
+                  </p>
+                ) : (
+                  <p>Resend OTP in: ?</p>
+                )}
+
+                <button
+                  disabled={seconds > 0 || minutes > 0}
+                  style={{color: seconds > 0 || minutes > 0 ? "#DFE3E8" : "#FF5630",}}
+                  onClick={ResendOtp}
+                >
+                  Resend OTP
+                </button>
+            </div>
             </div>
 
           </div>
