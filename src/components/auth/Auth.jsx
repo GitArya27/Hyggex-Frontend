@@ -46,7 +46,7 @@ function Auth() {
   }, [seconds]);
 
 
-useEffect(()=>{
+  useEffect(()=>{
     setupRecaptcha();
 
   }, [status]);
@@ -179,7 +179,6 @@ useEffect(()=>{
         } else if (response.data.status === "newUser") {
           setStatus("newUser");
           setUid(response.data.uid);  // <-- Store the UID here
-          //alert('You cannot Sign in, Sign up first.')
           toast.error('You cannot login, sign Up first')
         }
       }
@@ -207,14 +206,12 @@ useEffect(()=>{
         schoolStudent
       });
       if (response.data.success) {
-        //alert("Registered Successfully!");
         toast.success("Registered Successfully!")
         window.location.href="/SignIn"
       }
     } catch (error) {
       if (error.response) {
         console.error("Backend responded with:", error.response.data);
-        //alert('registration failed')
         toast.error(`registration failed`)
       } else {
         console.error("Error during authentication:", error);
@@ -254,14 +251,6 @@ useEffect(()=>{
                 className="mt-4 flex justify-center text-xs m-auto md:mt-4 bg-blue-600 text-white py-2 px-4 rounded-full hover:bg-blue-600">
                   Continue
               </button>
-                  {/*isOtpExpired && (
-                      <div>
-                        <p>OTP has expired. Resend OTP?</p>
-                        <button onClick={handleResendOTP}>Resend OTP</button>
-                      </div>
-                    )*/}
-
-                    {/*!isOtpExpired && <p>Time remaining: {countdown} seconds</p>*/}
                   <div id="recaptcha-container"></div>
                    <input type="text" />
               </div>
@@ -291,26 +280,19 @@ useEffect(()=>{
             />
             <div id="recaptcha-container"></div>
             <div className='flex justify-end items-end'>
-              {/*<span className='text-[0.8rem] text-gray-500'>Resend OTP in: </span>
-              <button
-                onClick=""
-                className={`text-blue-600 text-[0.8rem] text-right ${resendOtp ? 'pointer-events-none' : ''}`}
-              >
-                {countdown} Seconds
-              </button>*/}
-              <div className="countdown-text flex ">
-                {seconds<1?'':<p className='mr-1 text-[0.6rem]'>Resend OTP
-                      {`:${seconds} sec `}
+              <div className="countdown-text flex justify-end text-[0.7rem]">
+                {seconds<1?'':  <p className='mr-2 text-gray-500 text-end text-[0.7rem]'>Resend OTP in:
+                      <span className='text-blue-600 font'>{` ${seconds} seconds `}</span>
                   </p>}
 
 
                 <button
-                  className='text-[0.6rem]'
+                  className='text-[0.8rem]'
                   disabled={seconds > 0 }
-                  style={{color: seconds > 0? "#fff" : "#4c51bf",}}
+                  style={{color: seconds > 0? "#fff" : "#4c51bf","fontWeight":"400"}}
                   onClick={sendOtp}
                 >
-                  Resend OTP
+                  45  seconds
                 </button>
             </div>
             </div>
