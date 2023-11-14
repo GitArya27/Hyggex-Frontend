@@ -30,8 +30,8 @@ function Auth() {
   const [otp, setOtp] = useState('');
   //const [isOtpExpired, setIsOtpExpired] = useState(false);
   //const [countdown, setCountdown] = useState(50);
-  const [minutes, setMinutes] = useState(1);
-  const [seconds, setSeconds] = useState(30);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(20);
 
 
 
@@ -148,8 +148,8 @@ function Auth() {
   };
 
   const ResendOtp = () => {
-    setMinutes(1);
-    setSeconds(30);
+    setMinutes(0);
+    setSeconds(20);
     sendOtp();
   }
   /*const handleResendOTP = () => {
@@ -352,7 +352,7 @@ function Auth() {
 
                 <button
                   disabled={seconds > 0 || minutes > 0}
-                  style={{color: seconds > 0 || minutes > 0 ? "#DFE3E8" : "#FF5630",}}
+                  style={{color: seconds > 0 || minutes > 0 ? "#DFE3E8" : "#4a90e2"}}
                   onClick={ResendOtp}
                 >
                   Resend OTP
