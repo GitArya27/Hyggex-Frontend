@@ -47,9 +47,7 @@ function Auth() {
 
     
 useEffect(()=>{
-  if (status === "initial") {
     setupRecaptcha();
-  }
 
   }, [status]);
 const setupRecaptcha = ()=>{
