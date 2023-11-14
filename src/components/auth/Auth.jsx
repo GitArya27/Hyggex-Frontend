@@ -46,10 +46,8 @@ function Auth() {
   }, [seconds]);
 
 
-  useEffect(()=>{
-    if (status === "initial") {
-     setupRecaptcha();
-    }
+useEffect(()=>{
+    setupRecaptcha();
 
   }, [status]);
 
