@@ -235,7 +235,7 @@ function Auth() {
 
           <div className="w-[100%] items-center">
             {/*===========Enter phone number form==============*/}
-                       <div className="sm:w-[95%] w-[80%] sm:px-12 px-6 mx-auto">
+            <div className="sm:w-[95%] w-[80%] sm:px-12 px-6 mx-auto">
               <label htmlFor="mobile number" className="text-xs font-semibold text-blue-600 leading-7">Mobile Number</label>
               <div className="sm:mb-8 mb-12 h-12">
                 <PhoneInput
@@ -309,7 +309,7 @@ function Auth() {
                 <button
                   className='text-[0.6rem]'
                   disabled={seconds > 0 }
-                  style={{color: seconds > 0? "#DFE3E8" : "#FF5630",}}
+                  style={{color: seconds > 0? "#fff" : "#4c51bf",}}
                   onClick={sendOtp}
                 >
                   Resend OTP

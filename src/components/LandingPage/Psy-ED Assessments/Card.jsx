@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { StrikeThrough, Svg } from "./CardSvg";
 
-
 function Card({ data }) {
-  const [currentIndex, setCurrentIndex] = useState(0); 
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : 0));
@@ -16,7 +15,7 @@ function Card({ data }) {
   };
 
   const handleMiddle = () => {
-    setCurrentIndex(1); 
+    setCurrentIndex(1);
   };
 
   return (
@@ -29,7 +28,7 @@ function Card({ data }) {
         }}
       >
         {data.map((item, index) => (
-          <div 
+          <div
             key={item.id}
             className="md:h-[15.8rem] h-[17.8rem] ml-[4.68rem] rounded-lg flex min-w-[calc(100%/5)]  md:min-w-[calc(25%-0.25rem)] flex-none bg-white "
           >
@@ -39,9 +38,9 @@ function Card({ data }) {
               className="w-36 h-24 object-cover"
             />
             </div>
- 
+
             <div>
-              <div className="w-[15.5rem] mt-[2rem] h-[2.81rem]">  
+              <div className="w-[15.5rem] mt-[2rem] h-[2.81rem]">
               <h2 className="text-[1.2rem] ">{item.title}</h2>
               </div>
               <ul className="my-[1.2rem]   text-[0.81rem]">
