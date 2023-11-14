@@ -30,8 +30,8 @@ function Auth() {
   const [otp, setOtp] = useState('');
   //const [isOtpExpired, setIsOtpExpired] = useState(false);
   //const [countdown, setCountdown] = useState(50);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(20);
+  const [minutes, setMinutes] = useState(1);
+  const [seconds, setSeconds] = useState(30);
 
 
 
@@ -148,8 +148,8 @@ function Auth() {
   };
 
   const ResendOtp = () => {
-    setMinutes(0);
-    setSeconds(20);
+    setMinutes(1);
+    setSeconds(30);
     sendOtp();
   }
   /*const handleResendOTP = () => {
@@ -352,7 +352,7 @@ function Auth() {
 
                 <button
                   disabled={seconds > 0 || minutes > 0}
-                  style={{color: seconds > 0 || minutes > 0 ? "#DFE3E8" : "#4a90e2"}}
+                  style={{color: seconds > 0 || minutes > 0 ? "#DFE3E8" : "#FF5630",}}
                   onClick={ResendOtp}
                 >
                   Resend OTP
@@ -416,13 +416,6 @@ function Auth() {
                 placeholder="Samchristy98879@gmail.com"
                 className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12"
               />
-
-              <label htmlFor="school" className="text-xs text-gray-600">Are you in school? <small className='text-red-500'>*</small></label>
-              <select name="school" id="select1" className="w-full py-2 px-3 border rounded-md mb-4 text-xs h-10 md:h-8 xs:h-12">
-                <option value=""></option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-              </select>
 
               <label htmlFor="schoolStudent" className="text-xs text-gray-600">School Student <small className='text-red-500'>*</small></label>
               <select
