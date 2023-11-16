@@ -1,15 +1,19 @@
-import React, { useState } from "react";
 import "font-awesome/css/font-awesome.min.css";
 import "./TestPage.css";
+
+import React, { useEffect, useState } from "react";
+
+import axios from "axios";
+import { book } from "../../../constants/url";
 import { checklist } from "../../../constants/url";
 import { idea } from "../../../constants/url";
-import { book } from "../../../constants/url";
 
-function TestPage() {
+function TestPage({testName}) {
   const [sliderValue, setSliderValue] = useState(0);
   const [selectedQuestion, setSelectedQuestion] = useState(1);
   const [answers, setAnswers] = useState(new Array(60).fill(null));
   const [currentPage, setCurrentPage] = useState(1);
+  const [quest, setQuest] = useState([]);
 
   const handleSliderChange = (event) => {
     setSliderValue(event.target.value);
@@ -40,6 +44,20 @@ function TestPage() {
     text: question,
     number: firstQuestion + index + 1,
   }));
+
+
+  useEffect(() => {
+    // Fetch data from the API
+    fetch('https://hyggexbackend-d2b0.onrender.com/api/v1/test/tests/Reading%20Assessment%20Test')
+      .then(response => response.json())
+      .then(data => {
+        setQuest(data.quest);
+        console.log(data.quest);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
 
   return (
     <div>
@@ -112,7 +130,7 @@ function TestPage() {
             className="next"
             onClick={() => setCurrentPage(currentPage + 1)}
           >
-            Next <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+            Next <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
           </button>
         )}
       </div>

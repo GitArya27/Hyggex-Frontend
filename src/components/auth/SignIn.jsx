@@ -3,6 +3,7 @@ import { circle, circle1, circle2, logo1, slide1, slide2, slide3 } from '../../c
 import Auth from './Auth'
 import AuthLeft from './AuthLeft'
 import { Link } from 'react-router-dom'
+import Notification from './notification'
 import PhoneInput from 'react-phone-input-2'
 import React from 'react'
 
@@ -39,8 +40,10 @@ const SignIn = () => {
             <Auth />
             <span id="link-span" className="text-gray-600 flex items-center justify-center text-center mx-auto text-xs">
                 Don't have an account?   <Link id="link-to-register" to="/signUp" className="text-center no-underline text-xs text-blue-600 font-medium">  Sign Up</Link>
-               </span>
+            </span>
+
           </div>
+
 
         </div>
       </div>
