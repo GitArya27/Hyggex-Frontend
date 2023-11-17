@@ -20,7 +20,7 @@ function TestPage() {
     setSliderValue(event.target.value);
   };
 
-  /*const handleQuestionChange = (questionNumber) => {
+  const handleQuestionChange = (questionNumber) => {
     setSelectedQuestion(questionNumber);
   };
 
@@ -44,7 +44,7 @@ function TestPage() {
   const Question = initialQuestions.map((question, index) => ({
     text: question,
     number: firstQuestion + index + 1,
-  }));*/
+  }));
 
   //my codes here
   useEffect(() => {
