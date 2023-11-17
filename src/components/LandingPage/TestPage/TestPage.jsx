@@ -8,18 +8,19 @@ import { book } from "../../../constants/url";
 import { checklist } from "../../../constants/url";
 import { idea } from "../../../constants/url";
 
-function TestPage({testName}) {
+function TestPage() {
   const [sliderValue, setSliderValue] = useState(0);
   const [selectedQuestion, setSelectedQuestion] = useState(1);
   const [answers, setAnswers] = useState(new Array(60).fill(null));
   const [currentPage, setCurrentPage] = useState(1);
-  const [quest, setQuest] = useState([]);
+  const [sections, setSections] = useState([]);
+  const [options, setOptions] = useState([]);
 
   const handleSliderChange = (event) => {
     setSliderValue(event.target.value);
   };
 
-  const handleQuestionChange = (questionNumber) => {
+  /*const handleQuestionChange = (questionNumber) => {
     setSelectedQuestion(questionNumber);
   };
 
@@ -37,27 +38,52 @@ function TestPage({testName}) {
     "How often do you struggle to understand what you're reading during your study sessions?",
   ];
 
-  const questionsPerPage = 5;
-  const firstQuestion = (currentPage - 1) * questionsPerPage;
+  const questionPerPage = 5;
+  const firstQuestion = (currentPage - 1) * questionPerPage;
 
-  const questions = initialQuestions.map((question, index) => ({
+  const Question = initialQuestions.map((question, index) => ({
     text: question,
     number: firstQuestion + index + 1,
-  }));
+  }));*/
 
-
+  //my codes here
   useEffect(() => {
-    // Fetch data from the API
-    fetch('https://hyggexbackend-d2b0.onrender.com/api/v1/test/tests/Reading%20Assessment%20Test')
-      .then(response => response.json())
-      .then(data => {
-        setQuest(data.quest);
-        console.log(data.quest);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          'https://hyggexbackend-d2b0.onrender.com/api/v1/test/tests/Reading%20Assessment%20Test'
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log(data);
+        setSections(data.section || []);
+        setOptions(data.options || []);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchData();
   }, []);
+
+  const questionsPerPage = 5;
+  const indexOfLastQuestion = currentPage * questionsPerPage;
+  const indexOfFirstQuestion = indexOfLastQuestion - questionsPerPage;
+  const currentQuestions = sections.slice(indexOfFirstQuestion, indexOfLastQuestion);
+
+  const handleOption = (questionIndex, optionIndex) => {
+    setSections(prevSections => {
+      const updatedSections = [...prevSections];
+      updatedSections[questionIndex].selectedOption = optionIndex;
+      return updatedSections;
+    });
+  };
+
+  const paginate = increment => setCurrentPage(prevPage => prevPage + increment);
+
+
 
   return (
     <div>
@@ -111,8 +137,51 @@ function TestPage({testName}) {
       </div>
       <div>
         <h6 className="Read">Reading Comprehension</h6>
-        <hr />
-        {questions.map((question) => (
+        <hr /><br />
+        {sections.length > 0 &&
+        sections.map((section, sectionIndex) => (
+          <div key={sectionIndex} className="wrap">
+            <ul>
+              {section.questions.map((question, questionIndex) => (
+                <li key={question._id}>
+                  <h5 className="question">{question.question}</h5>
+                  <ul className="radio-btn">
+                    {options.length > 0 &&
+                      options.map((option, optionIndex) => (
+                        <li key={option._id}>
+                          <input
+                            type="radio"
+                            name={`question-${question._id}`}
+                            checked={
+                              section.questions[questionIndex]
+                                .selectedOption === optionIndex
+                            }
+                            value={option.optionName}
+                            onChange={() =>
+                              handleOption(questionIndex, optionIndex)
+                            }
+                          />
+                          <label
+                            className={
+                              section.questions[questionIndex]
+                                .selectedOption === optionIndex
+                                ? 'selected'
+                                : ''
+                            }
+                          >
+                            {option.optionName}
+                          </label>
+                        </li>
+                      ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+
+
+        {/*questions.map((question) => (
           <Question
             key={question.number}
             number={question.number}
@@ -122,7 +191,7 @@ function TestPage({testName}) {
             handleAnswerSelect={handleAnswerSelect}
             answer={answers[question.number - 1]}
           />
-        ))}
+        ))*/}
       </div>
       <div className="button-container">
         {selectedQuestion <= 60 && (
@@ -138,7 +207,7 @@ function TestPage({testName}) {
   );
 }
 
-function Question({ number, text, handleAnswerSelect, answer }) {
+{/*function Question({ number, text, handleAnswerSelect, answer }) {
   return (
     <div>
       <h5 className="question">
@@ -206,6 +275,6 @@ function Question({ number, text, handleAnswerSelect, answer }) {
       </div>
     </div>
   );
-}
+}*/}
 
 export default TestPage;
