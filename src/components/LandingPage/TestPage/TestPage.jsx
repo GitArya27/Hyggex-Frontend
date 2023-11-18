@@ -11,7 +11,7 @@ import { idea } from "../../../constants/url";
 function TestPage() {
   const [sliderValue, setSliderValue] = useState(0);
   const [selectedQuestion, setSelectedQuestion] = useState(1);
-  const [answers, setAnswers] = useState(new Array(60).fill(null));
+  const [answers, setAnswers] = useState(new Array(30).fill(null));
   const [currentPage, setCurrentPage] = useState(1);
   const [sections, setSections] = useState([]);
   const [options, setOptions] = useState([]);
@@ -30,7 +30,7 @@ function TestPage() {
     setAnswers(updatedAnswers);
   };
 
-  const initialQuestions = [
+  /*const initialQuestions = [
     "How often do you struggle to understand what you're reading during your study sessions?",
     "How often do you struggle to understand what you're reading during your study sessions?",
     "How often do you struggle to understand what you're reading during your study sessions?",
@@ -41,10 +41,11 @@ function TestPage() {
   const questionPerPage = 5;
   const firstQuestion = (currentPage - 1) * questionPerPage;
 
-  const Question = initialQuestions.map((question, index) => ({
+  /*const Question = initialQuestions.map((question, index) => ({
     text: question,
     number: firstQuestion + index + 1,
-  }));
+  }));*/
+
 
   //my codes here
   useEffect(() => {
@@ -81,8 +82,7 @@ function TestPage() {
     });
   };
 
-  const paginate = increment => setCurrentPage(prevPage => prevPage + increment);
-
+  let questionCount = indexOfFirstQuestion
 
 
   return (
@@ -142,40 +142,48 @@ function TestPage() {
         sections.map((section, sectionIndex) => (
           <div key={sectionIndex} className="wrap">
             <ul>
-              {section.questions.map((question, questionIndex) => (
-                <li key={question._id}>
-                  <h5 className="question">{question.question}</h5>
-                  <ul className="radio-btn">
-                    {options.length > 0 &&
-                      options.map((option, optionIndex) => (
-                        <li key={option._id}>
-                          <input
-                            type="radio"
-                            name={`question-${question._id}`}
-                            checked={
-                              section.questions[questionIndex]
-                                .selectedOption === optionIndex
-                            }
-                            value={option.optionName}
-                            onChange={() =>
-                              handleOption(questionIndex, optionIndex)
-                            }
-                          />
-                          <label
-                            className={
-                              section.questions[questionIndex]
-                                .selectedOption === optionIndex
-                                ? 'selected'
-                                : ''
-                            }
-                          >
-                            {option.optionName}
-                          </label>
-                        </li>
-                      ))}
-                  </ul>
-                </li>
-              ))}
+              {section.questions.map((question, questionIndex) => {
+                questionCount++;
+                return (
+                  <li key={question._id}>
+                    <h5 className="quest-head">{`${questionCount}.${question.question}`}</h5>
+
+                    <div className="option-holder">
+                      {options.length > 0 &&
+                        options.map((option, optionIndex) => (
+
+                            <div key={option._id} className="input-wrapper">
+                              <input
+                                type="radio"
+                                id="input"
+                                name={`question-${question._id}`}
+                                checked={
+                                  section.questions[questionIndex]
+                                    .selectedOption === optionIndex
+                                }
+                                value={option.optionName}
+                                className="never-input"
+                                onChange={() =>
+                                 handleOption(questionIndex, optionIndex)
+                                }
+                            />
+                            <label id="label"
+                              className={
+                                section.questions[questionIndex]
+                                  .selectedOption === optionIndex
+                                  ? 'selected'
+                                  : ''
+                              }
+                            >
+                              {option.optionName}
+                            </label>
+                            </div>
+
+                        ))}
+                    </div>
+                  </li>
+                )
+              })}
             </ul>
           </div>
         ))}
@@ -194,7 +202,7 @@ function TestPage() {
         ))*/}
       </div>
       <div className="button-container">
-        {selectedQuestion <= 60 && (
+        {selectedQuestion <= 5 && (
           <button
             className="next"
             onClick={() => setCurrentPage(currentPage + 1)}
