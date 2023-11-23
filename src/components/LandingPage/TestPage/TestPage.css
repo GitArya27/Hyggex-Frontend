@@ -124,6 +124,7 @@ h6 {
   padding: 30px 10px 10px 50px;
   font-size: 24px;
   color: #06286e;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -170,7 +171,7 @@ input[type="radio"]:before {
 }
 
 input[type="radio"]:checked:before {
-  background: blue;
+
 }
 
 .radio-btn label {
@@ -218,7 +219,7 @@ input[type="radio"]:checked:before {
   height: 10px;
   border-radius: 50%;
   outline: none;
-  box-shadow: 0 0 0 2px #06286e;
+
   transition: box-shadow 0.3s;
 }
 
@@ -227,7 +228,7 @@ input[type="radio"]:checked:before {
 .sometimes-input:checked,
 .often-input:checked,
 .always-input:checked {
-  box-shadow: 0 0 0 2px blue;
+
 }
 
 .never-input:checked + label,
@@ -235,7 +236,7 @@ input[type="radio"]:checked:before {
 .sometimes-input:checked + label,
 .often-input:checked + label,
 .always-input:checked + label {
-  color: blue;
+  /*color: blue;*/
 }
 
 /* Next button */
@@ -501,7 +502,7 @@ input[type="radio"]:checked:before {
   font-size: 1.2rem;
   align-items: center;
 }
-#input{
+.input-box{
   width: 25px;
   height: 25px;
 }
@@ -528,7 +529,7 @@ input[type="radio"]:nth-child(4) {
 }
 
 input[type="radio"]:nth-child(5) {
-  border: 1px solid navy;
+  border: 1px solid rgb(10, 10, 140);
 }
 
 
@@ -558,7 +559,7 @@ input[type="radio"]:checked:before {
 input[type="radio"].selected {
   border-color: blue;
 }
-label.selected {
+.selected {
   color: blue;
 }
 

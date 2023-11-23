@@ -3,51 +3,28 @@ import "./TestPage.css";
 
 import React, { useEffect, useState } from "react";
 
-import axios from "axios";
 import { book } from "../../../constants/url";
 import { checklist } from "../../../constants/url";
 import { idea } from "../../../constants/url";
+import { useRef } from "react";
 
 function TestPage() {
   const [sliderValue, setSliderValue] = useState(0);
-  const [selectedQuestion, setSelectedQuestion] = useState(1);
-  const [answers, setAnswers] = useState(new Array(30).fill(null));
+  //const [selectedQuestion, setSelectedQuestion] = useState(1);
+  //const [answers, setAnswers] = useState(new Array(30).fill(null));
   const [currentPage, setCurrentPage] = useState(1);
   const [sections, setSections] = useState([]);
   const [options, setOptions] = useState([]);
+  const [questionsPerPage, setQuestionsPerPage] = useState(1);
+
+  const buttonRefs = useRef([]);
+
 
   const handleSliderChange = (event) => {
     setSliderValue(event.target.value);
   };
 
-  const handleQuestionChange = (questionNumber) => {
-    setSelectedQuestion(questionNumber);
-  };
-
-  const handleAnswerSelect = (questionNumber, answer) => {
-    const updatedAnswers = [...answers];
-    updatedAnswers[questionNumber - 1] = answer;
-    setAnswers(updatedAnswers);
-  };
-
-  /*const initialQuestions = [
-    "How often do you struggle to understand what you're reading during your study sessions?",
-    "How often do you struggle to understand what you're reading during your study sessions?",
-    "How often do you struggle to understand what you're reading during your study sessions?",
-    "How often do you struggle to understand what you're reading during your study sessions?",
-    "How often do you struggle to understand what you're reading during your study sessions?",
-  ];
-
-  const questionPerPage = 5;
-  const firstQuestion = (currentPage - 1) * questionPerPage;
-
-  /*const Question = initialQuestions.map((question, index) => ({
-    text: question,
-    number: firstQuestion + index + 1,
-  }));*/
-
-
-  //my codes here
+    //my codes here
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -69,25 +46,33 @@ function TestPage() {
     fetchData();
   }, []);
 
-  const questionsPerPage = 5;
+
+  const NumOfTotalPages = Math.ceil(sections.length / questionsPerPage);
+  const pages = [...Array(NumOfTotalPages + 1).keys()].slice(1);
+
   const indexOfLastQuestion = currentPage * questionsPerPage;
   const indexOfFirstQuestion = indexOfLastQuestion - questionsPerPage;
   const currentQuestions = sections.slice(indexOfFirstQuestion, indexOfLastQuestion);
 
-  const handleOption = (questionIndex, optionIndex) => {
-    setSections(prevSections => {
-      const updatedSections = [...prevSections];
-      updatedSections[questionIndex].selectedOption = optionIndex;
-      return updatedSections;
-    });
+  const previousHandler = () => {
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+  const nextHandler = () => {
+    if (currentPage !== NumOfTotalPages) {
+      setCurrentPage(currentPage + 1);
+    }
   };
 
-  let questionCount = indexOfFirstQuestion
+  let questionCount = indexOfFirstQuestion;
+
+  const button = useRef();
 
 
   return (
     <div>
-   <div className="head">
+      <div className="head">
         <h1 className="h1">Free Reading Assessment</h1>
         <p>HyggeX Assessment Explorer &reg;</p>
       </div>
@@ -136,11 +121,13 @@ function TestPage() {
         </div>
       </div>
       <div>
-        <h6 className="Read">Reading Comprehension</h6>
-        <hr /><br />
-        {sections.length > 0 &&
-        sections.map((section, sectionIndex) => (
+
+
+        {currentQuestions.length > 0 &&
+        currentQuestions.map((section, sectionIndex) => (
           <div key={sectionIndex} className="wrap">
+            <h3 className="Read">{section.sectionName}</h3>
+            <hr /><br />
             <ul>
               {section.questions.map((question, questionIndex) => {
                 questionCount++;
@@ -152,28 +139,17 @@ function TestPage() {
                       {options.length > 0 &&
                         options.map((option, optionIndex) => (
 
-                            <div key={option._id} className="input-wrapper">
+                          <div key={option._id} className="input-wrapper">
+
                               <input
-                                type="radio"
-                                id="input"
-                                name={`question-${question._id}`}
-                                checked={
-                                  section.questions[questionIndex]
-                                    .selectedOption === optionIndex
-                                }
-                                value={option.optionName}
-                                className="never-input"
-                                onChange={() =>
-                                 handleOption(questionIndex, optionIndex)
-                                }
+                              type="radio"
+                              name={`group${questionIndex}`}
+                              className="input-box"
+                              //checked
+                              ref={(el) => (buttonRefs.current[optionIndex] = el)}
                             />
                             <label id="label"
-                              className={
-                                section.questions[questionIndex]
-                                  .selectedOption === optionIndex
-                                  ? 'selected'
-                                  : ''
-                              }
+                              className="checked"
                             >
                               {option.optionName}
                             </label>
@@ -187,102 +163,22 @@ function TestPage() {
             </ul>
           </div>
         ))}
-
-
-        {/*questions.map((question) => (
-          <Question
-            key={question.number}
-            number={question.number}
-            text={question.text}
-            selected={question.number === selectedQuestion}
-            handleQuestionChange={handleQuestionChange}
-            handleAnswerSelect={handleAnswerSelect}
-            answer={answers[question.number - 1]}
-          />
-        ))*/}
       </div>
       <div className="button-container">
-        {selectedQuestion <= 5 && (
-          <button
-            className="next"
-            onClick={() => setCurrentPage(currentPage + 1)}
-          >
-            Next <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
-          </button>
-        )}
+        <button
+          className="next"
+          onClick={nextHandler}
+        >
+          Next <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+        </button>
+        <button
+          className="next"
+          onClick={previousHandler}
+        >
+          Prev <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+        </button>
       </div>
     </div>
   );
 }
-
-{/*function Question({ number, text, handleAnswerSelect, answer }) {
-  return (
-    <div>
-      <h5 className="question">
-        {number}. {text}
-      </h5>
-      <div className="radio-btn">
-        <input
-          type="radio"
-          id={`Never${number}`}
-          name={`choose${number}`}
-          value="Never"
-          checked={answer === "Never"}
-          onChange={() => handleAnswerSelect(number, "Never")}
-          className="never-input"
-        />
-        <label htmlFor={`Never${number}`}>Never</label>
-
-        <input
-          type="radio"
-          id={`Rarely${number}`}
-          name={`choose${number}`}
-          value="Rarely"
-          checked={answer === "Rarely"}
-          onChange={() => handleAnswerSelect(number, "Rarely")}
-          className="rarely-input"
-        />
-        <label htmlFor={`Rarely${number}`}>Rarely</label>
-
-        <input
-          type="radio"
-          id={`Sometimes${number}`}
-          name={`choose${number}`}
-          value="Sometimes"
-          checked={answer === "Sometimes"}
-          onChange={() => handleAnswerSelect(number, "Sometimes")}
-          className="sometimes-input"
-        />
-        <label className="sometimes" htmlFor={`Sometimes${number}`}>
-          Sometimes
-        </label>
-
-        <input
-          type="radio"
-          id={`Often${number}`}
-          name={`choose${number}`}
-          value="Often"
-          checked={answer === "Often"}
-          onChange={() => handleAnswerSelect(number, "Often")}
-          className="often-input"
-        />
-        <label className="often" htmlFor={`Often${number}`}>
-          Often
-        </label>
-
-        <input
-          type="radio"
-          id={`Always${number}`}
-          name={`choose${number}`}
-          value="Always"
-          checked={answer === "Always"}
-          onChange={() => handleAnswerSelect(number, "Always")}
-          className="always-input"
-        />
-        <label htmlFor={`Always${number}`}>Always</label>
-      </div>
-    </div>
-  );
-}*/}
-
 export default TestPage;
