@@ -53,6 +53,7 @@ function TestPage() {
   const indexOfLastQuestion = currentPage * questionsPerPage;
   const indexOfFirstQuestion = indexOfLastQuestion - questionsPerPage;
   const currentQuestions = sections.slice(indexOfFirstQuestion, indexOfLastQuestion);
+  console.log(currentQuestions?.questions);
 
   const previousHandler = () => {
     if (currentPage !== 1) {
