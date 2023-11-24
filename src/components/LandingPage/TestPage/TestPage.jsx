@@ -53,7 +53,7 @@ function TestPage() {
   const indexOfLastQuestion = currentPage * questionsPerPage;
   const indexOfFirstQuestion = indexOfLastQuestion - questionsPerPage;
   const currentQuestions = sections.slice(indexOfFirstQuestion, indexOfLastQuestion);
-  console.log(currentQuestions?.questions);
+  console.log(currentQuestions);
 
   const previousHandler = () => {
     if (currentPage !== 1) {
@@ -172,12 +172,12 @@ function TestPage() {
         >
           Next <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
         </button>
-        <button
+        {/*<button
           className="next"
           onClick={previousHandler}
         >
           Prev <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
-        </button>
+            </button>*/}
       </div>
     </div>
   );
