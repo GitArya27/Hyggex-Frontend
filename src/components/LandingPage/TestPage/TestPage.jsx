@@ -12,7 +12,7 @@ function TestPage() {
   const [sliderValue, setSliderValue] = useState(0);
   //const [selectedQuestion, setSelectedQuestion] = useState(1);
   //const [answers, setAnswers] = useState(new Array(30).fill(null));
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState( + 1);
   const [sections, setSections] = useState([]);
   const [options, setOptions] = useState([]);
   const [questionsPerPage, setQuestionsPerPage] = useState(1);
@@ -38,6 +38,7 @@ function TestPage() {
         console.log(data);
         setSections(data.section || []);
         setOptions(data.options || []);
+        //setQuestionsPerPage(5);
       } catch (error) {
         console.error('Error:', error);
       }
@@ -62,7 +63,7 @@ function TestPage() {
   };
   const nextHandler = () => {
     if (currentPage !== NumOfTotalPages) {
-      setCurrentPage(currentPage + 1);
+      setCurrentPage(currentPage + 5);
     }
   };
 
@@ -73,7 +74,7 @@ function TestPage() {
 
   return (
     <div>
-      <div className="head">
+      {/*<div className="head">
         <h1 className="h1">Free Reading Assessment</h1>
         <p>HyggeX Assessment Explorer &reg;</p>
       </div>
@@ -120,8 +121,9 @@ function TestPage() {
           />
           <div id="slider-value">{sliderValue}%</div>
         </div>
-      </div>
-      <div>
+      </div>*/}
+
+      <div><br /><br />
 
 
         {currentQuestions.length > 0 &&
