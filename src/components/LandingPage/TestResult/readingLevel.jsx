@@ -24,13 +24,13 @@ const ReadingLevel = () => {
 
     return (
         <div>
-            <div className=' flex border border-solid border-blue-900'>
-                <div className='flex w-[30%]'>
-                    <div className='flex flex-col w-[92%] h-full'>
+            <div className=' flex flex-col sm:flex-row border border-solid border-blue-900'>
+                <div className='flex flex-col sm:flex-row w-full sm:w-[30%]'>
+                    <div className='flex flex-row sm:flex-col w-[100%] sm:w-[92%] h-full'>
                         {Levels.map((item, index) => (
                             <div
                                 key={index}
-                                className='flex flex-col justify-center items-center text-xs font-semibold p-8 bg-[#A6C1F9] h-[25%] text-blue-900'
+                                className='flex flex-col justify-center items-center sm:text-[1rem] font-bold p-1 text-[0.4rem] sm:p-8 bg-[#A6C1F9] w-full h-full sm:h-[25%] text-blue-900'
                                 onClick={() => handleLevel(index)}
                                 style={LevelStyles[index]}
                             >
@@ -39,13 +39,13 @@ const ReadingLevel = () => {
                         ))}
 
                     </div>
-                    <div className='flex flex-col h-full w-[8%]'>
-                        <span className='bg-[#007765] h-[22%]'></span>
-                        <span className='bg-[#263238] h-[78%]'></span>
+                    <div className='flex flex-row sm:flex-col h-full w-full sm:w-[8%]'>
+                        <span className='bg-[#007765] w-[22%] sm:w-full h-[20px] sm:h-[22%]'></span>
+                        <span className='bg-[#263238] w-[78%] sm:w-full h-[20px] sm:h-[78%]'></span>
                     </div>
                 </div>
-                <div className='w-[70%] h-full flex flex-col px-12 py-16 items-start justify-center'>
-                    <h3 className='text-blue-900 font-bold text-l pb-2'>{accordionTexts[activeIndex].title}</h3>
+                <div className='w-full sm:w-[70%] h-full flex flex-col px-4 sm:px-12 py-16 items-start justify-center'>
+                    <h3 className='text-blue-900 font-bold text-[1.4rem] sm:text-l pb-2'>{accordionTexts[activeIndex].title}</h3>
                     <p className='text-[15px] text-blue-900'>{accordionTexts[activeIndex].content}</p>
                 </div>
             </div>

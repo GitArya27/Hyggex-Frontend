@@ -37,7 +37,7 @@ const CustomCircularProgressBar = ({ strokeWidth, radius, progress }) => {
         y="50%"
         textAnchor="middle"
         dominantBaseline="middle"
-        fontSize="22"
+        fontSize="18"
         fill="#06286E"
         fontWeight="700"
       >

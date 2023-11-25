@@ -26,7 +26,7 @@ const ReadingMetrixs = () => {
                   backgroundColor: activeIndex === index ? '#DFEAFF' : 'transparent',
                   color: activeIndex === index ? '#06286E' : 'black'
                 }}
-                className="border border-solid border-blue-300 py-1 text-center px-4 cursor-[pointer] w-[17%] font-semibold text-[0.65rem]"
+                className="border border-solid border-blue-300 py-1 text-center cursor-[pointer] w-[17%] font-semibold text-[0.5rem] sm:text-[0.65rem]"
                 key={index}
                 onClick={() => handleButtonClick(index)}
               >
@@ -36,7 +36,7 @@ const ReadingMetrixs = () => {
 
         </div>
       <div className='bg-blue-200 rounded-br-lg border border-solid border-blue-900 rounded-bl-lg py-8 b-tr px-8'>
-        <h3 className='text-blue-900 font-semibold pb-2'>{accordionTexts[activeIndex].title}</h3>
+        <h3 className='text-blue-900 text-[0.8rem] sm:text-xl font-semibold pb-2'>{accordionTexts[activeIndex].title}</h3>
         <p className='text-[#164EC0] text-xs'>{accordionTexts[activeIndex].content}</p>
       </div>
     </div>

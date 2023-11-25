@@ -27,11 +27,11 @@ const TestResult = () => {
 
 
   return (
-    <div className="bg-[#f9f9f9] px-16 pt-24 pb-16">
+    <div className="bg-[#f9f9f9] px-9 sm:px-16 pt-24 pb-16">
       <section className='bg-[#fff] px-8 py-8 mb-9 rounded-xl' id='section1'>
-        <div className='flex flex-row justify-between items-center'>
-          <div className='w-[40%]'>
-            <h3 className='text-blue-900 font-semibold text-xl'>Hi Sameer,</h3>
+        <div className='flex flex-col sm:flex-row justify-around items-center'>
+          <div className='sm:w-[40%] w-full py-6'>
+            <h3 className='text-blue-900 font-semibold sm:text-xl'>Hi Sameer,</h3>
             <p className='text-blue-900 text-sm'>
               Let’s delve deep into the findings from your reading assessment
               and discover the distinct characteristics of your reading style.
@@ -39,23 +39,24 @@ const TestResult = () => {
             </p>
           </div>
 
-          <div className='flex w-[40%]' id='progress-bar'>
-            <div className='flex justify-between'>
+          <div className='flex w-full sm:w-[40%] sm:mt-12' id='progress-bar'>
+            <div className='flex justify-around'>
               {Progress.map((item,index) => (
                 <div key={index} className='mx-4'>
                   <CustomCircularProgressBar
+                    style={{width: '100%', height: '100%'}}
                     strokeWidth={10}
-                    radius={50}
+                    radius={37}
                     progress={item.score}
                   />
                   <p className='text-[0.5rem] font-semibold leading-10 text-[#000]'>{ item.text}</p>
                 </div>
               ))}
 
-            </div>
+              </div>
           </div>
         </div>
-        <div className='mt-16'>
+        <div className='mt-8 sm:mt-16'>
           <p className='text-[#06286E] text-xs ml-24 pb-4'>You've scored as <br /> <b>“Sprouting Reader”</b></p>
           <div className='flex h-2'>
             <span className='bg-[#007765] w-[23%]'></span>
@@ -70,24 +71,22 @@ const TestResult = () => {
         </div>
       </section>
 
-      <section className='bg-[#fff] px-16 py-8 mb-9 border-cyan-500 border-2 rounded-xl' id='section2'>
-        <div className='flex flex-row justify-between items-center'>
-          <div className='w-[55%]'>
-            <h3 className='text-blue-900 font-bold text-l pb-2 ml-10'>Reading Skills Spectrum</h3>
+      <section className='bg-[#fff] px-8 sm:px-16 py-8 mb-9 rounded-xl' id='section2'>
+        <div className='flex flex-col sm:flex-row justify-between items-center'>
+          <div className='w-full sm:w-[55%]'>
+            <h3 className='text-blue-900 font-semibold sm:font-bold text-[1.4rem] sm:text-lg text-start pb-2 sm:ml-10'>Reading Skills Spectrum</h3>
             <div className='text-sm'>
               <img src="https://res.cloudinary.com/dbnxbly1r/image/upload/v1700792350/result-image-removebg-preview_mhswt9.png" alt="image" />
             </div>
           </div>
 
-          <div className='w-[40%]' id='progress-bar'>
+          <div className='w-full sm:w-[40%]' id='progress-bar'>
             <div className=''>
               {ProgressItems.map((item,index) => (
                 <div key={index} className='mx-4 mb-4'>
                    <span className='text-[0.6rem] font-semibold text-[#000]'>{ item.text} </span>
                   <span className='text-[0.9rem] float-right mb-0.1 font-semibold text-[#06286E]'>{ item.progress}%</span>
                   <HorizontalProgressBar
-                    strokeWidth={10}
-                    radius={50}
                     progress={item.progress}
                   />
 
@@ -99,16 +98,16 @@ const TestResult = () => {
         </div>
       </section>
 
-      <section className='bg-[#fff] px-16 py-8 mb-9 border-cyan-500 border-2 rounded-xl' id='section3'>
-        <h3 className='text-blue-900 font-bold text-l pb-2'>Key Reading Metrics</h3>
+      <section className='bg-[#fff] px-8 sm:px-16 py-8 mb-9 rounded-xl' id='section3'>
+        <h3 className='text-blue-900 font-bold text-[1.4rem] sm:text-l pb-2'>Key Reading Metrics</h3>
         <div className=''>
             <ReadingMetrixs/>
 
         </div>
       </section>
 
-      <section className='bg-[#fff] px-16 py-8 mb-9 border-cyan-500 border-2 rounded-xl' id='section4'>
-        <h3 className='text-blue-900 font-bold text-l pb-2'>Your Reading Level Explained</h3>
+      <section className='bg-[#fff] px-8 sm:px-16 py-8 mb-9 rounded-xl' id='section4'>
+        <h3 className='text-blue-900 font-bold text-[1.4rem] sm:text-l pb-2'>Your Reading Level Explained</h3>
         <div>
           <ReadingLevel/>
         </div>
@@ -134,14 +133,14 @@ const TestResult = () => {
         </div>*/}
       </section>
 
-      <section className='relative bottom-[50px] bg-[#5085F3] top-[50px] px-16 py-8 mb-9 rounded-[2rem]' id='section5'>
-        <div className='flex flex-row justify-around  relative items-center'>
-          <div className='absolute top-[-80px] left-10'>
-            <img className="max-h-[250px]" src="https://res.cloudinary.com/dbnxbly1r/image/upload/v1700926528/hyggex1/Untitled_design_8_1_x38isj.png" alt="image" />
+      <section className='bg-[#5085F3] sm:h-[250px] sm:mt-28 px-16 py-8 mb-9 rounded-[2rem]' id='section5'>
+        <div className='flex flex-col sm:flex-row justify-evenly items-center'>
+          <div className=''>
+            <img className="max-h-[150px] sm:max-h-[310px] sm:mt-[-5rem]" src="https://res.cloudinary.com/dbnxbly1r/image/upload/v1700926528/hyggex1/Untitled_design_8_1_x38isj.png" alt="image" />
           </div>
 
-          <div className='flex flex-col text-[#fff] relative left-[120px] text-center items-center justify-center'>
-            <h4 className='font-semibold'>Track Your Reading Progress!</h4>
+          <div className='pt-4 flex flex-col text-[#fff] text-center items-center justify-center'>
+            <h4 className='text-[1rem] sm:text-[1.1rem] font-semibold'>Track Your Reading Progress!</h4>
             <p className='text-xs mt-[0.2rem]'>Download Our Free Google Sheet Template.</p>
             <a className="w-[120px] rounded-xl bg-blue-800 text-center mt-2 px-1 py-2 text-xs" href="#">Get it Now</a>
           </div>
