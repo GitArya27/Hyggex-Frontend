@@ -99,7 +99,7 @@ const TestResult = () => {
       </section>
 
       <section className='bg-[#fff] px-16 py-8 mb-9 border-cyan-500 border-2 rounded-xl' id='section3'>
-        <h3 className='text-blue-900 font-bold text-l pb-2 ml-10'>Key Reading Metrics</h3>
+        <h3 className='text-blue-900 font-bold text-l pb-2'>Key Reading Metrics</h3>
         <div className=''>
          {/* <div className='w-full flex rounded-md border border-solid border-blue-300'>
             <abutton id="btn" className="border border-solid border-blue-300 py-1 text-center px-4 cursor-[pointer] w-[17%] font-semibold text-[0.65rem]">Comprehension</abutton>
@@ -111,10 +111,34 @@ const TestResult = () => {
           </div>*/}
             <Accordion/>
 
-              </div>
+        </div>
 
       </section>
 
+      <section className='bg-[#fff] px-16 py-8 mb-9 border-cyan-500 border-2 rounded-xl' id='section4'>
+        <h3 className='text-blue-900 font-bold text-l pb-2'>Your Reading Level Explained</h3>
+        <div className=' flex border border-solid border-blue-900'>
+          <div className='flex w-[30%]'>
+            <div className='flex flex-col w-[92%] h-full'>
+              <span className='bg-[#A6C1F9] h-1/4 text-[#fff] text-center p-12'>span1</span>
+              <span className='bg-[#5085F3] h-1/4 text-[#fff] text-center p-12'>span2</span>
+              <span className='bg-[#164EC0] h-1/4 text-[#fff] text-center p-12'>span3</span>
+              <span className='bg-[#06286E] h-1/4 text-[#fff] text-center p-12'>span4</span>
+            </div>
+            <div className='flex flex-col h-full w-[8%]'>
+              <span className='bg-[#007765] h-[22%]'></span>
+              <span className='bg-[#263238] h-[78%]'></span>
+            </div>
+          </div>
+          <div className='w-[70%] flex flex-col px-12 py-16 items-start justify-center'>
+            <h3 className='text-blue-900 font-bold text-l pb-2'>Sprout Reading</h3>
+            <p className='text-[15px] text-blue-900'>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ex temporibus, laboriosam id ducimus non qui omnis et ullam molestias, quaerat vero architecto, reprehenderit necessitatibus excepturi provident unde esse? Possimus rerum minus odit eaque iure rem dolores eveniet cupiditate doloribus repudiandae suscipit, nulla assumenda molestiae deleniti ut magnam, distinctio cum nostrum ducimus? Aut maxime voluptatum autem ratione omnis et accusantium, animi quis doloremque aliquam harum quos iure atque nisi, ut mollitia inventore voluptatem voluptatibus. Sed, exercitationem sunt. Dolorem quia doloremque sequi animi soluta. Quasi, porro quo. Laudantium a, reiciendis sed voluptates harum voluptatem quisquam non dolorem iste. Quia, nostrum a veniam nesciunt fugiat perspiciatis delectus ad enim aliquam aspernatur similique eaque maiores magnam dolore provident cum! Enim aliquam dolor quasi necessitatibus iste autem dicta, ea maxime, perferendis adipisci minus inventore rerum, quia in nemo alias. Cumque in voluptates ex error ab inventore consequatur ratione, nam dolores sapiente quas at, quae fuga ipsum ipsa possimus temporibus non molestias, ad soluta blanditiis doloremque quaerat autem quos! Nisi nulla iure rerum perspiciatis adipisci, laudantium tempore consectetur quae nostrum. Ex, aut sit aspernatur quae quas consequatur! Voluptate asperiores error sequi veniam eligendi, similique qui dicta laborum, atque amet deserunt provident labore aspernatur dolores vel earum doloribus ipsa quos ex, fugiat quis! Cumque laudantium, minima iusto amet blanditiis sequi. Vero animi tempora iure quasi repellendus ratione explicabo aliquam rem, corrupti eligendi dolore consequatur commodi sint cupiditate tenetur iste voluptatem molestias delectus laboriosam praesentium nobis inventore at distinctio cum! Ex dolore aliquam omnis itaque atque saepe eaque est ab repudiandae autem, corrupti, voluptatum quis ullam. Repudiandae autem commodi dicta iste obcaecati libero optio natus ut quos aliquid quae quasi impedit minus cupiditate aspernatur, delectus error odit provident deleniti minima velit. Magnam consectetur nobis recusandae incidunt, odit placeat veritatis facere quod atque veniam quibusdam tenetur aperiam facilis repellendus!.
+            </p>
+          </div>
+        </div>
+
+      </section>
 
     </div>
   )
