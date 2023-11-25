@@ -2,9 +2,10 @@ import './result.css'
 
 import React,{useState} from 'react'
 
-import Accordion from './accordian';
 import CustomCircularProgressBar from './progressbar'
 import HorizontalProgressBar from './horizontalProgressBar';
+import ReadingLevel from './readingLevel';
+import ReadingMetrixs from './readingMetrixs';
 
 const TestResult = () => {
 
@@ -101,29 +102,23 @@ const TestResult = () => {
       <section className='bg-[#fff] px-16 py-8 mb-9 border-cyan-500 border-2 rounded-xl' id='section3'>
         <h3 className='text-blue-900 font-bold text-l pb-2'>Key Reading Metrics</h3>
         <div className=''>
-         {/* <div className='w-full flex rounded-md border border-solid border-blue-300'>
-            <abutton id="btn" className="border border-solid border-blue-300 py-1 text-center px-4 cursor-[pointer] w-[17%] font-semibold text-[0.65rem]">Comprehension</abutton>
-            <abutton id="btn1" className="border border-solid border-blue-300 py-1 text-center px-4 cursor-[pointer] w-[17%] font-semibold text-[0.65rem]">Speed</abutton>
-            <abutton id="btn2" className="border border-solid border-blue-300 py-1 text-center px-4 cursor-[pointer] w-[17%] font-semibold text-[0.65rem]">Retention</abutton>
-            <abutton id="btn3" className="border border-solid border-blue-300 py-1 text-center px-4 cursor-[pointer] w-[17%] font-semibold text-[0.65rem]">Focus & Attention</abutton>
-            <abutton id="btn4" className="border border-solid border-blue-300 py-1 text-center px-4 cursor-[pointer] w-[17%] font-semibold text-[0.65rem]">Fatigue </abutton>
-            <abutton id="btn5" className="border border-solid border-blue-300 py-1 text-center px-4 cursor-[pointer] w-[17%] font-semibold text-[0.65rem]">Stress</abutton>
-          </div>*/}
-            <Accordion/>
+            <ReadingMetrixs/>
 
         </div>
-
       </section>
 
       <section className='bg-[#fff] px-16 py-8 mb-9 border-cyan-500 border-2 rounded-xl' id='section4'>
         <h3 className='text-blue-900 font-bold text-l pb-2'>Your Reading Level Explained</h3>
-        <div className=' flex border border-solid border-blue-900'>
+        <div>
+          <ReadingLevel/>
+        </div>
+        {/*<div className=' flex border border-solid border-blue-900'>
           <div className='flex w-[30%]'>
             <div className='flex flex-col w-[92%] h-full'>
-              <span className='bg-[#A6C1F9] h-1/4 text-[#fff] text-center p-12'>span1</span>
-              <span className='bg-[#5085F3] h-1/4 text-[#fff] text-center p-12'>span2</span>
-              <span className='bg-[#164EC0] h-1/4 text-[#fff] text-center p-12'>span3</span>
-              <span className='bg-[#06286E] h-1/4 text-[#fff] text-center p-12'>span4</span>
+              <div className='flex flex-col justify-center items-center font-semibold bg-[#A6C1F9] h-1/4 text-blue-900 '>Level1: <br />Sprouting Reader</div>
+              <div className='flex flex-col justify-center items-center font-semibold bg-[#5085F3] h-1/4 text-[#fff] p-12'>Level2: <br />Budding Reader</div>
+              <div className='flex flex-col justify-center items-center font-semibold bg-[#164EC0] h-1/4 text-[#fff] p-12'>Level3: <br />Blooming Reader</div>
+              <div className='flex flex-col justify-center items-center font-semibold bg-[#06286E] h-1/4 text-[#fff] p-12'>Level4: <br />Flourishing Reader</div>
             </div>
             <div className='flex flex-col h-full w-[8%]'>
               <span className='bg-[#007765] h-[22%]'></span>
@@ -133,12 +128,26 @@ const TestResult = () => {
           <div className='w-[70%] flex flex-col px-12 py-16 items-start justify-center'>
             <h3 className='text-blue-900 font-bold text-l pb-2'>Sprout Reading</h3>
             <p className='text-[15px] text-blue-900'>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ex temporibus, laboriosam id ducimus non qui omnis et ullam molestias, quaerat vero architecto, reprehenderit necessitatibus excepturi provident unde esse? Possimus rerum minus odit eaque iure rem dolores eveniet cupiditate doloribus repudiandae suscipit, nulla assumenda molestiae deleniti ut magnam, distinctio cum nostrum ducimus? Aut maxime voluptatum autem ratione omnis et accusantium, animi quis doloremque aliquam harum quos iure atque nisi, ut mollitia inventore voluptatem voluptatibus. Sed, exercitationem sunt. Dolorem quia doloremque sequi animi soluta. Quasi, porro quo. Laudantium a, reiciendis sed voluptates harum voluptatem quisquam non dolorem iste. Quia, nostrum a veniam nesciunt fugiat perspiciatis delectus ad enim aliquam aspernatur similique eaque maiores magnam dolore provident cum! Enim aliquam dolor quasi necessitatibus iste autem dicta, ea maxime, perferendis adipisci minus inventore rerum, quia in nemo alias. Cumque in voluptates ex error ab inventore consequatur ratione, nam dolores sapiente quas at, quae fuga ipsum ipsa possimus temporibus non molestias, ad soluta blanditiis doloremque quaerat autem quos! Nisi nulla iure rerum perspiciatis adipisci, laudantium tempore consectetur quae nostrum. Ex, aut sit aspernatur quae quas consequatur! Voluptate asperiores error sequi veniam eligendi, similique qui dicta laborum, atque amet deserunt provident labore aspernatur dolores vel earum doloribus ipsa quos ex, fugiat quis! Cumque laudantium, minima iusto amet blanditiis sequi. Vero animi tempora iure quasi repellendus ratione explicabo aliquam rem, corrupti eligendi dolore consequatur commodi sint cupiditate tenetur iste voluptatem molestias delectus laboriosam praesentium nobis inventore at distinctio cum! Ex dolore aliquam omnis itaque atque saepe eaque est ab repudiandae autem, corrupti, voluptatum quis ullam. Repudiandae autem commodi dicta iste obcaecati libero optio natus ut quos aliquid quae quasi impedit minus cupiditate aspernatur, delectus error odit provident deleniti minima velit. Magnam consectetur nobis recusandae incidunt, odit placeat veritatis facere quod atque veniam quibusdam tenetur aperiam facilis repellendus!.
+              As a "Sprouting Reader", you are at the beginning of your journey towards becoming a skilled reader. At this stage, every text you read has the potential to help you grow and develop your understanding. You'll encounter complex sentences and intricate plots that may require you to slow down, think carefully about the meaning, and take in all the details. You may need to reread lines or paragraphs to make sure you understand them, but this extra effort will help you improve your comprehension and foster a love for reading.  Reading at this level requires concentration and effort, just like a young plant needs support to grow straight and tall. You'll need to maintain focus amidst the hustle and bustle of everyday life, much like a young shoot needs support to stand up straight. But by taking your time and reading carefully, you'll get the most out of the text and help yourself understand it better. You'll learn to read between the lines, pick up on subtle hints and nuances, and develop a deeper appreciation for the author's craft.  As you read, you'll gradually get better at remembering what you have read and using that knowledge for your own thoughts and discussions. This is a process akin to photosynthesis, where you take in information and transform it into energy for thought and discussion. You'll learn to make connections between different texts, recognize patterns and themes, and develop your own unique perspective on the world.  To get the most out of your reading, it's a good idea to read a variety of genres, just like a diverse garden is more beautiful than a single type of flower. You can explore different genres like fiction, non-fiction, poetry, and more, each with their own unique characteristics and challenges. You can also use tools like highlighters, tabs, and notes to mark important sections of the text and help you remember them. Sharing your thoughts and ideas about what you have read can also help you remember and understand the text better. You'll learn to express yourself clearly and thoughtfully, and develop your own voice as a reader and thinker.  Make reading a consistent part of your daily routine to help you build a strong habit. This means setting aside time each day to read, even if it's just for a few minutes. You can also use mindfulness techniques to help you focus and avoid distractions, like finding a quiet place to read or using noise-cancelling headphones. By cultivating a strong reading habit, you'll develop a lifelong love of reading that will serve you well in all areas of life.  Remember that every word you learn, every theme you explore, and every book you finish is a victory. The literary world is full of opportunities for discovery and learning, so keep reading and growing!.
             </p>
           </div>
-        </div>
-
+        </div>*/}
       </section>
+
+      <section className='relative bottom-[50px] bg-[#5085F3] top-[50px] px-16 py-8 mb-9 rounded-[2rem]' id='section5'>
+        <div className='flex flex-row justify-around  relative items-center'>
+          <div className='absolute top-[-80px] left-10'>
+            <img className="max-h-[250px]" src="https://res.cloudinary.com/dbnxbly1r/image/upload/v1700926528/hyggex1/Untitled_design_8_1_x38isj.png" alt="image" />
+          </div>
+
+          <div className='flex flex-col text-[#fff] relative left-[120px] text-center items-center justify-center'>
+            <h4 className='font-semibold'>Track Your Reading Progress!</h4>
+            <p className='text-xs mt-[0.2rem]'>Download Our Free Google Sheet Template.</p>
+            <a className="w-[120px] rounded-xl bg-blue-800 text-center mt-2 px-1 py-2 text-xs" href="">Get it Now</a>
+          </div>
+        </div>
+      </section>
+
 
     </div>
   )
