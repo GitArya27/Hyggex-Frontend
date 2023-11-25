@@ -19,17 +19,23 @@ const Accordion = () => {
 
   return (
     <div>
-        <div className='w-full flex rounded-md border border-solid border-blue-300'>
+        <div className='w-full flex'>
             {buttons.map((button, index) => (
-                <button
-                    className="border border-solid border-blue-300 py-1 text-center px-4 cursor-[pointer] w-[17%] font-semibold text-[0.65rem]"
-                    key={index}
-                    onClick={() => handleButtonClick(index)}>
-                    {button}
-                </button>
+              <button
+                style={{
+                  backgroundColor: activeIndex === index ? '#DFEAFF' : 'transparent',
+                  color: activeIndex === index ? '#06286E' : 'black'
+                }}
+                className="border border-solid border-blue-300 py-1 text-center px-4 cursor-[pointer] w-[17%] font-semibold text-[0.65rem]"
+                key={index}
+                onClick={() => handleButtonClick(index)}
+              >
+                {button}
+              </button>
             ))}
+
         </div>
-        <div className='bg-blue-200 py-4 px-8'>{accordionTexts[activeIndex]}</div>
+        <div className='bg-blue-200 rounded-br-lg border border-solid border-blue-900 rounded-bl-lg py-8 b-tr px-8 text-[#164EC0] text-xs'>{accordionTexts[activeIndex]}</div>
     </div>
   );
 };

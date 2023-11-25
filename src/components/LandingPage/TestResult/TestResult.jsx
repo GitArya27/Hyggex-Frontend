@@ -25,21 +25,6 @@ const TestResult = () => {
   ];
 
 
-  const [activeIndex, setActiveIndex] = useState(null);
-  const buttons = ['btn1', 'btn2', 'btn3', 'btn4'];
-
-  const accordionTexts = [
-    'you have a good comprehension skills',
-    'listening to your success',
-    'computer literacy',
-    'logical reasoning'
-  ];
-
-  const handleButtonClick = (index) => {
-    setActiveIndex(activeIndex === index ? null : index);
-  };
-
-
   return (
     <div className="bg-[#f9f9f9] px-16 pt-8">
       <section className='bg-[#fff] px-8 py-8 mb-9 rounded-xl' id='section1'>
