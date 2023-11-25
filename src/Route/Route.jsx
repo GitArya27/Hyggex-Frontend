@@ -28,6 +28,10 @@ export const router =createBrowserRouter(
         {
             path: "/test",
             element:<TestPage/>
+        },
+        {
+            path:'/testResult',
+            element: <TestResult/>
         }
             ]
     },
@@ -43,10 +47,7 @@ export const router =createBrowserRouter(
         path:'/signIn',
         element: <SignIn/>
     },
-    {
-        path:'/testResult',
-        element: <TestResult/>
-    }
+
 
 
 

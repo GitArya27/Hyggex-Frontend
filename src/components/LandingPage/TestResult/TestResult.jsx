@@ -27,7 +27,7 @@ const TestResult = () => {
 
 
   return (
-    <div className="bg-[#f9f9f9] px-16 pt-8">
+    <div className="bg-[#f9f9f9] px-16 pt-24 pb-16">
       <section className='bg-[#fff] px-8 py-8 mb-9 rounded-xl' id='section1'>
         <div className='flex flex-row justify-between items-center'>
           <div className='w-[40%]'>
