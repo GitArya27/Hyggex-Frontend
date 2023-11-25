@@ -143,14 +143,14 @@ const TestResult = () => {
           <div className='flex flex-col text-[#fff] relative left-[120px] text-center items-center justify-center'>
             <h4 className='font-semibold'>Track Your Reading Progress!</h4>
             <p className='text-xs mt-[0.2rem]'>Download Our Free Google Sheet Template.</p>
-            <a className="w-[120px] rounded-xl bg-blue-800 text-center mt-2 px-1 py-2 text-xs" href="">Get it Now</a>
+            <a className="w-[120px] rounded-xl bg-blue-800 text-center mt-2 px-1 py-2 text-xs" href="#">Get it Now</a>
           </div>
         </div>
       </section>
 
 
     </div>
-  )
+  );
 }
 
-export default TestResult
+export default TestResult;
