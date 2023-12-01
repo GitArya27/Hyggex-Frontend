@@ -12,19 +12,16 @@ function TestPage() {
   const [sliderValue, setSliderValue] = useState(0);
   //const [selectedQuestion, setSelectedQuestion] = useState(1);
   //const [answers, setAnswers] = useState(new Array(30).fill(null));
-  const [currentPage, setCurrentPage] = useState( + 1);
+  const [currentPage, setCurrentPage] = useState(1);
   const [sections, setSections] = useState([]);
   const [options, setOptions] = useState([]);
-  const [questionsPerPage, setQuestionsPerPage] = useState(1);
+  const [questionsPerPage, setQuestionsPerPage] = useState(5);
+  const [selectedOptions, setSelectedOptions] = useState();
 
   const buttonRefs = useRef([]);
 
 
-  const handleSliderChange = (event) => {
-    setSliderValue(event.target.value);
-  };
-
-    //my codes here
+    //fetching questions/answers
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -38,7 +35,12 @@ function TestPage() {
         console.log(data);
         setSections(data.section || []);
         setOptions(data.options || []);
-        //setQuestionsPerPage(5);
+
+        //data.section.forEach(section => {
+          //console.log('Section: ', section.sectionName);
+          //console.log('Questions here: ', section.questions);
+        //});
+
       } catch (error) {
         console.error('Error:', error);
       }
@@ -47,34 +49,77 @@ function TestPage() {
     fetchData();
   }, []);
 
+  //submit function
+  const submitScrore = async()=> {
+    try {
+      const selectedAnswers = selectedOptions.map((selectedOptionsIndex, questionIndex) => {
+        return {
+          question: sections[questionIndex].questions[questionIndex].question,
+          answer: options[selectedOptionsIndex].optionName
+        };
+      });
+
+      const resp = await fetch('https://hyggexbackend-d2b0.onrender.com/api/v1/test/submit-score',
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ selectedAnswers })
+
+        }
+      )
+
+      if (!resp.ok) {
+        throw new Error(`HTTP error: ${resp.status}`)
+      }
+      const data = await resp.json();
+      console.log(data, 'successfully submitted');
+
+    } catch (error) {
+      console.log(Error, 'error');
+    }
+  }
+
 
   const NumOfTotalPages = Math.ceil(sections.length / questionsPerPage);
+
   const pages = [...Array(NumOfTotalPages + 1).keys()].slice(1);
 
   const indexOfLastQuestion = currentPage * questionsPerPage;
   const indexOfFirstQuestion = indexOfLastQuestion - questionsPerPage;
   const currentQuestions = sections.slice(indexOfFirstQuestion, indexOfLastQuestion);
-  console.log(currentQuestions);
+  //console.log(currentQuestions, 'currentquestions');
 
   const previousHandler = () => {
     if (currentPage !== 1) {
       setCurrentPage(currentPage - 1);
     }
   };
+
   const nextHandler = () => {
     if (currentPage !== NumOfTotalPages) {
-      setCurrentPage(currentPage + 5);
+      setCurrentPage(currentPage + 1);
     }
   };
 
-  let questionCount = indexOfFirstQuestion;
+  const handleSliderChange = (event) => {
+    setSliderValue(event.target.value);
+  };
+  const handleSelectedOptions = () => {
+    const updatedOptions = [...selectedOptions];
+    updatedOptions[questionIndex] = optionIndex;
+    setSelectedOptions(updatedOptions);
+  }
 
+
+
+
+  let questionCount = indexOfFirstQuestion;
   const button = useRef();
 
 
   return (
     <div>
-      {/*<div className="head">
+      <div className="head">
         <h1 className="h1">Free Reading Assessment</h1>
         <p>HyggeX Assessment Explorer &reg;</p>
       </div>
@@ -121,13 +166,13 @@ function TestPage() {
           />
           <div id="slider-value">{sliderValue}%</div>
         </div>
-      </div>*/}
+      </div>
 
       <div><br /><br />
 
 
-        {currentQuestions.length > 0 &&
-        currentQuestions.map((section, sectionIndex) => (
+        {/*currentQuestions.length > 0 &&*/}{
+        sections.map((section, sectionIndex) => (
           <div key={sectionIndex} className="wrap">
             <h3 className="Read">{section.sectionName}</h3>
             <hr /><br />
@@ -144,12 +189,17 @@ function TestPage() {
 
                           <div key={option._id} className="input-wrapper">
 
-                              <input
+                            <input
                               type="radio"
                               name={`group${questionIndex}`}
                               className="input-box"
-                              //checked
-                              ref={(el) => (buttonRefs.current[optionIndex] = el)}
+                              checked
+                              onChange={() => {
+                                const updatedSelectedOptions = [...selectedOptions];
+                                updatedSelectedOptions[questionIndex] = optionIndex;
+                                setSelectedOptions(updatedSelectedOptions);
+                              }}
+                              //ref={(el) => (buttonRefs.current[optionIndex] = el)}
                             />
                             <label id="label"
                               className="checked"
@@ -167,19 +217,23 @@ function TestPage() {
           </div>
         ))}
       </div>
-      <div className="button-container">
+      <div className="button-container flex justify-center">
         <button
           className="next"
           onClick={nextHandler}
         >
           Next <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
         </button>
+
         {/*<button
           className="next"
           onClick={previousHandler}
         >
           Prev <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
             </button>*/}
+      </div>
+      <div className="flex justify-center">
+        <button className="bg-blue-900 mb-8 px-3 py-2 border rounded-2xl text-blue-100" onClick={submitScrore}>Submit Answers</button>
       </div>
     </div>
   );
