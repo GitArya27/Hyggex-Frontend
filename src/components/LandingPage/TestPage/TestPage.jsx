@@ -18,7 +18,7 @@ function TestPage() {
   const [questionsPerPage, setQuestionsPerPage] = useState(5);
   const [selectedOptions, setSelectedOptions] = useState();
 
-  const buttonRefs = useRef([]);
+  //const buttonRefs = useRef([]);
 
 
     //fetching questions/answers
@@ -59,14 +59,18 @@ function TestPage() {
         };
       });
 
-      const resp = await fetch('https://hyggexbackend-d2b0.onrender.com/api/v1/test/submit-score',
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ selectedAnswers })
+      const token = localStorage.getItem("JwtToken");
 
-        }
-      )
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(selectedAnswers)
+      };
+
+      const resp = await fetch('https://hyggexbackend-d2b0.onrender.com/api/v1/test/submit-score', requestOptions);
 
       if (!resp.ok) {
         throw new Error(`HTTP error: ${resp.status}`)
@@ -187,19 +191,15 @@ function TestPage() {
                       {options.length > 0 &&
                         options.map((option, optionIndex) => (
 
-                          <div key={option._id} className="input-wrapper">
+                          <div key={optionIndex} className="input-wrapper">
 
                             <input
                               type="radio"
                               name={`group${questionIndex}`}
                               className="input-box"
-                              checked
-                              onChange={() => {
-                                const updatedSelectedOptions = [...selectedOptions];
-                                updatedSelectedOptions[questionIndex] = optionIndex;
-                                setSelectedOptions(updatedSelectedOptions);
-                              }}
-                              //ref={(el) => (buttonRefs.current[optionIndex] = el)}
+                              //checked
+                              onChange={handleSelectedOptions}
+                              value={option.optionIndex}
                             />
                             <label id="label"
                               className="checked"
