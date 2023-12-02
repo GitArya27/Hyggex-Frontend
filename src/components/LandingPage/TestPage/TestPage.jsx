@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 
 import { book } from "../../../constants/url";
 import { checklist } from "../../../constants/url";
+import { getAuth } from 'firebase'
 import { idea } from "../../../constants/url";
 import { useRef } from "react";
 
@@ -16,7 +17,7 @@ function TestPage() {
   const [sections, setSections] = useState([]);
   const [options, setOptions] = useState([]);
   const [questionsPerPage, setQuestionsPerPage] = useState(5);
-  const [selectedOptions, setSelectedOptions] = useState();
+  const [selectedOptions, setSelectedOptions] = useState([]);
 
   //const buttonRefs = useRef([]);
 
@@ -51,7 +52,6 @@ function TestPage() {
   }, []);
 
   //submit function
-
   const checkUserAuth = () => {
     return new Promise((resolve, reject) => {
       const auth = getAuth();
@@ -65,6 +65,7 @@ function TestPage() {
     });
   };
 
+  //function to submit answers
   const submitScrore = async()=> {
     try {
       const user = await checkUserAuth();
@@ -74,6 +75,7 @@ function TestPage() {
           answer: options[selectedOptionsIndex].optionName
         };
       });
+      console.log(selectedAnswers), 'selected answers';
 
       //const token = localStorage.getItem("JwtToken");
       const token = await user.getIdToken();
@@ -94,11 +96,16 @@ function TestPage() {
       }
       const data = await resp.json();
       console.log(data, 'successfully submitted');
+      console.log(resp.data, 'submitted data');
 
     } catch (error) {
-      console.log(Error, 'error');
+      console.log(error, 'Error occured while submitting');
     }
   }
+
+  useEffect(() => {
+    submitScrore()
+  }, [])
 
 
   const NumOfTotalPages = Math.ceil(sections.length / questionsPerPage);
@@ -118,18 +125,18 @@ function TestPage() {
 
   const nextHandler = () => {
     if (currentPage !== NumOfTotalPages) {
-      setCurrentPage(currentPage + 1);
+      //setCurrentPage(currentPage + 1);
     }
   };
 
   const handleSliderChange = (event) => {
     setSliderValue(event.target.value);
   };
-  const handleSelectedOptions = () => {
+  /*const handleSelectedOptions = () => {
     const updatedOptions = [...selectedOptions];
     updatedOptions[questionIndex] = optionIndex;
     setSelectedOptions(updatedOptions);
-  }
+  }*/
 
 
 
@@ -215,7 +222,11 @@ function TestPage() {
                               name={`group${questionIndex}`}
                               className="input-box"
                               //checked
-                              onChange={handleSelectedOptions}
+                              onChange={() => {
+                                const updatedOptions = [...selectedOptions];
+                                updatedOptions[questionIndex] = optionIndex;
+                                setSelectedOptions(updatedOptions)
+                              }}
                               value={option.optionIndex}
                             />
                             <label id="label"
