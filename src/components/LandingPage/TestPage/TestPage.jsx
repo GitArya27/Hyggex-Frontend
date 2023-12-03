@@ -2,25 +2,27 @@ import "font-awesome/css/font-awesome.min.css";
 import "./TestPage.css";
 
 import React, { useEffect, useState } from "react";
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
+import SignIn from "../../auth/SignIn";
 import { book } from "../../../constants/url";
 import { checklist } from "../../../constants/url";
-import { getAuth } from 'firebase'
 import { idea } from "../../../constants/url";
+import { redirect } from "react-router-dom";
 import { useRef } from "react";
 
 function TestPage() {
   const [sliderValue, setSliderValue] = useState(0);
-  //const [selectedQuestion, setSelectedQuestion] = useState(1);
-  //const [answers, setAnswers] = useState(new Array(30).fill(null));
   const [currentPage, setCurrentPage] = useState(1);
   const [sections, setSections] = useState([]);
   const [options, setOptions] = useState([]);
   const [questionsPerPage, setQuestionsPerPage] = useState(5);
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [loggedInUser, setLoggedInUser] = useState(false);
+
+  // https://hyggexbackend-d2b0.onrender.com//api/v1/test/user-results
 
   //const buttonRefs = useRef([]);
-
 
   //fetching questions/answers
 
@@ -51,7 +53,7 @@ function TestPage() {
     fetchData();
   }, []);
 
-  //submit function
+  //auth function
   const checkUserAuth = () => {
     return new Promise((resolve, reject) => {
       const auth = getAuth();
@@ -59,6 +61,7 @@ function TestPage() {
         if (user) {
           resolve(user);
         } else {
+          redirect('./signIn');
           reject(new Error('User not authenticated.'));
         }
       });
@@ -68,6 +71,10 @@ function TestPage() {
   //function to submit answers
   const submitScrore = async()=> {
     try {
+      if (!loggedInUser) {
+        SignIn();
+        return;
+      };
       const user = await checkUserAuth();
       const selectedAnswers = selectedOptions.map((selectedOptionsIndex, questionIndex) => {
         return {
@@ -75,7 +82,7 @@ function TestPage() {
           answer: options[selectedOptionsIndex].optionName
         };
       });
-      console.log(selectedAnswers), 'selected answers';
+      console.log(selectedAnswers, 'selected answers');
 
       //const token = localStorage.getItem("JwtToken");
       const token = await user.getIdToken();
@@ -97,6 +104,7 @@ function TestPage() {
       const data = await resp.json();
       console.log(data, 'successfully submitted');
       console.log(resp.data, 'submitted data');
+      alert('Successfully submitted');
 
     } catch (error) {
       console.log(error, 'Error occured while submitting');
