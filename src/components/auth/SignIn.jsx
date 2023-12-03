@@ -1,12 +1,26 @@
-import { circle, circle1, circle2, logo1, slide1, slide2, slide3 } from '../../constants/url'
+import { useState } from 'react';  // Import useState hook if not already imported
+import { circle, circle1, logo1, slide1, slide2, slide3 } from '../../constants/url';
 
-import Auth from './Auth'
-import AuthLeft from './AuthLeft'
-import { Link } from 'react-router-dom'
-import PhoneInput from 'react-phone-input-2'
-import React from 'react'
+import Auth from './Auth';
+import AuthLeft from './AuthLeft';
+import { Link } from 'react-router-dom';
+import PhoneInput from 'react-phone-input-2';
+import React from 'react';
+import { getAuth, signOut } from 'firebase/auth'; 
 
 const SignIn = () => {
+  const [user, setUser] = useState();
+
+  const handleLogout = async () => {
+    try {
+      const auth = getAuth();  
+      await signOut(auth);     
+      setUser(null);
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
+
   return (
     <>
       <div className='flex flex-col sm:flex-row  min-h-[100vh]'>
@@ -15,37 +29,43 @@ const SignIn = () => {
         </div>
         <div className='pt-8 pb-10 sm:pt-12 px-10 w-[100%] sm:w-[50%] order-1 sm:order-2'>
           <div>
-          <div id='first-div' className="my-5 text-center">
-                <h1 id="h1" className="text-blue-600 font-bold pb-5">Login</h1>
+            <div id='first-div' className="my-5 text-center">
+              <h1 id="h1" className="text-blue-600 font-bold pb-5">Login</h1>
             </div>
 
-              <div className='flex flex-row justify-center'>
-                <img src={circle1} alt="dotted circle" className='w-6 h-6' />
-                <span className='text-blue-600'>--------------------------</span>
-                <img className='w-6 h-6' src={circle} alt="circle" />
-              </div>
+            <div className='flex flex-row justify-center'>
+              <img src={circle1} alt="dotted circle" className='w-6 h-6' />
+              <span className='text-blue-600'>--------------------------</span>
+              <img className='w-6 h-6' src={circle} alt="circle" />
+            </div>
 
-              <div className="flex flex-row justify-evenly mt-2 md:mt-2 text-gray-600" id='second-div'>
-                <span className='text-xs mr-[4rem] text-blue-600 font-medium'>Enter Number</span>
-                <span className='text-xs '>Verify</span>
-              </div>
-              <p
-                className="my-8 sm:my-8 text-gray-600 text-xs text-center"
-                id='profile-details'
-              >
-                Enter your mobile number to continue your journey
-              </p>
+            <div className="flex flex-row justify-evenly mt-2 md:mt-2 text-gray-600" id='second-div'>
+              <span className='text-xs mr-[4rem] text-blue-600 font-medium'>Enter Number</span>
+              <span className='text-xs '>Verify</span>
+            </div>
+            <p
+              className="my-8 sm:my-8 text-gray-600 text-xs text-center"
+              id='profile-details'
+            >
+              Enter your mobile number to continue your journey
+            </p>
 
             <Auth />
-            <span id="link-span" className="text-gray-600 flex items-center justify-center text-center mx-auto text-xs">
-                Don't have an account?   <Link id="link-to-register" to="/signUp" className="text-center no-underline text-xs text-blue-600 font-medium">  Sign Up</Link>
-               </span>
-          </div>
 
+            {user ? (  // Render logout button if user is logged in
+              <button onClick={handleLogout} className="my-4 flex justify-center text-xs m-auto bg-red-600 text-black py-2 px-4 rounded-full hover:bg-red-600">
+                Logout
+              </button>
+            ) : (
+              <span id="link-span" className="text-gray-600 flex items-center justify-center text-center mx-auto text-xs">
+                Don't have an account?   <Link id="link-to-register" to="/signUp" className="text-center no-underline text-xs text-blue-600 font-medium">  Sign Up</Link>
+              </span>
+            )}
+          </div>
         </div>
       </div>
     </>
-  )
+  );
 }
 
 export default SignIn;
