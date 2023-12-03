@@ -9,16 +9,19 @@ import { book } from "../../../constants/url";
 import { checklist } from "../../../constants/url";
 import { idea } from "../../../constants/url";
 import { redirect } from "react-router-dom";
+import { useAuth } from "../../auth/AuthContext";
 import { useRef } from "react";
 
 function TestPage() {
+  const { login } = useAuth;
   const [sliderValue, setSliderValue] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [sections, setSections] = useState([]);
   const [options, setOptions] = useState([]);
   const [questionsPerPage, setQuestionsPerPage] = useState(5);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [loggedInUser, setLoggedInUser] = useState(false);
+  const [isAuthenticated, setAuthenticated] = useState(!!localStorage.getItem("jwtToken"));
+
 
   // https://hyggexbackend-d2b0.onrender.com//api/v1/test/user-results
 
@@ -69,13 +72,10 @@ function TestPage() {
   };
 
   //function to submit answers
+
   const submitScrore = async()=> {
     try {
-      if (!loggedInUser) {
-        SignIn();
-        return;
-      };
-      const user = await checkUserAuth();
+      //const user = await checkUserAuth();
       const selectedAnswers = selectedOptions.map((selectedOptionsIndex, questionIndex) => {
         return {
           question: sections[questionIndex].questions[questionIndex].question,
@@ -84,9 +84,7 @@ function TestPage() {
       });
       console.log(selectedAnswers, 'selected answers');
 
-      //const token = localStorage.getItem("JwtToken");
-      const token = await user.getIdToken();
-
+      const token = localStorage.getItem("JwtToken");
       const requestOptions = {
         method: "POST",
         headers: {
@@ -112,8 +110,19 @@ function TestPage() {
   }
 
   useEffect(() => {
-    submitScrore()
+
+
+
   }, [])
+  const Sub = () => {
+    const token = localStorage.getItem("JwtToken");
+    if (!token) {
+      window.location.href = "../SignIn";
+    } else {
+      //window.location.href = "../signIn";
+      submitScrore();
+    }
+  }
 
 
   const NumOfTotalPages = Math.ceil(sections.length / questionsPerPage);
@@ -269,7 +278,7 @@ function TestPage() {
             </button>*/}
       </div>
       <div className="flex justify-center">
-        <button className="bg-blue-900 mb-8 px-3 py-2 border rounded-2xl text-blue-100" onClick={submitScrore}>Submit Answers</button>
+        <button className="bg-blue-900 mb-8 px-3 py-2 border rounded-2xl text-blue-100" onClick={Sub}>Submit Answers</button>
       </div>
     </div>
   );
