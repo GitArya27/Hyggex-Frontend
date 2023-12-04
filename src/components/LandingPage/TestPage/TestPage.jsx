@@ -17,13 +17,15 @@ function TestPage() {
   const [sliderValue, setSliderValue] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [sections, setSections] = useState([]);
+  const [isection, setSection] = useState([]);
   const [options, setOptions] = useState([]);
   const [questionsPerPage, setQuestionsPerPage] = useState(5);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [isAuthenticated, setAuthenticated] = useState(!!localStorage.getItem("jwtToken"));
   const [data, setData] = useState([]);
   const [radio, setRadio] = useState();
-
+  // let count =0;
+  const [countsection , updatesectionid] = useState(1);
 
   // https://hyggexbackend-d2b0.onrender.com//api/v1/test/user-results
 
@@ -44,6 +46,7 @@ function TestPage() {
         console.log(data);
         setSections(data.section || []);
         setOptions(data.options || []);
+        setSection([data.section[0]] || []);
 
         //data.section.forEach(section => {
           //console.log('Section: ', section.sectionName);
@@ -54,7 +57,7 @@ function TestPage() {
         console.error('Error:', error);
       }
     };
-    console.log(sections);
+    console.log("sections",sections);
     fetchData();
   }, []);
 
@@ -188,6 +191,11 @@ function TestPage() {
   };
 
   const nextHandler = () => {
+    if(countsection <= currentQuestions.length){
+      updatesectionid(countsection + 1);
+      console.log(countsection);
+      setSection([sections[countsection]] || []);
+    }
     if (currentPage !== NumOfTotalPages) {
       //setCurrentPage(currentPage + 1);
     }
@@ -260,11 +268,9 @@ function TestPage() {
         </div>
       </div>
 
-      <div><br /><br />
-
-
+      <div><br/><br />
         {currentQuestions.length > 0 &&
-        sections.map((section, sectionIndex) => (
+        isection.map((section, sectionIndex) => (
           <div key={sectionIndex} className="wrap">
             <h3 className="Read">{section.sectionName}</h3>
             <hr /><br />
