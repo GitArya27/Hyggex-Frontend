@@ -44,7 +44,7 @@ const Hero = () => {
               </span>
             </h1> */}
             <div className="text-primary text-[2.27rem]  font-medium flex">
-                       
+
             <span className="">
                 {words.map((word, index) => {
                   let styles =
@@ -68,19 +68,19 @@ const Hero = () => {
                   );
                 })}
               </span>
-          
+
               <span className={`mt-3 mr-2 ml-[9.6rem] text-[#FF6E41] text-[2rem] `}>With</span>
               {" "}
-              <span className=" mt-2 font-bold">Hyggex</span>   
+              <span className=" mt-2 font-bold">Hyggex</span>
             </div>
-            
+
           </div>
           <div className=" w-[24.20rem]  h-[4rem] pt-[0.67rem] text-justify">
             <p className=" text-[0.81rem]">
             In just 10 minutes, unlock 'astoundingly precise' insights into your study habits and future success with our Adaptive Learning Assessment.            </p>
-          </div>
+          </div>{/*https://test.hyggexworld.com/*/}
           <div className="flex  ">
-            <a href="https://test.hyggexworld.com/">
+            <a href="../test">
             <button className=" border-4 border-blue-200 border-opacity-70 text-[0.81rem] justify-center align-center  group xs:mt-[5rem] ss:mt-[3rem] flex items-center relative w-[11.9rem] h-[2.63rem] bg-blue-800 rounded-[33px] text-white hover:bg-blue-600">
                Start Your Assessment
               {/* <span className="absolute right-1 flex items-center justify-center w-[1.83rem] h-[1.83rem] bg-stone-50 rounded-full transition-transform duration-300 group-hover:right-3 z-0">
@@ -113,11 +113,11 @@ const Hero = () => {
             </button>
             </a>
             <div
-              className="ss:ml-[15.9rem] xs:ml-[13.5rem] xs:mt-[2.3rem]  ss:mt-[0.8rem] absolute origin-top-left rotate-[-5.03deg] font-LaBelleAurore text-center text-[#06286E] 
-                 
+              className="ss:ml-[15.9rem] xs:ml-[13.5rem] xs:mt-[2.3rem]  ss:mt-[0.8rem] absolute origin-top-left rotate-[-5.03deg] font-LaBelleAurore text-center text-[#06286E]
+
                 text-[1.52rem]"
             >
-              Step into the Future of 
+              Step into the Future of
               <br />
               Learning.
             </div>
