@@ -255,7 +255,7 @@ function TestPage() {
                                 updatedOptions[questionIndex] = optionIndex;
                                 setSelectedOptions(updatedOptions)*/
 
-                              value="hello"
+                              value={option.optionName}
                             />
                             <label id="label"
                               className="checked"
