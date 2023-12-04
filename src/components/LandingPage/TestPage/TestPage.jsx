@@ -62,7 +62,7 @@ function TestPage() {
     //console.log(e.target.value);
   //}
   const handleClick = () => {
-    console.log(radio, "hello");
+    console.log(radio, "hellooooo");
   }
   //auth function
   /*const checkUserAuth = () => {
@@ -249,13 +249,13 @@ function TestPage() {
                               className="input-box"
                               //checked
                               name="radio"
-                              onChange={e => setRadio(e.target.value)}
+                              onChange={(e) => setRadio(e.target.value)}
 
                                 /*const updatedOptions = [...selectedOptions];
                                 updatedOptions[questionIndex] = optionIndex;
                                 setSelectedOptions(updatedOptions)*/
 
-                              value="hello"
+                              value={option.optionName}
                             />
                             <label id="label"
                               className="checked"
