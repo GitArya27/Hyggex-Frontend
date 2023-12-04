@@ -1,49 +1,179 @@
-import React, { useState } from "react";
 import "font-awesome/css/font-awesome.min.css";
 import "./TestPage.css";
+
+import React, { useEffect, useState } from "react";
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+
+import SignIn from "../../auth/SignIn";
+import { book } from "../../../constants/url";
 import { checklist } from "../../../constants/url";
 import { idea } from "../../../constants/url";
-import { book } from "../../../constants/url";
+import { redirect } from "react-router-dom";
+import { useAuth } from "../../auth/AuthContext";
+import { useRef } from "react";
 
 function TestPage() {
+  const { login } = useAuth;
   const [sliderValue, setSliderValue] = useState(0);
-  const [selectedQuestion, setSelectedQuestion] = useState(1);
-  const [answers, setAnswers] = useState(new Array(60).fill(null));
   const [currentPage, setCurrentPage] = useState(1);
+  const [sections, setSections] = useState([]);
+  const [options, setOptions] = useState([]);
+  const [questionsPerPage, setQuestionsPerPage] = useState(5);
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [isAuthenticated, setAuthenticated] = useState(!!localStorage.getItem("jwtToken"));
+  const [data, setData] = useState([]);
+  const [radio, setRadio] = useState();
+
+
+  // https://hyggexbackend-d2b0.onrender.com//api/v1/test/user-results
+
+  //const buttonRefs = useRef([]);
+
+  //fetching questions/answers
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          'https://hyggexbackend-d2b0.onrender.com/api/v1/test/tests/Reading%20Assessment%20Test'
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log(data);
+        setSections(data.section || []);
+        setOptions(data.options || []);
+
+        //data.section.forEach(section => {
+          //console.log('Section: ', section.sectionName);
+          //console.log('Questions here: ', section.questions);
+        //});
+
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+    console.log(sections);
+    fetchData();
+  }, []);
+
+  //const handleChange = (e) => {
+    //console.log(e.target.value);
+  //}
+  const handleClick = () => {
+    console.log(radio, "hello");
+  }
+  //auth function
+  /*const checkUserAuth = () => {
+    return new Promise((resolve, reject) => {
+      const auth = getAuth();
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          resolve(user);
+        } else {
+          redirect('./signIn');
+          reject(new Error('User not authenticated.'));
+        }
+      });
+    });
+  };*/
+
+  //function to submit answers
+  /*const submitScrore = async()=> {
+    try {
+      //const user = await checkUserAuth();
+      const selectedAnswers = selectedOptions.map((selectedOptionsIndex, questionIndex) => {
+        return {
+          question: sections[questionIndex].questions[questionIndex].question,
+          answer: options[selectedOptionsIndex].optionName
+        };
+      });
+      console.log(selectedAnswers, 'selected answers');
+
+      const token = localStorage.getItem("JwtToken");
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(selectedAnswers)
+      };
+
+      const resp = await fetch('https://hyggexbackend-d2b0.onrender.com/api/v1/test/submit-score', requestOptions);
+
+      if (!resp.ok) {
+        throw new Error(`HTTP error: ${resp.status}`)
+      }
+      const data = await resp.json();
+      console.log(data, 'successfully submitted');
+      console.log(resp.data, 'submitted data');
+      alert('Successfully submitted');
+
+    } catch (error) {
+      console.log(error, 'Error occured while submitting');
+    }
+  }
+
+  useEffect(() => {
+
+    //Sub();
+
+  }, [])
+  const Sub = () => {
+    const token = localStorage.getItem("JwtToken");
+    if (!token) {
+      window.location.href = "../SignIn";
+    } else {
+      //window.location.href = "../signIn";
+      submitScrore();
+    }
+    submitScrore();
+    console.log(data, 'data');
+  }*/
+
+
+  const NumOfTotalPages = Math.ceil(sections.length / questionsPerPage);
+
+  const pages = [...Array(NumOfTotalPages + 1).keys()].slice(1);
+
+  const indexOfLastQuestion = currentPage * questionsPerPage;
+  const indexOfFirstQuestion = indexOfLastQuestion - questionsPerPage;
+  const currentQuestions = sections.slice(indexOfFirstQuestion, indexOfLastQuestion);
+  //console.log(currentQuestions, 'currentquestions');
+
+  const previousHandler = () => {
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const nextHandler = () => {
+    if (currentPage !== NumOfTotalPages) {
+      //setCurrentPage(currentPage + 1);
+    }
+  };
 
   const handleSliderChange = (event) => {
     setSliderValue(event.target.value);
   };
+  /*const handleSelectedOptions = () => {
+    const updatedOptions = [...selectedOptions];
+    updatedOptions[questionIndex] = optionIndex;
+    setSelectedOptions(updatedOptions);
+  }*/
 
-  const handleQuestionChange = (questionNumber) => {
-    setSelectedQuestion(questionNumber);
-  };
 
-  const handleAnswerSelect = (questionNumber, answer) => {
-    const updatedAnswers = [...answers];
-    updatedAnswers[questionNumber - 1] = answer;
-    setAnswers(updatedAnswers);
-  };
 
-  const initialQuestions = [
-    "How often do you struggle to understand what you're reading during your study sessions?",
-    "How often do you struggle to understand what you're reading during your study sessions?",
-    "How often do you struggle to understand what you're reading during your study sessions?",
-    "How often do you struggle to understand what you're reading during your study sessions?",
-    "How often do you struggle to understand what you're reading during your study sessions?",
-  ];
 
-  const questionsPerPage = 5;
-  const firstQuestion = (currentPage - 1) * questionsPerPage;
+  let questionCount = indexOfFirstQuestion;
+  const button = useRef();
 
-  const questions = initialQuestions.map((question, index) => ({
-    text: question,
-    number: firstQuestion + index + 1,
-  }));
 
   return (
     <div>
-   <div className="head">
+      <div className="head">
         <h1 className="h1">Free Reading Assessment</h1>
         <p>HyggeX Assessment Explorer &reg;</p>
       </div>
@@ -91,103 +221,77 @@ function TestPage() {
           <div id="slider-value">{sliderValue}%</div>
         </div>
       </div>
-      <div>
-        <h6 className="Read">Reading Comprehension</h6>
-        <hr />
-        {questions.map((question) => (
-          <Question
-            key={question.number}
-            number={question.number}
-            text={question.text}
-            selected={question.number === selectedQuestion}
-            handleQuestionChange={handleQuestionChange}
-            handleAnswerSelect={handleAnswerSelect}
-            answer={answers[question.number - 1]}
-          />
+
+      <div><br /><br />
+
+
+        {/*currentQuestions.length > 0 &&*/}{
+        sections.map((section, sectionIndex) => (
+          <div key={sectionIndex} className="wrap">
+            <h3 className="Read">{section.sectionName}</h3>
+            <hr /><br />
+            <ul>
+              {section.questions.map((question, questionIndex) => {
+                questionCount++;
+                return (
+                  <li key={question._id}>
+                    <h5 className="quest-head">{`${questionCount}.${question.question}`}</h5>
+
+                    <div className="option-holder">
+                      {options.length > 0 &&
+                        options.map((option, optionIndex) => (
+
+                          <div key={optionIndex} className="input-wrapper">
+
+                            <input
+                              type="radio"
+                              //name={`group${questionIndex}`}
+                              className="input-box"
+                              //checked
+                              name="radio"
+                              onChange={e => setRadio(e.target.value)}
+
+                                /*const updatedOptions = [...selectedOptions];
+                                updatedOptions[questionIndex] = optionIndex;
+                                setSelectedOptions(updatedOptions)*/
+
+                              value="hello"
+                            />
+                            <label id="label"
+                              className="checked"
+                            >
+                              {option.optionName}
+                            </label>
+                            </div>
+
+                        ))}
+                    </div>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
         ))}
       </div>
-      <div className="button-container">
-        {selectedQuestion <= 60 && (
-          <button
-            className="next"
-            onClick={() => setCurrentPage(currentPage + 1)}
-          >
-            Next <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
-          </button>
-        )}
+      <div className="button-container flex justify-center">
+        <button
+          className="next"
+          onClick={nextHandler}
+        >
+          Next <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+        </button>
+
+        {/*<button
+          className="next"
+          onClick={previousHandler}
+        >
+          Prev <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+            </button>*/}
+      </div>
+      <div className="flex justify-center">
+        <button className="bg-blue-900 mb-8 px-3 py-2 border rounded-2xl text-blue-100" onClick={handleClick()}>Submit Answers</button>
       </div>
     </div>
   );
 }
-
-function Question({ number, text, handleAnswerSelect, answer }) {
-  return (
-    <div>
-      <h5 className="question">
-        {number}. {text}
-      </h5>
-      <div className="radio-btn">
-        <input
-          type="radio"
-          id={`Never${number}`}
-          name={`choose${number}`}
-          value="Never"
-          checked={answer === "Never"}
-          onChange={() => handleAnswerSelect(number, "Never")}
-          className="never-input"
-        />
-        <label htmlFor={`Never${number}`}>Never</label>
-
-        <input
-          type="radio"
-          id={`Rarely${number}`}
-          name={`choose${number}`}
-          value="Rarely"
-          checked={answer === "Rarely"}
-          onChange={() => handleAnswerSelect(number, "Rarely")}
-          className="rarely-input"
-        />
-        <label htmlFor={`Rarely${number}`}>Rarely</label>
-
-        <input
-          type="radio"
-          id={`Sometimes${number}`}
-          name={`choose${number}`}
-          value="Sometimes"
-          checked={answer === "Sometimes"}
-          onChange={() => handleAnswerSelect(number, "Sometimes")}
-          className="sometimes-input"
-        />
-        <label className="sometimes" htmlFor={`Sometimes${number}`}>
-          Sometimes
-        </label>
-
-        <input
-          type="radio"
-          id={`Often${number}`}
-          name={`choose${number}`}
-          value="Often"
-          checked={answer === "Often"}
-          onChange={() => handleAnswerSelect(number, "Often")}
-          className="often-input"
-        />
-        <label className="often" htmlFor={`Often${number}`}>
-          Often
-        </label>
-
-        <input
-          type="radio"
-          id={`Always${number}`}
-          name={`choose${number}`}
-          value="Always"
-          checked={answer === "Always"}
-          onChange={() => handleAnswerSelect(number, "Always")}
-          className="always-input"
-        />
-        <label htmlFor={`Always${number}`}>Always</label>
-      </div>
-    </div>
-  );
-}
-
 export default TestPage;
