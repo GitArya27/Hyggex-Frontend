@@ -10,6 +10,7 @@ import React from "react";
 import SignIn from "../components/auth/SignIn";
 import SignUp from "../components/auth/SignUp";
 import TestPage from "../components/LandingPage/TestPage/TestPage";
+import TestResult from "../components/LandingPage/TestResult/TestResult";
 
 //import SignUp from "../components/signUp/signUp"
 
@@ -27,6 +28,10 @@ export const router =createBrowserRouter(
         {
             path: "/test",
             element:<TestPage/>
+        },
+        {
+            path:'/testResult',
+            element: <TestResult/>
         }
             ]
     },
@@ -41,7 +46,8 @@ export const router =createBrowserRouter(
     {
         path:'/signIn',
         element: <SignIn/>
-    }
+    },
+
 
 
 
