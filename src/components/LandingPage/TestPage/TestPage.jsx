@@ -21,6 +21,8 @@ function TestPage() {
   const [questionsPerPage, setQuestionsPerPage] = useState(5);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [isAuthenticated, setAuthenticated] = useState(!!localStorage.getItem("jwtToken"));
+  const [data, setData] = useState([]);
+  const [radio, setRadio] = useState();
 
 
   // https://hyggexbackend-d2b0.onrender.com//api/v1/test/user-results
@@ -52,12 +54,18 @@ function TestPage() {
         console.error('Error:', error);
       }
     };
-
+    console.log(sections);
     fetchData();
   }, []);
 
+  //const handleChange = (e) => {
+    //console.log(e.target.value);
+  //}
+  const handleClick = () => {
+    console.log(radio, "hello");
+  }
   //auth function
-  const checkUserAuth = () => {
+  /*const checkUserAuth = () => {
     return new Promise((resolve, reject) => {
       const auth = getAuth();
       onAuthStateChanged(auth, (user) => {
@@ -69,11 +77,10 @@ function TestPage() {
         }
       });
     });
-  };
+  };*/
 
   //function to submit answers
-
-  const submitScrore = async()=> {
+  /*const submitScrore = async()=> {
     try {
       //const user = await checkUserAuth();
       const selectedAnswers = selectedOptions.map((selectedOptionsIndex, questionIndex) => {
@@ -111,7 +118,7 @@ function TestPage() {
 
   useEffect(() => {
 
-
+    //Sub();
 
   }, [])
   const Sub = () => {
@@ -122,7 +129,9 @@ function TestPage() {
       //window.location.href = "../signIn";
       submitScrore();
     }
-  }
+    submitScrore();
+    console.log(data, 'data');
+  }*/
 
 
   const NumOfTotalPages = Math.ceil(sections.length / questionsPerPage);
@@ -236,15 +245,17 @@ function TestPage() {
 
                             <input
                               type="radio"
-                              name={`group${questionIndex}`}
+                              //name={`group${questionIndex}`}
                               className="input-box"
                               //checked
-                              onChange={() => {
-                                const updatedOptions = [...selectedOptions];
+                              name="radio"
+                              onChange={e => setRadio(e.target.value)}
+
+                                /*const updatedOptions = [...selectedOptions];
                                 updatedOptions[questionIndex] = optionIndex;
-                                setSelectedOptions(updatedOptions)
-                              }}
-                              value={option.optionIndex}
+                                setSelectedOptions(updatedOptions)*/
+
+                              value="hello"
                             />
                             <label id="label"
                               className="checked"
@@ -278,7 +289,7 @@ function TestPage() {
             </button>*/}
       </div>
       <div className="flex justify-center">
-        <button className="bg-blue-900 mb-8 px-3 py-2 border rounded-2xl text-blue-100" onClick={Sub}>Submit Answers</button>
+        <button className="bg-blue-900 mb-8 px-3 py-2 border rounded-2xl text-blue-100" onClick={handleClick()}>Submit Answers</button>
       </div>
     </div>
   );
