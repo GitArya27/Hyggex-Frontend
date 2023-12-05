@@ -17,13 +17,15 @@ function TestPage() {
   const [sliderValue, setSliderValue] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [sections, setSections] = useState([]);
+  const [isection, setSection] = useState([]);
   const [options, setOptions] = useState([]);
   const [questionsPerPage, setQuestionsPerPage] = useState(5);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [isAuthenticated, setAuthenticated] = useState(!!localStorage.getItem("jwtToken"));
   const [data, setData] = useState([]);
   const [radio, setRadio] = useState();
-
+  // let count =0;
+  const [countsection , updatesectionid] = useState(1);
 
   // https://hyggexbackend-d2b0.onrender.com//api/v1/test/user-results
 
@@ -44,6 +46,7 @@ function TestPage() {
         console.log(data);
         setSections(data.section || []);
         setOptions(data.options || []);
+        setSection([data.section[0]] || []);
 
         //data.section.forEach(section => {
           //console.log('Section: ', section.sectionName);
@@ -54,16 +57,54 @@ function TestPage() {
         console.error('Error:', error);
       }
     };
-    console.log(sections);
+    console.log("sections",sections);
     fetchData();
   }, []);
 
-  //const handleChange = (e) => {
-    //console.log(e.target.value);
+
   //}
   const handleClick = () => {
-    console.log(radio, "hellooooo");
+    console.log(radio, "hello");
   }
+  handleClick();
+
+  const submitAnswers = async () => {
+    try {
+      const selectedAnswers = sections.map((section, sectionIndex) =>
+        section.questions.map((question, questionIndex) => ({
+          question: question.question,
+          answer: options[selectedOptions[sectionIndex]]?.optionName || radio || null,
+        }))
+      );
+
+      const token = localStorage.getItem('JwtToken');
+
+      const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(selectedAnswers),
+      };
+
+      const resp = await fetch('https://hyggexbackend-d2b0.onrender.com/api/v1/test/submit-score', requestOptions);
+
+      if (!resp.ok) {
+        throw new Error(`HTTP error: ${resp.status}`);
+      }
+
+      const data = await resp.json();
+      console.log(data, 'successfully submitted');
+      alert('Successfully submitted');
+    } catch (error) {
+      console.error(error, 'Error occurred while submitting');
+    }
+  };
+
+
+
+
   //auth function
   /*const checkUserAuth = () => {
     return new Promise((resolve, reject) => {
@@ -80,7 +121,7 @@ function TestPage() {
   };*/
 
   //function to submit answers
-  /*const submitScrore = async()=> {
+  const submitScrore = async()=> {
     try {
       //const user = await checkUserAuth();
       const selectedAnswers = selectedOptions.map((selectedOptionsIndex, questionIndex) => {
@@ -131,7 +172,7 @@ function TestPage() {
     }
     submitScrore();
     console.log(data, 'data');
-  }*/
+  }
 
 
   const NumOfTotalPages = Math.ceil(sections.length / questionsPerPage);
@@ -150,6 +191,11 @@ function TestPage() {
   };
 
   const nextHandler = () => {
+    if(countsection <= currentQuestions.length){
+      updatesectionid(countsection + 1);
+      console.log(countsection);
+      setSection([sections[countsection]] || []);
+    }
     if (currentPage !== NumOfTotalPages) {
       //setCurrentPage(currentPage + 1);
     }
@@ -222,20 +268,18 @@ function TestPage() {
         </div>
       </div>
 
-      <div><br /><br />
-
-
-        {/*currentQuestions.length > 0 &&*/}{
-        sections.map((section, sectionIndex) => (
+      <div><br/><br />
+        {currentQuestions.length > 0 &&
+        isection.map((section, sectionIndex) => (
           <div key={sectionIndex} className="wrap">
             <h3 className="Read">{section.sectionName}</h3>
             <hr /><br />
             <ul>
               {section.questions.map((question, questionIndex) => {
-                questionCount++;
+                const Question = 5*(countsection-1) + questionIndex + 1
                 return (
                   <li key={question._id}>
-                    <h5 className="quest-head">{`${questionCount}.${question.question}`}</h5>
+                    <h5 className="quest-head">{`${Question}.${question.question}`}</h5>
 
                     <div className="option-holder">
                       {options.length > 0 &&
@@ -248,8 +292,9 @@ function TestPage() {
                               //name={`group${questionIndex}`}
                               className="input-box"
                               //checked
+                              required
                               name="radio"
-                              onChange={(e) => setRadio(e.target.value)}
+                              onChange={e => setRadio(e.target.value)}
 
                                 /*const updatedOptions = [...selectedOptions];
                                 updatedOptions[questionIndex] = optionIndex;
@@ -289,7 +334,7 @@ function TestPage() {
             </button>*/}
       </div>
       <div className="flex justify-center">
-        <button className="bg-blue-900 mb-8 px-3 py-2 border rounded-2xl text-blue-100" onClick={handleClick()}>Submit Answers</button>
+        <button className="bg-blue-900 mb-8 px-3 py-2 border rounded-2xl text-blue-100" onClick={ submitAnswers}>Submit Answers</button>
       </div>
     </div>
   );
