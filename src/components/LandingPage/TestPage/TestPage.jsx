@@ -311,9 +311,9 @@ function TestPage() {
           Prev <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
             </button>*/}
       </div>
-      <div className="flex justify-center">
+      {/*<div className="flex justify-center">
         <button className="bg-blue-900 mb-8 px-3 py-2 border rounded-2xl text-blue-100" onClick={ submitAnswers}>Submit Answers</button>
-      </div>
+          </div>*/}
     </div>
   );
 }
