@@ -48,11 +48,6 @@ function TestPage() {
         setOptions(data.options || []);
         setSection([data.section[0]] || []);
 
-        //data.section.forEach(section => {
-          //console.log('Section: ', section.sectionName);
-          //console.log('Questions here: ', section.questions);
-        //});
-
       } catch (error) {
         console.error('Error:', error);
       }
@@ -102,23 +97,6 @@ function TestPage() {
     }
   };
 
-
-
-
-  //auth function
-  /*const checkUserAuth = () => {
-    return new Promise((resolve, reject) => {
-      const auth = getAuth();
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          resolve(user);
-        } else {
-          redirect('./signIn');
-          reject(new Error('User not authenticated.'));
-        }
-      });
-    });
-  };*/
 
   //function to submit answers
   const submitScrore = async()=> {
