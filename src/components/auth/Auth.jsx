@@ -163,7 +163,7 @@ function Auth() {
         }
       );
       if (response.data.success) {
-        console.log(response.data);
+        console.log(response.data, 'logged in');
         if (response.data.status === "loggedIn") {
           alert("Logged In Successfully!");
           toast.success("successfully logged in");

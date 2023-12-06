@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 import SignIn from "../../auth/SignIn";
+import axios from "axios";
 import { book } from "../../../constants/url";
 import { checklist } from "../../../constants/url";
 import { idea } from "../../../constants/url";
@@ -13,7 +14,7 @@ import { useAuth } from "../../auth/AuthContext";
 import { useRef } from "react";
 
 function TestPage() {
-  const { login } = useAuth;
+  const { logout } = useAuth();
   const [sliderValue, setSliderValue] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [sections, setSections] = useState([]);
@@ -24,29 +25,22 @@ function TestPage() {
   const [isAuthenticated, setAuthenticated] = useState(!!localStorage.getItem("jwtToken"));
   const [data, setData] = useState([]);
   const [radio, setRadio] = useState();
-  // let count =0;
-  const [countsection , updatesectionid] = useState(1);
+  const [countsection, updatesectionid] = useState(1);
+
 
   // https://hyggexbackend-d2b0.onrender.com//api/v1/test/user-results
 
-  //const buttonRefs = useRef([]);
-
   //fetching questions/answers
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          'https://hyggexbackend-d2b0.onrender.com/api/v1/test/tests/Reading%20Assessment%20Test'
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log(data);
-        setSections(data.section || []);
-        setOptions(data.options || []);
-        setSection([data.section[0]] || []);
+        const response = await axios.get('https://hyggexbackend-d2b0.onrender.com/api/v1/test/tests/Reading%20Assessment%20Test');
+
+        const result = response.data;
+        console.log(result);
+        setSections(result.section || []);
+        setOptions(result.options || []);
+        setSection([result.section[0]] || []);
 
       } catch (error) {
         console.error('Error:', error);
@@ -57,39 +51,36 @@ function TestPage() {
   }, []);
 
 
-  //}
-  const handleClick = () => {
-    console.log(radio, "hello");
-  }
-  handleClick();
+  //submit answer function
 
   const submitAnswers = async () => {
+
     try {
+      const token = localStorage.getItem('jwtToken');
+
+      if (!token) {
+        logout(); // Redirect to signIn if not logged in
+        return;
+      }
+
       const selectedAnswers = sections.map((section, sectionIndex) =>
         section.questions.map((question, questionIndex) => ({
           question: question.question,
           answer: options[selectedOptions[sectionIndex]]?.optionName || radio || null,
         }))
       );
-
-      const token = localStorage.getItem('JwtToken');
+      console.log(selectedAnswers, 'selected answers are here');
 
       const requestOptions = {
-        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(selectedAnswers),
       };
 
-      const resp = await fetch('https://hyggexbackend-d2b0.onrender.com/api/v1/test/submit-score', requestOptions);
+      const resp = await axios.post('https://hyggexbackend-d2b0.onrender.com/api/v1/test/submit-score', selectedAnswers, requestOptions);
 
-      if (!resp.ok) {
-        throw new Error(`HTTP error: ${resp.status}`);
-      }
-
-      const data = await resp.json();
+      const data = resp.data;
       console.log(data, 'successfully submitted');
       alert('Successfully submitted');
     } catch (error) {
@@ -97,64 +88,14 @@ function TestPage() {
     }
   };
 
-
-  //function to submit answers
-  const submitScrore = async()=> {
-    try {
-      //const user = await checkUserAuth();
-      const selectedAnswers = selectedOptions.map((selectedOptionsIndex, questionIndex) => {
-        return {
-          question: sections[questionIndex].questions[questionIndex].question,
-          answer: options[selectedOptionsIndex].optionName
-        };
-      });
-      console.log(selectedAnswers, 'selected answers');
-
-      const token = localStorage.getItem("JwtToken");
-      const requestOptions = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify(selectedAnswers)
-      };
-
-      const resp = await fetch('https://hyggexbackend-d2b0.onrender.com/api/v1/test/submit-score', requestOptions);
-
-      if (!resp.ok) {
-        throw new Error(`HTTP error: ${resp.status}`)
-      }
-      const data = await resp.json();
-      console.log(data, 'successfully submitted');
-      console.log(resp.data, 'submitted data');
-      alert('Successfully submitted');
-
-    } catch (error) {
-      console.log(error, 'Error occured while submitting');
-    }
-  }
-
   useEffect(() => {
+    submitAnswers();
+  }, []);
 
-    //Sub();
 
-  }, [])
-  const Sub = () => {
-    const token = localStorage.getItem("JwtToken");
-    if (!token) {
-      window.location.href = "../SignIn";
-    } else {
-      //window.location.href = "../signIn";
-      submitScrore();
-    }
-    submitScrore();
-    console.log(data, 'data');
-  }
 
 
   const NumOfTotalPages = Math.ceil(sections.length / questionsPerPage);
-
   const pages = [...Array(NumOfTotalPages + 1).keys()].slice(1);
 
   const indexOfLastQuestion = currentPage * questionsPerPage;
@@ -179,20 +120,18 @@ function TestPage() {
     }
   };
 
+  const handleClick = () => {
+    console.log(radio, "hello");
+  }
+  handleClick();
+
   const handleSliderChange = (event) => {
     setSliderValue(event.target.value);
   };
-  /*const handleSelectedOptions = () => {
-    const updatedOptions = [...selectedOptions];
-    updatedOptions[questionIndex] = optionIndex;
-    setSelectedOptions(updatedOptions);
-  }*/
 
 
-
-
-  let questionCount = indexOfFirstQuestion;
-  const button = useRef();
+  //let questionCount = indexOfFirstQuestion;
+  //const button = useRef();
 
 
   return (
@@ -311,9 +250,9 @@ function TestPage() {
           Prev <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
             </button>*/}
       </div>
-      {/*<div className="flex justify-center">
+      <div className="flex justify-center">
         <button className="bg-blue-900 mb-8 px-3 py-2 border rounded-2xl text-blue-100" onClick={ submitAnswers}>Submit Answers</button>
-          </div>*/}
+          </div>
     </div>
   );
 }
