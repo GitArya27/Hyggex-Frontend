@@ -4,17 +4,17 @@ import "./TestPage.css";
 import React, { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
+import { Redirect } from "react-router-dom";
 import SignIn from "../../auth/SignIn";
 import axios from "axios";
 import { book } from "../../../constants/url";
 import { checklist } from "../../../constants/url";
 import { idea } from "../../../constants/url";
-import { redirect } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
 import { useRef } from "react";
 
 function TestPage() {
-  const { logout } = useAuth();
+  const { logout, isAuthenticated } = useAuth();
   const [sliderValue, setSliderValue] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [sections, setSections] = useState([]);
@@ -22,7 +22,7 @@ function TestPage() {
   const [options, setOptions] = useState([]);
   const [questionsPerPage, setQuestionsPerPage] = useState(5);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [isAuthenticated, setAuthenticated] = useState(!!localStorage.getItem("jwtToken"));
+  //const [isAuthenticated, setAuthenticated] = useState(!!localStorage.getItem("jwtToken"));
   const [data, setData] = useState([]);
   const [radio, setRadio] = useState();
   const [countsection, updatesectionid] = useState(1);
@@ -58,10 +58,10 @@ function TestPage() {
     try {
       const token = localStorage.getItem('jwtToken');
 
-      if (!token) {
-        logout(); // Redirect to signIn if not logged in
-        return;
-      }
+      //if (!token) {
+        //logout(); // Redirect to signIn if not logged in
+        //return;
+      //}
 
       const selectedAnswers = sections.map((section, sectionIndex) =>
         section.questions.map((question, questionIndex) => ({
@@ -251,6 +251,7 @@ function TestPage() {
             </button>*/}
       </div>
       <div className="flex justify-center">
+        {isAuthenticated? (submitAnswers):(SignIn)}
         <button className="bg-blue-900 mb-8 px-3 py-2 border rounded-2xl text-blue-100" onClick={ submitAnswers}>Submit Answers</button>
           </div>
     </div>
