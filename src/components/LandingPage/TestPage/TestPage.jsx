@@ -48,11 +48,6 @@ function TestPage() {
         setOptions(data.options || []);
         setSection([data.section[0]] || []);
 
-        //data.section.forEach(section => {
-          //console.log('Section: ', section.sectionName);
-          //console.log('Questions here: ', section.questions);
-        //});
-
       } catch (error) {
         console.error('Error:', error);
       }
@@ -101,24 +96,6 @@ function TestPage() {
       console.error(error, 'Error occurred while submitting');
     }
   };
-
-
-
-
-  //auth function
-  /*const checkUserAuth = () => {
-    return new Promise((resolve, reject) => {
-      const auth = getAuth();
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          resolve(user);
-        } else {
-          redirect('./signIn');
-          reject(new Error('User not authenticated.'));
-        }
-      });
-    });
-  };*/
 
   //function to submit answers
   const submitScrore = async()=> {
@@ -270,17 +247,19 @@ function TestPage() {
 
       <div><br/><br />
         {currentQuestions.length > 0 &&
-        isection.map((section, sectionIndex) => (
+          isection.map((section, sectionIndex) => (
+
           <div key={sectionIndex} className="wrap">
             <h3 className="Read">{section.sectionName}</h3>
             <hr /><br />
             <ul>
               {section.questions.map((question, questionIndex) => {
+
                 // questionCount++;
-                questionCount = 5*(countsection-1) + questionIndex +1;
+                const Question = 5*(countsection-1) + Question +1;
                 return (
                   <li key={question._id}>
-                    <h5 className="quest-head">{`${questionCount}.${question.question}`}</h5>
+                    <h5 className="quest-head">{`${Question}.${question.question}`}</h5>
 
                     <div className="option-holder">
                       {options.length > 0 &&
