@@ -456,7 +456,6 @@ h6 {
 }*/
 
 .input-box:checked + label {
-  background-color: blue;
   color: blue;
 }
 

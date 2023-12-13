@@ -130,6 +130,7 @@ function TestPage() {
     setSliderValue(event.target.value);
   };
 
+  //function to save the answers in an array of selectedanswers
   const handleOptionChange = (questionIndex, optionIndex, optionValue) => {
     const updatedAnswers = [...selectedAnswers];
     updatedAnswers[questionIndex] = optionValue;
@@ -214,7 +215,6 @@ function TestPage() {
 
                             <input
                               type="radio"
-                              //name={`group${questionIndex}`}
                               className="input-box"
                               //checked
                               required
