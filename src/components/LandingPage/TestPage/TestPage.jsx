@@ -26,7 +26,7 @@ function TestPage() {
   const [data, setData] = useState([]);
   const [radio, setRadio] = useState();
   const [countsection, updatesectionid] = useState(1);
-
+  const [selectedAnswers, setSelectedAnswers] = useState(Array(sections.length).fill(''));
 
   // https://hyggexbackend-d2b0.onrender.com//api/v1/test/user-results
 
@@ -53,7 +53,7 @@ function TestPage() {
 
   //submit answer function
 
-  const submitAnswers = async () => {
+  /*const submitAnswers = async () => {
 
     try {
       const token = localStorage.getItem('jwtToken');
@@ -90,7 +90,7 @@ function TestPage() {
 
   useEffect(() => {
     submitAnswers();
-  }, []);
+  }, []);*/
 
 
 
@@ -115,20 +115,28 @@ function TestPage() {
       console.log(countsection);
       setSection([sections[countsection]] || []);
     }
-    if (currentPage !== NumOfTotalPages) {
-      //setCurrentPage(currentPage + 1);
-    }
   };
 
-  const handleClick = () => {
+  const Style = () => {
+    color: "blue"
+  }
+  /*const handleClick = () => {
     console.log(radio, "hello");
   }
-  handleClick();
+
+  handleClick();*/
 
   const handleSliderChange = (event) => {
     setSliderValue(event.target.value);
   };
 
+  const handleOptionChange = (questionIndex, optionIndex, optionValue) => {
+    const updatedAnswers = [...selectedAnswers];
+    updatedAnswers[questionIndex] = optionValue;
+    setSelectedAnswers(updatedAnswers);
+  };
+
+  console.log(selectedAnswers, 'Answers here: ');
 
   //let questionCount = indexOfFirstQuestion;
   //const button = useRef();
@@ -210,18 +218,14 @@ function TestPage() {
                               className="input-box"
                               //checked
                               required
-                              name="radio"
-                              onChange={e => setRadio(e.target.value)}
-
-                                /*const updatedOptions = [...selectedOptions];
-                                updatedOptions[questionIndex] = optionIndex;
-                                setSelectedOptions(updatedOptions)*/
-
+                              name={`question${Question}`}
+                              onChange={()=>handleOptionChange(Question-1,questionIndex, option.optionName)}
+                              //onChange={e => setRadio(e.target.value)}
                               value={option.optionName}
+                              checked={selectedAnswers[question - 1] === option.optionName}
+                              id={`question-${Question}-${optionIndex}`}
                             />
-                            <label id="label"
-                              className="checked"
-                            >
+                            <label htmlFor={`question-${Question}-${optionIndex}`} className="checked">
                               {option.optionName}
                             </label>
                             </div>
@@ -248,6 +252,8 @@ function TestPage() {
           {isAuthenticated? (submitAnswers):(SignIn)}
             <button className="bg-blue-900 mb-8 px-3 py-2 border rounded-2xl text-blue-100" onClick={ submitAnswers}>Submit Answers</button>
         </div>*/}
+      {/* Display selected answers array in console
+      <button onClick={() => console.log(selectedAnswers)}>Show Answers</button>*/}
     </div>
   );
 }
