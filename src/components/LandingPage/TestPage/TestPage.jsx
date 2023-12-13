@@ -276,7 +276,8 @@ function TestPage() {
             <hr /><br />
             <ul>
               {section.questions.map((question, questionIndex) => {
-                questionCount++;
+                // questionCount++;
+                questionCount = 5*(countsection-1) + questionIndex +1;
                 return (
                   <li key={question._id}>
                     <h5 className="quest-head">{`${questionCount}.${question.question}`}</h5>
