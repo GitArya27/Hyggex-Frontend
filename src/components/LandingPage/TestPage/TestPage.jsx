@@ -243,17 +243,11 @@ function TestPage() {
           Next <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
         </button>
 
-        {/*<button
-          className="next"
-          onClick={previousHandler}
-        >
-          Prev <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
-            </button>*/}
       </div>
-      <div className="flex justify-center">
-        {isAuthenticated? (submitAnswers):(SignIn)}
-        <button className="bg-blue-900 mb-8 px-3 py-2 border rounded-2xl text-blue-100" onClick={ submitAnswers}>Submit Answers</button>
-          </div>
+        {/*<div className="flex justify-center">
+          {isAuthenticated? (submitAnswers):(SignIn)}
+            <button className="bg-blue-900 mb-8 px-3 py-2 border rounded-2xl text-blue-100" onClick={ submitAnswers}>Submit Answers</button>
+        </div>*/}
     </div>
   );
 }
