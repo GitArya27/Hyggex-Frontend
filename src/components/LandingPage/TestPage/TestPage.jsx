@@ -130,14 +130,25 @@ function TestPage() {
     setSliderValue(event.target.value);
   };
 
+
+
   //function to save the answers in an array of selectedanswers
+  const total = 30;
+
+  const answeredQuestionsCount = selectedAnswers.filter(answer => answer !== '').length;
+  const percentage = (answeredQuestionsCount / total) * 100;
+
   const handleOptionChange = (questionIndex, optionIndex, optionValue) => {
     const updatedAnswers = [...selectedAnswers];
     updatedAnswers[questionIndex] = optionValue;
     setSelectedAnswers(updatedAnswers);
-  };
+
+    const newPercentage = ((answeredQuestionsCount + 1) / total) * 100;
+    setSliderValue(newPercentage);
+  }
 
   console.log(selectedAnswers, 'Answers here: ');
+
 
   //let questionCount = indexOfFirstQuestion;
   //const button = useRef();
@@ -188,9 +199,9 @@ function TestPage() {
             max="100"
             value={sliderValue}
             className="slider"
-            onChange={handleSliderChange}
+            onChange={()=>{}}
           />
-          <div id="slider-value">{sliderValue}%</div>
+          <div id="slider-value">{Math.round(percentage)}%</div>
         </div>
       </div>
 
