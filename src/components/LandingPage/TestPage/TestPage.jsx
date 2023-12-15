@@ -236,7 +236,10 @@ function TestPage() {
                               checked={selectedAnswers[question - 1] === option.optionName}
                               id={`question-${Question}-${optionIndex}`}
                             />
-                            <label htmlFor={`question-${Question}-${optionIndex}`} className="checked">
+                            <label
+                              htmlFor={`question-${Question}-${optionIndex}`}
+                              className={`checked ${selectedAnswers[Question - 1] === option.optionName ? 'blue-checked' : ''}`}
+                            >
                               {option.optionName}
                             </label>
                             </div>
