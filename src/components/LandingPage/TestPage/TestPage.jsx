@@ -145,7 +145,14 @@ function TestPage() {
 
     const newPercentage = ((answeredQuestionsCount + 1) / total) * 100;
     setSliderValue(newPercentage);
+
+    if (questionIndex < total - 1 && optionValue !== '') {
+      const nextQuestionIndex = questionIndex + 1;
+      document.getElementById(`question-${nextQuestionIndex}-0`).disabled = false;
+      document.getElementById(`question-${nextQuestionIndex}-0`).focus();
+    }
   }
+
 
   console.log(selectedAnswers, 'Answers here: ');
 
