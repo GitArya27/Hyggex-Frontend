@@ -153,7 +153,7 @@ function TestPage() {
     }
   }
 
-
+  
   console.log(selectedAnswers, 'Answers here: ');
 
 
@@ -237,15 +237,16 @@ function TestPage() {
                               //checked
                               required
                               name={`question${Question}`}
-                              onChange={()=>handleOptionChange(Question-1,questionIndex, option.optionName)}
-                              //onChange={e => setRadio(e.target.value)}
-                              value={option.optionName}
                               checked={selectedAnswers[question - 1] === option.optionName}
+                              value={option.optionName}
                               id={`question-${Question}-${optionIndex}`}
+                              onChange={()=>handleOptionChange(Question-1,questionIndex, option.optionName)}
+                              // style={{ color: '#0a53e6' }}
+                              //onChange={e => setRadio(e.target.value)}
                             />
                             <label
                               htmlFor={`question-${Question}-${optionIndex}`}
-                              className={`checked ${selectedAnswers[Question - 1] === option.optionName ? 'blue-checked' : ''}`}
+                              className={`${selectedAnswers[Question - 1] === option.optionName ? 'blue-checked' : 'checked'}`}
                             >
                               {option.optionName}
                             </label>

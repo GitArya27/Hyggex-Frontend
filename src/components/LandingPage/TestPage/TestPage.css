@@ -445,10 +445,11 @@ h6 {
   font-size: 1.2rem;
   align-items: center;
 }
-.input-box{
+input[type=radio].input-box{
   width: 16px;
   height: 16px;
   margin: 0rem 1.9rem;
+  accent-color: #0a53e6; 
 }
 .checked{
   padding-top: 0.8rem;
@@ -457,7 +458,9 @@ h6 {
 }
 
 .blue-checked{
+  padding-top: 0.8rem;
   color: #0a53e6;
+  font-size: 0.7rem;
 }
 .next-button{
   text-align: center;
