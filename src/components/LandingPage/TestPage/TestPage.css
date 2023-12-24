@@ -31,6 +31,7 @@ body {
   transform: translate(0, -50%);
   width: 27%;
   top: 56%;
+  border: 2px;
 }
 
 .box1 {
@@ -92,11 +93,14 @@ h6 {
   height: 40px;
   flex-shrink: 0;
   background: #f1f1f1;
+  color: #0f286e;
+  font-weight: 600;
   margin-top: 220px;
 }
 .slider-container {
-  width: 90%;
-  margin: 10px auto;
+  width: 70%;
+  margin: auto;
+  color: #0f286e;
   text-align: center;
   padding-top: 10px;
   position: relative;
@@ -110,7 +114,8 @@ h6 {
   font-size: 16px;
   position: absolute;
   text-align: center;
-  top: -20px; 
+  visibility: hidden;
+  top: -5px;
   left: 50%;
   transform: translateX(-50%);
   width: auto;
@@ -121,8 +126,9 @@ h6 {
 
 .Read {
   padding: 30px 10px 10px 50px;
-  font-size: 24px;
+  font-size: 20px;
   color: #06286e;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -130,9 +136,9 @@ h6 {
 
 .question {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
-  margin: 10px auto;
+  margin: 50px 20%;
   white-space: nowrap;
   font-size: 20px;
   font-weight: 500;
@@ -142,22 +148,24 @@ h6 {
 
 /* Custom CSS for radio buttons with labels below */
 
-.radio-btn {
+/*.radio-btn {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   margin-right: 50px !important;
   margin-left: 50px !important;
+
 }
 
 .radio-btn input[type="radio"] {
   width: 24px;
   height: 24px;
-  margin: 30px;
+  margin: 0px 40px;
 }
 
-input[type="radio"]:before {
+
+/*input[type="radio"]:before {
   content: "";
   display: block;
   width: 60%;
@@ -165,26 +173,15 @@ input[type="radio"]:before {
   margin: 20% auto;
   border-radius: 50%;
 }
+*/
 
-input[type="radio"]:checked:before {
-  background: blue;
-}
-
-.radio-btn label {
-  position: relative;
-  top: 40px;
-  right: 65px;
-  transition: color 0.3s;
-  color: #696671;
-}
-
-.sometimes {
+/*.sometimes {
   position: relative !important;
   top: 40px !important;
   right: 45px !important;
 }
 
-.never-input,
+/*.never-input,
 .rarely-input {
   -webkit-appearance: none;
   width: 10px;
@@ -193,46 +190,8 @@ input[type="radio"]:checked:before {
   outline: none;
   box-shadow: 0 0 0 2px #5085f3;
   transition: box-shadow 0.3s;
-}
+}*/
 
-.sometimes-input {
-  -webkit-appearance: none;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  outline: none;
-  box-shadow: 0 0 0 2px #a6c1f9;
-  transition: box-shadow 0.3s;
-  position: relative;
-  left: 40px;
-}
-
-.often-input,
-.always-input {
-  -webkit-appearance: none;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  outline: none;
-  box-shadow: 0 0 0 2px #06286e;
-  transition: box-shadow 0.3s;
-}
-
-.never-input:checked,
-.rarely-input:checked,
-.sometimes-input:checked,
-.often-input:checked,
-.always-input:checked {
-  box-shadow: 0 0 0 2px blue;
-}
-
-.never-input:checked + label,
-.rarely-input:checked + label,
-.sometimes-input:checked + label,
-.often-input:checked + label,
-.always-input:checked + label {
-  color: blue;
-}
 
 /* Next button */
 
@@ -272,7 +231,7 @@ input[type="radio"]:checked:before {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-}
+  }
 
   .h1 {
     font-size: 25px !important;
@@ -325,14 +284,17 @@ input[type="radio"]:checked:before {
   }
 
   #slider-value {
-    font-size: 14px; 
+    font-size: 14px;
     top: 5%;
   }
 
-  .question {
-    font-size: 7.5px !important; 
+
+  /*.question {
+    font-size: 7.5px !important;
     max-width: 90%;
-    margin: auto 20px;
+    text-align: center;
+    margin: auto 30px;
+    padding-left: 20px;
     line-height: 6;
     font-weight: 800;
   }
@@ -363,22 +325,11 @@ input[type="radio"]:checked:before {
     right: 33px !important;
   }
 
-  .sometimes-input {
-    -webkit-appearance: none;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    outline: none;
-    box-shadow: 0 0 0 2px #a6c1f9;
-    transition: box-shadow 0.3s;
-    position: relative;
-    left: 14px !important;
-  }
-
   .next{
     height: 6vh;
-  }
+  }*/
 }
+
 
 @media (max-width: 1024px) {
   .h1 {
@@ -411,7 +362,7 @@ input[type="radio"]:checked:before {
 
 
 
-  .radio-btn {
+  /*.radio-btn {
     margin-right: 10px !important;
     margin-left: 10px !important;
   }
@@ -450,10 +401,166 @@ input[type="radio"]:checked:before {
   }
 
   .question {
-    font-size: 16px; 
+    font-size: 16px;
   }
 
   .next{
     height: 6vh;
+  }*/
+}
+
+
+
+/*============Emma's styling=============*/
+.wrap{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-top: 2rem;
+  margin: auto;
+  text-align: start;
+  width: 80%;
+  /*border: 2px solid green;*/
+}
+.wrap ul li{
+  list-style-type: none;
+}
+
+.wrap .quest-head{
+  font-size: 0.8rem;
+  padding: 1rem 0rem;
+  color: #57555d;
+  text-align: center;
+  font-weight: 500;
+}
+.option-holder{
+  display: flex;
+  justify-content: center;
+
+}
+.input-wrapper{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.1rem;
+  font-size: 1.2rem;
+  align-items: center;
+}
+.input-box{
+  width: 16px;
+  height: 16px;
+  margin: 0rem 1.9rem;
+}
+.checked{
+  padding-top: 0.8rem;
+  color: #696671;
+  font-size: 0.7rem;
+}
+
+.blue-checked{
+  color: #0a53e6;
+}
+.next-button{
+  text-align: center;
+  margin: 2rem;
+}
+.next-button button{
+  display: flex;
+  height: 7vh;
+  padding: 15px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  border-radius: 33px;
+  border: 5px solid #add8e6;
+  background: linear-gradient(93deg, #06286e -34.91%, #164ec0 135.05%);
+  color: #f1f1f1;
+  transform: translate(5%, -50%);
+  margin: 10px auto;
+  width: 150px;
+}
+/*input[type="radio"]:checked:before {
+  background: blue;
+}
+
+input[type="radio"].selected {
+  border-color: blue;
+}
+.selected {
+  color: blue;
+}*/
+
+@media (max-width:1024px){
+  .wrap{
+    width: 90%;
+
+  }
+  .wrap .quest-head{
+    font-size: 1rem;
+    padding: 1rem 0rem;
+    color: #28282b;
+    font-weight: 500;
+  }
+  /*#input{
+    width: 20px;
+    height: 20px;
+  }*/
+}
+
+@media (max-width:768px){
+  .container{
+    margin: 3rem 1.5rem;
+  }
+  .wrap{
+    width: 85%;
+
+  }
+  .wrap .quest-head{
+    font-size: 0.8rem;
+    padding: 1rem 0rem;
+    color: #28282b;
+    font-weight: 500;
+  }
+  .input-box{
+    width: 12px;
+    height: 12px;
+  }
+  .checked{
+    padding-top: 0.8rem;
+    color: #696671;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width:550px){
+  .container{
+    margin: 1.3rem;
+  }
+  .wrap{
+    width: 90%;
+
+  }
+  .wrap .quest-head{
+    font-size: 0.7rem;
+    padding: 1rem 0rem;
+    margin-left: 0.8rem;
+    color: #000000;
+    font-weight: 600;
+
+  }
+  .input-wrapper{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.8rem;
+    align-items: center;
+  }
+
+  #input{
+    width: 12px;
+    height: 12px;
+  }
+  .checked{
+    padding-top: 0.9rem;
+    color: #696671;
+    font-size: 0.6rem;
   }
 }

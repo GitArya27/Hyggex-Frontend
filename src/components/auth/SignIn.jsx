@@ -1,20 +1,30 @@
-import { useState } from 'react';  // Import useState hook if not already imported
 import { circle, circle1, logo1, slide1, slide2, slide3 } from '../../constants/url';
 
-import Auth from './Auth';
-import AuthLeft from './AuthLeft';
-import { Link } from 'react-router-dom';
-import PhoneInput from 'react-phone-input-2';
-import React from 'react';
-import { getAuth, signOut } from 'firebase/auth'; 
+import Auth from './Auth'
+import AuthLeft from './AuthLeft'
+import { Link } from 'react-router-dom'
+import Notification from './notification'
+import PhoneInput from 'react-phone-input-2'
+import React from 'react'
+import { useState } from 'react';
+
+// Import useState hook if not already imported
+
+
+
+
+
+
+
+
 
 const SignIn = () => {
   const [user, setUser] = useState();
 
   const handleLogout = async () => {
     try {
-      const auth = getAuth();  
-      await signOut(auth);     
+      const auth = getAuth();
+      await signOut(auth);
       setUser(null);
     } catch (error) {
       console.error('Error signing out:', error);

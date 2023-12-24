@@ -163,7 +163,7 @@ function Auth() {
         }
       );
       if (response.data.success) {
-        console.log(response.data);
+        console.log(response.data, 'logged in');
         if (response.data.status === "loggedIn") {
           alert("Logged In Successfully!");
           toast.success("successfully logged in");
@@ -494,14 +494,14 @@ function Auth() {
             </button>
           </div>
           {status === "loggedIn" && (
-          
+
               <button
                 onClick={logout}
                 className="my-4 bg-red-500 text-white py-2 px-4 rounded-full hover:bg-red-600"
               >
                 Logout
               </button>
-            
+
           )}
         </>
       )}
