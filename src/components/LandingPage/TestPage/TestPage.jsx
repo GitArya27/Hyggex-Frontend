@@ -319,7 +319,7 @@ function TestPage() {
             Next{" "}
             <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
           </button>
-        ) : countsection == currentQuestions.length ? (
+        ) : countsection == currentQuestions.length +1? (
           <button className="next" onClick={backHandler}>
             <i className="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
             back
