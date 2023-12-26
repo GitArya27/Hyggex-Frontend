@@ -27,7 +27,8 @@ function TestPage() {
   //const [isAuthenticated, setAuthenticated] = useState(!!localStorage.getItem("jwtToken"));
   const [data, setData] = useState([]);
   const [radio, setRadio] = useState();
-  const [countsection, updatesectionid] = useState(1);
+  const [countsection, updatesectionid] = useState(0);
+  // var countsection = 1;
   const [selectedAnswers, setSelectedAnswers] = useState(
     Array(sections.length).fill("")
   );
@@ -105,37 +106,24 @@ function TestPage() {
     indexOfFirstQuestion,
     indexOfLastQuestion
   );
-  //console.log(currentQuestions, 'currentquestions');
+  // useEffect(() => {
+  //   console.log(countsection);
+  //   console.log(isection[0]);
+  // }, [countsection, isection]);
 
-  const previousHandler = () => {
-    if (currentPage !== 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
   const backHandler = () => {
     if (countsection > 0) {
-      updatesectionid(countsection - 1);
-      // console.log(countsection);
-      setSection([sections[countsection]] || []);
+      updatesectionid(countsection-1);
+      setSection(() => [sections[countsection - 1]] || []);
     }
   };
 
   const nextHandler = () => {
-    if (countsection <= currentQuestions.length) {
-      updatesectionid(countsection + 1);
-      // console.log(countsection);
-      setSection([sections[countsection]] || []);
+    if (countsection <= totalSections) {
+      updatesectionid(countsection +1);
+      setSection(() => [sections[countsection+1 ]] || []);
     }
   };
-
-  const Style = () => {
-    color: "blue";
-  };
-  /*const handleClick = () => {
-    console.log(radio, "hello");
-  }
-
-  handleClick();*/
 
   const handleSliderChange = (event) => {
     setSliderValue(event.target.value);
@@ -143,12 +131,11 @@ function TestPage() {
 
   //function to save the answers in an array of selectedanswers
   var total = 0;
-  // console.log(isection);
+  var totalSections = 0;
   for (const sec in sections) {
     total = total + sections[sec].questions.length;
-    // console.log(isection[sec]);
+    totalSections = totalSections + 1;
   }
-  // console.log(total);
 
   const answeredQuestionsCount = selectedAnswers.filter(
     (answer) => answer !== ""
@@ -172,7 +159,7 @@ function TestPage() {
     }
   };
 
-  console.log(selectedAnswers, "Answers here: ");
+  // console.log(selectedAnswers, "Answers here: ");
 
   //let questionCount = indexOfFirstQuestion;
   //const button = useRef();
@@ -222,7 +209,7 @@ function TestPage() {
             <div
               className={`flex flex-col gap-2.5 ml-[${
                 Math.round(percentage) * 100
-              }px] mb-[10px] h-[15px] w-[30px] p-1 w-auto`}
+              }px] mb-[10px] h-[15px] w-[30px] p-1 `}
             >
               <div className="bg-indigo-300 flex flex-col items-center justify-center p-1 rounded w-auto">
                 <div className="flex flex-col items-start justify-start w-auto">
@@ -253,7 +240,7 @@ function TestPage() {
       <div>
         <br />
         <br />
-        {currentQuestions.length > 0 &&
+        {currentQuestions.length > 0 ?
           isection.map((section, sectionIndex) => (
             <div key={sectionIndex} className="wrap">
               <h3 className="Read">{section.sectionName}</h3>
@@ -261,7 +248,7 @@ function TestPage() {
               <br />
               <ul>
                 {section.questions.map((question, questionIndex) => {
-                  const Question = 5 * (countsection - 1) + questionIndex + 1;
+                  const Question = 5 * (countsection) + questionIndex + 1;
                   return (
                     <li key={question._id}>
                       <h5 className="quest-head">{`${Question}.${question.question}`}</h5>
@@ -311,15 +298,15 @@ function TestPage() {
                 })}
               </ul>
             </div>
-          ))}
+          )) : <><div className="justify-center item-center flex "> Loading Data ...</div></>}
       </div>
       <div className="button-container flex justify-center">
-        {countsection == 1 ? (
+        {countsection == 0 ? (
           <button className="next" onClick={nextHandler}>
             Next{" "}
             <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
           </button>
-        ) : countsection == currentQuestions.length +1? (
+        ) : countsection == totalSections-1 ? (
           <button className="next" onClick={backHandler}>
             <i className="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
             back
