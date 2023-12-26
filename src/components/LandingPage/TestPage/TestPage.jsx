@@ -3,7 +3,7 @@ import "./TestPage.css";
 
 import React, { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-
+import ProgressBar from "@ramonak/react-progress-bar";
 import { Redirect } from "react-router-dom";
 import SignIn from "../../auth/SignIn";
 import axios from "axios";
@@ -14,6 +14,7 @@ import { useAuth } from "../../auth/AuthContext";
 import { useRef } from "react";
 import { Img } from "../../Img";
 import { Text } from "../../Text";
+
 
 function TestPage() {
   const { logout, isAuthenticated } = useAuth();
@@ -30,7 +31,7 @@ function TestPage() {
   const [countsection, updatesectionid] = useState(0);
   const [, forceUpdate] = useState();
   const [selectedData, setSelectedData] = useState(new Object());
-
+  const scrollRef = useRef();
   // https://hyggexbackend-d2b0.onrender.com//api/v1/test/user-results
 
   useEffect(() => {
@@ -51,9 +52,17 @@ function TestPage() {
     };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    // 👇️ scroll to top on page load
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+  }, []);
+
   const submitAnswers = async () => {
     console.log(selectedData, "selected answers are here");
+    
   };
+  
   // const submitAnswers = async () => {
 
   //   try {
@@ -97,6 +106,7 @@ function TestPage() {
     if (countsection > 0) {
       updatesectionid(countsection - 1);
       setSection(() => [sections[countsection - 1]] || []);
+      window.scrollTo({top: 300, left: 0, behavior: 'smooth'});
     }
   };
 
@@ -104,6 +114,7 @@ function TestPage() {
     if (countsection <= totalSections) {
       updatesectionid(countsection + 1);
       setSection(() => [sections[countsection + 1]] || []);
+      window.scrollTo({top: 300, left: 0, behavior: 'smooth'});
     }
   };
 
@@ -116,22 +127,18 @@ function TestPage() {
 
   const percentage = (Object.keys(selectedData).length / total) * 100;
 
-  const handleOptionChange = (questionID, optionID, optionValue) => {
-    selectedData[questionID] = optionID;
+  const handleOptionChange = (questionID, optionID, Question) => {
+    selectedData[questionID] = `${Question}.${optionID}`;
     setSelectedData(selectedData);
     const newPercentage = (Object.keys(selectedData).length / total) * 100;
     setSliderValue(newPercentage);
-    forceUpdate(prev =>  !prev);
-    // if (optionValue !== "") {
-    //   document.getElementById(`${optionID}`).disabled = false;
-    //   document.getElementById(`${optionID}`).focus();
-    // }
+    forceUpdate((prev) => !prev);
   };
 
-  console.log(selectedData, "Answers here: ");
+  // console.log(selectedData, "Answers here: ");
 
   return (
-    <div>
+    <div >
       <div className="head">
         <h1 className="h1">Free Reading Assessment</h1>
         <p>HyggeX Assessment Explorer &reg;</p>
@@ -170,29 +177,7 @@ function TestPage() {
 
       <div className="line">
         <div className="slider-container">
-          {
-            <div
-              className={`flex flex-col gap-2 ml-[${
-                Math.round(percentage) * 100
-              }px] mb-[10px] h-[15px] w-[30px] p-1  mt-[-12px]`}
-            >
-              <div className="bg-indigo-300 flex flex-col items-center justify-center p-1 rounded w-auto">
-                <div className="flex flex-col items-start justify-start w-auto">
-                  <Text className="font-semibold text-white-A700 text-xs w-auto">
-                    {Math.round(percentage)}%
-                  </Text>
-                </div>
-              </div>
-            </div>
-          }
-          <input
-            type="range"
-            min="0"
-            max="100"
-            value={sliderValue}
-            className="slider"
-            onChange={() => {}}
-          />
+          <ProgressBar completed = {Math.round(percentage)} bgColor = "#164ec0" animateOnRender = {true} />
           <div id="slider-value">{Math.round(percentage)}%</div>
         </div>
       </div>
@@ -222,25 +207,27 @@ function TestPage() {
                                 className="input-box"
                                 //checked
                                 required
-                                name={`${option._id}`}
+                                name={`${Question}.${option._id}`}
                                 checked={
-                                  selectedData[question._id] === option._id
+                                  selectedData[question._id] ===
+                                  `${Question}.${option._id}`
                                 }
                                 value={option.optionName}
-                                id={`${option._id}`}
+                                id={`${Question}.${option._id}`}
                                 onChange={() => {
                                   handleOptionChange(
                                     question._id,
                                     option._id,
-                                    option.optionName
+                                    Question
                                   );
-                                  console.log("selected " + option.optionName);
+                                  // console.log("selected " + option.optionName);
                                 }}
                               />
                               <label
-                                htmlFor={`${option._id}`}
+                                htmlFor={`${Question}.${option._id}`}
                                 className={`${
-                                  selectedData[question._id] === option._id
+                                  selectedData[question._id] ===
+                                  `${Question}.${option._id}`
                                     ? "blue-checked"
                                     : "checked"
                                 }`}
