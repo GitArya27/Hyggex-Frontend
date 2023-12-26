@@ -14,7 +14,7 @@ import { useAuth } from "../../auth/AuthContext";
 import { useRef } from "react";
 import { Img } from "../../Img";
 import { Text } from "../../Text";
-
+import { ToastContainer, toast } from "react-toastify";
 
 function TestPage() {
   const { logout, isAuthenticated } = useAuth();
@@ -25,14 +25,12 @@ function TestPage() {
   const [options, setOptions] = useState([]);
   const [questionsPerPage, setQuestionsPerPage] = useState(5);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  // const [isAuthenticated, setAuthenticated] = useState(!!localStorage.getItem("jwtToken"));
   const [data, setData] = useState([]);
   const [radio, setRadio] = useState();
   const [countsection, updatesectionid] = useState(0);
   const [, forceUpdate] = useState();
   const [selectedData, setSelectedData] = useState(new Object());
   const scrollRef = useRef();
-  // https://hyggexbackend-d2b0.onrender.com//api/v1/test/user-results
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,9 +38,7 @@ function TestPage() {
         const response = await axios.get(
           "https://hyggexbackend-d2b0.onrender.com/api/v1/test/tests/Reading%20Assessment%20Test"
         );
-
         const result = response.data;
-        // console.log(result);
         setSections(result.section || []);
         setOptions(result.options || []);
         setSection([result.section[0]] || []);
@@ -54,43 +50,39 @@ function TestPage() {
   }, []);
 
   useEffect(() => {
-    // 👇️ scroll to top on page load
-    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, []);
 
   const submitAnswers = async () => {
-    console.log(selectedData, "selected answers are here");
-    
+    const token = localStorage.getItem("jwtToken");
+    const selectedAnswersJSON = JSON.stringify(selectedData);
+    console.log(selectedAnswersJSON, "selected answers are here");
+    console.log(token, "this is jwtToken");
+    const requestOptions = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    if (token == null) {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      toast.error("SignIn to View Your Result");
+    } else {
+      try {
+        const resp = await axios.post(
+          "https://hyggexbackend-d2b0.onrender.com/api/v1/test/submit-score",
+          selectedAnswersJSON,
+          requestOptions
+        );
+
+        const data = resp.data;
+        console.log(data, "successfully submitted");
+        alert("Successfully submitted");
+      } catch (error) {
+        console.error(error, "Error occurred while submitting");
+      }
+    }
   };
-  
-  // const submitAnswers = async () => {
-
-  //   try {
-  //     const token = localStorage.getItem('jwtToken');
-  //     const selectedAnswers = sections.map((section, sectionIndex) =>
-  //       section.questions.map((question, questionIndex) => ({
-  //         question: question.question,
-  //         answer: options[selectedOptions[sectionIndex]]?.optionName || radio || null,
-  //       }))
-  //     );
-  //     console.log(selectedAnswers, 'selected answers are here');
-
-  //     const requestOptions = {
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     };
-
-  //     const resp = await axios.post('https://hyggexbackend-d2b0.onrender.com/api/v1/test/submit-score', selectedAnswers, requestOptions);
-
-  //     const data = resp.data;
-  //     console.log(data, 'successfully submitted');
-  //     alert('Successfully submitted');
-  //   } catch (error) {
-  //     console.error(error, 'Error occurred while submitting');
-  //   }
-  // };
 
   const NumOfTotalPages = Math.ceil(sections.length / questionsPerPage);
   const pages = [...Array(NumOfTotalPages + 1).keys()].slice(1);
@@ -106,7 +98,7 @@ function TestPage() {
     if (countsection > 0) {
       updatesectionid(countsection - 1);
       setSection(() => [sections[countsection - 1]] || []);
-      window.scrollTo({top: 300, left: 0, behavior: 'smooth'});
+      window.scrollTo({ top: 300, left: 0, behavior: "smooth" });
     }
   };
 
@@ -114,7 +106,7 @@ function TestPage() {
     if (countsection <= totalSections) {
       updatesectionid(countsection + 1);
       setSection(() => [sections[countsection + 1]] || []);
-      window.scrollTo({top: 300, left: 0, behavior: 'smooth'});
+      window.scrollTo({ top: 300, left: 0, behavior: "smooth" });
     }
   };
 
@@ -135,10 +127,8 @@ function TestPage() {
     forceUpdate((prev) => !prev);
   };
 
-  // console.log(selectedData, "Answers here: ");
-
   return (
-    <div >
+    <div>
       <div className="head">
         <h1 className="h1">Free Reading Assessment</h1>
         <p>HyggeX Assessment Explorer &reg;</p>
@@ -177,7 +167,11 @@ function TestPage() {
 
       <div className="line">
         <div className="slider-container">
-          <ProgressBar completed = {Math.round(percentage)} bgColor = "#164ec0" animateOnRender = {true} />
+          <ProgressBar
+            completed={Math.round(percentage)}
+            bgColor="#164ec0"
+            animateOnRender={true}
+          />
           <div id="slider-value">{Math.round(percentage)}%</div>
         </div>
       </div>
@@ -281,6 +275,17 @@ function TestPage() {
           </>
         )}
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 }
