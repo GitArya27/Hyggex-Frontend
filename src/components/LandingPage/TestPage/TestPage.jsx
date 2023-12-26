@@ -24,18 +24,15 @@ function TestPage() {
   const [options, setOptions] = useState([]);
   const [questionsPerPage, setQuestionsPerPage] = useState(5);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  //const [isAuthenticated, setAuthenticated] = useState(!!localStorage.getItem("jwtToken"));
+  // const [isAuthenticated, setAuthenticated] = useState(!!localStorage.getItem("jwtToken"));
   const [data, setData] = useState([]);
   const [radio, setRadio] = useState();
   const [countsection, updatesectionid] = useState(0);
-  // var countsection = 1;
-  const [selectedAnswers, setSelectedAnswers] = useState(
-    Array(sections.length).fill("")
-  );
-  var cn = "";
+  const [, forceUpdate] = useState();
+  const [selectedData, setSelectedData] = useState(new Object());
+
   // https://hyggexbackend-d2b0.onrender.com//api/v1/test/user-results
 
-  //fetching questions/answers
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -52,50 +49,39 @@ function TestPage() {
         console.error("Error:", error);
       }
     };
-    // console.log("sections", sections);
     fetchData();
   }, []);
-
-  //submit answer function
-
-  /*const submitAnswers = async () => {
-
-    try {
-      const token = localStorage.getItem('jwtToken');
-
-      //if (!token) {
-        //logout(); // Redirect to signIn if not logged in
-        //return;
-      //}
-
-      const selectedAnswers = sections.map((section, sectionIndex) =>
-        section.questions.map((question, questionIndex) => ({
-          question: question.question,
-          answer: options[selectedOptions[sectionIndex]]?.optionName || radio || null,
-        }))
-      );
-      console.log(selectedAnswers, 'selected answers are here');
-
-      const requestOptions = {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      };
-
-      const resp = await axios.post('https://hyggexbackend-d2b0.onrender.com/api/v1/test/submit-score', selectedAnswers, requestOptions);
-
-      const data = resp.data;
-      console.log(data, 'successfully submitted');
-      alert('Successfully submitted');
-    } catch (error) {
-      console.error(error, 'Error occurred while submitting');
-    }
+  const submitAnswers = async () => {
+    console.log(selectedData, "selected answers are here");
   };
+  // const submitAnswers = async () => {
 
-  useEffect(() => {
-    submitAnswers();
-  }, []);*/
+  //   try {
+  //     const token = localStorage.getItem('jwtToken');
+  //     const selectedAnswers = sections.map((section, sectionIndex) =>
+  //       section.questions.map((question, questionIndex) => ({
+  //         question: question.question,
+  //         answer: options[selectedOptions[sectionIndex]]?.optionName || radio || null,
+  //       }))
+  //     );
+  //     console.log(selectedAnswers, 'selected answers are here');
+
+  //     const requestOptions = {
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     };
+
+  //     const resp = await axios.post('https://hyggexbackend-d2b0.onrender.com/api/v1/test/submit-score', selectedAnswers, requestOptions);
+
+  //     const data = resp.data;
+  //     console.log(data, 'successfully submitted');
+  //     alert('Successfully submitted');
+  //   } catch (error) {
+  //     console.error(error, 'Error occurred while submitting');
+  //   }
+  // };
 
   const NumOfTotalPages = Math.ceil(sections.length / questionsPerPage);
   const pages = [...Array(NumOfTotalPages + 1).keys()].slice(1);
@@ -106,30 +92,21 @@ function TestPage() {
     indexOfFirstQuestion,
     indexOfLastQuestion
   );
-  // useEffect(() => {
-  //   console.log(countsection);
-  //   console.log(isection[0]);
-  // }, [countsection, isection]);
 
   const backHandler = () => {
     if (countsection > 0) {
-      updatesectionid(countsection-1);
+      updatesectionid(countsection - 1);
       setSection(() => [sections[countsection - 1]] || []);
     }
   };
 
   const nextHandler = () => {
     if (countsection <= totalSections) {
-      updatesectionid(countsection +1);
-      setSection(() => [sections[countsection+1 ]] || []);
+      updatesectionid(countsection + 1);
+      setSection(() => [sections[countsection + 1]] || []);
     }
   };
 
-  const handleSliderChange = (event) => {
-    setSliderValue(event.target.value);
-  };
-
-  //function to save the answers in an array of selectedanswers
   var total = 0;
   var totalSections = 0;
   for (const sec in sections) {
@@ -137,33 +114,21 @@ function TestPage() {
     totalSections = totalSections + 1;
   }
 
-  const answeredQuestionsCount = selectedAnswers.filter(
-    (answer) => answer !== ""
-  ).length;
-  const percentage = (answeredQuestionsCount / total) * 100;
+  const percentage = (Object.keys(selectedData).length / total) * 100;
 
-  const handleOptionChange = (questionIndex, optionIndex, optionValue) => {
-    const updatedAnswers = [...selectedAnswers];
-    updatedAnswers[questionIndex] = optionValue;
-    setSelectedAnswers(updatedAnswers);
-
-    const newPercentage = ((answeredQuestionsCount + 1) / total) * 100;
+  const handleOptionChange = (questionID, optionID, optionValue) => {
+    selectedData[questionID] = optionID;
+    setSelectedData(selectedData);
+    const newPercentage = (Object.keys(selectedData).length / total) * 100;
     setSliderValue(newPercentage);
-
-    if (questionIndex < total - 1 && optionValue !== "") {
-      const nextQuestionIndex = questionIndex + 1;
-      document.getElementById(
-        `question-${nextQuestionIndex}-0`
-      ).disabled = false;
-      document.getElementById(`question-${nextQuestionIndex}-0`).focus();
-    }
+    forceUpdate(prev =>  !prev);
+    // if (optionValue !== "") {
+    //   document.getElementById(`${optionID}`).disabled = false;
+    //   document.getElementById(`${optionID}`).focus();
+    // }
   };
 
-  // console.log(selectedAnswers, "Answers here: ");
-
-  //let questionCount = indexOfFirstQuestion;
-  //const button = useRef();
-  // console.log(countsection);
+  console.log(selectedData, "Answers here: ");
 
   return (
     <div>
@@ -207,9 +172,9 @@ function TestPage() {
         <div className="slider-container">
           {
             <div
-              className={`flex flex-col gap-2.5 ml-[${
+              className={`flex flex-col gap-2 ml-[${
                 Math.round(percentage) * 100
-              }px] mb-[10px] h-[15px] w-[30px] p-1 `}
+              }px] mb-[10px] h-[15px] w-[30px] p-1  mt-[-12px]`}
             >
               <div className="bg-indigo-300 flex flex-col items-center justify-center p-1 rounded w-auto">
                 <div className="flex flex-col items-start justify-start w-auto">
@@ -218,11 +183,6 @@ function TestPage() {
                   </Text>
                 </div>
               </div>
-              <Img
-                className="h-1.5 rounded-[1px] w-2.5"
-                src="images/img_favorite_indigo_900.svg"
-                alt="favorite"
-              />
             </div>
           }
           <input
@@ -240,7 +200,7 @@ function TestPage() {
       <div>
         <br />
         <br />
-        {currentQuestions.length > 0 ?
+        {currentQuestions.length > 0 ? (
           isection.map((section, sectionIndex) => (
             <div key={sectionIndex} className="wrap">
               <h3 className="Read">{section.sectionName}</h3>
@@ -248,10 +208,10 @@ function TestPage() {
               <br />
               <ul>
                 {section.questions.map((question, questionIndex) => {
-                  const Question = 5 * (countsection) + questionIndex + 1;
+                  const Question = 5 * countsection + questionIndex + 1;
                   return (
                     <li key={question._id}>
-                      <h5 className="quest-head">{`${Question}.${question.question}`}</h5>
+                      <h5 className="quest-head">{`${Question}. ${question.question}`}</h5>
 
                       <div className="option-holder">
                         {options.length > 0 &&
@@ -262,28 +222,25 @@ function TestPage() {
                                 className="input-box"
                                 //checked
                                 required
-                                name={`question${Question}`}
+                                name={`${option._id}`}
                                 checked={
-                                  selectedAnswers[question - 1] ===
-                                  option.optionName
+                                  selectedData[question._id] === option._id
                                 }
                                 value={option.optionName}
-                                id={`question-${Question}-${optionIndex}`}
-                                onChange={() =>
+                                id={`${option._id}`}
+                                onChange={() => {
                                   handleOptionChange(
-                                    Question - 1,
-                                    questionIndex,
+                                    question._id,
+                                    option._id,
                                     option.optionName
-                                  )
-                                }
-                                // style={{ color: '#0a53e6' }}
-                                //onChange={e => setRadio(e.target.value)}
+                                  );
+                                  console.log("selected " + option.optionName);
+                                }}
                               />
                               <label
-                                htmlFor={`question-${Question}-${optionIndex}`}
+                                htmlFor={`${option._id}`}
                                 className={`${
-                                  selectedAnswers[Question - 1] ===
-                                  option.optionName
+                                  selectedData[question._id] === option._id
                                     ? "blue-checked"
                                     : "checked"
                                 }`}
@@ -298,7 +255,15 @@ function TestPage() {
                 })}
               </ul>
             </div>
-          )) : <><div className="justify-center item-center flex "> Loading Data ...</div></>}
+          ))
+        ) : (
+          <>
+            <div className="justify-center item-center flex ">
+              {" "}
+              Loading Data ...
+            </div>
+          </>
+        )}
       </div>
       <div className="button-container flex justify-center">
         {countsection == 0 ? (
@@ -306,11 +271,16 @@ function TestPage() {
             Next{" "}
             <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
           </button>
-        ) : countsection == totalSections-1 ? (
-          <button className="next" onClick={backHandler}>
-            <i className="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
-            back
-          </button>
+        ) : countsection == totalSections - 1 ? (
+          <div className="verticle">
+            <button className="next" onClick={backHandler}>
+              <i className="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
+              back
+            </button>
+            <button className="next" onClick={submitAnswers}>
+              Submit Answers
+            </button>
+          </div>
         ) : (
           <>
             <button className="next" onClick={backHandler}>
@@ -324,12 +294,6 @@ function TestPage() {
           </>
         )}
       </div>
-      {/*<div className="flex justify-center">
-          {isAuthenticated? (submitAnswers):(SignIn)}
-            <button className="bg-blue-900 mb-8 px-3 py-2 border rounded-2xl text-blue-100" onClick={ submitAnswers}>Submit Answers</button>
-        </div>*/}
-      {/* Display selected answers array in console
-      <button onClick={() => console.log(selectedAnswers)}>Show Answers</button>*/}
     </div>
   );
 }
