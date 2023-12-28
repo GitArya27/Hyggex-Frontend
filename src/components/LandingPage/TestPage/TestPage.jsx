@@ -2,19 +2,20 @@ import "font-awesome/css/font-awesome.min.css";
 import "./TestPage.css";
 
 import React, { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+import { Img } from "../../Img";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { Redirect } from "react-router-dom";
 import SignIn from "../../auth/SignIn";
+import { Text } from "../../Text";
 import axios from "axios";
 import { book } from "../../../constants/url";
 import { checklist } from "../../../constants/url";
 import { idea } from "../../../constants/url";
 import { useAuth } from "../../auth/AuthContext";
 import { useRef } from "react";
-import { Img } from "../../Img";
-import { Text } from "../../Text";
-import { ToastContainer, toast } from "react-toastify";
 
 function TestPage() {
   const { logout, isAuthenticated } = useAuth();
@@ -131,37 +132,39 @@ function TestPage() {
     <div>
       <div className="head">
         <h1 className="h1">Free Reading Assessment</h1>
-        <p>HyggeX Assessment Explorer &reg;</p>
+        <p className="text-[0.7rem] mb-16 text-[#F5F5F5] md:mb-[2rem]">HyggeX Assessment Explorer &reg;</p>
       </div>
 
-      <div className="box1">
-        <img src={checklist} alt="" />
-        <div className="one">
-          <h6>Complete the Assessment</h6>
-          <p>
-            Engage sincerely and respond accurately to unveil your reading
-            profile.
-          </p>
+      <div className="box-wrapper">
+        <div className="box1 bg-[#f7fbfc]">
+          <img src={checklist} alt="" />
+          <div className="one">
+            <h6>Complete the Assessment</h6>
+            <p>
+              Engage sincerely and respond accurately to unveil your reading
+              profile.
+            </p>
+          </div>
         </div>
-      </div>
-      <div className="box2">
-        <img src={idea} alt="" />
-        <div className="one">
-          <h6>View Detailed Insights</h6>
-          <p>
-            Explore the impact of comprehension, speed, retention, anxiety,
-            focus, and fatigue on your reading.
-          </p>
+        <div className="box2 bg-[#fefcf7]">
+          <img src={idea} alt="" />
+          <div className="one">
+            <h6>View Detailed Insights</h6>
+            <p>
+              Explore the impact of comprehension, speed, retention, anxiety,
+              focus, and fatigue on your reading.
+            </p>
+          </div>
         </div>
-      </div>
-      <div className="box3">
-        <img src={book} alt="" />
-        <div className="one">
-          <h6>Unlock Your Reading Potential</h6>
-          <p>
-            Advance into the proficient reader you aim to be with your optional
-            Premium Suite.
-          </p>
+        <div className="box3 bg-[#f8f7f9]">
+          <img src={book} alt=""/>
+          <div className="one">
+            <h6>Unlock Your Reading Potential</h6>
+            <p>
+              Advance into the proficient reader you aim to be with your optional
+              Premium Suite.
+            </p>
+          </div>
         </div>
       </div>
 
