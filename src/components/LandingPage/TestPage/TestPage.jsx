@@ -52,12 +52,16 @@ function TestPage() {
 
   const submitAnswers = async () => {
     const token = localStorage.getItem("jwtToken");
-    const selectedAnswersJSON = JSON.stringify(selectedData);
-    console.log(selectedAnswersJSON, "selected answers are here");
-    console.log(token, "this is jwtToken");
+    const optionsSelected = new Object();
+    for (var questionId in selectedData) {
+      console.log(selectedData[questionId]);
+      optionsSelected[questionId] = selectedData[questionId].split(".")[1];
+    }
+    const optionSelectedJSON = JSON.stringify(optionsSelected);
+    // console.log(optionsSelected, "selected answers are here");
+    // console.log(token, "this is jwtToken");
     const requestOptions = {
       headers: {
-
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
@@ -68,14 +72,14 @@ function TestPage() {
     } else {
       try {
         const sendData = {
-          answers: selectedAnswersJSON,
+          answers: optionSelectedJSON,
           testId: "Reading%20Assessment%20Test",
         };
         const resp = await axios.post(
           "http://localhost:8000/api/v1/test/submit-score",
           sendData,
           requestOptions,
-          {mode:'cors'}
+          { mode: "cors" }
         );
 
         const data = resp.data;
@@ -213,10 +217,18 @@ function TestPage() {
         </div>
         <div className="button-container flex justify-center">
           {countsection == 0 ? (
-            <button className="next" onClick={nextHandler}>
-              Next{" "}
-              <i className="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
-            </button>
+            <>
+              <button className="next" onClick={nextHandler}>
+                Next{" "}
+                <i
+                  className="fa fa-arrow-circle-o-right"
+                  aria-hidden="true"
+                ></i>
+              </button>
+              <button className="next" onClick={submitAnswers}>
+                Submit Answers
+              </button>
+            </>
           ) : countsection == totalSections - 1 ? (
             <div className="verticle">
               <button className="next" onClick={backHandler}>
