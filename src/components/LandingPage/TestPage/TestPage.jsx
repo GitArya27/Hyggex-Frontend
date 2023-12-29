@@ -1,5 +1,6 @@
 import "font-awesome/css/font-awesome.min.css";
 import "./TestPage.css";
+
 import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -7,11 +8,10 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { Img } from "../../Img";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { Redirect } from "react-router-dom";
+import TestHeader from "./TestHeader";
 import axios from "axios";
 import { useAuth } from "../../auth/AuthContext";
 import { useRef } from "react";
-import { ToastContainer, toast } from "react-toastify";
-import TestHeader from "./TestHeader";
 
 function TestPage() {
   const [sliderValue, setSliderValue] = useState(0);
