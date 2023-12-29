@@ -36,18 +36,21 @@ body {
 .box1 {
   border-bottom: 140px solid #e3f0f4;
   position: absolute;
+  background: #f7fbfc;
   left: 9%;
 }
 
 .box2 {
   border-bottom: 140px solid #fbf3e1;
   position: absolute;
+  background: #fefcf7;
   left: 37%;
 }
 
 .box3 {
   border-bottom: 140px solid #e6e2e8;
   position: absolute;
+  background: #f8f7f9;
   left: 65%;
 }
 
