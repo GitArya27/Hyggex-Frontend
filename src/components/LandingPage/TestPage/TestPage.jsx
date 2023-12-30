@@ -249,9 +249,6 @@ function TestPage() {
                         aria-hidden="true"
                       ></i>
                     </button>
-                    <button className="next" onClick={submitAnswers}>
-                      Submit Answers
-                    </button>
                   </>
                 ) : countsection == totalSections - 1 ? (
                   <div className="verticle">
