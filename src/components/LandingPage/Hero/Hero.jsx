@@ -79,8 +79,10 @@ const Hero = () => {
           <div className=" w-[24.20rem]  h-[4rem] pt-[0.67rem] text-justify">
             <p className=" text-[0.81rem]">
             In just 10 minutes, unlock 'astoundingly precise' insights into your study habits and future success with our Adaptive Learning Assessment.            </p>
+
           </div>
             <div className="flex  ">{/*//https://test.hyggexworld.com/*/}
+
             <a href="../test">
             <button className=" border-4 border-blue-200 border-opacity-70 text-[0.81rem] justify-center align-center  group xs:mt-[5rem] ss:mt-[3rem] flex items-center relative w-[11.9rem] h-[2.63rem] bg-blue-800 rounded-[33px] text-white hover:bg-blue-600">
                Start Your Assessment

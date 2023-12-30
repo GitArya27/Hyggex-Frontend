@@ -10,12 +10,22 @@ import ProgressBar from "@ramonak/react-progress-bar";
 import { Redirect } from "react-router-dom";
 import TestHeader from "./TestHeader";
 import axios from "axios";
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+
+import SignIn from "../../auth/SignIn";
+import { book } from "../../../constants/url";
+import { checklist } from "../../../constants/url";
+import { idea } from "../../../constants/url";
+import { redirect } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
 import { useRef } from "react";
 
 function TestPage() {
+  const { login } = useAuth;
   const [sliderValue, setSliderValue] = useState(0);
+
   const [isLoading, setIsLoading] = useState(true);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [sections, setSections] = useState([]);
   const [isection, setSection] = useState([]);
@@ -268,8 +278,7 @@ function TestPage() {
           pauseOnFocusLoss
           draggable
           pauseOnHover
-        />
-      </div>
+        />      </div>
     );
   } else {
     return <></>;

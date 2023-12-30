@@ -34,10 +34,6 @@ export const router =createBrowserRouter(
             path:'/testResult',
             element: <TestResult/>
            },
-        {
-            path:'/flashcards',
-            element: <Flashcards/>
-        }
             ]
     },
     {
