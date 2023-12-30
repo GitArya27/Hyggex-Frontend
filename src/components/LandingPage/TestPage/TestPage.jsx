@@ -9,6 +9,7 @@ import { useAuth } from "../../auth/AuthContext";
 import { useRef } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import TestHeader from "./TestHeader";
+import { useNavigate} from 'react-router-dom';
 
 function TestPage() {
   const [sliderValue, setSliderValue] = useState(0);
@@ -21,7 +22,7 @@ function TestPage() {
   const [countsection, updatesectionid] = useState(0);
   const [, forceUpdate] = useState();
   const [selectedData, setSelectedData] = useState(new Object());
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -52,6 +53,7 @@ function TestPage() {
 
   const submitAnswers = async () => {
     const token = localStorage.getItem("jwtToken");
+    console.log("jwt Token:", `${token}`);
     const optionsSelected = new Object();
     for (var questionId in selectedData) {
       console.log(selectedData[questionId]);
@@ -73,10 +75,11 @@ function TestPage() {
       try {
         const sendData = {
           answers: optionSelectedJSON,
-          testId: "Reading%20Assessment%20Test",
+          testId: "654e9c3ffa59c1438f7d140c",
+          token: token,
         };
         const resp = await axios.post(
-          "http://localhost:8000/api/v1/test/submit-score",
+          "http://localhost:3001/api/v1/test/submit-score",
           sendData,
           requestOptions,
           { mode: "cors" }
@@ -84,7 +87,8 @@ function TestPage() {
 
         const data = resp.data;
         console.log(data, "successfully submitted");
-        alert("Successfully submitted");
+        // alert("Successfully submitted");
+        navigate('/testResult',{data});
       } catch (error) {
         console.error(error, "Error occurred while submitting");
       }

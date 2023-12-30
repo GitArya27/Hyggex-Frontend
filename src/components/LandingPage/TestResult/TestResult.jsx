@@ -1,7 +1,6 @@
 import './result.css'
-
+import {useLocation} from 'react-router-dom';
 import React,{useState} from 'react'
-
 import CustomCircularProgressBar from './progressbar'
 import HorizontalProgressBar from './horizontalProgressBar';
 import ReadingLevel from './readingLevel';
@@ -9,6 +8,7 @@ import ReadingMetrixs from './readingMetrixs';
 
 const TestResult = () => {
 
+  const location = useLocation();
 
   const Progress = [
     { "id": 1, "score": 30, "text": "COMPREHENSION" },
