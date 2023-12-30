@@ -9,6 +9,8 @@ import ReadingMetrixs from './readingMetrixs';
 const TestResult = () => {
 
   const location = useLocation();
+  const data = location.state?.data;
+  console.log(data,"data on result page");
 
   const Progress = [
     { "id": 1, "score": 30, "text": "COMPREHENSION" },

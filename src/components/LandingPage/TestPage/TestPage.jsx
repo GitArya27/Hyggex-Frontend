@@ -9,7 +9,8 @@ import { useAuth } from "../../auth/AuthContext";
 import { useRef } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import TestHeader from "./TestHeader";
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import ReactLoading from "react-loading";
 
 function TestPage() {
   const [sliderValue, setSliderValue] = useState(0);
@@ -23,9 +24,11 @@ function TestPage() {
   const [, forceUpdate] = useState();
   const [selectedData, setSelectedData] = useState(new Object());
   const navigate = useNavigate();
+  const [waitForApi, setWaitForApi] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setWaitForApi(true);
         const token = localStorage.getItem("jwtToken");
         if (token == null) {
           toast.error("SignIn to View Your Result");
@@ -40,6 +43,7 @@ function TestPage() {
         setSections(result.section || []);
         setOptions(result.options || []);
         setSection([result.section[0]] || []);
+        setWaitForApi(false);
       } catch (error) {
         console.error("Error:", error);
       }
@@ -52,6 +56,8 @@ function TestPage() {
   }, []);
 
   const submitAnswers = async () => {
+    setWaitForApi(true);
+    window.scrollTo({ top: 10, left: 0, behavior: "smooth" });
     const token = localStorage.getItem("jwtToken");
     console.log("jwt Token:", `${token}`);
     const optionsSelected = new Object();
@@ -88,11 +94,12 @@ function TestPage() {
         const data = resp.data;
         console.log(data, "successfully submitted");
         // alert("Successfully submitted");
-        navigate('/testResult',{data});
+        navigate("/testResult", { data });
       } catch (error) {
         console.error(error, "Error occurred while submitting");
       }
     }
+    setWaitForApi(false);
   };
 
   const NumOfTotalPages = Math.ceil(sections.length / questionsPerPage);
@@ -137,143 +144,169 @@ function TestPage() {
     setSliderValue(newPercentage);
     forceUpdate((prev) => !prev);
   };
-  if (!isLoading) {
-    return (
-      <div>
-        <TestHeader />
-        <div className="line">
-          <div className="slider-container">
-            <ProgressBar
-              completed={Math.round(percentage)}
-              bgColor="#164ec0"
-              animateOnRender={true}
-            />
-            <div id="slider-value">{Math.round(percentage)}%</div>
-          </div>
-        </div>
-        <div className="mt-[-55px]">
-          <br />
-          <br />
-          {currentQuestions.length > 0 ? (
-            isection.map((section, sectionIndex) => (
-              <div key={sectionIndex} className="wrap">
-                <h3 className="Read">{section.sectionName}</h3>
-                <hr />
-                <br />
-                <ul>
-                  {section.questions.map((question, questionIndex) => {
-                    const Question = 5 * countsection + questionIndex + 1;
-                    return (
-                      <li key={question._id}>
-                        <h5 className="quest-head">{`${Question}. ${question.question}`}</h5>
 
-                        <div className="option-holder">
-                          {options.length > 0 &&
-                            options.map((option, optionIndex) => (
-                              <div key={optionIndex} className="input-wrapper">
-                                <input
-                                  type="radio"
-                                  className="input-box"
-                                  required
-                                  name={`${Question}.${option._id}`}
-                                  checked={
-                                    selectedData[question._id] ===
-                                    `${Question}.${option._id}`
-                                  }
-                                  value={option.optionName}
-                                  id={`${Question}.${option._id}`}
-                                  onChange={() => {
-                                    handleOptionChange(
-                                      question._id,
-                                      option._id,
-                                      Question
-                                    );
-                                  }}
-                                />
-                                <label
-                                  htmlFor={`${Question}.${option._id}`}
-                                  className={`${
-                                    selectedData[question._id] ===
-                                    `${Question}.${option._id}`
-                                      ? "blue-checked"
-                                      : "checked"
-                                  }`}
-                                >
-                                  {option.optionName}
-                                </label>
-                              </div>
-                            ))}
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
+  return (
+    <>
+      {!isLoading ? (
+        <div>
+          <TestHeader />
+          {!waitForApi ? (
+            <>
+              <div className="line">
+                <div className="slider-container">
+                  <ProgressBar
+                    completed={Math.round(percentage)}
+                    bgColor="#164ec0"
+                    animateOnRender={true}
+                  />
+                  <div id="slider-value">{Math.round(percentage)}%</div>
+                </div>
               </div>
-            ))
+              <div className="mt-[-55px]">
+                <br />
+                <br />
+                {isection.map((section, sectionIndex) => (
+                  <div key={sectionIndex} className="wrap">
+                    <h3 className="Read">{section.sectionName}</h3>
+                    <hr />
+                    <br />
+                    <ul>
+                      {section.questions.map((question, questionIndex) => {
+                        const Question = 5 * countsection + questionIndex + 1;
+                        return (
+                          <li key={question._id}>
+                            <h5 className="quest-head">{`${Question}. ${question.question}`}</h5>
+
+                            <div className="option-holder">
+                              {options.length > 0 &&
+                                options.map((option, optionIndex) => (
+                                  <div
+                                    key={optionIndex}
+                                    className="input-wrapper"
+                                  >
+                                    <input
+                                      type="radio"
+                                      className="input-box"
+                                      required
+                                      name={`${Question}.${option._id}`}
+                                      checked={
+                                        selectedData[question._id] ===
+                                        `${Question}.${option._id}`
+                                      }
+                                      value={option.optionName}
+                                      id={`${Question}.${option._id}`}
+                                      onChange={() => {
+                                        handleOptionChange(
+                                          question._id,
+                                          option._id,
+                                          Question
+                                        );
+                                      }}
+                                    />
+                                    <label
+                                      htmlFor={`${Question}.${option._id}`}
+                                      className={`${
+                                        selectedData[question._id] ===
+                                        `${Question}.${option._id}`
+                                          ? "blue-checked"
+                                          : "checked"
+                                      }`}
+                                    >
+                                      {option.optionName}
+                                    </label>
+                                  </div>
+                                ))}
+                            </div>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+              <div className="button-container flex justify-center">
+                {countsection == 0 ? (
+                  <>
+                    <button className="next" onClick={nextHandler}>
+                      Next{" "}
+                      <i
+                        className="fa fa-arrow-circle-o-right"
+                        aria-hidden="true"
+                      ></i>
+                    </button>
+                    <button className="next" onClick={submitAnswers}>
+                      Submit Answers
+                    </button>
+                  </>
+                ) : countsection == totalSections - 1 ? (
+                  <div className="verticle">
+                    <button className="next" onClick={backHandler}>
+                      <i
+                        className="fa fa-arrow-circle-o-left"
+                        aria-hidden="true"
+                      ></i>
+                      back
+                    </button>
+                    <button className="next" onClick={submitAnswers}>
+                      Submit Answers
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <button className="next" onClick={backHandler}>
+                      <i
+                        className="fa fa-arrow-circle-o-left"
+                        aria-hidden="true"
+                      ></i>
+                      back
+                    </button>
+                    <button className="next" onClick={nextHandler}>
+                      Next{" "}
+                      <i
+                        className="fa fa-arrow-circle-o-right"
+                        aria-hidden="true"
+                      ></i>
+                    </button>
+                  </>
+                )}
+              </div>
+            </>
           ) : (
             <>
-              <div className="justify-center item-center flex ">
-                {" "}
-                Loading Data ...
+              <br />
+              <br />
+              <br />
+
+              <div className=" mt-[120px] flex items-center justify-center flex-direction: column ">
+                <ReactLoading
+                  type="balls"
+                  color="#164ec0"
+                  height={"20%"}
+                  width={"20%"}
+                />
               </div>
+              <p className="flex items-center justify-center">
+                Please Wait ...
+              </p>
             </>
           )}
+
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
         </div>
-        <div className="button-container flex justify-center">
-          {countsection == 0 ? (
-            <>
-              <button className="next" onClick={nextHandler}>
-                Next{" "}
-                <i
-                  className="fa fa-arrow-circle-o-right"
-                  aria-hidden="true"
-                ></i>
-              </button>
-              <button className="next" onClick={submitAnswers}>
-                Submit Answers
-              </button>
-            </>
-          ) : countsection == totalSections - 1 ? (
-            <div className="verticle">
-              <button className="next" onClick={backHandler}>
-                <i className="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
-                back
-              </button>
-              <button className="next" onClick={submitAnswers}>
-                Submit Answers
-              </button>
-            </div>
-          ) : (
-            <>
-              <button className="next" onClick={backHandler}>
-                <i className="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
-                back
-              </button>
-              <button className="next" onClick={nextHandler}>
-                Next{" "}
-                <i
-                  className="fa fa-arrow-circle-o-right"
-                  aria-hidden="true"
-                ></i>
-              </button>
-            </>
-          )}
-        </div>
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
-      </div>
-    );
-  } else {
-    return <></>;
-  }
+      ) : (
+        <></>
+      )}
+    </>
+  );
 }
 export default TestPage;
