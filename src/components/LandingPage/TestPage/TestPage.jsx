@@ -1,10 +1,22 @@
 import "font-awesome/css/font-awesome.min.css";
 import "./TestPage.css";
+
 import React, { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+import { Img } from "../../Img";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { Redirect } from "react-router-dom";
+import TestHeader from "./TestHeader";
 import axios from "axios";
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+
+import SignIn from "../../auth/SignIn";
+import { book } from "../../../constants/url";
+import { checklist } from "../../../constants/url";
+import { idea } from "../../../constants/url";
+import { redirect } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
 import { useRef } from "react";
 import { ToastContainer, toast } from "react-toastify";
@@ -13,8 +25,11 @@ import { useNavigate } from "react-router-dom";
 import ReactLoading from "react-loading";
 
 function TestPage() {
+  const { login } = useAuth;
   const [sliderValue, setSliderValue] = useState(0);
+
   const [isLoading, setIsLoading] = useState(true);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [sections, setSections] = useState([]);
   const [isection, setSection] = useState([]);
