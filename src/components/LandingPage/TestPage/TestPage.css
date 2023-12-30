@@ -5,7 +5,7 @@ body {
 .head {
   background: #06286e;
   color: white;
-  padding: 90px 20px 20px 20px;
+  padding: 90px 20px 30px 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,7 +17,7 @@ body {
 
 .h1 {
   font-size: 30px;
-  font-weight: 800;
+  font-weight: 600;
 }
 /* Box 1 styling */
 
@@ -25,9 +25,8 @@ body {
 .box2,
 .box3 {
   border-radius: 10px;
-  background: white;
   height: 220px;
-  padding: 20px;
+  padding: 20px 15px;
   transform: translate(0, -50%);
   width: 27%;
   top: 56%;
@@ -35,29 +34,33 @@ body {
 }
 
 .box1 {
-  border-bottom: 140px solid rgba(173, 216, 230, 0.6);
+  border-bottom: 140px solid #e3f0f4;
   position: absolute;
+  background: #f7fbfc;
   left: 9%;
 }
 
 .box2 {
-  border-bottom: 140px solid #ffe4e1;
+  border-bottom: 140px solid #fbf3e1;
   position: absolute;
-  left: 38.5%;
+  background: #fefcf7;
+  left: 37%;
 }
 
 .box3 {
-  border-bottom: 140px solid #cdb7e2;
+  border-bottom: 140px solid #e6e2e8;
   position: absolute;
-  left: 68%;
+  background: #f8f7f9;
+  left: 65%;
 }
 
 .box1 img,
 .box2 img,
 .box3 img {
   position: relative;
-  bottom: 15px;
+  bottom: 17px;
   left: 120px;
+  padding-top: 15px;
 }
 
 .one p {
@@ -68,6 +71,7 @@ body {
   line-height: 20.07px;
   display: flex;
   justify-content: center;
+  text-align: center;
   align-items: center;
   padding-top: 10px;
   white-space: inherit;
@@ -80,7 +84,7 @@ h6 {
   justify-content: center;
   align-items: center;
   color: #576071;
-  font-size: 20px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -95,7 +99,9 @@ h6 {
   background: #f1f1f1;
   color: #0f286e;
   font-weight: 600;
-  margin-top: 220px;
+
+  margin-top: 200px;
+
 }
 .slider-container {
   width: 70%;
@@ -114,12 +120,14 @@ h6 {
   font-size: 16px;
   position: absolute;
   text-align: center;
+
+  visibility: hidden;
+
   top: -5px;
   left: 50%;
   transform: translateX(-50%);
   width: auto;
 }
-
 
 /* Reader styling */
 
@@ -144,6 +152,7 @@ h6 {
   font-style: normal;
   padding-top: 20px;
 }
+
 
 /* Custom CSS for radio buttons with labels below */
 
@@ -242,6 +251,7 @@ input[type="radio"]:checked:before {
   /*color: blue;*/
 }
 
+
 /* Next button */
 
 .button-container {
@@ -272,6 +282,50 @@ input[type="radio"]:checked:before {
 
 /* For Mobile Phones */
 
+
+
+@media (max-width: 1024px) {
+  .h1 {
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+  .box1 {
+    width: 29%;
+    left: 5%;
+  }
+
+  .box2 {
+    width: 29%;
+    left: 35%;
+  }
+
+  .box3 {
+    width: 29%;
+    left: 65%;
+  }
+
+  .box1 img,
+  .box2 img,
+  .box3 img {
+    width: 20%;
+    margin: 2px auto auto;
+    position: static;
+  }
+
+  .one p {
+    padding-top: 5px;
+
+  }
+
+  h6 {
+    font-size: 15px;
+    padding-top: 15px;
+    font-weight: 600;
+  }
+
+}
+
 @media (max-width: 768px) {
 
   body {
@@ -280,11 +334,11 @@ input[type="radio"]:checked:before {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-}
+  }
 
   .h1 {
     font-size: 25px !important;
-    font-weight: 800 !important;
+    font-weight: 700 !important;
   }
 
   .head{
@@ -329,144 +383,162 @@ input[type="radio"]:checked:before {
   .line {
     width: 100%;
     height: 35px;
-    margin-top: 5px;
+    margin-top: 0px;
   }
 
   #slider-value {
     font-size: 14px;
     top: 5%;
   }
-
-
-  .question {
-    font-size: 7.5px !important;
-    max-width: 90%;
-    text-align: center;
-    margin: auto 30px;
-    padding-left: 20px;
-    line-height: 6;
-    font-weight: 800;
-  }
-
-  .radio-btn {
-    margin-right: 20px !important;
-    margin-left: 20px !important;
-  }
-
-  .radio-btn input[type="radio"] {
-    width: 15px !important;
-    height: 15px !important;
-    margin: 30px;
-    border-radius: 50%;
-  }
-
-  .radio-btn label {
-    position: relative;
-    right: 33px !important;
-    top: 30px !important;
-    font-size: 10px !important;
-  }
-
-  .sometimes ,
-  .often{
-    position: relative !important;
-    top: 30px !important;
-    right: 33px !important;
-  }
-
-  .sometimes-input {
-    -webkit-appearance: none;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    outline: none;
-    box-shadow: 0 0 0 2px #a6c1f9;
-    transition: box-shadow 0.3s;
-    position: relative;
-    left: 14px !important;
-  }
-
-  .next{
-    height: 6vh;
-  }
 }
 
 
-@media (max-width: 1024px) {
-  .h1 {
-    font-size: 40px;
-    font-weight: 800;
+
+/*============Emma's styling=============*/
+.wrap{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-top: 2rem;
+  margin: auto;
+  text-align: start;
+  width: 80%;
+  /*border: 2px solid green;*/
+}
+.wrap ul li{
+  list-style-type: none;
+}
+
+.wrap .quest-head{
+  font-size: 0.8rem;
+  padding: 1rem 0rem;
+  color: #57555d;
+  text-align: center;
+  font-weight: 500;
+}
+.option-holder{
+  display: flex;
+  justify-content: center;
+
+}
+.input-wrapper{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.1rem;
+  font-size: 1.2rem;
+  align-items: center;
+}
+input[type=radio].input-box{
+  width: 16px;
+  height: 16px;
+  margin: 0rem 1.9rem;
+  accent-color: #0a53e6;
+}
+.checked{
+  padding-top: 0.8rem;
+  color: #696671;
+  font-size: 0.7rem;
+}
+
+.blue-checked{
+  padding-top: 0.8rem;
+  color: #0a53e6;
+  font-size: 0.7rem;
+}
+.next-button{
+  text-align: center;
+  margin: 2rem;
+}
+.next-button button{
+  display: flex;
+  height: 7vh;
+  padding: 15px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  border-radius: 33px;
+  border: 5px solid #add8e6;
+  background: linear-gradient(93deg, #06286e -34.91%, #164ec0 135.05%);
+  color: #f1f1f1;
+  transform: translate(5%, -50%);
+  margin: 10px auto;
+  width: 150px;
+}
+
+
+@media (max-width:1024px){
+  .wrap{
+    width: 90%;
+
+
+  }
+  .wrap .quest-head{
+    font-size: 1rem;
+    padding: 1rem 0rem;
+    color: #28282b;
+    font-weight: 500;
   }
 
-  .head p {
-    font-size: 25px;
+}
+
+@media (max-width:768px){
+  .container{
+    margin: 3rem 1.5rem;
+  }
+  .wrap{
+    width: 85%;
+
+  }
+  .wrap .quest-head{
+    font-size: 0.8rem;
+    padding: 1rem 0rem;
+    color: #28282b;
+    font-weight: 500;
+  }
+  .input-box{
+    width: 12px;
+    height: 12px;
+  }
+  .checked{
+    padding-top: 0.8rem;
+    color: #696671;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width:550px){
+  .container{
+    margin: 1.3rem;
+  }
+  .wrap{
+    width: 90%;
+
+  }
+  .wrap .quest-head{
+    font-size: 0.7rem;
+    padding: 1rem 0rem;
+    margin-left: 0.8rem;
+    color: #000000;
+    font-weight: 600;
+
+
+  }
+  .input-wrapper{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.8rem;
+    align-items: center;
+
   }
 
-  .box1 img,
-  .box2 img,
-  .box3 img {
-    width: 20%;
-    margin: 2px auto auto;
-    position: static;
+  #input{
+    width: 12px;
+    height: 12px;
   }
-
-  .one p {
-    font-size: 15px;
-    padding-top: 5px;
-  }
-
-  h6 {
-    font-size: 15px;
-    padding-top: 15px;
-    font-weight: 800;
-  }
-
-
-
-  .radio-btn {
-    margin-right: 10px !important;
-    margin-left: 10px !important;
-  }
-
-  .radio-btn input[type="radio"] {
-    width: 30px;
-    height: 30px;
-    margin: 10px;
-    border-radius: 50%;
-  }
-
-  .radio-btn label {
-    position: relative;
-    right: 46px;
-    top: 32px;
-    font-size: 16px;
-  }
-
-  .sometimes,
-  .often {
-    position: relative !important;
-    top: 32px !important;
-    right: 44px !important;
-  }
-
-  .sometimes-input {
-    -webkit-appearance: none;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    outline: none;
-    box-shadow: 0 0 0 2px #a6c1f9;
-    transition: box-shadow 0.3s;
-    position: relative;
-    left: 17px;
-  }
-
-  .question {
-    font-size: 16px;
-  }
-
-  .next{
-    height: 6vh;
+  .checked{
+    padding-top: 0.9rem;
+    color: #696671;
+    font-size: 0.6rem;
   }
 }
 

@@ -117,8 +117,9 @@ function Auth() {
       .confirm(otp)
       .then((result) => {
         const user = result.user;
+        const token = result.token;
         user.getIdToken().then((idToken) => {
-          localStorage.setItem("jwtToken", idToken);
+          console.log(idToken);
           authenticateWithBackend(idToken, user.phoneNumber);
           login();
         });
@@ -163,7 +164,8 @@ function Auth() {
         }
       );
       if (response.data.success) {
-        console.log(response.data);
+        localStorage.setItem("jwtToken", response.data.token);
+        console.log(response.data, "logged in");
         if (response.data.status === "loggedIn") {
           alert("Logged In Successfully!");
           toast.success("successfully logged in");
@@ -494,14 +496,12 @@ function Auth() {
             </button>
           </div>
           {status === "loggedIn" && (
-          
-              <button
-                onClick={logout}
-                className="my-4 bg-red-500 text-white py-2 px-4 rounded-full hover:bg-red-600"
-              >
-                Logout
-              </button>
-            
+            <button
+              onClick={logout}
+              className="my-4 bg-red-500 text-white py-2 px-4 rounded-full hover:bg-red-600"
+            >
+              Logout
+            </button>
           )}
         </>
       )}

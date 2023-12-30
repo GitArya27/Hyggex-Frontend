@@ -3,6 +3,7 @@ import { Routes, createBrowserRouter } from "react-router-dom";
 import Auth from "../components/auth/Auth";
 import Auth2 from "../components/auth/AuthLeft";
 import AuthLeft from "../components/auth/AuthLeft";
+import Flashcards from "../components/LandingPage/flashcards/flashcards";
 import Home from "../components/LandingPage/Home";
 import Layout from "../layout/Layout";
 import Login from "../components/auth/Login";
@@ -32,7 +33,7 @@ export const router =createBrowserRouter(
         {
             path:'/testResult',
             element: <TestResult/>
-        }
+           },
             ]
     },
     {
